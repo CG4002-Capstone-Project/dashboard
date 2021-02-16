@@ -6,7 +6,6 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <h1> heello </h1>
       <Register />
       </React.Fragment>
 

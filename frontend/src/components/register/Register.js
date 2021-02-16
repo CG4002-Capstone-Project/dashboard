@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import VerticalTab from './VerticalTab';
 
 export class Register extends Component {
     
@@ -30,9 +31,15 @@ export class Register extends Component {
         }
     }
 
+    currentTab = (currentIndex) => {
+        this.setState({
+            activeIndex: currentIndex,
+        })
+    }
     render() {
         return (
             <div>
+                <VerticalTab onTabChange={this.currentTab}/>
                 {this.state.activeIndex}
             </div>
         )
