@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
+import { RegisterDiv, VerticalTabDiv } from './RegisterStyledComponents';
 
 export class Register extends Component {
     
@@ -49,10 +50,14 @@ export class Register extends Component {
     }
     render() {
         return (
-            <div>
-                <VerticalTab onTabChange={this.currentTab} onFormSubmit={this.submittedForm}/>
+            <RegisterDiv>
+                <VerticalTabDiv>
+                    <VerticalTab onTabChange={this.currentTab} onFormSubmit={this.submittedForm}/>
+                </VerticalTabDiv>
                 {this.state.activeIndex}
-            </div>
+            </RegisterDiv>
+
+
         )
     }
 }

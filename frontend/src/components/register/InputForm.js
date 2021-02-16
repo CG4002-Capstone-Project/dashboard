@@ -56,45 +56,27 @@ export class InputForm extends Component {
     render() {
         return (
             <React.Fragment> 
-                <FormGroup label='Name' labelInfo='Required' helperText='This will be the name used in the dashboard' inline='true'>
-                    <InputGroup asyncControl='true' placeholder='Name' onChange={this.onNameChange} value={this.state.name} />
+                <FormGroup label='Name' labelInfo='Required' helperText='This will be the name used in the dashboard' inline={true}>
+                    <InputGroup asyncControl={true} placeholder='Name' onChange={this.onNameChange} value={this.state.name} />
                 </FormGroup>
 
-                <FormGroup label='Email' labelInfo='Required' helperText='For contact purposes' inline='true'>
-                    <InputGroup asyncControl='true' placeholder='Email' onChange={this.onEmailChange} value={this.state.email}/>
+                <br></br>
+                <FormGroup label='Email' labelInfo='Required' helperText='For contact purposes' inline={true}>
+                    <InputGroup asyncControl={true} placeholder='Email' onChange={this.onEmailChange} value={this.state.email}/>
                 </FormGroup>
+                <br></br>
 
-                <FormGroup label='Username' labelInfo='Required' helperText='This will be used to sign into the dashboard' inline='true'>
-                    <InputGroup asyncControl='true' placeholder='Username' onChange={this.onUsernameChange} value={this.state.username}/>
+                <FormGroup label='Username' labelInfo='Required' helperText='This will be used to sign into the dashboard' inline={true}>
+                    <InputGroup asyncControl={true} placeholder='Username' onChange={this.onUsernameChange} value={this.state.username}/>
                 </FormGroup>
+                <br></br>
 
-                <FormGroup label='Password' labelInfo='Required' helperText='This will be used to sign into the dashboard' inline='true'>
-                    <InputGroup asyncControl='true' placeholder='Password' onChange={this.onPasswordChange} value={this.state.password}/>
+                <FormGroup label='Password' labelInfo='Required' helperText='This will be used to sign into the dashboard' inline={true}>
+                    <InputGroup asyncControl={true} placeholder='Password' onChange={this.onPasswordChange} value={this.state.password}/>
                 </FormGroup>
                 <Button text='Save' onClick={this.onSaveButtonClicked}/>
                 <Button text='Next' onClick={this.onNextButtonClicked}/>
-                {/* <form>
-                    <label>
-                        Name: 
-                        <input type='text' name='name' onChange={this.onNameChange} value={this.state.name}/>
-                    </label>
-
-                    <label>
-                        Email: 
-                        <input type='text' name='email' onChange={this.onEmailChange} value={this.state.email}/>
-                    </label>
-
-                    <label>
-                        Username:
-                        <input type='text' name='username' onChange={this.onUsernameChange} value={this.state.username}/>
-                    </label>
-
-                    <label>
-                        Password:
-                        <input type='text' name='password' onChange={this.onPasswordChange} value={this.state.password}/>
-                    </label>
-
-                </form> */}
+                
 
             </React.Fragment>
         )

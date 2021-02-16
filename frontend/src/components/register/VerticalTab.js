@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Tab, Tabs } from '@blueprintjs/core';
 import InputForm from './InputForm';
+import './VerticalTab.css';
 
 
 export class VerticalTab extends Component {
@@ -102,12 +103,12 @@ export class VerticalTab extends Component {
     render() {
         return (
             <React.Fragment>
-                <Tabs id='VT' vertical='true' onChange={this.onVerticalTabChange} renderActiveTabPanelOnly='true'>
-                    <Tab id='coach' title='Coach' panel={<InputForm activeIndex='coach' onSave={this.onCoachInputFormChange}/>} />
-                    <Tab id='trainee1' title='Trainee 1' panel={<InputForm activeIndex='trainee1' onSave={this.onTraineeOneInputFormChange}/>}/>
-                    <Tab id='trainee2' title='Trainee 2' panel={<InputForm activeIndex='trainee2' onSave={this.onTraineeTwoInputFormChange}/>}/>
-                    <Tab id='trainee3' title='Trainee 3' panel={<InputForm activeIndex='trainee3' onSave={this.onTraineeThreeInputFormChange}/>}/>
-                    <Tab id='submit' title='Submit' panel={<Button text='Submit' onClick={this.onSubmitButtonClicked}/>}/>
+                <Tabs id='VT' vertical={true} className='tab' onChange={this.onVerticalTabChange} renderActiveTabPanelOnly={true}>
+                    <Tab id='coach' title='Coach' panelClassName='input' panel={<InputForm activeIndex='coach' onSave={this.onCoachInputFormChange}/>} />
+                    <Tab id='trainee1' title='Trainee 1' panelClassName='input' panel={<InputForm activeIndex='trainee1' onSave={this.onTraineeOneInputFormChange}/>}/>
+                    <Tab id='trainee2' title='Trainee 2' panelClassName='input' panel={<InputForm activeIndex='trainee2' onSave={this.onTraineeTwoInputFormChange}/>}/>
+                    <Tab id='trainee3' title='Trainee 3' panelClassName='input' panel={<InputForm activeIndex='trainee3' onSave={this.onTraineeThreeInputFormChange}/>}/>
+                    <Tab id='submit' title='Submit' panelClassName='input' panel={<Button text='Submit' onClick={this.onSubmitButtonClicked}/>}/>
                 </Tabs>
             </React.Fragment>
         )

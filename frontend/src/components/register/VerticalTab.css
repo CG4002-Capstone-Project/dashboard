@@ -1,0 +1,15 @@
+.input {
+    position: relative;
+    text-align: left;
+    width: 300px;
+}
+
+.tab {
+    position: relative;
+    display: flex;
+    width: 200px;
+    text-align: center;
+
+    /* top: 40%;
+    right: 50%; */
+}
