@@ -4,7 +4,7 @@ import VerticalTab from './VerticalTab';
 export class Register extends Component {
     
     state = { 
-        activeIndex: 0,
+        activeIndex: 'coach',
         coach: {
             name: '',
             email: '',
