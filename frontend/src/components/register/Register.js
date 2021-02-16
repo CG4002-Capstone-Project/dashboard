@@ -36,10 +36,21 @@ export class Register extends Component {
             activeIndex: currentIndex,
         })
     }
+
+    submittedForm = input => {
+        this.setState({
+            coach: input.coach,
+            trainee1: input.trainee1,
+            trainee2: input.trainee2,
+            trainee3: input.trainee3,
+        })
+
+        console.log('finished' + JSON.stringify(this.state));
+    }
     render() {
         return (
             <div>
-                <VerticalTab onTabChange={this.currentTab}/>
+                <VerticalTab onTabChange={this.currentTab} onFormSubmit={this.submittedForm}/>
                 {this.state.activeIndex}
             </div>
         )
