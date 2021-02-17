@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
-import { RegisterDiv, VerticalTabDiv } from './RegisterStyledComponents';
+import { RegisterDiv, HeaderTabDiv, InfoTabDiv, VerticalTabDiv } from './RegisterStyledComponents';
 
 export class Register extends Component {
     
     state = { 
-        activeIndex: 'coach',
         coach: {
             name: '',
             email: '',
@@ -32,13 +31,7 @@ export class Register extends Component {
         }
     }
 
-    currentTab = (currentIndex) => {
-        this.setState({
-            activeIndex: currentIndex,
-        })
-    }
-
-    submittedForm = input => {
+    accountForSubmittedForm = input => {
         this.setState({
             coach: input.coach,
             trainee1: input.trainee1,
@@ -51,8 +44,14 @@ export class Register extends Component {
     render() {
         return (
             <RegisterDiv>
+                <HeaderTabDiv>
+                    <h1> Registration </h1>
+                </HeaderTabDiv>
+                <InfoTabDiv>
+
+                </InfoTabDiv>
                 <VerticalTabDiv>
-                    <VerticalTab onTabChange={this.currentTab} onFormSubmit={this.submittedForm}/>
+                    <VerticalTab onTabChange={this.accountForTabChange} onFormSubmit={this.accountForSubmittedForm}/>
                 </VerticalTabDiv>
                 {this.state.activeIndex}
             </RegisterDiv>
