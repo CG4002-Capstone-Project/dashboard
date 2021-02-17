@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
-import { RegisterDiv, HeaderTabDiv, InfoTabDiv, VerticalTabDiv } from './RegisterStyledComponents';
+import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
 
 export class Register extends Component {
     
@@ -45,11 +45,14 @@ export class Register extends Component {
         return (
             <RegisterDiv>
                 <HeaderTabDiv>
-                    <h1> Registration </h1>
+                    <HeaderH1> Registration </HeaderH1>
+                    <InfoP> 
+                    Please be informed that only coaches can register themselves and their trainees into the system. 
+                            <br></br>
+                            <br></br>
+                    Trainees who wish to use DanceEdge must contact their coach to register the group on their behalf.
+                    </InfoP>
                 </HeaderTabDiv>
-                <InfoTabDiv>
-
-                </InfoTabDiv>
                 <VerticalTabDiv>
                     <VerticalTab onTabChange={this.accountForTabChange} onFormSubmit={this.accountForSubmittedForm}/>
                 </VerticalTabDiv>
