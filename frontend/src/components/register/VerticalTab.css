@@ -1,15 +1,25 @@
-.input {
-    position: relative;
-    text-align: left;
-    width: 300px;
+.tabs {
+    /* background-color: red; */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .tab {
-    position: relative;
-    display: flex;
-    width: 200px;
-    text-align: center;
+    background-color: yellow;
+    width: 25vw;
+    
+}
 
-    /* top: 40%;
-    right: 50%; */
+.tab:hover {
+    background-color: palegoldenrod;
+}
+
+.input {
+    height: 500px;
+    background-color: lightsalmon;
+}
+
+.input:hover {
+    background-color: lightsalmon;
 }
