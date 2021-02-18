@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Pane, Tablist, SidebarTab, TextInput } from 'evergreen-ui';
 import InputForm from './InputForm';
+import ViewAndSubmit from './ViewAndSubmit';
 // import './VerticalTab.css';
 
 
@@ -8,30 +9,34 @@ export class VerticalTab extends Component {
 
     state = {
         activeIndex: '0',
-        tabs: ['Coach', 'Trainee 1', 'Trainee 2', 'Trainee 3'],
+        tabs: ['Coach', 'Trainee 1', 'Trainee 2', 'Trainee 3', 'View & Submit'],
         coach: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         },
         trainee1: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         },
         trainee2: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         },
         trainee3: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         }
     }
 
@@ -46,55 +51,97 @@ export class VerticalTab extends Component {
 
     onCoachInputFormChange = event => {
         console.log('coach' + JSON.stringify(event));
-        this.setState({
-            coach: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
+
+        if (Object.keys(event).length === 1) {
+            this.setState({
+                onSave: event.onSave
+            })
+        } else {
+            this.setState({
+                coach: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+        }
+        console.log(JSON.stringify(this.state));
     }
 
     onTraineeOneInputFormChange = event => {
         console.log('t1' + JSON.stringify(event));
+        if (Object.keys(event).length === 1) {
+            this.setState({
+                onSave: event.onSave
+            })
+        } else {
+            this.setState({
+                coach: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+        }
         console.log(JSON.stringify(this.state));
-        this.setState({
-            trainee1: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
     }
 
     onTraineeTwoInputFormChange = event => {
         console.log('t2' + JSON.stringify(event));
-        this.setState({
-            trainee2: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
+        if (Object.keys(event).length === 1) {
+            this.setState({
+                onSave: event.onSave
+            })
+        } else {
+            this.setState({
+                coach: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+        }
         console.log(JSON.stringify(this.state));
 
     }
 
     onTraineeThreeInputFormChange = event => {
         console.log('t3' + JSON.stringify(event));
-        this.setState({
-            trainee3: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
+        if (Object.keys(event).length === 1) {
+            this.setState({
+                onSave: event.onSave
+            })
+        } else {
+            this.setState({
+                coach: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+        }
         console.log(JSON.stringify(this.state));
 
+    }
+
+    onSaveController = event => {
+        if (event.index === 0) {
+            this.onCoachInputFormChange(event)
+        } else if (event.index === 1) {
+            this.onTraineeOneInputFormChange(event)
+        } else if (event.index === 2) {
+            this.onTraineeTwoInputFormChange(event)
+        } else if (event.index === 3) {
+            this.onTraineeThreeInputFormChange(event)
+        }
     }
 
     onSubmitButtonClicked = event => {
@@ -139,7 +186,8 @@ export class VerticalTab extends Component {
                         aria-hidden={index !== this.state.activeIndex}
                         display={index === this.state.activeIndex ? 'block' : 'none'}
                     >
-                    <InputForm />
+                    {index === 4 ? <ViewAndSubmit coach={this.state.coach} trainee1={this.state.trainee1} trainee2={this.state.trainee2} trainee3={this.state.trainee3} />
+                     : <InputForm index={index} onInputFormChange={this.onSaveController} />}
                 </Pane>
                 ))}
             </Pane>
