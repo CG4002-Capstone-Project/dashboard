@@ -16,7 +16,7 @@ code {
 
 html * {
   /* font-size: 1em !important; */
-  color: #000 !important;
+  color: #000;
   font-family: Acme !important;
   /* font-family: Russo One !important; */
   font-weight: 100;
