@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
 import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
-import LoginAndRegisterNavBar from '../Navbars/LoginAndRegisterNavBar';
+import LoginAndRegisterNavBar from '../navbars/LoginAndRegisterNavBar';
 
 export class NewRegister extends Component {
     
