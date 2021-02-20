@@ -1,85 +1,64 @@
+import { TextInputField, Button, ArrowRightIcon, EditIcon, SavedIcon } from 'evergreen-ui';
 import React, { Component } from 'react';
-import { FormGroup, InputGroup, Button } from '@blueprintjs/core';
 import { InputFormDiv } from './InputFormStyledComponents';
 
 export class InputForm extends Component {
-    // how to save state between changing forms: https://stackoverflow.com/questions/41190571/saving-the-values-in-forms-after-leaving-the-page-in-reactjs
-    constructor(props) {
-        super(props);
-        this.formName = `formData` + this.props.activeIndex;
-
-        if(localStorage.getItem(this.formName)) {
-            this.state = JSON.parse(localStorage.getItem(this.formName));
-        } else {
-            this.state = {
-                name: '',
-                email: '',
-                username: '',
-                password: '',
-            }
-        }
+    state = {
+        onSave: false,
+        name: '',
+        email: '',
+        username: '',
+        password: '',
     }
-
-    onNameChange = event => {
-        this.setState({ name: event.target.value }, () => {
-            localStorage.setItem(this.formName, JSON.stringify(this.state));
-        })
-    }
-
-    onEmailChange = event => {
-        this.setState({ email: event.target.value }, () => {
-            localStorage.setItem(this.formName, JSON.stringify(this.state));
-        })
-    }
-
-    onUsernameChange = event => {
-        this.setState({ username: event.target.value }, () => {
-            localStorage.setItem(this.formName, JSON.stringify(this.state));
-        })
-    }
-
-    onPasswordChange = event => {
-        this.setState({ password: event.target.value }, () => {
-            localStorage.setItem(this.formName, JSON.stringify(this.state));
-        })
-    }
-
     onSaveButtonClicked = event => {
-        console.log(this.props);
-        event.preventDefault();
-        this.props.onSave(this.state);
+        console.log('save button clicked ' + this.props.index);
+        this.setState({ 
+            onSave: true,
+        })
+        console.log(JSON.stringify(this.state));
+        this.props.onInputFormChange({
+            index: this.props.index,
+            name: this.state.name,
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password,
+            onSave: true,
+        })
+    }
+
+    onEditButtonClicked = event => {
+        console.log('edit button clicked ' + this.props.index);
+        this.setState({ 
+            onSave: false,
+        });
+        console.log(JSON.stringify(this.state));
+        this.props.onInputFormChange({
+            index: this.props.index,
+            onSave: false,
+        })
     }
 
     onNextButtonClicked = event => {
-        this.props.onNext();
+        console.log('next button clicked ' + this.props.index);
     }
 
     render() {
         return (
             <InputFormDiv>
-               <FormGroup label='Name' labelInfo='(required)' helperText='This will be the name used in the dashboard' inline={true}>
-                    <InputGroup asyncControl={true} placeholder='Name' onChange={this.onNameChange} value={this.state.name} />
-                </FormGroup>
-
-                <br></br>
-                <FormGroup label='Email' labelInfo='(required)' helperText='For contact purposes' inline={true}>
-                    <InputGroup asyncControl={true} placeholder='Email' onChange={this.onEmailChange} value={this.state.email}/>
-                </FormGroup>
-                <br></br>
-
-                <FormGroup label='Username' labelInfo='(required)' helperText='This will be used to sign into the dashboard' inline={true}>
-                    <InputGroup asyncControl={true} placeholder='Username' onChange={this.onUsernameChange} value={this.state.username}/>
-                </FormGroup>
-                <br></br>
-
-                <FormGroup label='Password' labelInfo='(required)' helperText='This will be used to sign into the dashboard' inline={true}>
-                    <InputGroup asyncControl={true} placeholder='Password' onChange={this.onPasswordChange} value={this.state.password}/>
-                </FormGroup>
-                <Button text='Save' onClick={this.onSaveButtonClicked}/>
-                <Button text='Next' onClick={this.onNextButtonClicked}/>
+                <TextInputField label='Name' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.name} onChange={e => this.setState({ name: e.target.value })}/>
+                <TextInputField label='Email' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                <TextInputField label='Username' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.username} onChange={e => this.setState({ username: e.target.value })} />
+                <TextInputField label='Password' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                <Button appearance='primary' marginRight={30} onClick={this.onSaveButtonClicked} iconAfter={SavedIcon}> Save </Button>
+                <Button appearance='primary' marginRight={30} onClick={this.onEditButtonClicked} iconAfter={EditIcon} > Edit </Button>
+                <Button appearance='primary' marginRight={30} onClick={this.onNextButtonClicked} iconAfter={ArrowRightIcon}> Next </Button>
             </InputFormDiv>
         )
     }
 }
 
 export default InputForm
+
+
+
+

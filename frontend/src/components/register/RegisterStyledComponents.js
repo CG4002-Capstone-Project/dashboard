@@ -9,7 +9,7 @@ export const RegisterDiv = styled.div`
         '. header .'
         '. input .';    
     grid-gap: 1rem;
-    grid-template-rows: 0.25fr 0.25fr 0.5fr 2fr;
+    grid-template-rows: 0.25fr 0.5fr 1.5fr 0.25fr;
     grid-template-columns: 1fr 3fr 1fr;
     background-color: #FFFFF2;
     margin: auto;

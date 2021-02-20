@@ -1,36 +1,45 @@
 import React, { Component } from 'react';
-import { Button, Tab, Tabs } from '@blueprintjs/core';
+import { Button, Pane, Tablist, SidebarTab, TextInput } from 'evergreen-ui';
 import InputForm from './InputForm';
-import './VerticalTab.css';
+import ViewAndSubmit from './ViewAndSubmit';
+// import './VerticalTab.css';
 
+// how to update nested state properties: https://stackoverflow.com/questions/43040721/how-to-update-nested-state-properties-in-react
+// why console.log immediately after setState doesnt show updated value and the componentDidUpdate / async await soln: https://stackoverflow.com/questions/30782948/why-calling-react-setstate-method-doesnt-mutate-the-state-immediately
 
 export class VerticalTab extends Component {
 
     state = {
         activeIndex: '0',
+        tabs: ['Coach', 'Trainee 1', 'Trainee 2', 'Trainee 3', 'View & Submit'],
+        allOnSave: false,
         coach: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         },
         trainee1: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         },
         trainee2: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         },
         trainee3: {
             name: '',
             email: '',
             username: '',
-            password: ''
+            password: '',
+            onSave: false,
         }
     }
 
@@ -43,57 +52,115 @@ export class VerticalTab extends Component {
         console.log(this.state.activeIndex + ' ' + typeof this.state.activeIndex);
     }
 
-    onCoachInputFormChange = event => {
+    checkForAllSave = async () => {
+        if (this.state.coach.onSave && this.state.trainee1.onSave && this.state.trainee2.onSave && this.state.trainee3.onSave) {
+            await this.setState({
+                allOnSave: true,
+            })
+        } else {
+            await this.setState({
+                allOnSave: false,
+            })
+        }
+    }
+
+    onCoachInputFormChange = async (event) => {
         console.log('coach' + JSON.stringify(event));
-        this.setState({
-            coach: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
+
+        if (Object.keys(event).length === 2) {
+            console.log('here');
+            await this.setState({
+                coach: { ...this.state.coach , onSave: event.onSave } });
+            await this.checkForAllSave();
+        } else {
+            await this.setState({
+                coach: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+            await this.checkForAllSave();
+        }
+        console.log(JSON.stringify(this.state));
     }
 
-    onTraineeOneInputFormChange = event => {
+    onTraineeOneInputFormChange = async (event) => {
         console.log('t1' + JSON.stringify(event));
+        if (Object.keys(event).length === 2) {
+            await this.setState({
+                trainee1: { ...this.state.trainee1 , onSave: event.onSave }});
+            await this.checkForAllSave();
+
+        } else {
+            await this.setState({
+                trainee1: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+            await this.checkForAllSave();
+        }
         console.log(JSON.stringify(this.state));
-        this.setState({
-            trainee1: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
     }
 
-    onTraineeTwoInputFormChange = event => {
+    onTraineeTwoInputFormChange = async (event) => {
         console.log('t2' + JSON.stringify(event));
-        this.setState({
-            trainee2: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
+        if (Object.keys(event).length === 2) {
+            await this.setState({
+                trainee2: { ...this.state.trainee2 , onSave: event.onSave } });
+            await this.checkForAllSave();
+        } else {
+            await this.setState({
+                trainee2: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+            await this.checkForAllSave();
+        }
         console.log(JSON.stringify(this.state));
-
     }
 
-    onTraineeThreeInputFormChange = event => {
+    onTraineeThreeInputFormChange = async (event) => {
         console.log('t3' + JSON.stringify(event));
-        this.setState({
-            trainee3: {
-                name: event.name,
-                email: event.email,
-                username: event.username,
-                password: event.password
-            }
-        })
+        if (Object.keys(event).length === 2) {
+            await this.setState({
+                trainee3: { ...this.state.trainee3 , onSave: event.onSave } });
+            await this.checkForAllSave();
+        } else {
+            await this.setState({
+                trainee3: {
+                    name: event.name,
+                    email: event.email,
+                    username: event.username,
+                    password: event.password,
+                    onSave: event.onSave,
+                }
+            })
+            await this.checkForAllSave();
+        }
         console.log(JSON.stringify(this.state));
+    }
 
+    onSaveController = event => {
+        if (event.index === 0) {
+            this.onCoachInputFormChange(event)
+        } else if (event.index === 1) {
+            this.onTraineeOneInputFormChange(event)
+        } else if (event.index === 2) {
+            this.onTraineeTwoInputFormChange(event)
+        } else if (event.index === 3) {
+            this.onTraineeThreeInputFormChange(event)
+        }
     }
 
     onSubmitButtonClicked = event => {
@@ -113,15 +180,37 @@ export class VerticalTab extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <Tabs id='VT' vertical={true} className='tabs' onChange={this.onVerticalTabChange} renderActiveTabPanelOnly={true} selectedTabId={this.state.activeIndex} large={true}>
-                    <Tab id='0' title='Coach' className='tab' panelClassName='input'  panel={<InputForm activeIndex='coach' onSave={this.onCoachInputFormChange} onNext={this.onNextButtonClicked}/>} />
-                    <Tab id='1' title='Trainee 1' className='tab' panelClassName='input' panel={<InputForm activeIndex='trainee1' onSave={this.onTraineeOneInputFormChange} onNext={this.onNextButtonClicked}/>}/>
-                    <Tab id='2' title='Trainee 2' className='tab' panelClassName='input' panel={<InputForm activeIndex='trainee2' onSave={this.onTraineeTwoInputFormChange} onNext={this.onNextButtonClicked}/>}/>
-                    <Tab id='3' title='Trainee 3' className='tab' panelClassName='input' panel={<InputForm activeIndex='trainee3' onSave={this.onTraineeThreeInputFormChange} onNext={this.onNextButtonClicked}/>}/>
-                    <Tab id='4' title='Submit' className='tab' panelClassName='input' panel={<Button text='Submit' onClick={this.onSubmitButtonClicked}/>}/>
-                </Tabs>
-            </React.Fragment>
+         <Pane display='flex' height={240} >
+             <Tablist marginBottom={16} flexBasis={240} marginRight={24}>
+                 {this.state.tabs.map((tab, index) => (
+                     <SidebarTab 
+                        key={tab}
+                        id={tab}
+                        onSelect={() => this.setState({ activeIndex: index })}
+                        isSelected={index === this.state.activeIndex}
+                        aria-controls={`panel-${tab}`}
+                    >
+                        {tab}
+                    </SidebarTab>
+                 ))}
+                 
+             </Tablist>
+             <Pane padding={16} background="tint1" flex="1" height='max-content'>
+                {this.state.tabs.map((tab, index) => (
+                    <Pane
+                        key={tab}
+                        id={`panel-${tab}`}
+                        role="tabpanel"
+                        aria-labelledby={tab}
+                        aria-hidden={index !== this.state.activeIndex}
+                        display={index === this.state.activeIndex ? 'block' : 'none'}
+                    >
+                    {index === 4 ? <ViewAndSubmit display={this.state.allOnSave} coach={this.state.coach} trainee1={this.state.trainee1} trainee2={this.state.trainee2} trainee3={this.state.trainee3} />
+                     : <InputForm index={index} onInputFormChange={this.onSaveController} />}
+                </Pane>
+                ))}
+            </Pane>
+         </Pane>
         )
     }
 }
