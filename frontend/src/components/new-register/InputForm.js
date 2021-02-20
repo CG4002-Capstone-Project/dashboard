@@ -11,6 +11,7 @@ export class InputForm extends Component {
         password: '',
     }
     onSaveButtonClicked = event => {
+        console.log('save button clicked ' + this.props.index);
         this.setState({ 
             onSave: true,
         })
@@ -23,18 +24,18 @@ export class InputForm extends Component {
             password: this.state.password,
             onSave: true,
         })
-        console.log('save button clicked ' + this.props.index);
     }
 
     onEditButtonClicked = event => {
+        console.log('edit button clicked ' + this.props.index);
         this.setState({ 
             onSave: false,
         });
         console.log(JSON.stringify(this.state));
         this.props.onInputFormChange({
+            index: this.props.index,
             onSave: false,
         })
-        console.log('edit button clicked ' + this.props.index);
     }
 
     onNextButtonClicked = event => {

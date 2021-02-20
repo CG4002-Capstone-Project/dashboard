@@ -4,12 +4,15 @@ import InputForm from './InputForm';
 import ViewAndSubmit from './ViewAndSubmit';
 // import './VerticalTab.css';
 
+// how to update nested state properties: https://stackoverflow.com/questions/43040721/how-to-update-nested-state-properties-in-react
+// why console.log immediately after setState doesnt show updated value and the componentDidUpdate / async await soln: https://stackoverflow.com/questions/30782948/why-calling-react-setstate-method-doesnt-mutate-the-state-immediately
 
 export class VerticalTab extends Component {
 
     state = {
         activeIndex: '0',
         tabs: ['Coach', 'Trainee 1', 'Trainee 2', 'Trainee 3', 'View & Submit'],
+        allOnSave: false,
         coach: {
             name: '',
             email: '',
@@ -49,15 +52,28 @@ export class VerticalTab extends Component {
         console.log(this.state.activeIndex + ' ' + typeof this.state.activeIndex);
     }
 
-    onCoachInputFormChange = event => {
+    checkForAllSave = async () => {
+        if (this.state.coach.onSave && this.state.trainee1.onSave && this.state.trainee2.onSave && this.state.trainee3.onSave) {
+            await this.setState({
+                allOnSave: true,
+            })
+        } else {
+            await this.setState({
+                allOnSave: false,
+            })
+        }
+    }
+
+    onCoachInputFormChange = async (event) => {
         console.log('coach' + JSON.stringify(event));
 
-        if (Object.keys(event).length === 1) {
-            this.setState({
-                onSave: event.onSave
-            })
+        if (Object.keys(event).length === 2) {
+            console.log('here');
+            await this.setState({
+                coach: { ...this.state.coach , onSave: event.onSave } });
+            await this.checkForAllSave();
         } else {
-            this.setState({
+            await this.setState({
                 coach: {
                     name: event.name,
                     email: event.email,
@@ -66,19 +82,21 @@ export class VerticalTab extends Component {
                     onSave: event.onSave,
                 }
             })
+            await this.checkForAllSave();
         }
         console.log(JSON.stringify(this.state));
     }
 
-    onTraineeOneInputFormChange = event => {
+    onTraineeOneInputFormChange = async (event) => {
         console.log('t1' + JSON.stringify(event));
-        if (Object.keys(event).length === 1) {
-            this.setState({
-                onSave: event.onSave
-            })
+        if (Object.keys(event).length === 2) {
+            await this.setState({
+                trainee1: { ...this.state.trainee1 , onSave: event.onSave }});
+            await this.checkForAllSave();
+
         } else {
-            this.setState({
-                coach: {
+            await this.setState({
+                trainee1: {
                     name: event.name,
                     email: event.email,
                     username: event.username,
@@ -86,19 +104,20 @@ export class VerticalTab extends Component {
                     onSave: event.onSave,
                 }
             })
+            await this.checkForAllSave();
         }
         console.log(JSON.stringify(this.state));
     }
 
-    onTraineeTwoInputFormChange = event => {
+    onTraineeTwoInputFormChange = async (event) => {
         console.log('t2' + JSON.stringify(event));
-        if (Object.keys(event).length === 1) {
-            this.setState({
-                onSave: event.onSave
-            })
+        if (Object.keys(event).length === 2) {
+            await this.setState({
+                trainee2: { ...this.state.trainee2 , onSave: event.onSave } });
+            await this.checkForAllSave();
         } else {
-            this.setState({
-                coach: {
+            await this.setState({
+                trainee2: {
                     name: event.name,
                     email: event.email,
                     username: event.username,
@@ -106,20 +125,20 @@ export class VerticalTab extends Component {
                     onSave: event.onSave,
                 }
             })
+            await this.checkForAllSave();
         }
         console.log(JSON.stringify(this.state));
-
     }
 
-    onTraineeThreeInputFormChange = event => {
+    onTraineeThreeInputFormChange = async (event) => {
         console.log('t3' + JSON.stringify(event));
-        if (Object.keys(event).length === 1) {
-            this.setState({
-                onSave: event.onSave
-            })
+        if (Object.keys(event).length === 2) {
+            await this.setState({
+                trainee3: { ...this.state.trainee3 , onSave: event.onSave } });
+            await this.checkForAllSave();
         } else {
-            this.setState({
-                coach: {
+            await this.setState({
+                trainee3: {
                     name: event.name,
                     email: event.email,
                     username: event.username,
@@ -127,9 +146,9 @@ export class VerticalTab extends Component {
                     onSave: event.onSave,
                 }
             })
+            await this.checkForAllSave();
         }
         console.log(JSON.stringify(this.state));
-
     }
 
     onSaveController = event => {
@@ -176,7 +195,7 @@ export class VerticalTab extends Component {
                  ))}
                  
              </Tablist>
-             <Pane padding={16} background="tint1" flex="1">
+             <Pane padding={16} background="tint1" flex="1" height='max-content'>
                 {this.state.tabs.map((tab, index) => (
                     <Pane
                         key={tab}
@@ -186,7 +205,7 @@ export class VerticalTab extends Component {
                         aria-hidden={index !== this.state.activeIndex}
                         display={index === this.state.activeIndex ? 'block' : 'none'}
                     >
-                    {index === 4 ? <ViewAndSubmit coach={this.state.coach} trainee1={this.state.trainee1} trainee2={this.state.trainee2} trainee3={this.state.trainee3} />
+                    {index === 4 ? <ViewAndSubmit display={this.state.allOnSave} coach={this.state.coach} trainee1={this.state.trainee1} trainee2={this.state.trainee2} trainee3={this.state.trainee3} />
                      : <InputForm index={index} onInputFormChange={this.onSaveController} />}
                 </Pane>
                 ))}
