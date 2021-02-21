@@ -3,7 +3,6 @@ const { body, validationResult } = require('express-validator');
 const app = express();
 
 const UserCreate = require('./Registration');
-const jwt = require('jsonwebtoken');
 
 app.post(
     '/create', [
@@ -17,6 +16,7 @@ app.post(
         }
         try {
             const response = await UserCreate(req.body);
+            return res.json(response);
 
         } catch (error) {
             return res.status(403).json({ error });
