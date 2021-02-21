@@ -7,7 +7,6 @@ const Registration = require('./registration/RegistrationController');
 const app = express();
 app.use(bodyParser.json());
 
-const jwt = require('jsonwebtoken');
 
 
 // database

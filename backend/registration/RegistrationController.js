@@ -1,15 +1,27 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const app = express();
 
-const UserModel = require('../schemas/user-schema');
+const UserCreate = require('./Registration');
+const jwt = require('jsonwebtoken');
 
+app.post(
+    '/create', [
+    body('email').isEmail(),
+    body('password').isLength({ min: 5 })
+    ], 
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        try {
+            const response = await UserCreate(req.body);
 
-const userInstance = new UserModel({ name: 'test4', email: 'jaac@jelo.com', username: 'tt4', password: 'cads' });
-userInstance.save((err) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('saved!');
-    }
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
 })
+
+
 module.exports = app;
