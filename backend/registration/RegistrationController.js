@@ -1,19 +1,13 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
+const { decodeAccessToken } = require('../auth/Auth');
 const app = express();
 
 const UserCreate = require('./Registration');
 
 app.post(
-    '/create', [
-    body('email').isEmail(),
-    body('password').isLength({ min: 5 })
-    ], 
+    '/create',
     async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
         try {
             const response = await UserCreate(req.body);
             return res.json(response);
@@ -22,6 +16,15 @@ app.post(
             return res.status(403).json({ error });
         }
 })
+
+app.post(
+    '/decode',
+    async (req, res) => {
+        console.log(`headers access token ${req.headers.accesstoken}` )
+        const {email, role} = decodeAccessToken(req.headers.accesstoken);
+        return res.json({email, role});
+    }
+)
 
 
 module.exports = app;

@@ -1,30 +1,26 @@
 const UserModel = require('../schemas/user-schema');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
-const saltRounds = 10;
-const secret = process.env.JWT_SECRET;
+const { hashPassword, generateAccessToken } = require('../auth/Auth');
 
-const UserCreate = async ({ name, email, username, password }) => {
-    const hashedPassword = await hashPassword(password);
-    const userInstance = new UserModel({ name, email, username, password: hashedPassword });
-    userInstance.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('saved!');
-        }
-    })
-    const token = generateAccessToken({ email });
+const UserCreate = async (body) => {
+
+    for (let key of Object.keys(body)) {
+        const hashedPassword = await hashPassword(body[key].password);
+        const userInstance = new UserModel({ name: body[key].name, email: body[key].email, username: body[key].username, password: hashedPassword, role: body[key].role });
+        userInstance.save((err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(`${key} saved!`);
+            }
+        })
+    }
+
+    const token = generateAccessToken({ email: body['coach'].email, role: body['coach'].role });
+    console.log(`token: ${token}`);
     return { accessToken: token };
 }
 
-const hashPassword = async (password) => {
-    return await bcrypt.hash(password, saltRounds);
-}
-
-const generateAccessToken = (payload) => {
-    return jwt.sign(payload, secret);
-}
 
 module.exports = UserCreate;

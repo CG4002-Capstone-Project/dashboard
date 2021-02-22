@@ -61,7 +61,7 @@ export class NewRegister extends Component {
                 password: input.trainee3.password }
         })
 
-
+        await this.registerGroup();
         console.log('registration finished' + JSON.stringify(this.state));
     }
     render() {
