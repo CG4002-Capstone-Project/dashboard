@@ -7,40 +7,56 @@ export class NewRegister extends Component {
     
     state = { 
         coach: {
-            name: '',
-            email: '',
-            username: '',
-            password: ''
+            role: 'coach',
         },
         trainee1: {
-            name: '',
-            email: '',
-            username: '',
-            password: ''
+            role: 'trainee',
         },
         trainee2: {
-            name: '',
-            email: '',
-            username: '',
-            password: ''
+            role: 'trainee',
         },
         trainee3: {
-            name: '',
-            email: '',
-            username: '',
-            password: ''
-        }
+            role: 'trainee',
+        },
     }
 
-    accountForSubmittedForm = input => {
-        this.setState({
-            coach: input.coach,
-            trainee1: input.trainee1,
-            trainee2: input.trainee2,
-            trainee3: input.trainee3,
+    accountForSubmittedForm = async (input) => {
+        console.log(JSON.stringify(input));
+
+        await this.setState({
+            coach: { ...this.state.coach , 
+                name: input.coach.name,
+                email: input.coach.email,
+                username: input.coach.username,
+                password: input.coach.password }
         })
 
-        console.log('finished' + JSON.stringify(this.state));
+        await this.setState({
+            trainee1: { ...this.state.trainee1 , 
+                name: input.trainee1.name,
+                email: input.trainee1.email,
+                username: input.trainee1.username,
+                password: input.trainee1.password }
+        })
+
+        await this.setState({
+            trainee2: { ...this.state.trainee2 , 
+                name: input.trainee2.name,
+                email: input.trainee2.email,
+                username: input.trainee2.username,
+                password: input.trainee2.password }
+        })
+
+        await this.setState({
+            trainee3: { ...this.state.trainee3 , 
+                name: input.trainee3.name,
+                email: input.trainee3.email,
+                username: input.trainee3.username,
+                password: input.trainee3.password }
+        })
+
+
+        console.log('registration finished' + JSON.stringify(this.state));
     }
     render() {
         return (

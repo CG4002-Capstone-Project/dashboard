@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { ViewAndSubmitDiv, CoachInfo, Trainee1Info, Trainee2Info, Trainee3Info } from './ViewAndSubmitStyledComponents';
+import { Button } from 'evergreen-ui';
+
 
 export class ViewAndSubmit extends Component {
-
-    
+    onSubmitButtonClicked = event => {
+        console.log('Submit button in View & Submit page clicked.');
+        event.preventDefault();
+        this.props.onSubmit();
+    }
     render() {
         let content;
 
@@ -47,6 +52,8 @@ export class ViewAndSubmit extends Component {
                         <h4> Username: {this.props.trainee3.username} </h4>
                         <h4> Password: {this.props.trainee3.password} </h4>
                     </Trainee3Info>
+
+                    <Button appearance='primary' marginRight={30} onClick={this.onSubmitButtonClicked}> Submit </Button>
 
                 </React.Fragment>
             )

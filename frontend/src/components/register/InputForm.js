@@ -11,6 +11,7 @@ export class InputForm extends Component {
         password: '',
     }
     onSaveButtonClicked = event => {
+        event.preventDefault();
         console.log('save button clicked ' + this.props.index);
         this.setState({ 
             onSave: true,
@@ -27,6 +28,7 @@ export class InputForm extends Component {
     }
 
     onEditButtonClicked = event => {
+        event.preventDefault();
         console.log('edit button clicked ' + this.props.index);
         this.setState({ 
             onSave: false,
@@ -39,6 +41,7 @@ export class InputForm extends Component {
     }
 
     onNextButtonClicked = event => {
+        event.preventDefault();
         console.log('next button clicked ' + this.props.index);
     }
 

@@ -164,12 +164,9 @@ export class VerticalTab extends Component {
     }
 
     onSubmitButtonClicked = event => {
-
-        event.preventDefault();
         this.props.onFormSubmit(this.state)
     }
     onNextButtonClicked = event => {
-        // event.preventDefault();
         const newNumber = parseInt(this.state.activeIndex, 10) + 1;
         const newNumberString = newNumber.toString();
         this.setState({
@@ -205,7 +202,7 @@ export class VerticalTab extends Component {
                         aria-hidden={index !== this.state.activeIndex}
                         display={index === this.state.activeIndex ? 'block' : 'none'}
                     >
-                    {index === 4 ? <ViewAndSubmit display={this.state.allOnSave} coach={this.state.coach} trainee1={this.state.trainee1} trainee2={this.state.trainee2} trainee3={this.state.trainee3} />
+                    {index === 4 ? <ViewAndSubmit display={this.state.allOnSave} coach={this.state.coach} trainee1={this.state.trainee1} trainee2={this.state.trainee2} trainee3={this.state.trainee3} onSubmit={this.onSubmitButtonClicked}/>
                      : <InputForm index={index} onInputFormChange={this.onSaveController} />}
                 </Pane>
                 ))}
