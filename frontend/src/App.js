@@ -7,8 +7,8 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <Register />
-      {/* <CoachApp /> */}
+      {/* <Register /> */}
+      <CoachApp />
       </React.Fragment>
 
     )

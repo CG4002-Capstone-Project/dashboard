@@ -5,6 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 // import '../../dashboard/node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './LoginAndRegisterNavBar.css';
 
+// TODO the href here are all referring to trainee/login and trainee/register . trainee should be removed.
+
 export class LoginAndRegisterNavBar extends Component {
     render() {
         return (
