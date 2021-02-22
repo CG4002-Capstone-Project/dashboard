@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
 import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/LoginAndRegisterNavBar';
+import axios from 'axios';
 
 export class NewRegister extends Component {
     
@@ -18,6 +19,11 @@ export class NewRegister extends Component {
         trainee3: {
             role: 'trainee',
         },
+    }
+
+    registerGroup = async () => {
+        const accessToken = await axios.post(' http://localhost:3333/register/create', { ...this.state })
+        console.log('access token: ' + accessToken);
     }
 
     accountForSubmittedForm = async (input) => {
