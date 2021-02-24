@@ -13,10 +13,10 @@ export class DashboardNavBar extends Component {
     render() {
         return (
             <Navbar bg="dark" variant="light" fixed='top' className='navbar-dark'>
-                <Navbar.Brand href={`/${this.props.user}/home`}> {`DanceEdge Coach -- ${this.props.name}`} </Navbar.Brand>
+                <Navbar.Brand href={`/${this.props.user}/dashboard`}> {`DanceEdge Coach -- ${this.props.name}`} </Navbar.Brand>
                 <Nav variant='pills' className='nav'>
                     <Nav.Item className='item'>
-                        <Nav.Link href={`/${this.props.user}/home`}> Dashboard </Nav.Link>
+                        <Nav.Link href={`/${this.props.user}/dashboard`}> Dashboard </Nav.Link>
                     </Nav.Item>
                     <Nav.Item className='item'>
                         <Nav.Link href={`/${this.props.user}/availability`}> Availability </Nav.Link>

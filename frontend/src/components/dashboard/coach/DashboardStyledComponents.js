@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PreDashboardDiv = styled.div`
     display: grid;
     grid-template-areas: 
-    '. . '
+    '. . .'
     '. question .'
     '. . .';
     grid-gap: 1rem;
@@ -17,7 +17,9 @@ export const PreDashboardDiv = styled.div`
 
 export const QuestionDiv = styled.div`
     grid-area: question;
-    background-color: #ffece2;
+    /* background-color: #ffece2; */
+    text-align: center;
+    margin: auto;
 `;
 
 export const DashboardDiv = styled.div`
@@ -50,5 +52,25 @@ export const SummaryDiv = styled.div`
     grid-area: summary;
     border: 5px blue solid;
     /* text-align: center; */
-    background-color: #ffece2
-`
+    background-color: #ffece2;
+`;
+
+export const PostDashboardDiv = styled.div`
+    display: grid;
+    grid-template-areas: 
+    '. . .'
+    '. results .'
+    '. . .';
+    grid-gap: 1rem;
+    grid-template-rows: 0.25fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #FFFFF2;
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+`;
+
+export const PostResultsDiv = styled.div`
+    grid-area: results;
+    background-color: #ffece2;
+`;
