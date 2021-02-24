@@ -96,3 +96,15 @@ function generateResults() {
 }
 
 module.exports = generateResults;
+
+// [ 'timestamp', 'dancerIds', 'predictedMove', 'syncDelay', 'accuracy']
+
+/**
+ * [
+           { id: 'timestamp', title: 'timestamp' },
+           { id: 'dancerIds', title: 'dancerIds' },
+           { id: 'predictedMove', title: 'predictedMove'},
+           { id: 'syncDelay', title: 'syncDelay'},
+           { id: 'accuracy', title: 'accuracy' }, 
+       ]
+ */

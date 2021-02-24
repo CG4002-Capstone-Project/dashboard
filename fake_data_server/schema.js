@@ -8,7 +8,7 @@ const rawDataSchema = new mongoose.Schema({
     accx: { type: String, required: true, trim: true  },
     accy: { type: String, required: true, trim: true  },
     accz: { type: String, required: true, trim: true  },
-    timestamp: { type: Date, default: Date.now() },
+    timestamp: { type: String, default: Date.now() },
 })
 
 const RawDataModel = mongoose.model('raw_data', rawDataSchema);
@@ -19,7 +19,7 @@ const rawResultsSchema = new mongoose.Schema({
     predictedMove: { type: String, required: true, trim: true  },
     syncDelay: { type: String, required: true, trim: true  },
     accuracy: { type: String, required: true, trim: true  },
-    timestamps: { type: Date, default: Date.now() },
+    timestamps: { type: String, default: Date.now() },
 })
 
 const RawResultModel = mongoose.model('raw_result', rawResultsSchema);
