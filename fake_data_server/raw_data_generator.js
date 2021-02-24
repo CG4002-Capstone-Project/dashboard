@@ -5,7 +5,8 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
  * Creating Data for 5 mins 
  * Since 60 results are output per 2.5 seconds ==> In 5 mins, 7200 results are output. 
  * Since there are 8 dances, there will be 8 distinct ranges, having 900 results each.
- * The columns are trainee_id, timestamp, yaw, pitch, roll, accx, accy, accz.
+ * Timestamp is generated in db for now.
+ * The columns are trainee_id, yaw, pitch, roll, accx, accy, accz.
  * 
  * yaw : [-179.98, 179.93]
  * pitch : [-179.22, 179.49]
@@ -29,7 +30,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_1,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -61,7 +61,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_2,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -93,7 +92,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_3,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -125,7 +123,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_4,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -157,7 +154,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_5,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -189,7 +185,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_6,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -221,7 +216,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_7,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -253,7 +247,6 @@ function generateRawData() {
    
        const data = {
            trainee_id: trainee_id_8,
-           timestamp: Date.now(),
            yaw,
            pitch,
            roll,
@@ -279,7 +272,7 @@ function generateRawData() {
    
    const csvWriter = createCsvWriter({
        path: 'raw_data.csv',
-       header: [ 'trainee_id', 'timestamp', 'yaw', 'pitch', 'roll', 'accx', 'accy', 'accz']
+       header: [ 'trainee_id', 'yaw', 'pitch', 'roll', 'accx', 'accy', 'accz']
    });
    
    csvWriter.writeRecords(finalData)

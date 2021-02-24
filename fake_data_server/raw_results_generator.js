@@ -92,7 +92,7 @@ function generateResults() {
    });
    
    csvWriter.writeRecords(data)
-       .then(() => console.log('Raw Data csv file written'));
+       .then(() => console.log('Raw Results csv file written'));
 }
 
 module.exports = generateResults;
