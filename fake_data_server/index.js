@@ -26,7 +26,7 @@ const readResultsIntoDb = () => {
         headers: ['timestamp', 'dancerIds', 'predictedMove', 'syncDelay', 'accuracy']
     })
 
-
+// https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop/44476626
     const timer = ms => new Promise(res => setTimeout(res, ms));
 
     async function load() {
@@ -38,6 +38,7 @@ const readResultsIntoDb = () => {
                 predictedMove: records[i][2],
                 syncDelay: records[i][3],
                 accuracy: records[i][4],
+                timestamps: Date.now()
             });
             console.log(resultInstance);
 
@@ -48,7 +49,7 @@ const readResultsIntoDb = () => {
                     console.log(` ${records[i][2]} saved!`);
                 }
             })
-            await timer(3000);
+            await timer(50000);
         }
     }
 
@@ -74,5 +75,46 @@ const readResultsIntoDb = () => {
     // })
 }
 
+const readDataIntoDb = () => {
+
+    const arrayOfObjects = fs.readFileSync('raw_data.csv', 'utf8');
+
+    const records = parse(arrayOfObjects, {
+        headers: ['trainee_id', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
+    })
+
+
+    const timer = ms => new Promise(res => setTimeout(res, ms));
+
+    async function load() {
+        for (let i = 0; i < records.length; i++) {
+            console.log(i);
+            const resultInstance = new RawDataModel({ 
+                trainee_id: records[i][0],
+                yaw: records[i][1],
+                pitch: records[i][2],
+                roll: records[i][3],
+                accx: records[i][4],
+                accy: records[i][5],
+                accz: records[i][6],
+                timestamp: Date.now(),
+            });
+            console.log(resultInstance);
+
+            resultInstance.save((err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(` ${records[i][2]} saved!`);
+                }
+            })
+            await timer(100);
+        }
+    }
+
+    load();
+}
+
 
 readResultsIntoDb();
+readDataIntoDb();
