@@ -3,8 +3,9 @@ import { DashboardDiv, IndividualInputDiv, SummaryDiv, PreDashboardDiv, Question
 import Individual from './Individual';
 import { Button, EndorsedIcon } from 'evergreen-ui';
 import Summary from './Summary';
-import { ThemeConsumer } from 'styled-components';
 import io from "socket.io-client";
+import { connect } from 'react-redux';
+import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData } from '../../../actions';
 
 export class Dashboard extends Component {
 
@@ -12,9 +13,18 @@ export class Dashboard extends Component {
         const socket = io(`http://localhost:3333/`);
 
         socket.on("connect", () => {
-            console.log(socket.id);
+            console.log(`Frontend socket connected to backend ${socket.id}`);
         })
-        socket.on("newData", (data) => {
+        socket.on("onNewTraineeOneData", (data) => {
+            this.props.addTraineeOneData(data);
+            console.log('data ' + JSON.stringify(data));
+        })
+        socket.on("onNewTraineeTwoData", (data) => {
+            this.props.addTraineeTwoData(data);
+            console.log('data ' + JSON.stringify(data));
+        })
+        socket.on("onNewTraineeThreeData", (data) => {
+            this.props.addTraineeThreeData(data);
             console.log('data ' + JSON.stringify(data));
         })
 
@@ -37,6 +47,7 @@ export class Dashboard extends Component {
 
     render() {
 
+        console.log(this.props);
         let currentState;
 
         const preDashboard = (
@@ -89,4 +100,18 @@ export class Dashboard extends Component {
     }
 }
 
-export default Dashboard
+// do this to access the values created from each reducer. The state refers to the keys of the combined reducers. 
+const mapStateToProps = (state) => {
+    return {
+        traineeOneData: state.traineeOneData,
+        traineeTwoData: state.traineeTwoData,
+        traineeThreeData: state.traineeThreeData
+    }
+}
+
+// connect actions to the mapstatetoprops
+export default connect(mapStateToProps, {
+    addTraineeOneData,
+    addTraineeTwoData,
+    addTraineeThreeData
+})(Dashboard);

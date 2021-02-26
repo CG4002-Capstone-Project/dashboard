@@ -67,8 +67,7 @@ db.once('open', () => {
         switch (change.operationType) {
             case "insert":
                 const data = {
-                    timestamp: change.fullDocument.timestamps,
-                    trainee_id: change.fullDocument.trainee_id,
+                    timestamp: change.fullDocument.timestamp,
                     yaw: change.fullDocument.yaw,
                     pitch: change.fullDocument.pitch,
                     roll: change.fullDocument.roll,
@@ -81,7 +80,15 @@ db.once('open', () => {
                     console.log(`${i}th data: ` + JSON.stringify(data));
                 }
                 i += 1;
-                io.emit("newData", data);
+
+                if (change.fullDocument.trainee_id == '1') {
+                    io.emit("onNewTraineeOneData", data);
+                } else if (change.fullDocument.trainee_id == '2') {
+                    io.emit("onNewTraineeTwoData", data)
+                } else if (change.fullDocument.trainee_id == '3') {
+                    console.log('here');
+                    io.emit("onNewTraineeThreeData", data);
+                }
         }
     })
 })
