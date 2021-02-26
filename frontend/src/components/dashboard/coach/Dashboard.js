@@ -4,9 +4,24 @@ import Individual from './Individual';
 import { Button, EndorsedIcon } from 'evergreen-ui';
 import Summary from './Summary';
 import { ThemeConsumer } from 'styled-components';
+import io from "socket.io-client";
 
 export class Dashboard extends Component {
 
+    componentDidMount = async () => {
+        const socket = io(`http://localhost:3333/`);
+
+        socket.on("connect", () => {
+            console.log(socket.id);
+        })
+        socket.on("newData", (data) => {
+            console.log('data ' + JSON.stringify(data));
+        })
+
+        socket.on("newResult", (result) => {
+            console.log('result: '+ JSON.stringify(result));
+        })
+    }
     state = {
         preDashboard: true, 
         postDashboard: false,

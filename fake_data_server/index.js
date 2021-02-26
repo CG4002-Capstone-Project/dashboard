@@ -49,7 +49,7 @@ const readResultsIntoDb = () => {
                     console.log(` ${records[i][2]} saved!`);
                 }
             })
-            await timer(50000);
+            await timer(50000); // 50000
         }
     }
 
