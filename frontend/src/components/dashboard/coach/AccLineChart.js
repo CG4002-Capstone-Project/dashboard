@@ -43,10 +43,11 @@ export default class AccLineChart extends Component {
                     text: 'Acceleration X, Y and Z against Time',
                     display: true,
                     fontFamily: 'Acme',
+                    position: 'bottom'
                 },
                 legend: {
                     position: 'right',
-                }
+                },
             },
             data: {
                 labels: this.props.data.map(d => d.timestamp),

@@ -1,9 +1,21 @@
 import React, { Component, createContext } from 'react';
-import { IndividualDiv, InfoDisplay, PreDisplay } from './IndividualStyledComponents';
+import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay } from './IndividualStyledComponents';
 import Chart from 'chart.js';
 import YPRLineChart from './YPRLineChart';
 import AccLineChart from './AccLineChart';
+import { IconContext } from 'react-icons';
+import { IoAccessibilityOutline, IoAccessibilitySharp } from 'react-icons/io5'; 
 
+// how to style react-icons: https://stackoverflow.com/questions/56636280/how-to-style-react-icons
+function redPersonIcon() {
+    return (
+        <IconContext.Provider value={{ fill: "red", size: '2rem', marginRight: '1.5rem' }} >
+            <div>
+                <IoAccessibilitySharp />
+            </div>
+        </IconContext.Provider>
+    )
+}
 
 export class Individual extends Component {
     
@@ -23,6 +35,15 @@ export class Individual extends Component {
                 <InfoDisplay>
                     <h3> Trainee {this.props.no} - {this.props.name} </h3>
                 </InfoDisplay>
+                <PositionDisplay >
+                    {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
+                    <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
+                    <AccessibilityNewIcon fontSize='large' color="action" style={{ color: red[500], marginRight: '1rem'}} /> */}
+                    <IoAccessibilityOutline size='2rem' color="red" style={{ marginRight: '1.5rem' }} />
+                    <IoAccessibilitySharp size='2rem' color="red" style={{ fill:'#291f7d', outlineColor: 'black', marginRight: '1.5rem' }} />
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                </PositionDisplay>
+
                 <AccLineChart data={this.props.data} />
                 <YPRLineChart data={this.props.data} /> 
             </React.Fragment> 

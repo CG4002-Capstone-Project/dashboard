@@ -44,6 +44,7 @@ export default class YPRLineChart extends Component {
                     text: 'Yaw, Pitch & Roll against Time',
                     display: true,
                     fontFamily: 'Acme',
+                    position: 'bottom'
                 },
                 legend: {
                     position: 'right',

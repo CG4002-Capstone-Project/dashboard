@@ -19,3 +19,7 @@ export const PreDisplay = styled.div`
 export const InfoDisplay = styled.div`
     margin: auto;
 `;
+
+export const PositionDisplay = styled.div`
+    margin: auto;
+`;
