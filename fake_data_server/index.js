@@ -31,7 +31,6 @@ const readResultsIntoDb = () => {
 
     async function load() {
         for (let i = 0; i < records.length; i++) {
-            console.log(i);
             const resultInstance = new RawResultModel({ 
                 timestamp: records[i][0],
                 dancerIds: records[i][1],
@@ -49,7 +48,7 @@ const readResultsIntoDb = () => {
                     console.log(` ${records[i][2]} saved!`);
                 }
             })
-            await timer(50000); // 50000
+            await timer(10000); // 50000
         }
     }
 
@@ -88,7 +87,6 @@ const readDataIntoDb = () => {
 
     async function load() {
         for (let i = 0; i < records.length; i++) {
-            console.log(i);
             const resultInstance = new RawDataModel({ 
                 trainee_id: records[i][0],
                 yaw: records[i][1],
@@ -99,13 +97,13 @@ const readDataIntoDb = () => {
                 accz: records[i][6],
                 timestamp: Date.now(),
             });
-            console.log(resultInstance);
+            // console.log(resultInstance);
 
             resultInstance.save((err) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(` ${records[i][2]} saved!`);
+                    // console.log(` ${records[i][2]} saved!`);
                 }
             })
             await timer(100);

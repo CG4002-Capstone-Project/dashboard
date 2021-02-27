@@ -5,7 +5,8 @@ import { Button, EndorsedIcon } from 'evergreen-ui';
 import Summary from './Summary';
 import io from "socket.io-client";
 import { connect } from 'react-redux';
-import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData } from '../../../actions';
+import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
+    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy } from '../../../actions';
 
 export class Dashboard extends Component {
 
@@ -29,12 +30,126 @@ export class Dashboard extends Component {
         })
 
         socket.on("newResult", (result) => {
+            this.props.addAccuracy(result);
+            this.props.addDancerIds(result);
+            this.props.addPredictedMove(result);
+            this.props.addSyncDelay(result);
+            this.updatePositions(result.dancerIds);
+            this.updateCurrentMove(result.predictedMove)
             console.log('result: '+ JSON.stringify(result));
+        })
+
+        socket.on("disconnect", () => {
+            console.log('Frontend socket disconnected')
         })
     }
     state = {
         preDashboard: true, 
         postDashboard: false,
+        posTraineeOne: 1,
+        posTraineeTwo: 2,
+        posTraineeThree: 3,
+        currentMove: 0
+    }
+
+    updateCurrentMove = async (move) => {
+        if (move == '1') {
+            await this.setState({
+                currentMove: 1
+            });
+        } else if (move == '2') {
+            await this.setState({
+                currentMove: 2
+            });
+        } else if (move == '3') {
+            await this.setState({
+                currentMove: 3
+            });
+        } else if (move == '4') {
+            await this.setState({
+                currentMove: 4
+            });
+        } else if (move == '5') {
+            await this.setState({
+                currentMove: 5
+            });
+        } else if (move == '6') {
+            await this.setState({
+                currentMove: 6
+            });
+        } else if (move == '7') {
+            await this.setState({
+                currentMove: 7
+            });
+        } else if (move == '8') {
+            await this.setState({
+                currentMove: 8
+            });
+        }
+    }
+
+    updatePositions = async (positions) => {
+        if (positions == '1 2 3') {
+            await this.setState({
+                posTraineeOne: 1
+            });
+            await this.setState({
+                posTraineeTwo: 2
+            });
+            await this.setState({
+                posTraineeThree: 3
+            })
+        } else if (positions == '1 3 2') {
+            await this.setState({
+                posTraineeOne: 1
+            });
+            await this.setState({
+                posTraineeTwo: 3
+            });
+            await this.setState({
+                posTraineeThree: 2
+            })
+        } else if (positions == '2 1 3') {
+            await this.setState({
+                posTraineeOne: 2
+            });
+            await this.setState({
+                posTraineeTwo: 1
+            });
+            await this.setState({
+                posTraineeThree: 3
+            })
+        } else if (positions == '2 3 1') {
+            await this.setState({
+                posTraineeOne: 3
+            });
+            await this.setState({
+                posTraineeTwo: 1
+            });
+            await this.setState({
+                posTraineeThree: 2
+            })
+        } else if (positions == '3 1 2') {
+            await this.setState({
+                posTraineeOne: 2
+            });
+            await this.setState({
+                posTraineeTwo: 3
+            });
+            await this.setState({
+                posTraineeThree: 1
+            })
+        } else if (positions == '3 2 1') {
+            await this.setState({
+                posTraineeOne: 3
+            });
+            await this.setState({
+                posTraineeTwo: 2
+            });
+            await this.setState({
+                posTraineeThree: 1
+            })
+        }
     }
 
     onLetsDanceClicked = event => {
@@ -44,10 +159,10 @@ export class Dashboard extends Component {
         })
     }
 
-
     render() {
 
         // console.log(this.props);
+
         let currentState;
 
         const preDashboard = (
@@ -64,13 +179,13 @@ export class Dashboard extends Component {
         const dashboard = (
             <DashboardDiv>
                 <IndividualInputDiv>
-                    <Individual data={this.props.traineeOneData} no='1' name='Jane' />
-                    <Individual data={this.props.traineeTwoData} no='2' name='Mary' />
-                    <Individual data={this.props.traineeThreeData} no='3' name='Stacy' />
+                    <Individual data={this.props.traineeOneData} no='1' name='Jane' position={this.state.posTraineeOne} />
+                    <Individual data={this.props.traineeTwoData} no='2' name='Mary' position={this.state.posTraineeTwo} />
+                    <Individual data={this.props.traineeThreeData} no='3' name='Stacy' position={this.state.posTraineeThree} />
                 </IndividualInputDiv>
                 
                 <SummaryDiv>
-                    <Summary />
+                    <Summary accuracy={this.props.accuracy} dancerIds={this.props.dancerIds} predictedMoves={this.props.predictedMoves} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} />
                 </SummaryDiv>
             </DashboardDiv>
         )
@@ -105,7 +220,11 @@ const mapStateToProps = (state) => {
     return {
         traineeOneData: state.traineeOneData,
         traineeTwoData: state.traineeTwoData,
-        traineeThreeData: state.traineeThreeData
+        traineeThreeData: state.traineeThreeData,
+        syncDelay: state.syncDelay,
+        predictedMove: state.predictedMove,
+        dancerIds: state.dancerIds,
+        accuracy: state.accuracy
     }
 }
 
@@ -113,5 +232,9 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     addTraineeOneData,
     addTraineeTwoData,
-    addTraineeThreeData
+    addTraineeThreeData,
+    addDancerIds,
+    addPredictedMove,
+    addAccuracy,
+    addSyncDelay
 })(Dashboard);

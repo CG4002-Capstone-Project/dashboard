@@ -43,8 +43,48 @@ const addTraineeThreeData = (data) => {
     }
 }
 
+const addSyncDelay = (data) => {
+    return {
+        type: 'SYNC_DELAY',
+        payload: {
+            syncDelay: data.syncDelay
+        }
+    }
+}
+
+const addPredictedMove = (data) => {
+    return {
+        type: 'PREDICTED_MOVE',
+        payload: {
+            predictedMove: data.predictedMove
+        }
+    }
+}
+
+const addDancerIds = (data) => {
+    return {
+        type: 'DANCER_IDS',
+        payload: {
+            dancerIds: data.dancerIds,
+        }
+    }
+}
+
+const addAccuracy = (data) => {
+    return {
+        type: 'ACCURACY',
+        payload: {
+            accuracy: data.accuracy,
+        }
+    }
+}
+
 module.exports = {
     addTraineeOneData,
     addTraineeTwoData,
-    addTraineeThreeData
+    addTraineeThreeData,
+    addSyncDelay,
+    addPredictedMove,
+    addDancerIds,
+    addAccuracy
 }

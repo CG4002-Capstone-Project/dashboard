@@ -18,6 +18,43 @@ function redPersonIcon() {
 }
 
 export class Individual extends Component {
+
+    state = {
+        hasPositionsChanged: false,
+    }
+
+    // componentDidUpdate() {
+    //     if (this.props.dancerIds.length) {
+
+    //     }
+    // }
+    positionStickman() {
+        if (this.props.position == 1) {
+            return (
+                <React.Fragment>
+                    <IoAccessibilitySharp size='2rem' style={{ fill:'red', marginRight: '1.5rem' }} />
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                </React.Fragment>
+            )
+        } else if (this.props.position == 2) {
+            return (
+                <React.Fragment>
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                    <IoAccessibilitySharp size='2rem' style={{ fill:'red', marginRight: '1.5rem' }} />
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                    <IoAccessibilitySharp size='2rem' style={{ fill:'red', marginRight: '1.5rem' }} />
+                </React.Fragment>
+            )
+        }
+    }
     
     render() {
         console.log(this.props.data);
@@ -39,9 +76,10 @@ export class Individual extends Component {
                     {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
                     <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
                     <AccessibilityNewIcon fontSize='large' color="action" style={{ color: red[500], marginRight: '1rem'}} /> */}
-                    <IoAccessibilityOutline size='2rem' color="red" style={{ marginRight: '1.5rem' }} />
-                    <IoAccessibilitySharp size='2rem' color="red" style={{ fill:'#291f7d', outlineColor: 'black', marginRight: '1.5rem' }} />
-                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                    {this.positionStickman()}
+                    {/* <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                    <IoAccessibilitySharp size='2rem' style={{ fill:'#291f7d', marginRight: '1.5rem' }} />
+                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} /> */}
                 </PositionDisplay>
 
                 <AccLineChart data={this.props.data} />

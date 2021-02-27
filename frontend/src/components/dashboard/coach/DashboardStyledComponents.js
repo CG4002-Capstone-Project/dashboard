@@ -50,7 +50,7 @@ export const IndividualInputDiv = styled.div`
 
 export const SummaryDiv = styled.div`
     grid-area: summary;
-    border: 5px blue solid;
+    border-top: 5px lightgray solid;
     /* text-align: center; */
     background-color: #ffece2;
 `;

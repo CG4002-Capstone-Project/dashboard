@@ -53,11 +53,11 @@ db.once('open', () => {
                 const result = {
                     timestamp: change.fullDocument.timestamps,
                     dancerIds: change.fullDocument.dancerIds,
-                    predictedMoves: change.fullDocument.predictedMoves,
+                    predictedMove: change.fullDocument.predictedMove,
                     syncDelay: change.fullDocument.syncDelay,
                     accuracy: change.fullDocument.accuracy,
                 }
-                console.log('result: ' + JSON.stringify(result));
+                // console.log('result: ' + JSON.stringify(result));
                 io.emit("newResult", result);
         }
     })
@@ -86,7 +86,6 @@ db.once('open', () => {
                 } else if (change.fullDocument.trainee_id == '2') {
                     io.emit("onNewTraineeTwoData", data)
                 } else if (change.fullDocument.trainee_id == '3') {
-                    console.log('here');
                     io.emit("onNewTraineeThreeData", data);
                 }
         }

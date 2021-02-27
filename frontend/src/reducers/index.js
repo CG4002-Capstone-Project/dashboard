@@ -27,8 +27,50 @@ const addTraineeTwoDataReducer = (pastTraineeTwoData = [], action) => {
     return pastTraineeThreeData;
  }
 
+ const addSyncDelay = (syncDelay = [], action) => {
+    if (action.type == "SYNC_DELAY")  {
+        return [...syncDelay, action.payload];
+    }
+    
+    // handle initial startup
+    return syncDelay;
+ }
+
+ const addPredictedMove = (predictedMove = [], action) => {
+    if (action.type == "PREDICTED_MOVE")  {
+        return [...predictedMove, action.payload];
+    }
+    
+    // handle initial startup
+    return predictedMove;
+ }
+
+ const addDancerIds = (dancerIds = [], action) => {
+    if (action.type == "DANCER_IDS")  {
+        return [...dancerIds, action.payload];
+    }
+    
+    // handle initial startup
+    return dancerIds;
+ }
+
+ const addAccuracy = (accuracy = [], action) => {
+    if (action.type == "ACCURACY")  {
+        return [...accuracy, action.payload];
+    }
+    
+    // handle initial startup
+    return accuracy;
+ }
+
+ 
+
 export default combineReducers({
      traineeOneData: addTraineeOneDataReducer,
      traineeTwoData: addTraineeTwoDataReducer,
-     traineeThreeData: addTraineeThreeDataReducer
+     traineeThreeData: addTraineeThreeDataReducer,
+     syncDelay: addSyncDelay,
+     predictedMove: addPredictedMove,
+     dancerIds: addDancerIds,
+     accuracy: addAccuracy
 });
