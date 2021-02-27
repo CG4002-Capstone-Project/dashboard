@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
+import { AddColumnLeftIcon } from 'evergreen-ui';
 
 export default class YPRLineChart extends Component {
     constructor(props) {
@@ -40,7 +41,12 @@ export default class YPRLineChart extends Component {
                 },
                 animation: true,
                 title: {
-                    text: 'Yaw, Pitch & Roll against Time'
+                    text: 'Yaw, Pitch & Roll against Time',
+                    display: true,
+                    fontFamily: 'Acme',
+                },
+                legend: {
+                    position: 'right',
                 }
             },
             data: {

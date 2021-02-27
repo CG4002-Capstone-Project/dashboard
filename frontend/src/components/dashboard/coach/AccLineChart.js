@@ -32,8 +32,8 @@ export default class AccLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 20000,
-                                suggestedMin: -18000,
+                                suggestedMax: 15000,
+                                suggestedMin: -15000,
                             },
                         }
                     ]
@@ -42,6 +42,10 @@ export default class AccLineChart extends Component {
                 title: {
                     text: 'Acceleration X, Y and Z against Time',
                     display: true,
+                    fontFamily: 'Acme',
+                },
+                legend: {
+                    position: 'right',
                 }
             },
             data: {

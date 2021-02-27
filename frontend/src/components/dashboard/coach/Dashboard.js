@@ -59,13 +59,14 @@ export class Dashboard extends Component {
 
             </PreDashboardDiv>
         )
-
+        
+        // TODO fix name!! and coach-trainee entity relationship
         const dashboard = (
             <DashboardDiv>
                 <IndividualInputDiv>
-                    <Individual data={this.props.traineeOneData} />
-                    <Individual data={this.props.traineeTwoData} />
-                    <Individual data={this.props.traineeThreeData} />
+                    <Individual data={this.props.traineeOneData} no='1' name='Jane' />
+                    <Individual data={this.props.traineeTwoData} no='2' name='Mary' />
+                    <Individual data={this.props.traineeThreeData} no='3' name='Stacy' />
                 </IndividualInputDiv>
                 
                 <SummaryDiv>
