@@ -47,7 +47,7 @@ export class Dashboard extends Component {
 
     render() {
 
-        console.log(this.props);
+        // console.log(this.props);
         let currentState;
 
         const preDashboard = (
@@ -63,9 +63,9 @@ export class Dashboard extends Component {
         const dashboard = (
             <DashboardDiv>
                 <IndividualInputDiv>
-                    <Individual />
-                    <Individual />
-                    <Individual />
+                    <Individual data={this.props.traineeOneData} />
+                    <Individual data={this.props.traineeTwoData} />
+                    <Individual data={this.props.traineeThreeData} />
                 </IndividualInputDiv>
                 
                 <SummaryDiv>
@@ -81,7 +81,6 @@ export class Dashboard extends Component {
                 </PostResultsDiv>
             </PostDashboardDiv>
         )
-        console.log(this.state);
         if (this.state.preDashboard) {
             console.log('pre dashboard');
             currentState = preDashboard;
