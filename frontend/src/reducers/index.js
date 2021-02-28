@@ -63,6 +63,14 @@ const addTraineeTwoDataReducer = (pastTraineeTwoData = [], action) => {
     return accuracy;
  }
 
+ const addResults = (results = [], action) => {
+     if (action.type == 'RESULT') {
+         return [...results, action.payload]
+     }
+
+     return results;
+ }
+
  
 
 export default combineReducers({
@@ -72,5 +80,6 @@ export default combineReducers({
      syncDelay: addSyncDelay,
      predictedMove: addPredictedMove,
      dancerIds: addDancerIds,
-     accuracy: addAccuracy
+     accuracy: addAccuracy,
+     results: addResults
 });

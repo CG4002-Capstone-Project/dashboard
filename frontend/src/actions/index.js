@@ -46,36 +46,35 @@ const addTraineeThreeData = (data) => {
 const addSyncDelay = (data) => {
     return {
         type: 'SYNC_DELAY',
-        payload: {
-            syncDelay: data.syncDelay
-        }
+        payload: data.syncDelay,
     }
 }
 
 const addPredictedMove = (data) => {
     return {
         type: 'PREDICTED_MOVE',
-        payload: {
-            predictedMove: data.predictedMove
-        }
+        payload: data.predictedMove,
     }
 }
 
 const addDancerIds = (data) => {
     return {
         type: 'DANCER_IDS',
-        payload: {
-            dancerIds: data.dancerIds,
-        }
+        payload: data.dancerIds,
     }
 }
 
 const addAccuracy = (data) => {
     return {
         type: 'ACCURACY',
-        payload: {
-            accuracy: data.accuracy,
-        }
+        payload: data.accuracy,
+    }
+}
+
+const addResults = (data) => {
+    return {
+        type: 'RESULT',
+        payload: data
     }
 }
 
@@ -86,5 +85,6 @@ module.exports = {
     addSyncDelay,
     addPredictedMove,
     addDancerIds,
-    addAccuracy
+    addAccuracy,
+    addResults
 }

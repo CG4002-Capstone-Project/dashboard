@@ -51,13 +51,14 @@ db.once('open', () => {
         switch (change.operationType) {
             case "insert":
                 const result = {
-                    timestamp: change.fullDocument.timestamps,
+                    timestamp: change.fullDocument.timestamp,
                     dancerIds: change.fullDocument.dancerIds,
+                    correctDancerIds: change.fullDocument.correctDancerIds,
                     predictedMove: change.fullDocument.predictedMove,
                     syncDelay: change.fullDocument.syncDelay,
                     accuracy: change.fullDocument.accuracy,
                 }
-                // console.log('result: ' + JSON.stringify(result));
+                console.log('result: ' + JSON.stringify(result));
                 io.emit("newResult", result);
         }
     })

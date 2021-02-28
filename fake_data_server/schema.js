@@ -14,12 +14,12 @@ const rawDataSchema = new mongoose.Schema({
 const RawDataModel = mongoose.model('raw_data', rawDataSchema);
 
 const rawResultsSchema = new mongoose.Schema({
-    timestamp: { type: String, required: true, trim: true },
+    timestamp: { type: String, default: Date.now() },
     dancerIds: { type: String, required: true, trim: true },
+    correctDancerIds: { type: String, required: true, trim: true },
     predictedMove: { type: String, required: true, trim: true  },
     syncDelay: { type: String, required: true, trim: true  },
     accuracy: { type: String, required: true, trim: true  },
-    timestamps: { type: String, default: Date.now() },
 })
 
 const RawResultModel = mongoose.model('raw_result', rawResultsSchema);

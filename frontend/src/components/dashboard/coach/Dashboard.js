@@ -6,8 +6,10 @@ import Summary from './Summary';
 import io from "socket.io-client";
 import { connect } from 'react-redux';
 import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
-    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy } from '../../../actions';
+    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults } from '../../../actions';
 
+
+// how to update an object with setState: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
 export class Dashboard extends Component {
 
     componentDidMount = async () => {
@@ -18,25 +20,33 @@ export class Dashboard extends Component {
         })
         socket.on("onNewTraineeOneData", (data) => {
             this.props.addTraineeOneData(data);
-            console.log('data ' + JSON.stringify(data));
+            // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeTwoData", (data) => {
             this.props.addTraineeTwoData(data);
-            console.log('data ' + JSON.stringify(data));
+            // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeThreeData", (data) => {
             this.props.addTraineeThreeData(data);
-            console.log('data ' + JSON.stringify(data));
+            // console.log('data ' + JSON.stringify(data));
         })
 
-        socket.on("newResult", (result) => {
+        socket.on("newResult", async (result) => {
             this.props.addAccuracy(result);
             this.props.addDancerIds(result);
             this.props.addPredictedMove(result);
             this.props.addSyncDelay(result);
+            this.props.addResults(result);
             this.updatePositions(result.dancerIds);
-            this.updateCurrentMove(result.predictedMove)
-            console.log('result: '+ JSON.stringify(result));
+            this.updateCurrentMove(result.predictedMove);
+
+            await this.setState({
+                currentResult: {...result}
+            });
+
+            // console.log(this.state.currentResult);
+            
+            // console.log('result: '+ JSON.stringify(result));
         })
 
         socket.on("disconnect", () => {
@@ -49,7 +59,8 @@ export class Dashboard extends Component {
         posTraineeOne: 1,
         posTraineeTwo: 2,
         posTraineeThree: 3,
-        currentMove: 0
+        currentMove: 0,
+        currentResult: {}
     }
 
     updateCurrentMove = async (move) => {
@@ -185,7 +196,7 @@ export class Dashboard extends Component {
                 </IndividualInputDiv>
                 
                 <SummaryDiv>
-                    <Summary accuracy={this.props.accuracy} dancerIds={this.props.dancerIds} predictedMoves={this.props.predictedMoves} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} />
+                    <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} />
                 </SummaryDiv>
             </DashboardDiv>
         )
@@ -198,13 +209,13 @@ export class Dashboard extends Component {
             </PostDashboardDiv>
         )
         if (this.state.preDashboard) {
-            console.log('pre dashboard');
+            // console.log('pre dashboard');
             currentState = preDashboard;
         } else if (this.state.postDashboard) {
-            console.log('post dashboard');
+            // console.log('post dashboard');
             currentState = postDashboard;
         } else {
-            console.log('dashboard');
+            // console.log('dashboard');
             currentState = dashboard;
         }
         return (
@@ -224,7 +235,8 @@ const mapStateToProps = (state) => {
         syncDelay: state.syncDelay,
         predictedMove: state.predictedMove,
         dancerIds: state.dancerIds,
-        accuracy: state.accuracy
+        accuracy: state.accuracy,
+        results: state.results
     }
 }
 
@@ -236,5 +248,6 @@ export default connect(mapStateToProps, {
     addDancerIds,
     addPredictedMove,
     addAccuracy,
-    addSyncDelay
+    addSyncDelay,
+    addResults
 })(Dashboard);

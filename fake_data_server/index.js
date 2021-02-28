@@ -23,7 +23,7 @@ const readResultsIntoDb = () => {
     const arrayOfObjects = fs.readFileSync('raw_results.csv', 'utf8');
 
     const records = parse(arrayOfObjects, {
-        headers: ['timestamp', 'dancerIds', 'predictedMove', 'syncDelay', 'accuracy']
+        headers: ['dancerIds', 'correctDancerIds', 'predictedMove', 'syncDelay', 'accuracy']
     })
 
 // https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop/44476626
@@ -32,12 +32,12 @@ const readResultsIntoDb = () => {
     async function load() {
         for (let i = 0; i < records.length; i++) {
             const resultInstance = new RawResultModel({ 
-                timestamp: records[i][0],
-                dancerIds: records[i][1],
+                dancerIds: records[i][0],
+                correctDancerIds: records[i][1],
                 predictedMove: records[i][2],
                 syncDelay: records[i][3],
                 accuracy: records[i][4],
-                timestamps: Date.now()
+                timestamp: Date.now()
             });
             console.log(resultInstance);
 

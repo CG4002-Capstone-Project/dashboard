@@ -57,7 +57,6 @@ export class Individual extends Component {
     }
     
     render() {
-        console.log(this.props.data);
         let display;
         if (this.props.data.length == 0) {
             display = ( 
