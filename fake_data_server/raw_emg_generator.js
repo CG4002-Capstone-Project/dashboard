@@ -7,7 +7,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 function generateRawEMG() {
     let emgValues = [];
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 1300; i++) {
    
        const value = randomFloat({min: 0, max: 5, fixed: 2});
 

@@ -19,7 +19,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 function generateRawData() {
     let danceMove_1 = [];
     let trainee_id_1 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: -120, max: -80, fixed: 2});
        const pitch = randomFloat({min: -40, max: 50, fixed: 2});
@@ -50,7 +50,7 @@ function generateRawData() {
    
     let danceMove_2 = [];
     let trainee_id_2 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: 20, max: 70, fixed: 2});
        const pitch = randomFloat({min: -150, max: 0, fixed: 2});
@@ -81,7 +81,7 @@ function generateRawData() {
    
     let danceMove_3 = [];
     let trainee_id_3 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: 40, max: 110, fixed: 2});
        const pitch = randomFloat({min: 10, max: 80, fixed: 2});
@@ -112,7 +112,7 @@ function generateRawData() {
    
     let danceMove_4 = [];
     let trainee_id_4 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: 70, max: 150, fixed: 2});
        const pitch = randomFloat({min: 30, max: 120, fixed: 2});
@@ -143,7 +143,7 @@ function generateRawData() {
    
     let danceMove_5 = [];
     let trainee_id_5 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: -20, max: 50, fixed: 2});
        const pitch = randomFloat({min: -60, max: 20, fixed: 2});
@@ -174,7 +174,7 @@ function generateRawData() {
    
     let danceMove_6 = [];
     let trainee_id_6 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: 70, max: 160, fixed: 2});
        const pitch = randomFloat({min: 20, max: 120, fixed: 2});
@@ -205,7 +205,7 @@ function generateRawData() {
    
     let danceMove_7 = [];
     let trainee_id_7 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: -40, max: 50, fixed: 2});
        const pitch = randomFloat({min: -30, max: 80, fixed: 2});
@@ -236,7 +236,7 @@ function generateRawData() {
    
     let danceMove_8 = [];
     let trainee_id_8 = 1;
-    for (let i = 0;i < 900; i++) {
+    for (let i = 0;i < 400; i++) {
    
        const yaw = randomFloat({min: 40, max: 130, fixed: 2});
        const pitch = randomFloat({min: 60, max: 160, fixed: 2});
@@ -264,11 +264,73 @@ function generateRawData() {
            trainee_id_8 = 1;
        }
     }
+
+    let danceMove_9 = [];
+    let trainee_id_9 = 1;
+    for (let i = 0;i < 400; i++) {
+   
+       const yaw = randomFloat({min: 40, max: 130, fixed: 2});
+       const pitch = randomFloat({min: 60, max: 160, fixed: 2});
+       const roll = randomFloat({min: 20, max: 120, fixed: 2});
+       const accx = randomFloat({min: 5000, max: 14000, fixed: 4});
+       const accy = randomFloat({min: 2000, max: 8000, fixed: 4});
+       const accz = randomFloat({min: 7000, max: 15000, fixed: 4});
+   
+       const data = {
+           trainee_id: trainee_id_9,
+           yaw,
+           pitch,
+           roll,
+           accx,
+           accy,
+           accz
+       }
+       danceMove_9.push(data);
+   
+       if (trainee_id_9 == 1) {
+        trainee_id_9 = 2;
+       } else if (trainee_id_9 == 2) {
+        trainee_id_9 = 3
+       } else if (trainee_id_9 == 3) {
+        trainee_id_9 = 1;
+       }
+    }
+
+    let danceMove_10 = [];
+    let trainee_id_10 = 1;
+    for (let i = 0;i < 400; i++) {
+   
+       const yaw = randomFloat({min: 40, max: 130, fixed: 2});
+       const pitch = randomFloat({min: 60, max: 160, fixed: 2});
+       const roll = randomFloat({min: 20, max: 120, fixed: 2});
+       const accx = randomFloat({min: 5000, max: 14000, fixed: 4});
+       const accy = randomFloat({min: 2000, max: 8000, fixed: 4});
+       const accz = randomFloat({min: 7000, max: 15000, fixed: 4});
+   
+       const data = {
+           trainee_id: trainee_id_10,
+           yaw,
+           pitch,
+           roll,
+           accx,
+           accy,
+           accz
+       }
+       danceMove_10.push(data);
+   
+       if (trainee_id_10 == 1) {
+           trainee_id_10 = 2;
+       } else if (trainee_id_10 == 2) {
+           trainee_id_10 = 3
+       } else if (trainee_id_10 == 3) {
+           trainee_id_10 = 1;
+       }
+    }
    
    
     let finalData = []
    
-    finalData = [...danceMove_1, ...danceMove_2, ...danceMove_3, ...danceMove_4, ...danceMove_5, ...danceMove_6, ...danceMove_7, ...danceMove_8];
+    finalData = [...danceMove_1, ...danceMove_2, ...danceMove_3, ...danceMove_4, ...danceMove_5, ...danceMove_6, ...danceMove_7, ...danceMove_8, ...danceMove_9, ...danceMove_10];
    
    const csvWriter = createCsvWriter({
        path: 'raw_data.csv',

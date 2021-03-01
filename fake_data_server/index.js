@@ -12,13 +12,17 @@ const generateRawEMG = require('./raw_emg_generator');
 // generateResults();
 // generateRawEMG();
 
-const URI = process.env.MONGO_DB_URI;
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-    console.log('Connected to Jeevz MongoDB Cluster');
-})
+
+
+const connectToDb = async () => {
+    const URI = process.env.MONGO_DB_URI;
+    mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', () => {
+        console.log('Connected to Jeevz MongoDB Cluster');
+    })
+}
 
 const readResultsIntoDb = () => {
 
@@ -148,10 +152,98 @@ const readEMGIntoDb = () => {
     load();
 }
 
-// readEverythingIntoDb() = () => {
+const readEverythingIntoDb = () => {
+    const arrayOfDataObjects = fs.readFileSync('raw_data.csv', 'utf8');
+    const dataRecords = parse(arrayOfDataObjects, {
+        headers: ['trainee_id', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
+    })
 
-// }
+    const arrayOfEmgObjects = fs.readFileSync('raw_emg.csv', 'utf8');
+    const emgRecords = parse(arrayOfEmgObjects, {
+        headers: ['emgValue']
+    })
 
-readDataIntoDb();
-readEMGIntoDb();
-readResultsIntoDb();
+    const arrayOfResultObjects = fs.readFileSync('raw_results.csv', 'utf8');
+    const resultRecords = parse(arrayOfResultObjects, {
+        headers: ['dancerIds', 'correctDancerIds', 'predictedMove', 'syncDelay', 'accuracy']
+    })
+
+
+    const timer = ms => new Promise(res => setTimeout(res, ms));
+    let j = 0, k = 0;
+
+    async function load() {
+        for (let i = 0; i < dataRecords.length; i++) {
+            const dataInstance = new RawDataModel({ 
+                trainee_id: dataRecords[i][0],
+                yaw: dataRecords[i][1],
+                pitch: dataRecords[i][2],
+                roll: dataRecords[i][3],
+                accx: dataRecords[i][4],
+                accy: dataRecords[i][5],
+                accz: dataRecords[i][6],
+                timestamp: Date.now(),
+            });
+            await timer(100);
+
+            dataInstance.save((err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(`data instance ${i} sent`)
+                    // console.log(` ${records[i][2]} saved!`);
+                }
+            })
+
+            // console.log('here ' + typeof(dataRecords[i][0]));
+
+            if (dataRecords[i][0] == "1" && j < emgRecords.length) {
+                const emgInstance = new RawEMGModel({ 
+                    emgValue: emgRecords[j][0],
+                    timestamp: Date.now(),
+                });
+    
+                emgInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`emg instance ${j} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+
+                j += 1;
+            }
+
+            if (i % 400 == 200 && k < resultRecords.length) {
+                const resultInstance = new RawResultModel({ 
+                    dancerIds: resultRecords[k][0],
+                    correctDancerIds: resultRecords[k][1],
+                    predictedMove: resultRecords[k][2],
+                    syncDelay: resultRecords[k][3],
+                    accuracy: resultRecords[k][4],
+                    timestamp: Date.now()
+                });
+
+                resultInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(` result instance ${k} saved!`);
+                    }
+                })
+
+                k += 1;
+            }
+        }
+    }
+
+    load();
+
+}
+
+connectToDb();
+readEverythingIntoDb();
+// readDataIntoDb();
+// readEMGIntoDb();
+// readResultsIntoDb();
