@@ -22,8 +22,23 @@ export class NewRegister extends Component {
     }
 
     registerGroup = async () => {
-        const accessToken = await axios.post(' http://localhost:3333/register/create', { ...this.state })
+        const response = await axios.post(' http://localhost:3333/register/create', { ...this.state })
+        const accessToken = response.data.accessToken;
+        console.log('access token: ' + JSON.stringify(accessToken));
+        localStorage.setItem('accessToken', accessToken);
+        await this.test();
+    }
+
+    test = async () => {
+        const accessToken = localStorage.getItem('accessToken');
+        const can = await axios.post(' http://localhost:3333/register/decode', { 
+            data: 'helo'
+        }, { headers: { 
+                'authorization': accessToken
+            }
+        })
         console.log('access token: ' + accessToken);
+        console.log('can', can);
     }
 
     accountForSubmittedForm = async (input) => {

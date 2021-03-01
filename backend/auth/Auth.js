@@ -17,6 +17,19 @@ const decodeAccessToken = (token) => {
     return jwt.verify(token, secret);
 }
 
+const authChecker = (req, res, next) => {
+    try {
+        const accessToken = req.headers.authorization;
+        const {email, role} = decodeAccessToken(accessToken);
+
+
+        next();
+    } catch(e) {
+        res.status(401);
+        return res.json({ error: 'Unauthorized'});
+    }
+}
+
 module.exports = {
     hashPassword,
     generateAccessToken,
