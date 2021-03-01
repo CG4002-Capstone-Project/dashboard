@@ -78,6 +78,16 @@ const addResults = (data) => {
     }
 }
 
+const addEMG = (data) => {
+    return {
+        type: 'EMG',
+        payload: {
+            timestamp: data.timestamp,
+            emgValue: data.emgValue
+        }
+    }
+}
+
 module.exports = {
     addTraineeOneData,
     addTraineeTwoData,
@@ -86,5 +96,6 @@ module.exports = {
     addPredictedMove,
     addDancerIds,
     addAccuracy,
-    addResults
+    addResults,
+    addEMG
 }

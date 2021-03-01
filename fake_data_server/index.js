@@ -4,11 +4,13 @@ const generateResults = require('./raw_results_generator');
 const mongoose = require('mongoose');
 const csv = require('csv-parser');
 const fs = require('fs');
-const { RawResultModel, RawDataModel } = require('./schema');
+const { RawResultModel, RawDataModel, RawEMGModel } = require('./schema');
 const parse = require('csv-parse/lib/sync');
+const generateRawEMG = require('./raw_emg_generator');
 
 // generateRawData();
 // generateResults();
+// generateRawEMG();
 
 const URI = process.env.MONGO_DB_URI;
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -87,7 +89,7 @@ const readDataIntoDb = () => {
 
     async function load() {
         for (let i = 0; i < records.length; i++) {
-            const resultInstance = new RawDataModel({ 
+            const dataInstance = new RawDataModel({ 
                 trainee_id: records[i][0],
                 yaw: records[i][1],
                 pitch: records[i][2],
@@ -99,10 +101,11 @@ const readDataIntoDb = () => {
             });
             // console.log(resultInstance);
 
-            resultInstance.save((err) => {
+            dataInstance.save((err) => {
                 if (err) {
                     console.log(err);
                 } else {
+                    console.log(`data instance ${i} sent`)
                     // console.log(` ${records[i][2]} saved!`);
                 }
             })
@@ -113,6 +116,42 @@ const readDataIntoDb = () => {
     load();
 }
 
+const readEMGIntoDb = () => {
 
-readResultsIntoDb();
+    const arrayOfObjects = fs.readFileSync('raw_emg.csv', 'utf8');
+
+    const records = parse(arrayOfObjects, {
+        headers: ['emgValue']
+    })
+
+
+    const timer = ms => new Promise(res => setTimeout(res, ms));
+
+    async function load() {
+        for (let i = 0; i < records.length; i++) {
+            const emgInstance = new RawEMGModel({ 
+                emgValue: records[i][0],
+                timestamp: Date.now(),
+            });
+
+            emgInstance.save((err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(`emg instance ${i} sent`)
+                    // console.log(` ${records[i][2]} saved!`);
+                }
+            })
+            await timer(30);
+        }
+    }
+    load();
+}
+
+// readEverythingIntoDb() = () => {
+
+// }
+
 readDataIntoDb();
+readEMGIntoDb();
+readResultsIntoDb();

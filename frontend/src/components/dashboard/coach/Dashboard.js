@@ -6,7 +6,7 @@ import Summary from './Summary';
 import io from "socket.io-client";
 import { connect } from 'react-redux';
 import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
-    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults } from '../../../actions';
+    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults, addEMG } from '../../../actions';
 
 
 // how to update an object with setState: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
@@ -47,6 +47,10 @@ export class Dashboard extends Component {
             // console.log(this.state.currentResult);
             
             // console.log('result: '+ JSON.stringify(result));
+        })
+
+        socket.on("newEMG", async (result) => {
+            this.props.addEMG(result);
         })
 
         socket.on("disconnect", () => {
@@ -196,7 +200,7 @@ export class Dashboard extends Component {
                 </IndividualInputDiv>
                 
                 <SummaryDiv>
-                    <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} />
+                    <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} emgs={this.props.emgs} />
                 </SummaryDiv>
             </DashboardDiv>
         )
@@ -236,7 +240,8 @@ const mapStateToProps = (state) => {
         predictedMove: state.predictedMove,
         dancerIds: state.dancerIds,
         accuracy: state.accuracy,
-        results: state.results
+        results: state.results,
+        emgs: state.emgs
     }
 }
 
@@ -249,5 +254,6 @@ export default connect(mapStateToProps, {
     addPredictedMove,
     addAccuracy,
     addSyncDelay,
-    addResults
+    addResults,
+    addEMG
 })(Dashboard);

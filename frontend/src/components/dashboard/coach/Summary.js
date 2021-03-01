@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player';
 import Table from 'react-bootstrap/Table';
 import Fade from 'react-bootstrap/Fade';
 import _ from 'lodash';
+import EmgLineChart from './EmgLineChart';
 
 const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High', 'Side Pump', 'Wipe Table']
 
@@ -190,7 +191,7 @@ export class Summary extends Component {
               </SyncDelayMoveAccuracyDiv>
 
               <EMGDiv>
-
+                <EmgLineChart data={this.props.emgs}/>
 
               </EMGDiv>
               <DanceMovePlayerDiv>

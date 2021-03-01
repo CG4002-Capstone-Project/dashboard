@@ -71,6 +71,14 @@ const addTraineeTwoDataReducer = (pastTraineeTwoData = [], action) => {
      return results;
  }
 
+ const addEMGs = (emgs = [], action) => {
+    if (action.type == 'EMG') {
+        return [...emgs, action.payload]
+    }
+
+    return emgs;
+}
+
  
 
 export default combineReducers({
@@ -81,5 +89,6 @@ export default combineReducers({
      predictedMove: addPredictedMove,
      dancerIds: addDancerIds,
      accuracy: addAccuracy,
-     results: addResults
+     results: addResults,
+     emgs: addEMGs
 });

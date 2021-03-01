@@ -46,6 +46,7 @@ db.once('open', () => {
 
     const resultsChangeStreams = db.collection("raw_results").watch();
     const dataChangeStreams = db.collection("raw_datas").watch();
+    const emgChangeStreams = db.collection("raw_emgs").watch();
 
     resultsChangeStreams.on("change", (change) => {
         switch (change.operationType) {
@@ -89,6 +90,18 @@ db.once('open', () => {
                 } else if (change.fullDocument.trainee_id == '3') {
                     io.emit("onNewTraineeThreeData", data);
                 }
+        }
+    })
+
+    emgChangeStreams.on("change", (change) => {
+        switch (change.operationType) {
+            case "insert":
+                const emg = {
+                    timestamp: change.fullDocument.timestamp,
+                    emgValue: change.fullDocument.emgValue,
+                }
+                console.log('emg: ' + JSON.stringify(emg));
+                io.emit("newEMG", emg);
         }
     })
 })

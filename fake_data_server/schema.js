@@ -24,7 +24,15 @@ const rawResultsSchema = new mongoose.Schema({
 
 const RawResultModel = mongoose.model('raw_result', rawResultsSchema);
 
+const rawEMGSchema = new mongoose.Schema({
+    timestamp: { type: String, default: Date.now() },
+    emgValue: { type: String, required: true, trim: true },
+})
+
+const RawEMGModel = mongoose.model('raw_emg', rawEMGSchema);
+
 module.exports = {
     RawDataModel,
-    RawResultModel
+    RawResultModel,
+    RawEMGModel
 }
