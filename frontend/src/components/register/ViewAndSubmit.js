@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ViewAndSubmitDiv, CoachInfo, Trainee1Info, Trainee2Info, Trainee3Info } from './ViewAndSubmitStyledComponents';
 import { Button } from 'evergreen-ui';
-
+import { Link } from 'react-router-dom';
 
 export class ViewAndSubmit extends Component {
     onSubmitButtonClicked = event => {
@@ -52,8 +52,9 @@ export class ViewAndSubmit extends Component {
                         <h4> Username: {this.props.trainee3.username} </h4>
                         <h4> Password: {this.props.trainee3.password} </h4>
                     </Trainee3Info>
-
-                    <Button appearance='primary' marginRight={30} onClick={this.onSubmitButtonClicked}> Submit </Button>
+                    <Link to="/coach/dashboard" >
+                        <Button appearance='primary' marginRight={30} onClick={this.onSubmitButtonClicked}> Submit </Button>
+                    </Link>
 
                 </React.Fragment>
             )

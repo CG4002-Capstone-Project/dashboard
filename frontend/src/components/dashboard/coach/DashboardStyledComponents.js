@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+// how to account for navbar and landing page vh: https://stackoverflow.com/questions/45537828/need-a-fixed-navbar-and-landing-page-vh-that-incorporates-navbar-height
+
 export const PreDashboardDiv = styled.div`
     display: grid;
     grid-template-areas: 
@@ -29,7 +31,7 @@ export const DashboardDiv = styled.div`
         'individual'
         'summary';    
     grid-gap: 1rem;
-    grid-template-rows: 0.25fr 2fr 1fr;
+    grid-template-rows: 62px 2fr 1fr;
     /* grid-template-columns: 1fr 3fr 1fr; */
     background-color: #FFFFF2;
     margin: auto;
