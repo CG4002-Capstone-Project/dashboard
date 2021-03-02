@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export const IndividualDiv = styled.div`
     border: paleturquoise solid;
-    width: 500px;
     flex-shrink: 1;
     display: flex;
+    width: 500px;
+    height: 500px;
     flex-direction: column;
 `;
 

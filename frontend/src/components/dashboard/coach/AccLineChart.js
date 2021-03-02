@@ -20,6 +20,7 @@ export default class AccLineChart extends Component {
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                aspectRatio: 2.5,
                 scales: {
                     xAxes: [
                         {   
