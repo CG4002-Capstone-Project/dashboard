@@ -40,7 +40,6 @@ export default class YPRLineChart extends Component {
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'Yaw, Pitch & Roll against Time',
                     display: true,

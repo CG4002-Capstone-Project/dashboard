@@ -36,7 +36,6 @@ export default class EmgLineChart extends Component {
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'EMG Value against Time',
                     display: true,

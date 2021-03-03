@@ -39,7 +39,6 @@ export default class AccLineChart extends Component {
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'Acceleration X, Y and Z against Time',
                     display: true,

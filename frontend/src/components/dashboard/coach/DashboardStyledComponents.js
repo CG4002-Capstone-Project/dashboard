@@ -45,14 +45,14 @@ export const IndividualInputDiv = styled.div`
     justify-content: space-around;
     /* border: 5px red solid; */
     /* text-align: center; */
-    background-color: #ffece2;
+    background-color: #fff8e3;
 `
 
 export const SummaryDiv = styled.div`
     grid-area: summary;
     border-top: 5px lightgray solid;
     /* text-align: center; */
-    background-color: #ffece2;
+    background-color: #fff8f5;
 `;
 
 export const PostDashboardDiv = styled.div`

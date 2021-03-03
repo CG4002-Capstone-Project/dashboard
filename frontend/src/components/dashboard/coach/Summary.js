@@ -16,7 +16,7 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 export class Summary extends Component {
 
     render() {
-        console.log(this.props.currentResult);
+        console.log(JSON.stringify(this.props.currentResult));
 
         let videoComponent;
         let currentMove;
@@ -110,7 +110,8 @@ export class Summary extends Component {
                 <Table borderless size='sm'>
                     <thead><tr><th>Positions</th><th>Move</th></tr></thead>
                     <tbody>
-                        <Fade appear={true} in={true}><tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr></Fade>
+                        {/* <Fade appear={true} in={true}></Fade> */}
+                        <tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr>
                         <tr><td style={{ color: 'red' }}>{summarySecondRowDancerIds}</td><td style={{ color: 'red' }}>{summarySecondRowPredictedMove}</td></tr>
                         <tr><td>{summaryThirdRowDancerIds}</td><td>{summaryThirdRowPredictedMove}</td></tr></tbody>
                 </Table>
