@@ -54,8 +54,8 @@ export default class EmgLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'orange',
-                    backgroundColor: 'orange'              
+                    borderColor: 'black',
+                    backgroundColor: 'black'              
                 }]
             }
 

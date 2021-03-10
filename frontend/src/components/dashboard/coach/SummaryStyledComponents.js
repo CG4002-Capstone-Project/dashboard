@@ -13,6 +13,7 @@ export const SummaryDiv = styled.div`
 export const StatusDiv = styled.div`
     border: 1px solid lightslategray;
     grid-area: status;
+    text-align: center;
 `;
 
 export const CorrectPositionDiv = styled.div`

@@ -122,6 +122,7 @@ export class Summary extends Component {
         let positionDisplay; 
         let currentPosition;
         let correctPosition;
+        let currentStatus;
         if (_.isEmpty(this.props.currentResult)) {
             currentResultDisplay = (
                 <React.Fragment>
@@ -130,6 +131,13 @@ export class Summary extends Component {
                 </React.Fragment>
             )
             positionDisplay = (
+                <React.Fragment>
+                    <h4> Positions </h4>
+                    <h4> Waiting for incoming data! Be Patient. </h4>
+                </React.Fragment>
+            )
+
+            currentStatus = (
                 <React.Fragment>
                     <h4> Positions </h4>
                     <h4> Waiting for incoming data! Be Patient. </h4>
@@ -174,14 +182,24 @@ export class Summary extends Component {
                 )
             }
 
+            currentStatus = (
+                <React.Fragment>
+                    <br/>
+                    <h4> Jane - Active   </h4>
+                    <br/>
+                    <h4> Mary - Active </h4>
+                    <br/>
+                    <h4> Stacy - Active </h4>
+            </React.Fragment>
+            )
+
         }
 
 
         return (
           <SummaryDiv>
               <StatusDiv>
-
-
+                {currentStatus}
               </StatusDiv>
               <CorrectPositionDiv>
                 {positionDisplay}
