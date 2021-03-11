@@ -21,6 +21,7 @@ export default class YPRLineChart extends Component {
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                aspectRatio: 2.5,
                 scales: {
                     xAxes: [
                         {   
@@ -39,7 +40,6 @@ export default class YPRLineChart extends Component {
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'Yaw, Pitch & Roll against Time',
                     display: true,

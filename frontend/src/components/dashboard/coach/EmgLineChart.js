@@ -36,7 +36,6 @@ export default class EmgLineChart extends Component {
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'EMG Value against Time',
                     display: true,
@@ -55,8 +54,8 @@ export default class EmgLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'orange',
-                    backgroundColor: 'orange'              
+                    borderColor: 'black',
+                    backgroundColor: 'black'              
                 }]
             }
 

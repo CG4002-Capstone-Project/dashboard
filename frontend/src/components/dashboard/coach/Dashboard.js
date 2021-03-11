@@ -43,10 +43,8 @@ export class Dashboard extends Component {
             await this.setState({
                 currentResult: {...result}
             });
-
-            // console.log(this.state.currentResult);
             
-            // console.log('result: '+ JSON.stringify(result));
+            console.log('result: '+ JSON.stringify(this.state.currentResult));
         })
 
         socket.on("newEMG", async (result) => {
