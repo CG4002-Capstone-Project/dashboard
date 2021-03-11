@@ -15,12 +15,12 @@ const generateRawEMG = require('./raw_emg_generator');
 
 
 const connectToDb = async () => {
-    const URI = process.env.MONGO_DB_URI;
+    const URI = process.env.MONGO_DB_LOCAL_URI;
     mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', () => {
-        console.log('Connected to Jeevz MongoDB Cluster');
+        console.log('Connected to Jeevz MongoDB Local');
     })
 }
 
