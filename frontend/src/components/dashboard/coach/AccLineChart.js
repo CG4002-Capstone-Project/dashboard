@@ -16,11 +16,12 @@ export default class AccLineChart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.data.map(d => d.timestamp));
+        // console.log(this.props.data.map(d => d.timestamp));
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
-                aspectRatio: 2.5,
+                responsive: true,
+                aspectRatio: 2.75,
                 scales: {
                     xAxes: [
                         {   

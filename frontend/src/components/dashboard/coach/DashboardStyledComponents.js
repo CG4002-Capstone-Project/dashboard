@@ -22,37 +22,38 @@ export const QuestionDiv = styled.div`
     margin: auto;
 `;
 
-export const DashboardDiv = styled.div`
-    display: grid;
-    grid-template-areas: 
-        '.'
-        'individual'
-        'summary';    
-    grid-gap: 1rem;
-    grid-template-rows: 62px 1fr 0.6fr;
-    /* grid-template-columns: 1fr 3fr 1fr; */
-    background-color: #FFFFF2;
-    margin: auto;
-    width: 100vw;
-    height: 100vh;
+export const CoverDiv = styled.div`
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    border: 2px solid pink;
 `;
 
-export const IndividualInputDiv = styled.div`
-    grid-area: individual;
+export const DashboardDiv = styled.div`
+    box-sizing: border-box;
+    border: 3px solid lightgoldenrodyellow;
+    width: 100%;
+    height: 68%;
+    /* max-width: 100%;
+    max-height: 70%; */
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: stretch;
-    justify-content: space-around;
-    /* border: 5px red solid; */
-    /* text-align: center; */
-    background-color: #fff8e3;
-`
+    background-color: #FFFFF2;
+`;
 
 export const SummaryDiv = styled.div`
-    grid-area: summary;
-    border-top: 5px lightgray solid;
-    /* text-align: center; */
-    background-color: #fff8f5;
+    box-sizing: border-box;
+    border: 2px solid lightblue;
+    width: 100%;
+    height: 32%;
+    /* max-width: 100%;
+    max-height: 30%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
 `;
 
 export const PostDashboardDiv = styled.div`
