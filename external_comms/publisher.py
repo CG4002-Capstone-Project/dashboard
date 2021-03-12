@@ -11,9 +11,24 @@ params.socket_timeout = 5
 
 connection = pika.BlockingConnection(params) # Connect to CloudAMQP
 channel = connection.channel() # start a channel
-channel.queue_declare(queue='pdfprocess') # Declare a queue
+
+# raw_data
+# emg 
+# results
+channel.queue_declare(queue='raw_data') # Declare a queue
+channel.queue_declare(queue='emg') # Declare a queue
+channel.queue_declare(queue='results') # Declare a queue
 # send a message
 
-channel.basic_publish(exchange='', routing_key='pdfprocess', body='User information')
+for i in range(2):
+    data = "1 | 1456 | 20 30 40 12 13 14"
+    emg_data = "1555 | 2.3"
+    channel.basic_publish(exchange='', routing_key='raw_data', body=data)
+    channel.basic_publish(exchange='', routing_key='emg', body=emg_data)
+
+#channel.basic_publish(exchange='', routing_key='raw_data', body='raw_data')
+#channel.basic_publish(exchange='', routing_key='emg', body='emg')
+#channel.basic_publish(exchange='', routing_key='results', body='results')
+
 print ("[x] Message sent to consumer")
 connection.close()
