@@ -1,11 +1,11 @@
-import pika, os, logging
+import pika, os, logging, config
 # pip install pika 
 # python publisher.py
 
 logging.basicConfig()
 
 # Parse CLODUAMQP_URL (fallback to localhost)
-url = os.environ.get('CLOUDAMQP_URL', 'amqps://yjxagmuu:9i_-oo9VNSh5w4DtBxOlB6KLLOMLWlgj@mustang.rmq.cloudamqp.com/yjxagmuu')
+url = os.environ.get('CLOUDAMQP_URL', config.CLOUDAMQP_URL)
 params = pika.URLParameters(url)
 params.socket_timeout = 5
 
