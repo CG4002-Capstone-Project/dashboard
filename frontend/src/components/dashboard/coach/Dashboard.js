@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DashboardDiv, IndividualInputDiv, SummaryDiv, PreDashboardDiv, QuestionDiv, PostResultsDiv, PostDashboardDiv } from './DashboardStyledComponents';
+import { DashboardDiv, IndividualInputDiv, SummaryDiv, PreDashboardDiv, QuestionDiv, PostResultsDiv, PostDashboardDiv, CoverDiv } from './DashboardStyledComponents';
 import Individual from './Individual';
 import { Button, EndorsedIcon } from 'evergreen-ui';
 import Summary from './Summary';
@@ -190,17 +190,15 @@ export class Dashboard extends Component {
         
         // TODO fix name!! and coach-trainee entity relationship
         const dashboard = (
-            <DashboardDiv>
-                <IndividualInputDiv>
+            <React.Fragment>
+                <DashboardDiv>
                     <Individual data={this.props.traineeOneData} no='1' name='Jane' position={this.state.posTraineeOne} />
                     <Individual data={this.props.traineeTwoData} no='2' name='Mary' position={this.state.posTraineeTwo} />
                     <Individual data={this.props.traineeThreeData} no='3' name='Stacy' position={this.state.posTraineeThree} />
-                </IndividualInputDiv>
-                
-                <SummaryDiv>
-                    <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} emgs={this.props.emgs} />
-                </SummaryDiv>
-            </DashboardDiv>
+                </DashboardDiv>
+                <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} emgs={this.props.emgs} />
+            </React.Fragment>
+
         )
 
         const postDashboard = (

@@ -1,5 +1,5 @@
 import React, { Component, createContext } from 'react';
-import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay } from './IndividualStyledComponents';
+import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay, DisplayDiv, MiscDiv, AccGraphDiv, YPRGraphDiv  } from './IndividualStyledComponents';
 import Chart from 'chart.js';
 import YPRLineChart from './YPRLineChart';
 import AccLineChart from './AccLineChart';
@@ -68,21 +68,28 @@ export class Individual extends Component {
         } else {
             display = (
             <React.Fragment>
-                <InfoDisplay>
-                    <h3> Trainee {this.props.no} - {this.props.name} </h3>
-                </InfoDisplay>
-                <PositionDisplay >
-                    {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
-                    <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
-                    <AccessibilityNewIcon fontSize='large' color="action" style={{ color: red[500], marginRight: '1rem'}} /> */}
-                    {this.positionStickman()}
-                    {/* <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
-                    <IoAccessibilitySharp size='2rem' style={{ fill:'#291f7d', marginRight: '1.5rem' }} />
-                    <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} /> */}
-                </PositionDisplay>
-
-                <AccLineChart data={this.props.data} />
-                <YPRLineChart data={this.props.data} /> 
+                <DisplayDiv>
+                    <MiscDiv>
+                        <InfoDisplay>
+                            <h3> Trainee {this.props.no} - {this.props.name} </h3>
+                        </InfoDisplay>
+                        <PositionDisplay >
+                            {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
+                            <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
+                            <AccessibilityNewIcon fontSize='large' color="action" style={{ color: red[500], marginRight: '1rem'}} /> */}
+                            {this.positionStickman()}
+                            {/* <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
+                            <IoAccessibilitySharp size='2rem' style={{ fill:'#291f7d', marginRight: '1.5rem' }} />
+                            <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} /> */}
+                        </PositionDisplay>
+                    </MiscDiv>
+                    <AccGraphDiv>
+                        <AccLineChart data={this.props.data} />
+                    </AccGraphDiv>
+                    <YPRGraphDiv>
+                        <YPRLineChart data={this.props.data} /> 
+                    </YPRGraphDiv>
+                </DisplayDiv>
             </React.Fragment> 
         )}
         return (

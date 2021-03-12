@@ -221,8 +221,6 @@ export class Summary extends Component {
                 <h4> History </h4>
                 {summaryDisplay}
               </HistoryDiv>
-
-
           </SummaryDiv>
         )
     }

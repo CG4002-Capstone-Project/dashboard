@@ -14,7 +14,7 @@ export default class EmgLineChart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.data.map(d => d.timestamp));
+        // console.log(this.props.data.map(d => d.timestamp));
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
