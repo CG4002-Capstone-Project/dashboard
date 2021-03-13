@@ -34,8 +34,8 @@ export default class AccLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 15000,
-                                suggestedMin: -15000,
+                                suggestedMax: 2,
+                                suggestedMin: -2,
                             },
                         }
                     ]

@@ -24,10 +24,11 @@ const io = require('socket.io')(server, {
 
 // io.of('api/socket')
 io.on("connection", (socket) => {
-    console.log("socket.io: User Connected ", socket.id);
+    console.log("socket.io: Backend Connected to Frontend", socket.id);
 
-    socket.on("disconnect", () => {
-        console.log("socket.io: User disconnected: ", socket.id);
+    socket.on("disconnect", (reason) => {
+        console.log("socket.io: Backend disconnected: ", socket.id);
+        console.log("socket.io: Backend disconnected. Reason: ", reason);
     })
 })
 
@@ -83,11 +84,11 @@ db.once('open', () => {
                 }
                 i += 1;
 
-                if (change.fullDocument.trainee_id == '1') {
+                if (change.fullDocument.trainee_id == '0') {
                     io.emit("onNewTraineeOneData", data);
-                } else if (change.fullDocument.trainee_id == '2') {
+                } else if (change.fullDocument.trainee_id == '1') {
                     io.emit("onNewTraineeTwoData", data)
-                } else if (change.fullDocument.trainee_id == '3') {
+                } else if (change.fullDocument.trainee_id == '2') {
                     io.emit("onNewTraineeThreeData", data);
                 }
         }

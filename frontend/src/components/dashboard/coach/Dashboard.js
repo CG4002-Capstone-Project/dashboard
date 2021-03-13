@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { connect } from 'react-redux';
 import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
     addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults, addEMG } from '../../../actions';
-
+let i = 0;
 
 // how to update an object with setState: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
 export class Dashboard extends Component {
@@ -19,14 +19,26 @@ export class Dashboard extends Component {
             console.log(`Frontend socket connected to backend ${socket.id}`);
         })
         socket.on("onNewTraineeOneData", (data) => {
+            i += 1;
+            if (i % 100 == 0) {
+                console.log(`${i}th data`)
+            }
             this.props.addTraineeOneData(data);
             // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeTwoData", (data) => {
+            i += 1;
+            if (i % 100 == 0) {
+                console.log(`${i}th data`)
+            }
             this.props.addTraineeTwoData(data);
             // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeThreeData", (data) => {
+            i += 1;
+            if (i % 100 == 0) {
+                console.log(`${i}th data`)
+            }
             this.props.addTraineeThreeData(data);
             // console.log('data ' + JSON.stringify(data));
         })
@@ -51,8 +63,12 @@ export class Dashboard extends Component {
             this.props.addEMG(result);
         })
 
-        socket.on("disconnect", () => {
-            console.log('Frontend socket disconnected')
+        socket.on("disconnect", (reason) => {
+            if (reason === "io server disconnect") {
+                // the disconnection was initiated by the server, you need to reconnect manually
+                socket.connect();
+              }
+            console.log('Frontend socket disconnected. Reason: ' + reason);
         })
     }
     state = {
