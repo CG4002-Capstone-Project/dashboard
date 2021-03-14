@@ -24,10 +24,11 @@ const io = require('socket.io')(server, {
 
 // io.of('api/socket')
 io.on("connection", (socket) => {
-    console.log("socket.io: User Connected ", socket.id);
+    console.log("socket.io: Backend Connected to Frontend", socket.id);
 
-    socket.on("disconnect", () => {
-        console.log("socket.io: User disconnected: ", socket.id);
+    socket.on("disconnect", (reason) => {
+        console.log("socket.io: Backend disconnected: ", socket.id);
+        console.log("socket.io: Backend disconnected. Reason: ", reason);
     })
 })
 
@@ -35,12 +36,12 @@ io.emit("newResult", {hello: 'hello'});
 
 // database
 const mongoose = require('mongoose');
-const URI = process.env.MONGO_DB_URI;
+const URI = process.env.MONGO_DB_LOCAL_URI;
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-    console.log('Connected to Jeevz MongoDB Cluster');
+    console.log('Connected to Jeevz MongoDB Local');
 
     console.log('Setting change streams');
 
@@ -83,11 +84,11 @@ db.once('open', () => {
                 }
                 i += 1;
 
-                if (change.fullDocument.trainee_id == '1') {
+                if (change.fullDocument.trainee_id == '0') {
                     io.emit("onNewTraineeOneData", data);
-                } else if (change.fullDocument.trainee_id == '2') {
+                } else if (change.fullDocument.trainee_id == '1') {
                     io.emit("onNewTraineeTwoData", data)
-                } else if (change.fullDocument.trainee_id == '3') {
+                } else if (change.fullDocument.trainee_id == '2') {
                     io.emit("onNewTraineeThreeData", data);
                 }
         }

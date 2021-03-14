@@ -16,10 +16,12 @@ export default class AccLineChart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.data.map(d => d.timestamp));
+        // console.log(this.props.data.map(d => d.timestamp));
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                responsive: true,
+                aspectRatio: 2.75,
                 scales: {
                     xAxes: [
                         {   
@@ -32,13 +34,12 @@ export default class AccLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 15000,
-                                suggestedMin: -15000,
+                                suggestedMax: 2,
+                                suggestedMin: -2,
                             },
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'Acceleration X, Y and Z against Time',
                     display: true,

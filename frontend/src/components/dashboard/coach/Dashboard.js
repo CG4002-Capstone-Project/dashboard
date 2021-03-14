@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DashboardDiv, IndividualInputDiv, SummaryDiv, PreDashboardDiv, QuestionDiv, PostResultsDiv, PostDashboardDiv } from './DashboardStyledComponents';
+import { DashboardDiv, IndividualInputDiv, SummaryDiv, PreDashboardDiv, QuestionDiv, PostResultsDiv, PostDashboardDiv, CoverDiv } from './DashboardStyledComponents';
 import Individual from './Individual';
 import { Button, EndorsedIcon } from 'evergreen-ui';
 import Summary from './Summary';
@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { connect } from 'react-redux';
 import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
     addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults, addEMG } from '../../../actions';
-
+let i = 0;
 
 // how to update an object with setState: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
 export class Dashboard extends Component {
@@ -19,14 +19,26 @@ export class Dashboard extends Component {
             console.log(`Frontend socket connected to backend ${socket.id}`);
         })
         socket.on("onNewTraineeOneData", (data) => {
+            i += 1;
+            if (i % 100 == 0) {
+                console.log(`${i}th data`)
+            }
             this.props.addTraineeOneData(data);
             // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeTwoData", (data) => {
+            i += 1;
+            if (i % 100 == 0) {
+                console.log(`${i}th data`)
+            }
             this.props.addTraineeTwoData(data);
             // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeThreeData", (data) => {
+            i += 1;
+            if (i % 100 == 0) {
+                console.log(`${i}th data`)
+            }
             this.props.addTraineeThreeData(data);
             // console.log('data ' + JSON.stringify(data));
         })
@@ -43,18 +55,20 @@ export class Dashboard extends Component {
             await this.setState({
                 currentResult: {...result}
             });
-
-            // console.log(this.state.currentResult);
             
-            // console.log('result: '+ JSON.stringify(result));
+            console.log('result: '+ JSON.stringify(this.state.currentResult));
         })
 
         socket.on("newEMG", async (result) => {
             this.props.addEMG(result);
         })
 
-        socket.on("disconnect", () => {
-            console.log('Frontend socket disconnected')
+        socket.on("disconnect", (reason) => {
+            if (reason === "io server disconnect") {
+                // the disconnection was initiated by the server, you need to reconnect manually
+                socket.connect();
+              }
+            console.log('Frontend socket disconnected. Reason: ' + reason);
         })
     }
     state = {
@@ -192,17 +206,15 @@ export class Dashboard extends Component {
         
         // TODO fix name!! and coach-trainee entity relationship
         const dashboard = (
-            <DashboardDiv>
-                <IndividualInputDiv>
+            <React.Fragment>
+                <DashboardDiv>
                     <Individual data={this.props.traineeOneData} no='1' name='Jane' position={this.state.posTraineeOne} />
                     <Individual data={this.props.traineeTwoData} no='2' name='Mary' position={this.state.posTraineeTwo} />
                     <Individual data={this.props.traineeThreeData} no='3' name='Stacy' position={this.state.posTraineeThree} />
-                </IndividualInputDiv>
-                
-                <SummaryDiv>
-                    <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} emgs={this.props.emgs} />
-                </SummaryDiv>
-            </DashboardDiv>
+                </DashboardDiv>
+                <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} emgs={this.props.emgs} />
+            </React.Fragment>
+
         )
 
         const postDashboard = (

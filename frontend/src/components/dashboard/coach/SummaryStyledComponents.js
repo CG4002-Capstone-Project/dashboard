@@ -1,48 +1,56 @@
 import styled from 'styled-components';
 
 export const SummaryDiv = styled.div`
-    display: grid;
-    padding: 1em;
-    grid-template-areas: 
-    'status correctPosition three video emg emg history';
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    box-sizing: border-box;
+    border: 2px solid lightblue;
     width: 100%;
-    height: 100%;
+    height: 32%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
 `;
 
 export const StatusDiv = styled.div`
-    border: 5px solid brown;
-    grid-area: status;
+    flex: 1;
+    border: 1px solid lightslategray;
+    text-align: center;
+    box-sizing: border-box;
 `;
 
 export const CorrectPositionDiv = styled.div`
-    grid-area: correctPosition;
-    border: 5px solid black;
+    flex: 1;
+    border: 1px solid lightslategray ;
     text-align: center;
+    box-sizing: border-box;
 `;
 
 export const SyncDelayMoveAccuracyDiv = styled.div`
-    grid-area: three;
-    border: 5px solid green;
+    flex: 1;
+    border: 1px solid lightslategray;
     text-align: center;
+    box-sizing: border-box;
 `;
 
 export const DanceMovePlayerDiv = styled.div`
-    grid-area: video;
-    border: 5px solid blue;
+    flex: 1;
     text-align: center;
     background-color: black;
+    box-sizing: border-box;
+    /* max-height: 200px; */
 `;
 
 export const EMGDiv = styled.div`
-    grid-area: emg;
-    border: 5px solid pink;
+    flex: 1;
+    border: 1px solid lightslategray;
+    box-sizing: border-box;
 `; 
 
 export const HistoryDiv = styled.div`
-    grid-area: history;
-    border: 5px solid purple;
+    flex: 1;
+    border: 1px solid lightslategray;
     text-align: center;
+    box-sizing: border-box;
 `;
 
 export const GreenH4 = styled.h4`

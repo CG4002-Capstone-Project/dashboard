@@ -17,10 +17,12 @@ export default class YPRLineChart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.data.map(d => d.timestamp));
+        // console.log(this.props.data.map(d => d.timestamp));
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                responsive: true,
+                aspectRatio: 2.75,
                 scales: {
                     xAxes: [
                         {   
@@ -39,7 +41,6 @@ export default class YPRLineChart extends Component {
                         }
                     ]
                 },
-                animation: true,
                 title: {
                     text: 'Yaw, Pitch & Roll against Time',
                     display: true,
