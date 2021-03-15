@@ -13,23 +13,26 @@ export const SummaryDiv = styled.div`
 
 export const StatusDiv = styled.div`
     flex: 1;
-    border: 1px solid lightslategray;
+    /* border: 1px solid lightslategray; */
     text-align: center;
     box-sizing: border-box;
+    margin: auto;
 `;
 
 export const CorrectPositionDiv = styled.div`
     flex: 1;
-    border: 1px solid lightslategray ;
+    /* border: 1px solid lightslategray; */
     text-align: center;
     box-sizing: border-box;
+    margin: auto;
 `;
 
 export const SyncDelayMoveAccuracyDiv = styled.div`
     flex: 1;
-    border: 1px solid lightslategray;
+    /* border: 1px solid lightslategray; */
     text-align: center;
     box-sizing: border-box;
+    margin: auto;
 `;
 
 export const DanceMovePlayerDiv = styled.div`
@@ -42,15 +45,17 @@ export const DanceMovePlayerDiv = styled.div`
 
 export const EMGDiv = styled.div`
     flex: 1;
-    border: 1px solid lightslategray;
+    /* border: 1px solid lightslategray; */
     box-sizing: border-box;
+    margin: auto;
 `; 
 
 export const HistoryDiv = styled.div`
     flex: 1;
-    border: 1px solid lightslategray;
+    /* border: 1px solid lightslategray; */
     text-align: center;
     box-sizing: border-box;
+    margin: auto;
 `;
 
 export const GreenH4 = styled.h4`

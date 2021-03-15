@@ -21,6 +21,9 @@ export default class YPRLineChart extends Component {
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                animation: {
+                    duration: 0,
+                },
                 responsive: true,
                 aspectRatio: 2.75,
                 scales: {

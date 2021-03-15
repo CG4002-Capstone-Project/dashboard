@@ -88,21 +88,27 @@ export class Dashboard extends Component {
     }
 
     updateTraineeOneMode = async (mode) => {
-        await this.setState({
-            modeTraineeOne: mode
-        });
+        if (mode != this.state.modeTraineeOne) {
+            await this.setState({
+                modeTraineeOne: mode
+            });
+        }
     }
 
     updateTraineeTwoMode = async (mode) => {
-        await this.setState({
-            modeTraineeTwo: mode
-        });
+        if (mode != this.state.modeTraineeTwo) {
+            await this.setState({
+                modeTraineeTwo: mode
+            });
+        }
     }
 
     updateTraineeThreeMode = async (mode) => {
-        await this.setState({
-            modeTraineeThree: mode
-        });
+        if (mode != this.state.modeTraineeThree) {
+            await this.setState({
+                modeTraineeThree: mode
+            });
+        }
     }
 
     updateCurrentMove = async (move) => {

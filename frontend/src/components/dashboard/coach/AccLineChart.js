@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
+import 'chartjs-plugin-streaming';
 
 export default class AccLineChart extends Component {
     constructor(props) {
@@ -20,6 +21,9 @@ export default class AccLineChart extends Component {
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                animation: {
+                    duration: 0,
+                },
                 responsive: true,
                 aspectRatio: 2.75,
                 scales: {

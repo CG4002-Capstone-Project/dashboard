@@ -226,8 +226,8 @@ export class Summary extends Component {
 
               <EMGDiv>
                 <EmgLineChart data={this.props.emgs}/>
-
               </EMGDiv>
+              
               <DanceMovePlayerDiv>
                 {videoComponent}
               </DanceMovePlayerDiv>
