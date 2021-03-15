@@ -60,7 +60,8 @@ export default class EmgLineChart extends Component {
                     pointRadius: 2,
                     borderWidth: 1,
                     borderColor: 'teal',
-                    backgroundColor: 'teal'              
+                    backgroundColor: 'teal',
+                    spanGaps: true,            
                 }, {
                     label: 'RMS',
                     data: this.props.data.map(d => d.rms),
@@ -68,7 +69,8 @@ export default class EmgLineChart extends Component {
                     pointRadius: 2,
                     borderWidth: 1,
                     borderColor: 'lime',
-                    backgroundColor: 'lime'       
+                    backgroundColor: 'lime',
+                    spanGaps: true,                   
                 }, {
                     label: 'MFQ',
                     data: this.props.data.map(d => d.mfq),
@@ -76,7 +78,8 @@ export default class EmgLineChart extends Component {
                     pointRadius: 2,
                     borderWidth: 1,
                     borderColor: 'purple',
-                    backgroundColor: 'purple'   
+                    backgroundColor: 'purple',
+                    spanGaps: true,               
                 }]
             }
 
