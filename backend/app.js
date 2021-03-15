@@ -101,7 +101,9 @@ db.once('open', () => {
             case "insert":
                 const emg = {
                     timestamp: change.fullDocument.timestamp,
-                    emgValue: change.fullDocument.emgValue,
+                    voltage: change.fullDocument.voltage,
+                    rms: change.fullDocument.rms,
+                    mfq: change.fullDocument.mfq,
                 }
                 console.log('emg: ' + JSON.stringify(emg));
                 io.emit("newEMG", emg);

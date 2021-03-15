@@ -97,15 +97,25 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const stringMsg = msg.content.toString();
       const stringMsgArray = stringMsg.split('|');
       const timestamp = stringMsgArray[0].trim();
-      const emgValue = stringMsgArray[1].trim();
+      const emgDataString = stringMsgArray[1].trim();
+
+      const emgDataArray = emgDataString.split(' ');
+      const voltage = emgDataArray[0];
+      const rms = emgDataArray[1];
+      const mfq = emgDataArray[2];
 
       console.log('Timestamp: ' + timestamp);
-      console.log('EMG Value: ' + emgValue);
+      console.log('EMG Voltage: ' + voltage);
+      console.log('EMG RMS: ' + rms);
+      console.log('EMG MFQ: ' + mfq);
+
       console.log(" [Emg] Received %s", stringMsg);
 
       const emgInstance = new RawEMGModel({ 
-        emgValue,
         timestamp,
+        voltage,
+        rms,
+        mfq,
       });
 
       emgInstance.save((err) => {

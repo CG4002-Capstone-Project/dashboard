@@ -86,7 +86,9 @@ const addEMG = (data) => {
         type: 'EMG',
         payload: {
             timestamp: data.timestamp,
-            emgValue: data.emgValue
+            voltage: data.voltage,
+            rms: data.rms,
+            mfq: data.mfq
         }
     }
 }
