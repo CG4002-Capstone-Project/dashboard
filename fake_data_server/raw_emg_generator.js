@@ -7,19 +7,23 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 function generateRawEMG() {
     let emgValues = [];
-    for (let i = 0;i < 1300; i++) {
+    for (let i = 0;i < 5200; i++) {
    
-       const value = randomFloat({min: 0, max: 5, fixed: 2});
+       const voltage = randomFloat({min: 0, max: 5, fixed: 2});
+       const rms = randomFloat({min: 0, max: 5, fixed: 2});
+       const mfq = randomFloat({min: 0, max: 5, fixed: 2});
 
        const data = {
-           emgValue: value
+           voltage,
+           rms,
+           mfq
        }
        emgValues.push(data);
     }
    
    const csvWriter = createCsvWriter({
        path: 'raw_emg.csv',
-       header: [ 'emgValue']
+       header: [ 'voltage', 'rms', 'mfq']
    });
    
    csvWriter.writeRecords(emgValues)

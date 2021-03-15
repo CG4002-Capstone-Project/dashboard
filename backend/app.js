@@ -34,7 +34,6 @@ io.on("connection", (socket) => {
     })
 })
 
-io.emit("newResult", {hello: 'hello'});
 
 // database
 const mongoose = require('mongoose');
@@ -98,6 +97,7 @@ db.once('open', () => {
         }
     })
 
+    let j = 0;
     emgChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
@@ -107,7 +107,11 @@ db.once('open', () => {
                     rms: change.fullDocument.rms,
                     mfq: change.fullDocument.mfq,
                 }
-                console.log('emg: ' + JSON.stringify(emg));
+
+                if (j%100 == 0) {
+                    console.log(`${j}th emg: ` + JSON.stringify(emg));
+                }
+                j += 1;
                 io.emit("newEMG", emg);
         }
     })
