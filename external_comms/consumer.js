@@ -42,12 +42,14 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const rawDataString = stringMsgArray[2].trim();
 
       const rawDataArray = rawDataString.split(' ');
-      const yaw = rawDataArray[0];
-      const pitch = rawDataArray[1];
-      const roll = rawDataArray[2];
-      const accx = rawDataArray[3];
-      const accy = rawDataArray[4];
-      const accz = rawDataArray[5];
+      const mode = rawDataArray[0];
+      const yaw = rawDataArray[1];
+      const pitch = rawDataArray[2];
+      const roll = rawDataArray[3];
+      const accx = rawDataArray[4];
+      const accy = rawDataArray[5];
+      const accz = rawDataArray[6];
+      console.log('Mode: ' + mode);
       console.log('Dancer ID: ' + dancerId);
       console.log('Timestamp: ' + timestamp);
       console.log('Raw Data: ' + rawDataArray);
@@ -55,6 +57,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       const dataInstance = new RawDataModel({ 
         trainee_id: dancerId,
+        mode,
         yaw,
         pitch,
         roll,
@@ -110,6 +113,41 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
             console.log(err);
         } else {
             console.log(`emg instance sent to db`)
+        }
+      })
+    }, {
+      noAck: true
+    });
+  })
+
+  // assume msg to be of the format: predictedMove 
+  connection.createChannel(function(error1, channel) {
+    if (error1) {
+      throw error1;
+    }
+    const queue = 'results';
+
+    channel.assertQueue(queue, {
+      durable: false
+    });
+
+    console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+
+    channel.consume(queue, function(msg) {
+      const stringMsg = msg.content.toString();
+      const predictedMove = stringMsg.trim();
+
+      console.log('Predicted Move: ' + predictedMove);
+
+      const resultInstance = new RawResultModel({ 
+        predictedMove
+      });
+
+      resultInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`result instance sent to db`)
         }
       })
     }, {

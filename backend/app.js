@@ -53,12 +53,12 @@ db.once('open', () => {
         switch (change.operationType) {
             case "insert":
                 const result = {
-                    timestamp: change.fullDocument.timestamp,
-                    dancerIds: change.fullDocument.dancerIds,
-                    correctDancerIds: change.fullDocument.correctDancerIds,
+                    // timestamp: change.fullDocument.timestamp,
+                    // dancerIds: change.fullDocument.dancerIds,
+                    // correctDancerIds: change.fullDocument.correctDancerIds,
                     predictedMove: change.fullDocument.predictedMove,
-                    syncDelay: change.fullDocument.syncDelay,
-                    accuracy: change.fullDocument.accuracy,
+                    // syncDelay: change.fullDocument.syncDelay,
+                    // accuracy: change.fullDocument.accuracy,
                 }
                 console.log('result: ' + JSON.stringify(result));
                 io.emit("newResult", result);
@@ -69,8 +69,10 @@ db.once('open', () => {
     dataChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
+
                 const data = {
                     timestamp: change.fullDocument.timestamp,
+                    mode: change.fullDocument.mode,
                     yaw: change.fullDocument.yaw,
                     pitch: change.fullDocument.pitch,
                     roll: change.fullDocument.roll,
@@ -79,7 +81,7 @@ db.once('open', () => {
                     accz: change.fullDocument.accz,
                 }
 
-                if (i%100 == 0) {
+                if (i%1000 == 0) {
                     console.log(`${i}th data: ` + JSON.stringify(data));
                 }
                 i += 1;

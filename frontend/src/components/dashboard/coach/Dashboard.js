@@ -24,7 +24,8 @@ export class Dashboard extends Component {
                 console.log(`${i}th data`)
             }
             this.props.addTraineeOneData(data);
-            // console.log('data ' + JSON.stringify(data));
+            this.updateTraineeOneMode(data.mode);
+            console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeTwoData", (data) => {
             i += 1;
@@ -32,6 +33,7 @@ export class Dashboard extends Component {
                 console.log(`${i}th data`)
             }
             this.props.addTraineeTwoData(data);
+            this.updateTraineeTwoMode(data.mode);
             // console.log('data ' + JSON.stringify(data));
         })
         socket.on("onNewTraineeThreeData", (data) => {
@@ -40,16 +42,17 @@ export class Dashboard extends Component {
                 console.log(`${i}th data`)
             }
             this.props.addTraineeThreeData(data);
+            this.updateTraineeThreeMode(data.mode);
             // console.log('data ' + JSON.stringify(data));
         })
 
         socket.on("newResult", async (result) => {
-            this.props.addAccuracy(result);
-            this.props.addDancerIds(result);
-            this.props.addPredictedMove(result);
-            this.props.addSyncDelay(result);
-            this.props.addResults(result);
-            this.updatePositions(result.dancerIds);
+            // this.props.addAccuracy(result);
+            // this.props.addDancerIds(result);
+            // this.props.addPredictedMove(result);
+            // this.props.addSyncDelay(result);
+            // this.props.addResults(result);
+            // this.updatePositions(result.dancerIds);
             this.updateCurrentMove(result.predictedMove);
 
             await this.setState({
@@ -77,44 +80,35 @@ export class Dashboard extends Component {
         posTraineeOne: 1,
         posTraineeTwo: 2,
         posTraineeThree: 3,
+        modeTraineeOne: 1,
+        modeTraineeTwo: 1,
+        modeTraineeThree: 1,
         currentMove: 0,
         currentResult: {}
     }
 
+    updateTraineeOneMode = async (mode) => {
+        await this.setState({
+            modeTraineeOne: mode
+        });
+    }
+
+    updateTraineeTwoMode = async (mode) => {
+        await this.setState({
+            modeTraineeTwo: mode
+        });
+    }
+
+    updateTraineeThreeMode = async (mode) => {
+        await this.setState({
+            modeTraineeThree: mode
+        });
+    }
+
     updateCurrentMove = async (move) => {
-        if (move == '1') {
-            await this.setState({
-                currentMove: 1
-            });
-        } else if (move == '2') {
-            await this.setState({
-                currentMove: 2
-            });
-        } else if (move == '3') {
-            await this.setState({
-                currentMove: 3
-            });
-        } else if (move == '4') {
-            await this.setState({
-                currentMove: 4
-            });
-        } else if (move == '5') {
-            await this.setState({
-                currentMove: 5
-            });
-        } else if (move == '6') {
-            await this.setState({
-                currentMove: 6
-            });
-        } else if (move == '7') {
-            await this.setState({
-                currentMove: 7
-            });
-        } else if (move == '8') {
-            await this.setState({
-                currentMove: 8
-            });
-        }
+        await this.setState({ 
+            currentMove: move
+        });
     }
 
     updatePositions = async (positions) => {
@@ -212,7 +206,16 @@ export class Dashboard extends Component {
                     <Individual data={this.props.traineeTwoData} no='2' name='Mary' position={this.state.posTraineeTwo} />
                     <Individual data={this.props.traineeThreeData} no='3' name='Stacy' position={this.state.posTraineeThree} />
                 </DashboardDiv>
-                <Summary currentResult={this.state.currentResult} dancerIds={this.props.dancerIds} predictedMove={this.props.predictedMove} syncDelay={this.props.syncDelay} currentMove={this.state.currentMove} emgs={this.props.emgs} />
+                <Summary 
+                    currentResult={this.state.currentResult} 
+                    dancerIds={this.props.dancerIds} 
+                    predictedMove={this.props.predictedMove} 
+                    syncDelay={this.props.syncDelay} 
+                    currentMove={this.state.currentMove} 
+                    emgs={this.props.emgs}
+                    modeTraineeOne={this.state.modeTraineeOne}
+                    modeTraineeTwo={this.state.modeTraineeTwo}
+                    modeTraineeThree={this.state.modeTraineeThree} />
             </React.Fragment>
 
         )
