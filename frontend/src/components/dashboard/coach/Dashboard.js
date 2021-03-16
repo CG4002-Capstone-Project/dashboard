@@ -18,12 +18,15 @@ export class Dashboard extends Component {
         socket.on("connect", () => {
             console.log(`Frontend socket connected to backend ${socket.id}`);
         })
-        socket.on("onNewTraineeOneData", (data) => {
+        socket.on("onNewTraineeOneData", async (data) => {
             i += 1;
             if (i % 100 == 0) {
                 console.log(`${i}th data`)
             }
-            this.props.addTraineeOneData(data);
+            await this.setState({
+                t1Data: data
+            })
+            // this.props.addTraineeOneData(data);
             this.updateTraineeOneMode(data.mode);
             console.log('data ' + JSON.stringify(data));
         })
@@ -84,7 +87,8 @@ export class Dashboard extends Component {
         modeTraineeTwo: 1,
         modeTraineeThree: 1,
         currentMove: 0,
-        currentResult: {}
+        currentResult: {},
+        t1Data: {}
     }
 
     updateTraineeOneMode = async (mode) => {
@@ -208,7 +212,7 @@ export class Dashboard extends Component {
         const dashboard = (
             <React.Fragment>
                 <DashboardDiv>
-                    <Individual data={this.props.traineeOneData} no='1' name='Jane' position={this.state.posTraineeOne} />
+                    <Individual data={this.state.t1Data} no='1' name='Riyas' position={this.state.posTraineeOne} />
                     <Individual data={this.props.traineeTwoData} no='2' name='Mary' position={this.state.posTraineeTwo} />
                     <Individual data={this.props.traineeThreeData} no='3' name='Stacy' position={this.state.posTraineeThree} />
                 </DashboardDiv>

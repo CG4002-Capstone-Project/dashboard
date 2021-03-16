@@ -2,7 +2,9 @@ import React, { Component, createContext } from 'react';
 import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay, DisplayDiv, MiscDiv, AccGraphDiv, YPRGraphDiv  } from './IndividualStyledComponents';
 import Chart from 'chart.js';
 import YPRLineChart from './YPRLineChart';
+// import YPRLineChart from './RealTimeDataGyr';
 import AccLineChart from './AccLineChart';
+// import AccLineChart from './RealTimeDataAcc';
 import { IconContext } from 'react-icons';
 import { IoAccessibilityOutline, IoAccessibilitySharp } from 'react-icons/io5'; 
 
@@ -19,6 +21,9 @@ function redPersonIcon() {
 
 export class Individual extends Component {
 
+    componentDidMount() {
+        
+    }
     state = {
         hasPositionsChanged: false,
     }
@@ -58,7 +63,8 @@ export class Individual extends Component {
     
     render() {
         let display;
-        if (this.props.data.length == 0) {
+        console.log(this.props.data);
+        if (this.props.no == '2' || this.props.no == '3' || this.props.data == {}) {
             display = ( 
                 <PreDisplay>
                     <h2> Ooops unable to connect just yet. </h2>

@@ -66,7 +66,15 @@ db.once('open', () => {
         }
     })
 
-    let i = 0;
+    let i = 1;
+    let tempTimestamp = 0;
+    let tempYaw = 0;
+    let tempPitch = 0;
+    let tempRoll = 0;
+    let tempAccx = 0;
+    let tempAccy = 0;
+    let tempAccz = 0;
+
     dataChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
@@ -82,18 +90,54 @@ db.once('open', () => {
                     accz: change.fullDocument.accz,
                 }
 
-                if (i%1000 == 0) {
-                    console.log(`${i}th data: ` + JSON.stringify(data));
+                // tempTimestamp += Number(data.timestamp);
+                tempAccx += Number(data.accx);
+                tempAccy += Number(data.accy);
+                tempAccz += Number(data.accz);
+                tempYaw += Number(data.yaw);
+                tempPitch += Number(data.pitch);
+                tempRoll += Number(data.roll);
+
+                // console.log(`${i}th data: ${tempAccx}`);
+                if (i%10 == 0) {
+                    // tempTimestamp = tempTimestamp / 100;
+                    tempAccx = tempAccx / 10;
+                    tempAccy = tempAccy / 10;
+                    tempAccz = tempAccz / 10;
+                    tempYaw = tempYaw / 10;
+                    tempPitch = tempPitch / 10;
+                    tempRoll = tempRoll / 10;
+
+                    const finalisedData = {
+                        timestamp: data.timestamp,
+                        accx: tempAccx,
+                        accy: tempAccy,
+                        accz: tempAccz,
+                        yaw: tempYaw,
+                        pitch: tempPitch,
+                        roll: tempRoll,
+                        mode: data.mode
+                    }
+                    
+                    console.log(`${i}th data: ` + JSON.stringify(finalisedData));
+
+                    if (change.fullDocument.trainee_id == '0') {
+                        io.emit("onNewTraineeOneData", finalisedData);
+                    } else if (change.fullDocument.trainee_id == '1') {
+                        io.emit("onNewTraineeTwoData", finalisedData)
+                    } else if (change.fullDocument.trainee_id == '2') {
+                        io.emit("onNewTraineeThreeData", finalisedData);
+                    }
+
+                    tempTimestamp = 0;
+                    tempAccx = 0;
+                    tempAccy = 0;
+                    tempAccz = 0;
+                    tempYaw = 0;
+                    tempPitch = 0;
+                    tempRoll = 0;
                 }
                 i += 1;
-
-                if (change.fullDocument.trainee_id == '0') {
-                    io.emit("onNewTraineeOneData", data);
-                } else if (change.fullDocument.trainee_id == '1') {
-                    io.emit("onNewTraineeTwoData", data)
-                } else if (change.fullDocument.trainee_id == '2') {
-                    io.emit("onNewTraineeThreeData", data);
-                }
         }
     })
 

@@ -16,8 +16,8 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 export class Summary extends Component {
 
     render() {
-        // console.log(JSON.stringify(this.props.currentResult));
-        console.log(JSON.stringify(this.props.modeTraineeOne));
+        console.log('Current Move!!', JSON.stringify(this.props.currentMove));
+        // console.log(JSON.stringify(this.props.modeTraineeOne));
 
         let videoComponent;
         let currentMove;
