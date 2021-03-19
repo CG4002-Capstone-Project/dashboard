@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import { AddColumnLeftIcon } from 'evergreen-ui';
+let i = 0;
 
 export default class YPRLineChart extends Component {
     constructor(props) {
@@ -9,18 +10,37 @@ export default class YPRLineChart extends Component {
     }
 
     componentDidUpdate() {
-        this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        this.myChart.data.datasets[0].data = this.props.data.map(d => d.yaw);
-        this.myChart.data.datasets[1].data = this.props.data.map(d => d.pitch);
-        this.myChart.data.datasets[2].data = this.props.data.map(d => d.roll);
+        // this.myChart.data.labels = this.props.data.map(d => d.timestamp);
+        // this.myChart.data.datasets[0].data = this.props.data.map(d => d.yaw);
+        // this.myChart.data.datasets[1].data = this.props.data.map(d => d.pitch);
+        // this.myChart.data.datasets[2].data = this.props.data.map(d => d.roll);
+        // this.myChart.update();
+
+        this.myChart.data.labels.push(this.props.data.timestamp);
+        this.myChart.data.datasets[0].data.push(this.props.data.yaw);
+        this.myChart.data.datasets[1].data.push(this.props.data.pitch);
+        this.myChart.data.datasets[2].data.push(this.props.data.roll);
         this.myChart.update();
+        // setInterval(() => {
+        //     i += 1;
+        //     console.log(`Updated for the ${i}`);
+        //     return this.myChart.update()
+        // }, 1000)
+        
+        // setInterval(this.myChart.update(), 100);
+    
     }
+                
+
 
     componentDidMount() {
         // console.log(this.props.data.map(d => d.timestamp));
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                animation: {
+                    duration: 0,
+                },
                 responsive: true,
                 aspectRatio: 2.75,
                 scales: {
@@ -52,10 +72,10 @@ export default class YPRLineChart extends Component {
                 }
             },
             data: {
-                labels: this.props.data.map(d => d.timestamp),
+                labels: [],
                 datasets: [{
                     label: 'Yaw',
-                    data: this.props.data.map(d => d.yaw),
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
@@ -63,7 +83,7 @@ export default class YPRLineChart extends Component {
                     backgroundColor: 'red'              
                 }, {
                     label: 'Pitch',
-                    data: this.props.data.map(d => d.pitch),
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
@@ -71,7 +91,7 @@ export default class YPRLineChart extends Component {
                     backgroundColor: 'blue'
                 }, {
                     label: 'Roll',
-                    data: this.props.data.map(d => d.roll),
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,

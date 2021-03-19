@@ -9,7 +9,9 @@ export default class EmgLineChart extends Component {
 
     componentDidUpdate() {
         this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        this.myChart.data.datasets[0].data = this.props.data.map(d => d.emgValue);
+        this.myChart.data.datasets[0].data = this.props.data.map(d => d.voltage);
+        this.myChart.data.datasets[1].data = this.props.data.map(d => d.rms);
+        this.myChart.data.datasets[2].data = this.props.data.map(d => d.mfq);
         this.myChart.update();
     }
 
@@ -18,6 +20,9 @@ export default class EmgLineChart extends Component {
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
+                animation: {
+                    duration: 0,
+                },
                 scales: {
                     xAxes: [
                         {   
@@ -49,13 +54,32 @@ export default class EmgLineChart extends Component {
             data: {
                 labels: this.props.data.map(d => d.timestamp),
                 datasets: [{
-                    label: 'EMG',
-                    data: this.props.data.map(d => d.emgValue),
+                    label: 'Voltage',
+                    data: this.props.data.map(d => d.voltage),
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'black',
-                    backgroundColor: 'black'              
+                    borderColor: 'teal',
+                    backgroundColor: 'teal',
+                    spanGaps: true,            
+                }, {
+                    label: 'RMS',
+                    data: this.props.data.map(d => d.rms),
+                    fill: 'none',
+                    pointRadius: 2,
+                    borderWidth: 1,
+                    borderColor: 'lime',
+                    backgroundColor: 'lime',
+                    spanGaps: true,                   
+                }, {
+                    label: 'MFQ',
+                    data: this.props.data.map(d => d.mfq),
+                    fill: 'none',
+                    pointRadius: 2,
+                    borderWidth: 1,
+                    borderColor: 'purple',
+                    backgroundColor: 'purple',
+                    spanGaps: true,               
                 }]
             }
 

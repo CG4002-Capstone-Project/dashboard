@@ -2,7 +2,11 @@ import { combineReducers } from 'redux';
 
 const addTraineeOneDataReducer = (pastTraineeOneData = [], action) => {
    if (action.type == "TRAINEE_ONE_DATA")  {
-       return [...pastTraineeOneData, action.payload];
+       if (pastTraineeOneData.length <= 100) {
+            return [...pastTraineeOneData, action.payload];
+       } else {
+           return [...pastTraineeOneData.slice(Math.max(pastTraineeOneData.length - 100, 1)), action.payload]
+       }
    }
 
    // handle initial startup

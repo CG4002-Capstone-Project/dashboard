@@ -18,7 +18,9 @@ const io = require('socket.io')(server, {
         origin: "http://localhost:3000",
         methods: ['GET', "POST"],
         credentials: true,
-    }
+    },
+    pingTimeout: 25000,
+    pingInterval: 10000,
 });
 // socketio 
 
@@ -32,7 +34,6 @@ io.on("connection", (socket) => {
     })
 })
 
-io.emit("newResult", {hello: 'hello'});
 
 // database
 const mongoose = require('mongoose');
@@ -53,24 +54,34 @@ db.once('open', () => {
         switch (change.operationType) {
             case "insert":
                 const result = {
-                    timestamp: change.fullDocument.timestamp,
-                    dancerIds: change.fullDocument.dancerIds,
-                    correctDancerIds: change.fullDocument.correctDancerIds,
+                    // timestamp: change.fullDocument.timestamp,
+                    // dancerIds: change.fullDocument.dancerIds,
+                    // correctDancerIds: change.fullDocument.correctDancerIds,
                     predictedMove: change.fullDocument.predictedMove,
-                    syncDelay: change.fullDocument.syncDelay,
-                    accuracy: change.fullDocument.accuracy,
+                    // syncDelay: change.fullDocument.syncDelay,
+                    // accuracy: change.fullDocument.accuracy,
                 }
                 console.log('result: ' + JSON.stringify(result));
                 io.emit("newResult", result);
         }
     })
 
-    let i = 0;
+    let i = 1;
+    let tempTimestamp = 0;
+    let tempYaw = 0;
+    let tempPitch = 0;
+    let tempRoll = 0;
+    let tempAccx = 0;
+    let tempAccy = 0;
+    let tempAccz = 0;
+
     dataChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
+
                 const data = {
                     timestamp: change.fullDocument.timestamp,
+                    mode: change.fullDocument.mode,
                     yaw: change.fullDocument.yaw,
                     pitch: change.fullDocument.pitch,
                     roll: change.fullDocument.roll,
@@ -79,29 +90,72 @@ db.once('open', () => {
                     accz: change.fullDocument.accz,
                 }
 
-                if (i%100 == 0) {
-                    console.log(`${i}th data: ` + JSON.stringify(data));
+                // tempTimestamp += Number(data.timestamp);
+                tempAccx += Number(data.accx);
+                tempAccy += Number(data.accy);
+                tempAccz += Number(data.accz);
+                tempYaw += Number(data.yaw);
+                tempPitch += Number(data.pitch);
+                tempRoll += Number(data.roll);
+
+                // console.log(`${i}th data: ${tempAccx}`);
+                if (i%10 == 0) {
+                    // tempTimestamp = tempTimestamp / 100;
+                    tempAccx = tempAccx / 10;
+                    tempAccy = tempAccy / 10;
+                    tempAccz = tempAccz / 10;
+                    tempYaw = tempYaw / 10;
+                    tempPitch = tempPitch / 10;
+                    tempRoll = tempRoll / 10;
+
+                    const finalisedData = {
+                        timestamp: data.timestamp,
+                        accx: tempAccx,
+                        accy: tempAccy,
+                        accz: tempAccz,
+                        yaw: tempYaw,
+                        pitch: tempPitch,
+                        roll: tempRoll,
+                        mode: data.mode
+                    }
+                    
+                    console.log(`${i}th data: ` + JSON.stringify(finalisedData));
+
+                    if (change.fullDocument.trainee_id == '0') {
+                        io.emit("onNewTraineeOneData", finalisedData);
+                    } else if (change.fullDocument.trainee_id == '1') {
+                        io.emit("onNewTraineeTwoData", finalisedData)
+                    } else if (change.fullDocument.trainee_id == '2') {
+                        io.emit("onNewTraineeThreeData", finalisedData);
+                    }
+
+                    tempTimestamp = 0;
+                    tempAccx = 0;
+                    tempAccy = 0;
+                    tempAccz = 0;
+                    tempYaw = 0;
+                    tempPitch = 0;
+                    tempRoll = 0;
                 }
                 i += 1;
-
-                if (change.fullDocument.trainee_id == '0') {
-                    io.emit("onNewTraineeOneData", data);
-                } else if (change.fullDocument.trainee_id == '1') {
-                    io.emit("onNewTraineeTwoData", data)
-                } else if (change.fullDocument.trainee_id == '2') {
-                    io.emit("onNewTraineeThreeData", data);
-                }
         }
     })
 
+    let j = 0;
     emgChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
                 const emg = {
                     timestamp: change.fullDocument.timestamp,
-                    emgValue: change.fullDocument.emgValue,
+                    voltage: change.fullDocument.voltage,
+                    rms: change.fullDocument.rms,
+                    mfq: change.fullDocument.mfq,
                 }
-                console.log('emg: ' + JSON.stringify(emg));
+
+                if (j%100 == 0) {
+                    console.log(`${j}th emg: ` + JSON.stringify(emg));
+                }
+                j += 1;
                 io.emit("newEMG", emg);
         }
     })

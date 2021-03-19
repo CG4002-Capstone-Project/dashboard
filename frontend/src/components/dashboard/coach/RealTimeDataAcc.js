@@ -9,28 +9,44 @@ export default class AccLineChart extends Component {
         this.chartRef = React.createRef();
     }
 
-    componentDidUpdate() {
-        // this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        // this.myChart.data.datasets[0].data = this.props.data.map(d => d.accx);
-        // this.myChart.data.datasets[1].data = this.props.data.map(d => d.accy);
-        // this.myChart.data.datasets[2].data = this.props.data.map(d => d.accz);
+    onRefresh = (chart) => {
         i += 1;
-        console.log(`macha ${i}`);
-        this.myChart.data.labels.push(this.props.data.timestamp);
-        this.myChart.data.datasets[0].data.push(this.props.data.accx);
-        this.myChart.data.datasets[1].data.push(this.props.data.accy);
-        this.myChart.data.datasets[2].data.push(this.props.data.accz);
-
-        this.myChart.update();
-
-        // setInterval(() => {
-        //     i += 1;
-        //     console.log(`Updated for the ${i}`);
-        //     return this.myChart.update()
-        // }, 1000)
-
-        // setInterval(this.myChart.update(), 100);
+        // console.log(`macha ${i}: `, JSON.stringify(this.props.data));
+        console.log(`cacha ${i}: `, Number(data.timestamp));
+        const data = this.props.data[this.props.data.length - 1]
+        chart.data.datasets[0].data.push({
+            x: i,
+            y: data.accx
+        });
+        chart.data.datasets[1].data.push({
+            x: i,
+            y: data.accy
+        });
+        chart.data.datasets[2].data.push({
+            x: i,
+            y: data.accz
+        })
     }
+    // componentDidUpdate() {
+    //     // this.myChart.data.labels = this.props.data.map(d => d.timestamp);
+    //     // this.myChart.data.datasets[0].data = this.props.data.map(d => d.accx);
+    //     // this.myChart.data.datasets[1].data = this.props.data.map(d => d.accy);
+    //     // this.myChart.data.datasets[2].data = this.props.data.map(d => d.accz);
+
+    //     this.myChart.data.labels.push(this.props.data.timestamp);
+    //     this.myChart.data.datasets[0].data.push(this.props.data.accx);
+    //     this.myChart.data.datasets[1].data.push(this.props.data.accy);
+    //     this.myChart.data.datasets[2].data.push(this.props.data.accz);
+    //     this.myChart.update();
+
+    //     // setInterval(() => {
+    //     //     i += 1;
+    //     //     console.log(`Updated for the ${i}`);
+    //     //     return this.myChart.update()
+    //     // }, 1000)
+
+    //     // setInterval(this.myChart.update(), 100);
+    // }
 
     componentDidMount() {
         // console.log(this.props.data.map(d => d.timestamp));
@@ -49,6 +65,15 @@ export default class AccLineChart extends Component {
                 scales: {
                     xAxes: [
                         {   
+                            type: 'realtime',
+                            realtime: {
+                                duration: 60000,
+                                ttl: undefined,
+                                delay: 50,
+                                refresh: 50,
+                                pause: false,
+                                onRefresh: this.onRefresh
+                            },
                             display: false,
                             ticks: {
                                 display: false,
@@ -57,12 +82,23 @@ export default class AccLineChart extends Component {
                     ],
                     yAxes: [
                         {
+                            type: 'linear',
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'value',
+                            },
                             ticks: {
                                 suggestedMax: 2,
                                 suggestedMin: -2,
                             },
                         }
                     ]
+                },
+                plugins: {
+                    streaming: {
+                        frameRate: 30,
+                    }
                 },
                 title: {
                     text: 'Acceleration X, Y and Z against Time',
@@ -75,7 +111,6 @@ export default class AccLineChart extends Component {
                 },
             },
             data: {
-                labels: [],
                 datasets: [{
                     label: 'Acc X',
                     data: [],

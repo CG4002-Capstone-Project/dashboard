@@ -13,7 +13,6 @@ const generateRawEMG = require('./raw_emg_generator');
 // generateRawEMG();
 
 
-
 const connectToDb = async () => {
     const URI = process.env.MONGO_DB_LOCAL_URI;
     mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -155,12 +154,12 @@ const readEMGIntoDb = () => {
 const readEverythingIntoDb = () => {
     const arrayOfDataObjects = fs.readFileSync('raw_data.csv', 'utf8');
     const dataRecords = parse(arrayOfDataObjects, {
-        headers: ['trainee_id', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
+        headers: ['trainee_id', 'mode', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
     })
 
     const arrayOfEmgObjects = fs.readFileSync('raw_emg.csv', 'utf8');
     const emgRecords = parse(arrayOfEmgObjects, {
-        headers: ['emgValue']
+        headers: ['voltage', 'rms', 'mfq']
     })
 
     const arrayOfResultObjects = fs.readFileSync('raw_results.csv', 'utf8');
@@ -176,15 +175,16 @@ const readEverythingIntoDb = () => {
         for (let i = 0; i < dataRecords.length; i++) {
             const dataInstance = new RawDataModel({ 
                 trainee_id: dataRecords[i][0],
-                yaw: dataRecords[i][1],
-                pitch: dataRecords[i][2],
-                roll: dataRecords[i][3],
-                accx: dataRecords[i][4],
-                accy: dataRecords[i][5],
-                accz: dataRecords[i][6],
+                mode: dataRecords[i][1],
+                yaw: dataRecords[i][2],
+                pitch: dataRecords[i][3],
+                roll: dataRecords[i][4],
+                accx: dataRecords[i][5],
+                accy: dataRecords[i][6],
+                accz: dataRecords[i][7],
                 timestamp: Date.now(),
             });
-            await timer(100);
+            await timer(25); // initially 100
 
             dataInstance.save((err) => {
                 if (err) {
@@ -197,9 +197,11 @@ const readEverythingIntoDb = () => {
 
             // console.log('here ' + typeof(dataRecords[i][0]));
 
-            if (dataRecords[i][0] == "1" && j < emgRecords.length) {
+            if (dataRecords[i][0] == "0" && j < emgRecords.length) {
                 const emgInstance = new RawEMGModel({ 
-                    emgValue: emgRecords[j][0],
+                    voltage: emgRecords[j][0],
+                    rms: emgRecords[j][1],
+                    mfq: emgRecords[j][2],
                     timestamp: Date.now(),
                 });
     

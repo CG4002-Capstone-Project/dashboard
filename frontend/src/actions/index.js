@@ -3,6 +3,7 @@ const addTraineeOneData = (data) => {
         type: 'TRAINEE_ONE_DATA',
         payload: {
             timestamp: data.timestamp,
+            mode: data.mode,
             yaw: data.yaw,
             pitch: data.pitch,
             roll: data.roll,
@@ -18,6 +19,7 @@ const addTraineeTwoData = (data) => {
         type: 'TRAINEE_TWO_DATA',
         payload: {
             timestamp: data.timestamp,
+            mode: data.mode,
             yaw: data.yaw,
             pitch: data.pitch,
             roll: data.roll,
@@ -33,6 +35,7 @@ const addTraineeThreeData = (data) => {
         type: 'TRAINEE_THREE_DATA',
         payload: {
             timestamp: data.timestamp,
+            mode: data.mode,
             yaw: data.yaw,
             pitch: data.pitch,
             roll: data.roll,
@@ -83,7 +86,9 @@ const addEMG = (data) => {
         type: 'EMG',
         payload: {
             timestamp: data.timestamp,
-            emgValue: data.emgValue
+            voltage: data.voltage,
+            rms: data.rms,
+            mfq: data.mfq
         }
     }
 }

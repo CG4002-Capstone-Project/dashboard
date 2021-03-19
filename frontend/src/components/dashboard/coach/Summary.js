@@ -16,55 +16,54 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 export class Summary extends Component {
 
     render() {
-        console.log(JSON.stringify(this.props.currentResult));
+        console.log('Current Move!!', JSON.stringify(this.props.currentMove));
+        // console.log(JSON.stringify(this.props.modeTraineeOne));
 
         let videoComponent;
         let currentMove;
 
-        if (this.props.currentMove == 1) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        if (this.props.currentMove == 'dab') {
+            currentMove = 'Dab';
             videoComponent = (
                 <ReactPlayer url='./video/dab.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             );
-        } else if (this.props.currentMove == 2) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        } else if (this.props.currentMove == 'elbowkick') {
+            currentMove = 'Elbow Kick';
             videoComponent = (
                 <ReactPlayer url='./video/elbowkick.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 3) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        } else if (this.props.currentMove == 'gun') {
+            currentMove = 'Gun';
             videoComponent = (
                 <ReactPlayer url='./video/gun.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             );
-        }  else if (this.props.currentMove == 4) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        }  else if (this.props.currentMove == 'hair') {
+            currentMove = 'Hair';
             videoComponent = (
                 <ReactPlayer url='./video/hair.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 5) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        } else if (this.props.currentMove == 'listen') {
+            currentMove = 'Listen';
             videoComponent = (
                 <ReactPlayer url='./video/listen.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 6) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        } else if (this.props.currentMove == 'pointhigh') {
+            currentMove = 'Point High';
             videoComponent = (
                 <ReactPlayer url='./video/pointhigh.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 7) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        } else if (this.props.currentMove == 'sidepump') {
+            currentMove = 'Side Pump';
             videoComponent = (
                 <ReactPlayer url='./video/sidepump.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 8) {
-            currentMove = moveIdToMove[this.props.currentMove - 1];
+        } else if (this.props.currentMove == 'wipetable') {
+            currentMove = 'Wipe Table';
             videoComponent = (
                 <ReactPlayer url='./video/wipetable.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
         }
 
-        
-   
         let summaryFirstRowDancerIds = null;
         let summarySecondRowDancerIds = null;
         let summaryThirdRowDancerIds = null;
@@ -123,6 +122,42 @@ export class Summary extends Component {
         let currentPosition;
         let correctPosition;
         let currentStatus;
+        let statusTraineeOne;
+        let statusTraineeTwo;
+        let statusTraineeThree;
+
+        if (this.props.modeTraineeOne == 1) {
+            statusTraineeOne = 'Idle';
+        } else if (this.props.modeTraineeOne == 2) {
+            statusTraineeOne = 'Moving';
+        } else if (this.props.modeTraineeOne == 3) {
+            statusTraineeOne = 'Dancing';
+        }
+
+        if (this.props.modeTraineeTwo == 1) {
+            statusTraineeTwo = 'Idle';
+        } else if (this.props.modeTraineeTwo == 2) {
+            statusTraineeTwo = 'Moving';
+        } else if (this.props.modeTraineeTwo == 3) {
+            statusTraineeTwo = 'Dancing';
+        }
+        if (this.props.modeTraineeThree == 1) {
+            statusTraineeThree = 'Idle';
+        } else if (this.props.modeTraineeThree == 2) {
+            statusTraineeThree = 'Moving';
+        } else if (this.props.modeTraineeThree == 3) {
+            statusTraineeThree = 'Dancing';
+        }
+        currentStatus = (
+            <React.Fragment>
+                <br/>
+                <h4> Riyas - {statusTraineeOne}  </h4>
+                <br/>
+                {/* <h4> Mary - Active </h4>
+                <br/>
+                <h4> Stacy - Active </h4> */}
+            </React.Fragment>
+        )
         if (_.isEmpty(this.props.currentResult)) {
             currentResultDisplay = (
                 <React.Fragment>
@@ -136,23 +171,15 @@ export class Summary extends Component {
                     <h4> Waiting for incoming data! Be Patient. </h4>
                 </React.Fragment>
             )
-
-            currentStatus = (
-                <React.Fragment>
-                    <h4> Positions </h4>
-                    <h4> Waiting for incoming data! Be Patient. </h4>
-                </React.Fragment>
-            )
-
         } else {
             currentResultDisplay = (
                 <React.Fragment>
                     <br/>
                     <h4> Current Move - {currentMove}  </h4>
                     <br/>
-                    <h4> Sync Delay - {this.props.currentResult.syncDelay}s</h4>
+                    {/* <h4> Sync Delay - {this.props.currentResult.syncDelay}s</h4>
                     <br/>
-                    <h4> Accuracy - {this.props.currentResult.accuracy}% </h4>
+                    <h4> Accuracy - {this.props.currentResult.accuracy}% </h4> */}
                 </React.Fragment>
             )
             currentPosition = this.props.currentResult.dancerIds;
@@ -181,18 +208,6 @@ export class Summary extends Component {
                     </React.Fragment>
                 )
             }
-
-            currentStatus = (
-                <React.Fragment>
-                    <br/>
-                    <h4> Jane - Active   </h4>
-                    <br/>
-                    <h4> Mary - Active </h4>
-                    <br/>
-                    <h4> Stacy - Active </h4>
-            </React.Fragment>
-            )
-
         }
 
 
@@ -211,8 +226,8 @@ export class Summary extends Component {
 
               <EMGDiv>
                 <EmgLineChart data={this.props.emgs}/>
-
               </EMGDiv>
+              
               <DanceMovePlayerDiv>
                 {videoComponent}
               </DanceMovePlayerDiv>
