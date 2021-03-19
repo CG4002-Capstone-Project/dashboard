@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
     addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults, addEMG } from '../../../actions';
 let i = 0;
+let j = 0;
 
 // how to update an object with setState: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
 export class Dashboard extends Component {
@@ -20,15 +21,15 @@ export class Dashboard extends Component {
         })
         socket.on("onNewTraineeOneData", async (data) => {
             i += 1;
-            if (i % 100 == 0) {
-                console.log(`${i}th data`)
-            }
+            // if (i % 100 == 0) {
+            //     console.log(`${i}th data`)
+            // }
             await this.setState({
                 t1Data: data
             })
             // this.props.addTraineeOneData(data);
             this.updateTraineeOneMode(data.mode);
-            console.log('data ' + JSON.stringify(data));
+            console.log(`${i}th data ' + JSON.stringify(data)`);
         })
         socket.on("onNewTraineeTwoData", (data) => {
             i += 1;
@@ -56,13 +57,14 @@ export class Dashboard extends Component {
             // this.props.addSyncDelay(result);
             // this.props.addResults(result);
             // this.updatePositions(result.dancerIds);
+            j += 1;
             this.updateCurrentMove(result.predictedMove);
 
             await this.setState({
                 currentResult: {...result}
             });
             
-            console.log('result: '+ JSON.stringify(this.state.currentResult));
+            console.log(`${j}th result: `+ JSON.stringify(this.state.currentResult));
         })
 
         socket.on("newEMG", async (result) => {
