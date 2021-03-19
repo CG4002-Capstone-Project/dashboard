@@ -4,7 +4,9 @@ const generateResults = require('./raw_results_generator');
 const mongoose = require('mongoose');
 const csv = require('csv-parser');
 const fs = require('fs');
-const { RawResultModel, RawDataModel, RawEMGModel } = require('./schema');
+const { RawResultModel, TraineeOneDataModel,
+    TraineeTwoDataModel,
+    TraineeThreeDataModel, RawEMGModel } = require('./schema');
 const parse = require('csv-parse/lib/sync');
 const generateRawEMG = require('./raw_emg_generator');
 
@@ -92,27 +94,77 @@ const readDataIntoDb = () => {
 
     async function load() {
         for (let i = 0; i < records.length; i++) {
-            const dataInstance = new RawDataModel({ 
-                trainee_id: records[i][0],
-                yaw: records[i][1],
-                pitch: records[i][2],
-                roll: records[i][3],
-                accx: records[i][4],
-                accy: records[i][5],
-                accz: records[i][6],
-                timestamp: Date.now(),
-            });
-            // console.log(resultInstance);
-
-            dataInstance.save((err) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(`data instance ${i} sent`)
-                    // console.log(` ${records[i][2]} saved!`);
-                }
-            })
-            await timer(100);
+            if (records[i][0] == '0') {
+                const dataInstance = new TraineeOneDataModel({ 
+                    trainee_id: records[i][0],
+                    mode: records[i][1],
+                    yaw: records[i][2],
+                    pitch: records[i][3],
+                    roll: records[i][4],
+                    accx: records[i][5],
+                    accy: records[i][6],
+                    accz: records[i][7],
+                    timestamp: Date.now(),
+                });
+                // console.log(resultInstance);
+    
+                dataInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`T1 data instance ${i} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+                await timer(100);
+            } else if (records[i][0] == '1') {
+                const dataInstance = new TraineeTwoDataModel({ 
+                    trainee_id: records[i][0],
+                    mode: records[i][1],
+                    yaw: records[i][2],
+                    pitch: records[i][3],
+                    roll: records[i][4],
+                    accx: records[i][5],
+                    accy: records[i][6],
+                    accz: records[i][7],
+                    timestamp: Date.now(),
+                });
+                // console.log(resultInstance);
+    
+                dataInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`T2 data instance ${i} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+                await timer(100);
+            } else if (records[i][0] == '2') {
+                const dataInstance = new TraineeThreeDataModel({ 
+                    trainee_id: records[i][0],
+                    mode: records[i][1],
+                    yaw: records[i][2],
+                    pitch: records[i][3],
+                    roll: records[i][4],
+                    accx: records[i][5],
+                    accy: records[i][6],
+                    accz: records[i][7],
+                    timestamp: Date.now(),
+                });
+                // console.log(resultInstance);
+    
+                dataInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`data instance ${i} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+                await timer(100);
+            }
+            
         }
     }
 
@@ -173,27 +225,76 @@ const readEverythingIntoDb = () => {
 
     async function load() {
         for (let i = 0; i < dataRecords.length; i++) {
-            const dataInstance = new RawDataModel({ 
-                trainee_id: dataRecords[i][0],
-                mode: dataRecords[i][1],
-                yaw: dataRecords[i][2],
-                pitch: dataRecords[i][3],
-                roll: dataRecords[i][4],
-                accx: dataRecords[i][5],
-                accy: dataRecords[i][6],
-                accz: dataRecords[i][7],
-                timestamp: Date.now(),
-            });
-            await timer(25); // initially 100
-
-            dataInstance.save((err) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(`data instance ${i} sent`)
-                    // console.log(` ${records[i][2]} saved!`);
-                }
-            })
+            if (dataRecords[i][0] == '0') {
+                const dataInstance = new TraineeOneDataModel({ 
+                    trainee_id: dataRecords[i][0],
+                    mode: dataRecords[i][1],
+                    yaw: dataRecords[i][2],
+                    pitch: dataRecords[i][3],
+                    roll: dataRecords[i][4],
+                    accx: dataRecords[i][5],
+                    accy: dataRecords[i][6],
+                    accz: dataRecords[i][7],
+                    timestamp: Date.now(),
+                });
+                // console.log(resultInstance);
+    
+                dataInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`T1 data instance ${i} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+                await timer(25);
+            } else if (dataRecords[i][0] == '1') {
+                const dataInstance = new TraineeTwoDataModel({ 
+                    trainee_id: dataRecords[i][0],
+                    mode: dataRecords[i][1],
+                    yaw: dataRecords[i][2],
+                    pitch: dataRecords[i][3],
+                    roll: dataRecords[i][4],
+                    accx: dataRecords[i][5],
+                    accy: dataRecords[i][6],
+                    accz: dataRecords[i][7],
+                    timestamp: Date.now(),
+                });
+                // console.log(resultInstance);
+    
+                dataInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`T2 data instance ${i} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+                await timer(25);
+            } else if (dataRecords[i][0] == '2') {
+                const dataInstance = new TraineeThreeDataModel({ 
+                    trainee_id: dataRecords[i][0],
+                    mode: dataRecords[i][1],
+                    yaw: dataRecords[i][2],
+                    pitch: dataRecords[i][3],
+                    roll: dataRecords[i][4],
+                    accx: dataRecords[i][5],
+                    accy: dataRecords[i][6],
+                    accz: dataRecords[i][7],
+                    timestamp: Date.now(),
+                });
+                // console.log(resultInstance);
+    
+                dataInstance.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`data instance ${i} sent`)
+                        // console.log(` ${records[i][2]} saved!`);
+                    }
+                })
+                await timer(25);
+            }
 
             // console.log('here ' + typeof(dataRecords[i][0]));
 

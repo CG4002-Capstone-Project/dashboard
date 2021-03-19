@@ -1,7 +1,7 @@
 require('dotenv').config();
 const amqp = require('amqplib/callback_api');
 const mongoose = require('mongoose');
-const { RawDataModel, RawEMGModel, RawResultModel } = require('./schema');
+const { TraineeOneDataModel, TraineeTwoDataModel, TraineeThreeDataModel, RawEMGModel, RawResultModel } = require('./schema');
 
 
 const CLOUD_AMQP_URL = process.env.CLOUDAMQP_URL;
@@ -26,7 +26,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
     if (error1) {
       throw error1;
     }
-    const queue = 'raw_data';
+    const queue = 'trainee_one_data';
 
     channel.assertQueue(queue, {
       durable: false
@@ -55,7 +55,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       console.log('Raw Data: ' + rawDataArray);
       console.log(" [Raw Data] Received %s", stringMsg);
 
-      const dataInstance = new RawDataModel({ 
+      const dataInstance = new TraineeOneDataModel({ 
         trainee_id: dancerId,
         mode,
         yaw,
@@ -72,7 +72,123 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         if (err) {
             console.log(err);
         } else {
-            console.log(`data instance sent to db`)
+            console.log(`t1 data instance sent to db`)
+        }
+      })
+    }, {
+      noAck: true
+    });
+  });
+
+  connection.createChannel(function(error1, channel) {
+    if (error1) {
+      throw error1;
+    }
+    const queue = 'trainee_two_data';
+
+    channel.assertQueue(queue, {
+      durable: false
+    });
+
+    console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+    // assume msg to be of the format: dancerId | timestamp | yaw pitch roll accx accy accz
+    channel.consume(queue, function(msg) {
+      const stringMsg = msg.content.toString();
+      const stringMsgArray = stringMsg.split('|');
+      const dancerId = stringMsgArray[0].trim();
+      const timestamp = stringMsgArray[1].trim();
+      const rawDataString = stringMsgArray[2].trim();
+
+      const rawDataArray = rawDataString.split(' ');
+      const mode = rawDataArray[0];
+      const yaw = rawDataArray[1];
+      const pitch = rawDataArray[2];
+      const roll = rawDataArray[3];
+      const accx = rawDataArray[4];
+      const accy = rawDataArray[5];
+      const accz = rawDataArray[6];
+      console.log('Mode: ' + mode);
+      console.log('Dancer ID: ' + dancerId);
+      console.log('Timestamp: ' + timestamp);
+      console.log('Raw Data: ' + rawDataArray);
+      console.log(" [Raw Data] Received %s", stringMsg);
+
+      const dataInstance = new TraineeTwoDataModel({ 
+        trainee_id: dancerId,
+        mode,
+        yaw,
+        pitch,
+        roll,
+        accx,
+        accy,
+        accz,
+        timestamp,
+      });
+      // console.log(dataInstance);
+
+      dataInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`t2 data instance sent to db`)
+        }
+      })
+    }, {
+      noAck: true
+    });
+  });
+
+  connection.createChannel(function(error1, channel) {
+    if (error1) {
+      throw error1;
+    }
+    const queue = 'trainee_three_data';
+
+    channel.assertQueue(queue, {
+      durable: false
+    });
+
+    console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+    // assume msg to be of the format: dancerId | timestamp | yaw pitch roll accx accy accz
+    channel.consume(queue, function(msg) {
+      const stringMsg = msg.content.toString();
+      const stringMsgArray = stringMsg.split('|');
+      const dancerId = stringMsgArray[0].trim();
+      const timestamp = stringMsgArray[1].trim();
+      const rawDataString = stringMsgArray[2].trim();
+
+      const rawDataArray = rawDataString.split(' ');
+      const mode = rawDataArray[0];
+      const yaw = rawDataArray[1];
+      const pitch = rawDataArray[2];
+      const roll = rawDataArray[3];
+      const accx = rawDataArray[4];
+      const accy = rawDataArray[5];
+      const accz = rawDataArray[6];
+      console.log('Mode: ' + mode);
+      console.log('Dancer ID: ' + dancerId);
+      console.log('Timestamp: ' + timestamp);
+      console.log('Raw Data: ' + rawDataArray);
+      console.log(" [Raw Data] Received %s", stringMsg);
+
+      const dataInstance = new TraineeThreeDataModel({ 
+        trainee_id: dancerId,
+        mode,
+        yaw,
+        pitch,
+        roll,
+        accx,
+        accy,
+        accz,
+        timestamp,
+      });
+      // console.log(dataInstance);
+
+      dataInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`t3 data instance sent to db`)
         }
       })
     }, {

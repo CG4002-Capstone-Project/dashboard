@@ -12,7 +12,9 @@ const rawDataSchema = new mongoose.Schema({
     timestamp: { type: String, default: Date.now() },
 })
 
-const RawDataModel = mongoose.model('raw_data', rawDataSchema);
+const TraineeOneDataModel = mongoose.model('raw_trainee_one_data', rawDataSchema);
+const TraineeTwoDataModel = mongoose.model('raw_trainee_two_data', rawDataSchema);
+const TraineeThreeDataModel = mongoose.model('raw_trainee_three_data', rawDataSchema);
 
 const rawResultsSchema = new mongoose.Schema({
     // timestamp: { type: String, default: Date.now() },
@@ -35,7 +37,9 @@ const rawEMGSchema = new mongoose.Schema({
 const RawEMGModel = mongoose.model('raw_emg', rawEMGSchema);
 
 module.exports = {
-    RawDataModel,
+    TraineeOneDataModel,
+    TraineeTwoDataModel,
+    TraineeThreeDataModel,
     RawResultModel,
     RawEMGModel
 }

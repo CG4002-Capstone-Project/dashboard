@@ -29,7 +29,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_1,
            mode,
            yaw,
            pitch,
@@ -61,7 +61,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_2,
            mode,
            yaw,
            pitch,
@@ -93,7 +93,7 @@ function generateRawData() {
         const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_3,
            mode,
            yaw,
            pitch,
@@ -127,7 +127,7 @@ function generateRawData() {
 
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_4,
            mode,
            yaw,
            pitch,
@@ -160,7 +160,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_5,
            mode,
            yaw,
            pitch,
@@ -193,7 +193,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_6,
            mode,
            yaw,
            pitch,
@@ -226,7 +226,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_7,
            mode,
            yaw,
            pitch,
@@ -259,7 +259,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_8,
            mode,
            yaw,
            pitch,
@@ -292,7 +292,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_9,
            mode,
            yaw,
            pitch,
@@ -325,7 +325,7 @@ function generateRawData() {
        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
-           trainee_id: 0,
+           trainee_id: trainee_id_10,
            mode,
            yaw,
            pitch,
