@@ -1,12 +1,10 @@
-import React, { Component, createContext } from 'react';
+import React, { Component } from 'react';
 import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay, DisplayDiv, MiscDiv, AccGraphDiv, YPRGraphDiv  } from './IndividualStyledComponents';
-import Chart from 'chart.js';
 import YPRLineChart from './YPRLineChart';
-// import YPRLineChart from './RealTimeDataGyr';
 import AccLineChart from './AccLineChart';
-// import AccLineChart from './RealTimeDataAcc';
 import { IconContext } from 'react-icons';
 import { IoAccessibilityOutline, IoAccessibilitySharp } from 'react-icons/io5'; 
+import _ from 'lodash';
 
 // how to style react-icons: https://stackoverflow.com/questions/56636280/how-to-style-react-icons
 function redPersonIcon() {
@@ -21,18 +19,10 @@ function redPersonIcon() {
 
 export class Individual extends Component {
 
-    componentDidMount() {
-        
-    }
     state = {
         hasPositionsChanged: false,
     }
 
-    // componentDidUpdate() {
-    //     if (this.props.dancerIds.length) {
-
-    //     }
-    // }
     positionStickman() {
         if (this.props.position == 1) {
             return (
@@ -64,7 +54,7 @@ export class Individual extends Component {
     render() {
         let display;
         console.log(this.props.data);
-        if (this.props.no == '2' || this.props.no == '3' || this.props.data == {}) {
+        if (_.isEmpty(this.props.data)) {
             display = ( 
                 <PreDisplay>
                     <h2> Ooops unable to connect just yet. </h2>
