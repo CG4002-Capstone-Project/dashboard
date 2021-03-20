@@ -10,10 +10,6 @@ export default class AccLineChart extends Component {
     }
 
     componentDidUpdate() {
-        // this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        // this.myChart.data.datasets[0].data = this.props.data.map(d => d.accx);
-        // this.myChart.data.datasets[1].data = this.props.data.map(d => d.accy);
-        // this.myChart.data.datasets[2].data = this.props.data.map(d => d.accz);
         i += 1;
         console.log(`macha ${i}`);
         this.myChart.data.labels.push(this.props.data.timestamp);
@@ -22,14 +18,6 @@ export default class AccLineChart extends Component {
         this.myChart.data.datasets[2].data.push(this.props.data.accz);
 
         this.myChart.update();
-
-        // setInterval(() => {
-        //     i += 1;
-        //     console.log(`Updated for the ${i}`);
-        //     return this.myChart.update()
-        // }, 1000)
-
-        // setInterval(this.myChart.update(), 100);
     }
 
     componentDidMount() {

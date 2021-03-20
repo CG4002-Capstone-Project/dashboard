@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DashboardDiv, CoverDiv } from './DataStyledComponents';
-import Individual from './individual';
-import Summary from './summary';
+import Individual from './individual/Individual';
+import Summary from './summary/Summary';
 import io from "socket.io-client";
 
 let i = 0;
@@ -161,15 +161,18 @@ export class DataDashboard extends Component {
             <React.Fragment>
                 <DashboardDiv>
                     <Individual data={this.state.t1Data} no='1' name='Riyas' position={this.state.posTraineeOne} />
-                    <Individual data={this.state.t2Data} no='2' name='Mary' position={this.state.posTraineeTwo} />
-                    <Individual data={this.state.t3Data} no='3' name='Stacy' position={this.state.posTraineeThree} />
+                    <Individual data={this.state.t2Data} no='2' name='Zeng Hao' position={this.state.posTraineeTwo} />
+                    <Individual data={this.state.t3Data} no='3' name='Brandon' position={this.state.posTraineeThree} />
                 </DashboardDiv>
                 <Summary 
                     currentResult={this.state.currentResult} 
                     emgs={this.state.currentEmg}
                     modeTraineeOne={this.state.modeTraineeOne}
                     modeTraineeTwo={this.state.modeTraineeTwo}
-                    modeTraineeThree={this.state.modeTraineeThree} />
+                    modeTraineeThree={this.state.modeTraineeThree}
+                    traineeOneName='Riyas'
+                    traineeTwoName='Zeng Hao'
+                    traineeThreeName='Brandon' />
             </React.Fragment>
         )
     }

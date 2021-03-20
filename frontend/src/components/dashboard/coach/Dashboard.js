@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PreDataDashboard from './pre-data';
-import PostDataDashboard from './post-data';
-import DataDashboard from './data';
+import PreDataDashboard from './pre-data/PreDataDashboard';
+import PostDataDashboard from './post-data/PostDataDashboard';
+import DataDashboard from './data/DataDashboard';
 
 export class Dashboard extends Component {
 

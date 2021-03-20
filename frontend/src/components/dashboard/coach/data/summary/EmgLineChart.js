@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
+let i = 0;
 
 export default class EmgLineChart extends Component {
     constructor(props) {
@@ -8,10 +9,13 @@ export default class EmgLineChart extends Component {
     }
 
     componentDidUpdate() {
-        this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        this.myChart.data.datasets[0].data = this.props.data.map(d => d.voltage);
-        this.myChart.data.datasets[1].data = this.props.data.map(d => d.rms);
-        this.myChart.data.datasets[2].data = this.props.data.map(d => d.mfq);
+        i += 1;
+        console.log(`macha ${i}`);
+        this.myChart.data.labels.push(this.props.data.timestamp);
+        this.myChart.data.datasets[0].data.push(this.props.data.voltage);
+        this.myChart.data.datasets[1].data.push(this.props.data.rms);
+        this.myChart.data.datasets[2].data.push(this.props.data.mfq);
+
         this.myChart.update();
     }
 
@@ -23,6 +27,11 @@ export default class EmgLineChart extends Component {
                 animation: {
                     duration: 0,
                 },
+                hover: {
+                    animationDuration: 0,
+                },
+                responsive: true,
+                responsiveAnimationDuration: 0,
                 scales: {
                     xAxes: [
                         {   
@@ -52,10 +61,10 @@ export default class EmgLineChart extends Component {
                 },
             },
             data: {
-                labels: this.props.data.map(d => d.timestamp),
+                labels: [],
                 datasets: [{
                     label: 'Voltage',
-                    data: this.props.data.map(d => d.voltage),
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
@@ -64,7 +73,7 @@ export default class EmgLineChart extends Component {
                     spanGaps: true,            
                 }, {
                     label: 'RMS',
-                    data: this.props.data.map(d => d.rms),
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
@@ -73,7 +82,7 @@ export default class EmgLineChart extends Component {
                     spanGaps: true,                   
                 }, {
                     label: 'MFQ',
-                    data: this.props.data.map(d => d.mfq),
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
