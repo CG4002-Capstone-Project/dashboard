@@ -16,48 +16,51 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 export class Summary extends Component {
 
     render() {
-        console.log('Current Move!!', JSON.stringify(this.props.currentMove));
+        console.log('Current Move!!', JSON.stringify(this.props.currentResult.predictedMove));
         // console.log(JSON.stringify(this.props.modeTraineeOne));
-
+        
+        /**
+         * Move and Video Component
+         */
         let videoComponent;
         let currentMove;
 
-        if (this.props.currentMove == 'dab') {
+        if (this.props.currentResult.predictedMove == 'dab') {
             currentMove = 'Dab';
             videoComponent = (
                 <ReactPlayer url='./video/dab.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             );
-        } else if (this.props.currentMove == 'elbowkick') {
+        } else if (this.props.currentResult.predictedMove == 'elbowkick') {
             currentMove = 'Elbow Kick';
             videoComponent = (
                 <ReactPlayer url='./video/elbowkick.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 'gun') {
+        } else if (this.props.currentResult.predictedMove == 'gun') {
             currentMove = 'Gun';
             videoComponent = (
                 <ReactPlayer url='./video/gun.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             );
-        }  else if (this.props.currentMove == 'hair') {
+        }  else if (this.props.currentResult.predictedMove == 'hair') {
             currentMove = 'Hair';
             videoComponent = (
                 <ReactPlayer url='./video/hair.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 'listen') {
+        } else if (this.props.currentResult.predictedMove == 'listen') {
             currentMove = 'Listen';
             videoComponent = (
                 <ReactPlayer url='./video/listen.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 'pointhigh') {
+        } else if (this.props.currentResult.predictedMove == 'pointhigh') {
             currentMove = 'Point High';
             videoComponent = (
                 <ReactPlayer url='./video/pointhigh.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 'sidepump') {
+        } else if (this.props.currentResult.predictedMove == 'sidepump') {
             currentMove = 'Side Pump';
             videoComponent = (
                 <ReactPlayer url='./video/sidepump.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentMove == 'wipetable') {
+        } else if (this.props.currentResult.predictedMove == 'wipetable') {
             currentMove = 'Wipe Table';
             videoComponent = (
                 <ReactPlayer url='./video/wipetable.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />

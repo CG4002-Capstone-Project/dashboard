@@ -6,7 +6,7 @@ import Summary from './Summary';
 import io from "socket.io-client";
 import { connect } from 'react-redux';
 import { addTraineeOneData, addTraineeTwoData, addTraineeThreeData,
-    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults, addEMG } from '../../../actions';
+    addSyncDelay, addPredictedMove, addDancerIds, addAccuracy, addResults, addEMG } from '../actions';
 let i = 0;
 let j = 0;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
-import Dashboard from '../dashboard/coach/Dashboard';
+import Dashboard from '../dashboard/coach/index';
 import { DashboardDiv, NavbarDiv, ContentDiv } from './CoachAppStyledComponents';
 
 
