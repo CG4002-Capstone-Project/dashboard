@@ -1,35 +1,22 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
-import 'chartjs-plugin-streaming';
 let i = 0;
 
-export default class AccLineChart extends Component {
+export default class EmgLineChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
     }
 
     componentDidUpdate() {
-        // this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        // this.myChart.data.datasets[0].data = this.props.data.map(d => d.accx);
-        // this.myChart.data.datasets[1].data = this.props.data.map(d => d.accy);
-        // this.myChart.data.datasets[2].data = this.props.data.map(d => d.accz);
         i += 1;
         console.log(`macha ${i}`);
         this.myChart.data.labels.push(this.props.data.timestamp);
-        this.myChart.data.datasets[0].data.push(this.props.data.accx);
-        this.myChart.data.datasets[1].data.push(this.props.data.accy);
-        this.myChart.data.datasets[2].data.push(this.props.data.accz);
+        this.myChart.data.datasets[0].data.push(this.props.data.voltage);
+        this.myChart.data.datasets[1].data.push(this.props.data.rms);
+        this.myChart.data.datasets[2].data.push(this.props.data.mfq);
 
         this.myChart.update();
-
-        // setInterval(() => {
-        //     i += 1;
-        //     console.log(`Updated for the ${i}`);
-        //     return this.myChart.update()
-        // }, 1000)
-
-        // setInterval(this.myChart.update(), 100);
     }
 
     componentDidMount() {
@@ -43,9 +30,8 @@ export default class AccLineChart extends Component {
                 hover: {
                     animationDuration: 0,
                 },
-                responsiveAnimationDuration: 0,
                 responsive: true,
-                aspectRatio: 2.75,
+                responsiveAnimationDuration: 0,
                 scales: {
                     xAxes: [
                         {   
@@ -58,14 +44,14 @@ export default class AccLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 2,
-                                suggestedMin: -2,
+                                suggestedMax: 5,
+                                suggestedMin: 0,
                             },
                         }
                     ]
                 },
                 title: {
-                    text: 'Acceleration X, Y and Z against Time',
+                    text: 'EMG Value against Time',
                     display: true,
                     fontFamily: 'Acme',
                     position: 'bottom'
@@ -77,29 +63,32 @@ export default class AccLineChart extends Component {
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Acc X',
+                    label: 'Voltage',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'red',
-                    backgroundColor: 'red'              
+                    borderColor: 'teal',
+                    backgroundColor: 'teal',
+                    spanGaps: true,            
                 }, {
-                    label: 'Acc Y',
+                    label: 'RMS',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'blue',
-                    backgroundColor: 'blue'
+                    borderColor: 'lime',
+                    backgroundColor: 'lime',
+                    spanGaps: true,                   
                 }, {
-                    label: 'Acc Z',
+                    label: 'MFQ',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'green',
-                    backgroundColor: 'green'
+                    borderColor: 'purple',
+                    backgroundColor: 'purple',
+                    spanGaps: true,               
                 }]
             }
 

@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
+import 'chartjs-plugin-streaming';
+let i = 0;
 
-export default class EmgLineChart extends Component {
+export default class AccLineChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
     }
 
     componentDidUpdate() {
-        this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        this.myChart.data.datasets[0].data = this.props.data.map(d => d.voltage);
-        this.myChart.data.datasets[1].data = this.props.data.map(d => d.rms);
-        this.myChart.data.datasets[2].data = this.props.data.map(d => d.mfq);
+        i += 1;
+        console.log(`macha ${i}`);
+        this.myChart.data.labels.push(this.props.data.timestamp);
+        this.myChart.data.datasets[0].data.push(this.props.data.accx);
+        this.myChart.data.datasets[1].data.push(this.props.data.accy);
+        this.myChart.data.datasets[2].data.push(this.props.data.accz);
+
         this.myChart.update();
     }
 
@@ -23,6 +28,12 @@ export default class EmgLineChart extends Component {
                 animation: {
                     duration: 0,
                 },
+                hover: {
+                    animationDuration: 0,
+                },
+                responsiveAnimationDuration: 0,
+                responsive: true,
+                aspectRatio: 2.75,
                 scales: {
                     xAxes: [
                         {   
@@ -35,14 +46,14 @@ export default class EmgLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 5,
-                                suggestedMin: 0,
+                                suggestedMax: 2,
+                                suggestedMin: -2,
                             },
                         }
                     ]
                 },
                 title: {
-                    text: 'EMG Value against Time',
+                    text: 'Acceleration X, Y and Z against Time',
                     display: true,
                     fontFamily: 'Acme',
                     position: 'bottom'
@@ -52,34 +63,31 @@ export default class EmgLineChart extends Component {
                 },
             },
             data: {
-                labels: this.props.data.map(d => d.timestamp),
+                labels: [],
                 datasets: [{
-                    label: 'Voltage',
-                    data: this.props.data.map(d => d.voltage),
+                    label: 'Acc X',
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'teal',
-                    backgroundColor: 'teal',
-                    spanGaps: true,            
+                    borderColor: 'red',
+                    backgroundColor: 'red'              
                 }, {
-                    label: 'RMS',
-                    data: this.props.data.map(d => d.rms),
+                    label: 'Acc Y',
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'lime',
-                    backgroundColor: 'lime',
-                    spanGaps: true,                   
+                    borderColor: 'blue',
+                    backgroundColor: 'blue'
                 }, {
-                    label: 'MFQ',
-                    data: this.props.data.map(d => d.mfq),
+                    label: 'Acc Z',
+                    data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'purple',
-                    backgroundColor: 'purple',
-                    spanGaps: true,               
+                    borderColor: 'green',
+                    backgroundColor: 'green'
                 }]
             }
 

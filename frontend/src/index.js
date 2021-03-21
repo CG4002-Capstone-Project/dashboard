@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import reducers from './reducers';
 import './index.css';
 import App from './App';
+import { Log, VisualizerProvider } from 'react-lifecycle-visualizer';
 
 require('dotenv').config();
 
@@ -15,6 +16,6 @@ ReactDOM.render(
     <Provider store={createStore(reducers)}>
       <App />
     </Provider>
-  </React.StrictMode>,
+    </React.StrictMode>,
   document.getElementById('root')
 );

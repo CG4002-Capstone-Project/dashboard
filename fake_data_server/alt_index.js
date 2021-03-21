@@ -14,7 +14,7 @@ const generateRawEMG = require('./raw_emg_generator');
 // generateResults();
 // generateRawEMG();
 
-
+const CLOUD_AMQP_URL = process.env.CLOUDAMQP_URL;
 const connectToDb = async () => {
     const URI = process.env.MONGO_DB_LOCAL_URI;
     mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
