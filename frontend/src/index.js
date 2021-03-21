@@ -13,12 +13,9 @@ require('dotenv').config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <VisualizerProvider>
     <Provider store={createStore(reducers)}>
       <App />
-      <Log />
     </Provider>
-    </VisualizerProvider>
     </React.StrictMode>,
   document.getElementById('root')
 );

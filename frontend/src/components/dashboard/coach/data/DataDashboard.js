@@ -48,7 +48,8 @@ export class DataDashboard extends Component {
             await this.setState({
                 currentResult: result
             });
-            
+
+            await this.handleHistoryState(result);  
         })
 
         socket.on("newEMG", async (result) => {
@@ -77,6 +78,7 @@ export class DataDashboard extends Component {
         t2Data: {},
         t3Data: {},
         currentEmg: {},
+        history: []
     }
 
     updateTraineeOneInfo = async (data) => {
@@ -158,6 +160,29 @@ export class DataDashboard extends Component {
         }
     }
 
+    handleHistoryState = async (result) => {
+        if (this.state.history.length == 0) {
+            const history = [];
+            history.push(result)
+            await this.setState({
+                history
+            })
+        } else if (this.state.history.length == 1) {
+            const previousFirstItem = this.state.history[0];
+            const history = [result, previousFirstItem];
+            await this.setState({
+                history
+            })
+        } else if (this.state.history.length > 1) {
+            const previousFirstItem = this.state.history[0];
+            const previousSecondItem = this.state.history[1];
+            const history = [result, previousFirstItem, previousSecondItem];
+            await this.setState({
+                history
+            })
+        } 
+    }
+
     render() {
     
         return (
@@ -173,6 +198,7 @@ export class DataDashboard extends Component {
                     modeTraineeOne={this.state.modeTraineeOne}
                     modeTraineeTwo={this.state.modeTraineeTwo}
                     modeTraineeThree={this.state.modeTraineeThree}
+                    history={this.state.history}
                     traineeOneName='Riyas'
                     traineeTwoName='Zeng Hao'
                     traineeThreeName='Brandon' />

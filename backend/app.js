@@ -34,6 +34,27 @@ io.on("connection", (socket) => {
     })
 })
 
+// helper function 
+
+function transposeMoves(move) {
+    if (move == 'dab') {
+        return 0;
+    } else if (move == 'elbowkick') {
+        return 1;
+    } else if (move == 'gun') {
+        return 2;
+    } else if (move == 'hair') {
+        return 3;
+    } else if (move == 'listen') {
+        return 4;
+    } else if (move == 'pointhigh') {
+        return 5;
+    } else if (move == 'sidepump') {
+        return 6;
+    } else if (move == 'wipetable') {
+        return 7;
+    }
+}
 
 // database
 const mongoose = require('mongoose');
@@ -73,11 +94,12 @@ db.once('open', async () => {
     resultsChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
+                const move = transposeMoves(change.fullDocument.predictedMove);
                 const result = {
                     timestamp: change.fullDocument.timestamp,
                     dancerIds: change.fullDocument.dancerIds,
                     correctDancerIds: change.fullDocument.correctDancerIds,
-                    predictedMove: change.fullDocument.predictedMove,
+                    predictedMove: move,
                     syncDelay: change.fullDocument.syncDelay,
                     accuracy: change.fullDocument.accuracy,
                 }
