@@ -3,6 +3,7 @@ import { DashboardDiv, CoverDiv } from './DataStyledComponents';
 import Individual from './individual/Individual';
 import Summary from './summary/Summary';
 import io from "socket.io-client";
+// import { traceLifecycle } from 'react-lifecycle-visualizer';
 
 let i = 0;
 let j = 0;
@@ -10,6 +11,8 @@ let k = 0;
 let m = 0;
 
 // how to update an object with setState: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
+// how to fix experimental decorators vs code warning: https://ihatetomatoes.net/how-to-remove-experimentaldecorators-warning-in-vscode/
+// @traceLifecycle
 export class DataDashboard extends Component {
 
     componentDidMount = async () => {

@@ -11,7 +11,9 @@ let currentMove;
 let videoComponent;
 let currentMode;
 let resultDisplay;
-let positionDisplay; 
+let positionDisplay;
+let summaryDisplay;
+let i = 0;
 
 const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High', 'Side Pump', 'Wipe Table']
 
@@ -20,22 +22,97 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 // how to check for empty object: https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
 
 export class Summary extends Component {
+    state = {
+        summaryFirstRowDancerIds: null,
+        summarySecondRowDancerIds: null,
+        summaryThirdRowDancerIds: null,
+        summaryFirstRowPredictedMove: null,
+        summarySecondRowPredictedMove: null,
+        summaryThirdRowPredictedMove: null,
+        count: 0,
+    }
 
-    // async componentDidMount() {
-    //     await this.setState({
-    //         predictedMove: this.props.currentResult.predictedMove,
-    //         correctPositions: this.props.currentResult.correctDancerIds,
-    //         predictedPositions: this.props.currentResult.dancerIds,
-    //         syncDelay: this.props.currentResult.syncDelay
-    //     });
-    
+    // static async getDerivedStateFromProps(props, state) {
+    //     i += 1;
+    //     console.log('im here ', state);
+    //     if (state.count == 0) {
+    //         console.log('woi');
+    //         state = {
+    //             count: 1,
+    //             summaryFirstRowDancerIds: props.currentResult.dancerIds,
+    //             summaryFirstRowPredictedMove: currentMove,
+    //             summarySecondRowDancerIds: null,
+    //             summaryThirdRowDancerIds: null,
+    //             summarySecondRowPredictedMove: null,
+    //             summaryThirdRowPredictedMove: null,
+    //         }
+    //         return state;
+    //     } else if (state.count == 1) {
+    //         const previousFirstRowDancerIds = state.summaryFirstRowDancerIds;
+    //         const previousFirstRowPredictedMove = state.summaryFirstRowPredictedMove;
+
+    //         return {
+    //             count: 2,
+    //             summaryFirstRowDancerIds: props.currentResult.dancerIds,
+    //             summaryFirstRowPredictedMove: currentMove,
+    //             summarySecondRowDancerIds: previousFirstRowDancerIds,
+    //             summarySecondRowPredictedMove: previousFirstRowPredictedMove
+    //         }
+    //     } else if (state.count == 2) {
+    //         const previousFirstRowDancerIds = state.summaryFirstRowDancerIds;
+    //         const previousFirstRowPredictedMove = state.summaryFirstRowPredictedMove;
+    //         const previousSecondRowDancerIds = state.summarySecondRowDancerIds;
+    //         const previousSecondRowPredictedMove = state.summarySecondRowPredictedMove;
+
+    //         return {
+    //             summaryFirstRowDancerIds: props.currentResult.dancerIds,
+    //             summaryFirstRowPredictedMove: currentMove,
+    //             summarySecondRowDancerIds: previousFirstRowDancerIds,
+    //             summarySecondRowPredictedMove: previousFirstRowPredictedMove,
+    //             summaryThirdRowDancerIds: previousSecondRowDancerIds,
+    //             summaryThirdRowPredictedMove: previousSecondRowPredictedMove
+    //         }
+    //     } else {
+    //         return null;
+    //     }
     // }
-    // state = {
-    //     predictedMove: '',
-    //     correctPositions: '',
-    //     predictedPositions: '',
-    //     syncDelay: 0,
-    // }
+
+    async componentDidUpdate() {
+        // this.handleHistoryState();
+        i += 1;
+        if (this.state.count == 0 && !_.isEmpty(this.props.currentResult)) {
+            await this.setState({
+                count: 1,
+                summaryFirstRowDancerIds: this.props.currentResult.dancerIds,
+                summaryFirstRowPredictedMove: currentMove,
+            })
+        } else if (this.state.count == 1) {
+            const previousFirstRowDancerIds = this.state.summaryFirstRowDancerIds;
+            const previousFirstRowPredictedMove = this.state.summaryFirstRowPredictedMove;
+
+            await this.setState({
+                count: 2,
+                summaryFirstRowDancerIds: this.props.currentResult.dancerIds,
+                summaryFirstRowPredictedMove: currentMove,
+                summarySecondRowDancerIds: previousFirstRowDancerIds,
+                summarySecondRowPredictedMove: previousFirstRowPredictedMove
+            })
+        } else if (this.state.count == 2) {
+            const previousFirstRowDancerIds = this.state.summaryFirstRowDancerIds;
+            const previousFirstRowPredictedMove = this.state.summaryFirstRowPredictedMove;
+            const previousSecondRowDancerIds = this.state.summarySecondRowDancerIds;
+            const previousSecondRowPredictedMove = this.state.summarySecondRowPredictedMove;
+
+            await this.setState({
+                summaryFirstRowDancerIds: this.props.currentResult.dancerIds,
+                summaryFirstRowPredictedMove: currentMove,
+                summarySecondRowDancerIds: previousFirstRowDancerIds,
+                summarySecondRowPredictedMove: previousFirstRowPredictedMove,
+                summaryThirdRowDancerIds: previousSecondRowDancerIds,
+                summaryThirdRowPredictedMove: previousSecondRowPredictedMove
+            })
+        }
+    }
 
     settleMode() {
         let statusTraineeOne;
@@ -172,10 +249,73 @@ export class Summary extends Component {
         }
     }
 
+    async handleHistoryState() {
+        i += 1;
+        if (this.state.count == 0) {
+            await this.setState({
+                count: 1,
+                summaryFirstRowDancerIds: this.props.currentResult.dancerIds,
+                summaryFirstRowPredictedMove: currentMove,
+            })
+        } else if (this.state.count == 1) {
+            const previousFirstRowDancerIds = this.state.summaryFirstRowDancerIds;
+            const previousFirstRowPredictedMove = this.state.summaryFirstRowPredictedMove;
+
+            await this.setState({
+                count: 2,
+                summaryFirstRowDancerIds: this.props.currentResult.dancerIds,
+                summaryFirstRowPredictedMove: currentMove,
+                summarySecondRowDancerIds: previousFirstRowDancerIds,
+                summarySecondRowPredictedMove: previousFirstRowPredictedMove
+            })
+        } else if (this.state.count == 2) {
+            const previousFirstRowDancerIds = this.state.summaryFirstRowDancerIds;
+            const previousFirstRowPredictedMove = this.state.summaryFirstRowPredictedMove;
+            const previousSecondRowDancerIds = this.state.summarySecondRowDancerIds;
+            const previousSecondRowPredictedMove = this.state.summarySecondRowPredictedMove;
+
+            await this.setState({
+                summaryFirstRowDancerIds: this.props.currentResult.dancerIds,
+                summaryFirstRowPredictedMove: currentMove,
+                summarySecondRowDancerIds: previousFirstRowDancerIds,
+                summarySecondRowPredictedMove: previousFirstRowPredictedMove,
+                summaryThirdRowDancerIds: previousSecondRowDancerIds,
+                summaryThirdRowPredictedMove: previousSecondRowPredictedMove
+            })
+        }
+    }
+
+    settleHistory() {
+
+        console.log('History ', JSON.stringify(this.state));
+        if (_.isEmpty(this.props.currentResult)) {
+            summaryDisplay = ( 
+                <h4> No Data Yet! </h4>
+            )
+        } else {
+            let summaryFirstRowDancerIds = this.state.summaryFirstRowDancerIds;
+            let summarySecondRowDancerIds = this.state.summarySecondRowDancerIds;
+            let summaryThirdRowDancerIds = this.state.summaryThirdRowDancerIds;
+
+            let summaryFirstRowPredictedMove = this.state.summaryFirstRowPredictedMove;
+            let summarySecondRowPredictedMove = this.state.summarySecondRowPredictedMove;
+            let summaryThirdRowPredictedMove = this.state.summaryThirdRowPredictedMove;
+            summaryDisplay = (
+                <Table borderless size='sm'>
+                    <thead><tr><th>Positions</th><th>Move</th></tr></thead>
+                    <tbody>
+                        {/* <Fade appear={true} in={true}></Fade> */}
+                        <tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr>
+                        <tr><td style={{ color: 'red' }}>{summarySecondRowDancerIds}</td><td style={{ color: 'red' }}>{summarySecondRowPredictedMove}</td></tr>
+                        <tr><td>{summaryThirdRowDancerIds}</td><td>{summaryThirdRowPredictedMove}</td></tr></tbody>
+                </Table>
+            );
+        }
+    }
+
 
     render() {
-        console.log('Current Move!!', JSON.stringify(this.props.currentResult));
-        
+        console.log(`Count ${i} Current Move!!`, JSON.stringify(this.props.currentResult));
         /**
          * Move and Video Component
          */
@@ -183,60 +323,10 @@ export class Summary extends Component {
         this.settleMode();
         this.settleVideoAndMove();
         this.settleResult();
+        this.settleHistory();
 
 
-        // let summaryFirstRowDancerIds = null;
-        // let summarySecondRowDancerIds = null;
-        // let summaryThirdRowDancerIds = null;
 
-        // let summaryFirstRowPredictedMove = null;
-        // let summarySecondRowPredictedMove = null;
-        // let summaryThirdRowPredictedMove = null;
-
-        // let summaryDisplay;
-        // if (this.props.dancerIds.length == 0) {
-        //     summaryDisplay = ( 
-        //         <h4> No Data Yet! </h4>
-        //     )
-        // } else {
-        //     if (this.props.dancerIds.length == 1) {
-        //         summaryFirstRowDancerIds = this.props.dancerIds[0];
-        //         summaryFirstRowPredictedMove = moveIdToMove[this.props.predictedMove[0] - 1];
-
-        //         summarySecondRowDancerIds = null;
-        //         summarySecondRowPredictedMove = null;
-        //         summaryThirdRowDancerIds = null;
-        //         summaryThirdRowPredictedMove = null;
-        //     } else if (this.props.dancerIds == 2) {
-        //         summaryFirstRowDancerIds = this.props.dancerIds[1];
-        //         summaryFirstRowPredictedMove = moveIdToMove[this.props.predictedMove[1] - 1];
-
-        //         summarySecondRowDancerIds = this.props.dancerIds[0];
-        //         summarySecondRowPredictedMove = moveIdToMove[this.props.predictedMove[0] - 1];
-
-        //         summaryThirdRowDancerIds = null;
-        //         summaryThirdRowPredictedMove = null;
-        //     } else {
-        //         summaryFirstRowDancerIds = this.props.dancerIds[this.props.dancerIds.length - 1];
-        //         summaryFirstRowPredictedMove = moveIdToMove[this.props.predictedMove[this.props.dancerIds.length - 1] - 1];
-
-        //         summarySecondRowDancerIds = this.props.dancerIds[this.props.dancerIds.length - 2];
-        //         summarySecondRowPredictedMove = moveIdToMove[this.props.predictedMove[this.props.dancerIds.length - 2] - 1];
-
-        //         summaryThirdRowDancerIds = this.props.dancerIds[this.props.dancerIds.length - 3];
-        //         summaryThirdRowPredictedMove = moveIdToMove[this.props.predictedMove[this.props.dancerIds.length - 3] - 1];
-        //     }
-        //     summaryDisplay = (
-        //         <Table borderless size='sm'>
-        //             <thead><tr><th>Positions</th><th>Move</th></tr></thead>
-        //             <tbody>
-        //                 {/* <Fade appear={true} in={true}></Fade> */}
-        //                 <tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr>
-        //                 <tr><td style={{ color: 'red' }}>{summarySecondRowDancerIds}</td><td style={{ color: 'red' }}>{summarySecondRowPredictedMove}</td></tr>
-        //                 <tr><td>{summaryThirdRowDancerIds}</td><td>{summaryThirdRowPredictedMove}</td></tr></tbody>
-        //         </Table>
-        //     );
-        // }
 
         return (
           <SummaryDiv>
@@ -259,10 +349,10 @@ export class Summary extends Component {
                 {videoComponent}
               </DanceMovePlayerDiv>
 
-              {/* <HistoryDiv>
+              <HistoryDiv>
                 <h4> History </h4>
                 {summaryDisplay}
-              </HistoryDiv> */}
+              </HistoryDiv>
           </SummaryDiv>
         )
     }
