@@ -3,6 +3,7 @@ import VerticalTab from './VerticalTab';
 import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import axios from 'axios';
+import { register, test } from '../../utils/Auth';
 
 export class NewRegister extends Component {
     
@@ -22,23 +23,8 @@ export class NewRegister extends Component {
     }
 
     registerGroup = async () => {
-        const response = await axios.post(' http://localhost:3333/register/create', { ...this.state })
-        const accessToken = response.data.accessToken;
-        console.log('access token: ' + JSON.stringify(accessToken));
-        localStorage.setItem('accessToken', accessToken);
-        await this.test();
-    }
-
-    test = async () => {
-        const accessToken = localStorage.getItem('accessToken');
-        const can = await axios.post(' http://localhost:3333/register/decode', { 
-            data: 'helo'
-        }, { headers: { 
-                'authorization': accessToken
-            }
-        })
-        console.log('access token: ' + accessToken);
-        console.log('can', can);
+        await register({ ...this.state });
+        await test();
     }
 
     accountForSubmittedForm = async (input) => {

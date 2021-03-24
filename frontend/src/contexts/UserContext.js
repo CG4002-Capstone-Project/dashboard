@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { checkAccessToken } from '../utils/auth';
+import { checkAccessToken } from '../utils/Auth';
 
 /**
  * Sources: https://github.com/kentcdodds/bookshelf/blob/main/src/context/auth-context.js
