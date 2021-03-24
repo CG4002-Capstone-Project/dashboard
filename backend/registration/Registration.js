@@ -3,6 +3,7 @@ const _ = require('lodash');
 
 const { hashPassword, generateAccessToken } = require('../auth/Auth');
 const CoachTreeModel = require('../schemas/coach-tree-schema');
+const { createLogInstance } = require('../login/Login');
 
 const UserCreate = async (body) => {
 
@@ -20,6 +21,7 @@ const UserCreate = async (body) => {
 
     const token = generateAccessToken({ email: body['coach'].email, role: body['coach'].role });
     console.log(`token: ${token}`);
+    await createLogInstance(body['coach'].email, body['coach'].role, token);
     return { accessToken: token };
 }
 

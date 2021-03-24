@@ -14,6 +14,7 @@ app.post(
             const response = await UserCreate(req.body);
             // creates coach-trainee entity relationships in coach_trees collections 
             await CoachTreeCreate(req.body);
+            
             return res.json(response);
 
         } catch (error) {

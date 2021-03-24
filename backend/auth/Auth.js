@@ -21,8 +21,6 @@ const authChecker = (req, res, next) => {
     try {
         const accessToken = req.headers.authorization;
         const {email, role} = decodeAccessToken(accessToken);
-
-
         next();
     } catch(e) {
         res.status(401);
