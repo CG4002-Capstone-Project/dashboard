@@ -15,7 +15,7 @@ const App = () => {
   // TODO add AppLoader
 
   return (
-    <React.Suspense >
+    <React.Suspense  fallback={<AppLoader />}>
       <Router>
         {user.isAuth ? <AuthenticatedApp /> : <UnAuthenticatedApp />}
       </Router>
