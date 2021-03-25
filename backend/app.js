@@ -73,6 +73,10 @@ db.once('open', async () => {
     await db.dropCollection("raw_trainee_two_datas");
     await db.dropCollection("raw_trainee_three_datas");
     await db.dropCollection("raw_emgs");
+    // await db.dropCollection("access_logs");
+    // await db.dropCollection("coach_trees");
+    // await db.dropCollection("users");
+
     console.log('DELETED Collections ');
 
     // add collections 
@@ -82,6 +86,10 @@ db.once('open', async () => {
     await db.createCollection("raw_trainee_two_datas");
     await db.createCollection("raw_trainee_three_datas");
     await db.createCollection("raw_emgs");
+    // await db.createCollection("access_logs");
+    // await db.createCollection("coach_trees");
+    // await db.createCollection("users");
+
     console.log("CREATED Collections")
 
     console.log('Setting change streams');

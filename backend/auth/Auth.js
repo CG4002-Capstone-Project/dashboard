@@ -10,7 +10,7 @@ const hashPassword = async (password) => {
 }
 
 const generateAccessToken = (payload) => {
-    return jwt.sign(payload, secret);
+    return jwt.sign(payload, secret, { expiresIn: 60 * 60 * 24 });
 }
 
 const decodeAccessToken = (token) => {
