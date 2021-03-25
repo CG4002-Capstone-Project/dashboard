@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { createLogInstance } = require('./Login');
+const { createLogInstance, verifyUserCredentials, createAccessToken } = require('./Login');
 
 
 module.exports = app;
@@ -11,11 +11,23 @@ app.post(
         try {
             // creates user documents in users collection 
             console.log('Login Attempt: ', JSON.stringify(req.body));
-            const response = await createLogInstance(req.body);
-            
-            
-            return res.json(response);
+            const userCredentials = await verifyUserCredentials(req.body);
 
+            if (userCredentials.isUserGrantedAccess) {
+                const token = await createAccessToken(userCredentials.email, userCredentials.role);
+                // console.log('hereee' , token);
+                await createLogInstance(userCredentials.email, userCredentials.role, token);
+                const response = {
+                    success: true,
+                    name: userCredentials.name,
+                    email: userCredentials.email,
+                    role: userCredentials.role,
+                    accessToken: token
+                }
+                return res.status(200).json(response);
+            } else {
+                return res.json({ success: false });
+            }
         } catch (error) {
             return res.status(403).json({ error });
         }

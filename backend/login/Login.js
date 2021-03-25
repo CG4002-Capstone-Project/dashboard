@@ -16,20 +16,49 @@ const createLogInstance = async (email, role, accessToken) => {
     })
 } 
 
-const findUserCredentials = async (email, password) => {
-    UserModel.find({ email, password }, (err, docs) => {
-        if (err) {
-            return false
-        } else {
-            return true;
-        }
-    })
+const verifyUserCredentials = async (body) => {
+    let isUserGrantedAccess = false;
+    let name = '';
+    let role = '';
+    let email = '';
+    try {
+        await UserModel.find({ email: body.email , password: body.password }, (err, docs) => {
+            if (err) {
+                throw new Error(err);
+            }
+            // console.log('login docs ', docs);
+
+            if (docs.length = 1) {
+                isUserGrantedAccess = true;
+                name = docs[0].name;
+                role = docs[0].role;
+                email = docs[0].email;
+            }
+        })
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    const response = {
+        isUserGrantedAccess,
+        name,
+        role,
+        email
+    }
+    // console.log('login response', response);
+    return response;
 }
 
+const createAccessToken = (email, role) => {
+    console.log('login create access token ', email , role);
+    const token = generateAccessToken(email, role);
+    return token;
+}
 
 module.exports = {
     createLogInstance,
-    findUserCredentials
+    verifyUserCredentials,
+    createAccessToken
 }
 
 
