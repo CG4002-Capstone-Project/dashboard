@@ -1,6 +1,6 @@
 import React from 'react';
 import MainApp from './pages/MainApp';
-import AppProviders from './contexts/AppProviders';
+import { UserProvider as AppProviders } from './contexts/UserContext';
 
 const App = () => {
     return (

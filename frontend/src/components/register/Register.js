@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
 import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
-import axios from 'axios';
-import { register, test } from '../../utils/Auth';
+import { register, test, getAccessToken, getName } from '../../utils/Auth';
+import { UserContext } from '../../contexts/UserContext';
 
 export class NewRegister extends Component {
-    
+    static contextType = UserContext;
+
     state = { 
         coach: {
             role: 'coach',
@@ -23,8 +24,27 @@ export class NewRegister extends Component {
     }
 
     registerGroup = async () => {
-        await register({ ...this.state });
-        await test();
+        const { user, handleUser } = this.context;
+        console.log('CONTEXT 1', this.context);
+        await handleUser({ ...user, isFetching: true });
+        try {
+            console.log('CONTEXT 2', this.context);
+            await register({ ...this.state });
+            console.log('CONTEXT 3', this.context);
+            await handleUser({
+                ...user,
+                email: this.state.coach.email,
+                role: this.state.coach.role,
+                isAuth: true,
+                isFetching: true,
+            });
+            console.log('CONTEXT 4', this.context);
+            console.log('LOCAL STORAGE ', getAccessToken(), getName());
+
+        } catch {
+            await handleUser({ ...user, isAuth: false, isFetching: false });
+        }
+        // await test();
     }
 
     accountForSubmittedForm = async (input) => {
