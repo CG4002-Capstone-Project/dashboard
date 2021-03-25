@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const Login = require('./login/LoginController');
 const Registration = require('./registration/RegistrationController');
+const Access = require('./access/AccessController');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -329,5 +330,6 @@ db.once('open', async () => {
 
 app.use('/login', Login); // used to be app
 app.use('/register', Registration); // used to be app
+app.use('/user', Access);
 
 module.exports = server; // used to be app
