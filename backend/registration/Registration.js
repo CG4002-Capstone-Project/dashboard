@@ -1,12 +1,37 @@
-const UserModel = require('../schemas/user-schema');
 const _ = require('lodash');
 
-const { hashPassword, generateAccessToken } = require('../auth/Auth');
+const UserModel = require('../schemas/user-schema');
 const CoachTreeModel = require('../schemas/coach-tree-schema');
+const { hashPassword, generateAccessToken } = require('../auth/Auth');
 const { createLogInstance } = require('../login/Login');
 
-const UserCreate = async (body) => {
+const searchForConflictUsers = async (body) => {
+    let isConflictsPresent = false;
+    for (let key of Object.keys(body)) {
+        try {
+            await UserModel.find({ email: body[key].email, username: body[key].username, role: body[key].role }, (err, docs) => {
+                // console.log('docs', JSON.stringify(docs));
+                // console.log('docs length', docs.length);
+                if (docs.length >= 1) {
+                    isConflictsPresent = true;
+                }
+                if (err) {
+                    throw new Error(err);
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
+    if (isConflictsPresent) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const UserCreate = async (body) => {
     for (let key of Object.keys(body)) {
         const hashedPassword = await hashPassword(body[key].password);
         const userInstance = new UserModel({ name: body[key].name, email: body[key].email, username: body[key].username, password: hashedPassword, role: body[key].role });
@@ -18,11 +43,12 @@ const UserCreate = async (body) => {
             }
         })
     }
+}
 
+const createAccessToken = (body) => {
     const token = generateAccessToken({ email: body['coach'].email, role: body['coach'].role });
-    console.log(`token: ${token}`);
-    await createLogInstance(body['coach'].email, body['coach'].role, token);
-    return { accessToken: token };
+    console.log(`accessToken generated: ${token}`);
+    return token;
 }
 
 const CoachTreeCreate = async (body) => {
@@ -42,8 +68,15 @@ const CoachTreeCreate = async (body) => {
     })
 }
 
+const loginUser = async (body, token) => {
+    await createLogInstance(body['coach'].email, body['coach'].role, token);
+}
+
 
 module.exports = {
     UserCreate,
-    CoachTreeCreate
+    CoachTreeCreate,
+    searchForConflictUsers,
+    createAccessToken,
+    loginUser
 };
