@@ -39,7 +39,7 @@ const UserCreate = async (body) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log(`${key} saved!`);
+                console.log(`user create ${key} saved!`);
             }
         })
     }
@@ -63,7 +63,7 @@ const CoachTreeCreate = async (body) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(`${body['coach'].username} , ${body['trainee1'].username}, ${body['trainee2'].username}, ${body['trainee3'].username} saved!`);
+            console.log(`coach tree entity relationship ${body['coach'].username} , ${body['trainee1'].username}, ${body['trainee2'].username}, ${body['trainee3'].username} saved!`);
         }
     })
 }
