@@ -26,11 +26,11 @@ function generateRawData() {
        const accx = randomFloat({min: -13000, max: 0, fixed: 4});
        const accy = randomFloat({min: -1000, max: -6700, fixed: 4});
        const accz = randomFloat({min: -7000, max: 13000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_1,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -58,11 +58,11 @@ function generateRawData() {
        const accx = randomFloat({min: -3000, max: 10000, fixed: 4});
        const accy = randomFloat({min: 5000, max: 13000, fixed: 4});
        const accz = randomFloat({min: 7000, max: 15000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_2,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -90,11 +90,11 @@ function generateRawData() {
         const accx = randomFloat({min: -10000, max: -4000, fixed: 4});
         const accy = randomFloat({min: -2000, max: 8000, fixed: 4});
         const accz = randomFloat({min: 0, max: 7000, fixed: 4});
-        const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+        // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_3,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -123,12 +123,12 @@ function generateRawData() {
        const accx = randomFloat({min: -5000, max: 4000, fixed: 4});
        const accy = randomFloat({min: -12000, max: 2000, fixed: 4});
        const accz = randomFloat({min: 4000, max: 15000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
 
    
        const data = {
            trainee_id: trainee_id_4,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -157,11 +157,11 @@ function generateRawData() {
        const accx = randomFloat({min: -2000, max: 5000, fixed: 4});
        const accy = randomFloat({min: 2000, max: 11000, fixed: 4});
        const accz = randomFloat({min: -5000, max: 3000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_5,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -190,11 +190,11 @@ function generateRawData() {
        const accx = randomFloat({min: -6000, max: 2000, fixed: 4});
        const accy = randomFloat({min: -4000, max: 7000, fixed: 4});
        const accz = randomFloat({min: -8000, max: -3000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;;
    
        const data = {
            trainee_id: trainee_id_6,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -223,11 +223,11 @@ function generateRawData() {
        const accx = randomFloat({min: -9000, max: 1000, fixed: 4});
        const accy = randomFloat({min: -5000, max: 3000, fixed: 4});
        const accz = randomFloat({min: -7000, max: -1000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_7,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -256,11 +256,11 @@ function generateRawData() {
        const accx = randomFloat({min: 5000, max: 14000, fixed: 4});
        const accy = randomFloat({min: 2000, max: 8000, fixed: 4});
        const accz = randomFloat({min: 7000, max: 15000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_8,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -289,11 +289,11 @@ function generateRawData() {
        const accx = randomFloat({min: 5000, max: 14000, fixed: 4});
        const accy = randomFloat({min: 2000, max: 8000, fixed: 4});
        const accz = randomFloat({min: 7000, max: 15000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_9,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -322,11 +322,11 @@ function generateRawData() {
        const accx = randomFloat({min: 5000, max: 14000, fixed: 4});
        const accy = randomFloat({min: 2000, max: 8000, fixed: 4});
        const accz = randomFloat({min: 7000, max: 15000, fixed: 4});
-       const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+       // const mode = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
    
        const data = {
            trainee_id: trainee_id_10,
-           mode,
+           // mode,
            yaw,
            pitch,
            roll,
@@ -350,9 +350,10 @@ function generateRawData() {
    
     finalData = [...danceMove_1, ...danceMove_2, ...danceMove_3, ...danceMove_4, ...danceMove_5, ...danceMove_6, ...danceMove_7, ...danceMove_8, ...danceMove_9, ...danceMove_10];
    
+   // header: [ 'trainee_id', 'mode', 'yaw', 'pitch', 'roll', 'accx', 'accy', 'accz']
    const csvWriter = createCsvWriter({
        path: 'raw_data.csv',
-       header: [ 'trainee_id', 'mode', 'yaw', 'pitch', 'roll', 'accx', 'accy', 'accz']
+       header: [ 'trainee_id', 'yaw', 'pitch', 'roll', 'accx', 'accy', 'accz']
    });
    
    csvWriter.writeRecords(finalData)
