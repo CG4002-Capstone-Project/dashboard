@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const rawDataSchema = new mongoose.Schema({
     trainee_id: { type: String, required: true, trim: true },
-    mode: { type: String, required: true, trim: true },
+    // mode: { type: String, required: true, trim: true },
     yaw: { type: String, required: true, trim: true },
     pitch: { type: String, required: true, trim: true  },
     roll: { type: String, required: true, trim: true  },

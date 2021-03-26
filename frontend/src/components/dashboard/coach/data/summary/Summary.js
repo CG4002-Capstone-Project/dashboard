@@ -212,7 +212,7 @@ export class Summary extends Component {
          * Move and Video Component
          */
         
-        this.settleMode();
+        // this.settleMode();
         this.settleVideoAndMove();
         this.settleResult();
         this.settleHistory();

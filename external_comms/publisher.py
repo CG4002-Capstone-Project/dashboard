@@ -15,7 +15,10 @@ channel = connection.channel() # start a channel
 # raw_data
 # emg 
 # results
-channel.queue_declare(queue='raw_data') # Declare a queue
+# channel.queue_declare(queue='raw_data') # Declare a queue
+channel.queue_declare(queue='trainee_one_data') # Declare a queue
+channel.queue_declare(queue='trainee_two_data') # Declare a queue
+channel.queue_declare(queue='trainee_three_data') # Declare a queue
 channel.queue_declare(queue='emg') # Declare a queue
 channel.queue_declare(queue='results') # Declare a queue
 # send a message

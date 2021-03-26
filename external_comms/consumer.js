@@ -22,6 +22,14 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
   if (error0) {
     throw error0;
   }
+
+  let traineeOneDocumentArray = [];
+  let traineeTwoDocumentArray = [];
+  let traineeThreeDocumentArray = [];
+
+  let traineeOneDocumentBatchCount = 0;
+  let traineeTwoDocumentBatchCount = 0;
+  let traineeThreeDocumentBatchCount = 0;
   connection.createChannel(function(error1, channel) {
     if (error1) {
       throw error1;
@@ -42,14 +50,14 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const rawDataString = stringMsgArray[2].trim();
 
       const rawDataArray = rawDataString.split(' ');
-      const mode = rawDataArray[0];
-      const yaw = rawDataArray[1];
-      const pitch = rawDataArray[2];
-      const roll = rawDataArray[3];
-      const accx = rawDataArray[4];
-      const accy = rawDataArray[5];
-      const accz = rawDataArray[6];
-      console.log('Mode: ' + mode);
+      //const mode = rawDataArray[0];
+      const yaw = rawDataArray[0];
+      const pitch = rawDataArray[1];
+      const roll = rawDataArray[2];
+      const accx = rawDataArray[3];
+      const accy = rawDataArray[4];
+      const accz = rawDataArray[5];
+      // console.log('Mode: ' + mode);
       console.log('Dancer ID: ' + dancerId);
       console.log('Timestamp: ' + timestamp);
       console.log('Raw Data: ' + rawDataArray);
@@ -57,7 +65,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       const dataInstance = new TraineeOneDataModel({ 
         trainee_id: dancerId,
-        mode,
+        // mode,
         yaw,
         pitch,
         roll,
@@ -67,14 +75,26 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         timestamp,
       });
       // console.log(dataInstance);
+      traineeOneDocumentArray.push(dataInstance);
 
-      dataInstance.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(`t1 data instance sent to db`)
-        }
-      })
+      if (traineeOneDocumentArray.length == 10) {
+        traineeOneDocumentBatchCount += 1;
+        TraineeOneDataModel.insertMany(traineeOneDocumentArray).then((err, docs) => {
+          if (err) {
+            console.log('Error occured in batch insert for T1 documents');
+          }
+          console.log(`${traineeOneDocumentBatchCount} t1 documents sent to db in batch`)
+        })
+
+        traineeOneDocumentArray = [];
+      }
+    //   dataInstance.save((err) => {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log(`t1 data instance sent to db`)
+    //     }
+    //   })
     }, {
       noAck: true
     });
@@ -100,14 +120,14 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const rawDataString = stringMsgArray[2].trim();
 
       const rawDataArray = rawDataString.split(' ');
-      const mode = rawDataArray[0];
-      const yaw = rawDataArray[1];
-      const pitch = rawDataArray[2];
-      const roll = rawDataArray[3];
-      const accx = rawDataArray[4];
-      const accy = rawDataArray[5];
-      const accz = rawDataArray[6];
-      console.log('Mode: ' + mode);
+      // const mode = rawDataArray[0];
+      const yaw = rawDataArray[0];
+      const pitch = rawDataArray[1];
+      const roll = rawDataArray[2];
+      const accx = rawDataArray[3];
+      const accy = rawDataArray[4];
+      const accz = rawDataArray[5];
+      // console.log('Mode: ' + mode);
       console.log('Dancer ID: ' + dancerId);
       console.log('Timestamp: ' + timestamp);
       console.log('Raw Data: ' + rawDataArray);
@@ -115,7 +135,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       const dataInstance = new TraineeTwoDataModel({ 
         trainee_id: dancerId,
-        mode,
+        // mode,
         yaw,
         pitch,
         roll,
@@ -125,14 +145,27 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         timestamp,
       });
       // console.log(dataInstance);
+      traineeTwoDocumentArray.push(dataInstance);
 
-      dataInstance.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(`t2 data instance sent to db`)
-        }
-      })
+      if (traineeTwoDocumentArray.length == 10) {
+        traineeTwoDocumentBatchCount += 1;
+        TraineeTwoDataModel.insertMany(traineeTwoDocumentArray).then((err, docs) => {
+          if (err) {
+            console.log('Error occured in batch insert for T2 documents');
+          }
+          console.log(`${traineeTwoDocumentBatchCount} t2 documents sent to db in batch`)
+        })
+
+        traineeTwoDocumentArray = [];
+      }
+
+    //   dataInstance.save((err) => {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log(`t2 data instance sent to db`)
+    //     }
+    //   })
     }, {
       noAck: true
     });
@@ -158,14 +191,14 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const rawDataString = stringMsgArray[2].trim();
 
       const rawDataArray = rawDataString.split(' ');
-      const mode = rawDataArray[0];
+      // const mode = rawDataArray[0];
       const yaw = rawDataArray[1];
       const pitch = rawDataArray[2];
       const roll = rawDataArray[3];
       const accx = rawDataArray[4];
       const accy = rawDataArray[5];
       const accz = rawDataArray[6];
-      console.log('Mode: ' + mode);
+      // console.log('Mode: ' + mode);
       console.log('Dancer ID: ' + dancerId);
       console.log('Timestamp: ' + timestamp);
       console.log('Raw Data: ' + rawDataArray);
@@ -173,7 +206,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       const dataInstance = new TraineeThreeDataModel({ 
         trainee_id: dancerId,
-        mode,
+        // mode,
         yaw,
         pitch,
         roll,
@@ -183,14 +216,27 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         timestamp,
       });
       // console.log(dataInstance);
+      traineeThreeDocumentArray.push(dataInstance);
 
-      dataInstance.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(`t3 data instance sent to db`)
-        }
-      })
+      if (traineeThreeDocumentArray.length == 10) {
+        traineeThreeDocumentBatchCount += 1;
+        TraineeThreeDataModel.insertMany(traineeThreeDocumentArray).then((err, docs) => {
+          if (err) {
+            console.log('Error occured in batch insert for T3 documents');
+          }
+          console.log(`${traineeThreeDocumentBatchCount} t3 documents sent to db in batch`)
+        })
+
+        traineeThreeDocumentArray = [];
+      }
+
+      // dataInstance.save((err) => {
+      //   if (err) {
+      //       console.log(err);
+      //   } else {
+      //       console.log(`t3 data instance sent to db`)
+      //   }
+      // })
     }, {
       noAck: true
     });

@@ -23,18 +23,18 @@ export class DataDashboard extends Component {
         })
         socket.on("onNewTraineeOneData", async (data) => {
             i += 1;
-            console.log(`${i}th data ` + JSON.stringify(data));
+            console.log(`t1 ${i}th data ` + JSON.stringify(data));
             
             this.updateTraineeOneInfo(data);
         })
         socket.on("onNewTraineeTwoData", (data) => {
             j += 1;
-            console.log(`${j}th data ` + JSON.stringify(data));
+            console.log(`t2 ${j}th data ` + JSON.stringify(data));
             this.updateTraineeTwoInfo(data);
         })
         socket.on("onNewTraineeThreeData", (data) => {
             k += 1;
-            console.log(`${k}th data ` + JSON.stringify(data));
+            console.log(`t3 ${k}th data ` + JSON.stringify(data));
             this.updateTraineeThreeInfo(data);
         })
 
@@ -70,9 +70,9 @@ export class DataDashboard extends Component {
         posTraineeOne: 1,
         posTraineeTwo: 2,
         posTraineeThree: 3,
-        modeTraineeOne: 1,
-        modeTraineeTwo: 1,
-        modeTraineeThree: 1,
+        // modeTraineeOne: 1,
+        // modeTraineeTwo: 1,
+        // modeTraineeThree: 1,
         currentResult: {},
         t1Data: {},
         t2Data: {},
@@ -82,33 +82,33 @@ export class DataDashboard extends Component {
     }
 
     updateTraineeOneInfo = async (data) => {
-        if (data.mode != this.state.modeTraineeOne) {
-            await this.setState({
-                modeTraineeOne: data.mode
-            });
-        }
+        // if (data.mode != this.state.modeTraineeOne) {
+        //     await this.setState({
+        //         modeTraineeOne: data.mode
+        //     });
+        // }
         await this.setState({
             t1Data: data
         })
     }
 
     updateTraineeTwoInfo = async (data) => {
-        if (data.mode != this.state.modeTraineeTwo) {
-            await this.setState({
-                modeTraineeTwo: data.mode
-            });
-        }
+        // if (data.mode != this.state.modeTraineeTwo) {
+        //     await this.setState({
+        //         modeTraineeTwo: data.mode
+        //     });
+        // }
         await this.setState({
             t2Data: data
         })
     }
 
     updateTraineeThreeInfo = async (data) => {
-        if (data.mode != this.state.modeTraineeThree) {
-            await this.setState({
-                modeTraineeThree: data.mode
-            });
-        }
+        // if (data.mode != this.state.modeTraineeThree) {
+        //     await this.setState({
+        //         modeTraineeThree: data.mode
+        //     });
+        // }
         await this.setState({
             t3Data: data
         })
@@ -195,9 +195,9 @@ export class DataDashboard extends Component {
                 <Summary 
                     currentResult={this.state.currentResult} 
                     emgs={this.state.currentEmg}
-                    modeTraineeOne={this.state.modeTraineeOne}
-                    modeTraineeTwo={this.state.modeTraineeTwo}
-                    modeTraineeThree={this.state.modeTraineeThree}
+                    // modeTraineeOne={this.state.modeTraineeOne}
+                    // modeTraineeTwo={this.state.modeTraineeTwo}
+                    // modeTraineeThree={this.state.modeTraineeThree}
                     history={this.state.history}
                     traineeOneName='Riyas'
                     traineeTwoName='Zeng Hao'
