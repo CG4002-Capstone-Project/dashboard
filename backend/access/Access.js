@@ -3,6 +3,7 @@ const _ = require('lodash');
 const { hashPassword, generateAccessToken } = require('../auth/Auth');
 const AccessLogModel = require('../schemas/access-log-schema');
 
+// TODO instead of storing it , decrypt it and check for user. 
 const verifyUserAccess = async (body) => {
     let isUserGrantedAccess = false;
     try {

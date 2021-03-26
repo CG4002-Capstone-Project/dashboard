@@ -40,7 +40,7 @@ export const setEmail = (email) => {
 export const checkAccessToken = async () => {
     try {
         const accessToken = getAccessToken();
-        const data = await axios.get('http://localhost:3333/user/access', {}, accessToken);
+        const data = await axios.post('http://localhost:3333/user/access', {}, accessToken);
         return data;
     } catch (error) {
         logout();

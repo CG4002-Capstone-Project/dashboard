@@ -36,6 +36,25 @@ class UserProvider extends Component {
         }
     }
 
+    async componentDidUpdate() {
+        await this.checkUserAuth();
+    }
+
+    async componentDidMount() {
+        await this.checkUserAuth();
+    }
+
+    checkUserAuth = async () => {
+        this.handleUser({...this.state.user, isFetching: true})
+
+        try {
+            const { email, role } = await checkAccessToken();
+            await this.handleUser({ email, role, isAuth: true, isFetching: false });
+        } catch (error) {
+            this.handleUser({ ...this.state.user, isAuth: false, isFetching: false });
+        }
+    }
+
     handleUser = async (user) => {
         console.log('userrrr', user);
         await this.setState((prevState) => ({user}));
