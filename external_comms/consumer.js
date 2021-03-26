@@ -307,12 +307,21 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
     channel.consume(queue, function(msg) {
       const stringMsg = msg.content.toString();
-      const predictedMove = stringMsg.trim();
+      const stringMsgArray = stringMsg.split('|');
+      const correctDancerIds = stringMsgArray[0].trim();
+      const predictedMove = stringMsgArray[1].trim();
+      const dancerIds = stringMsgArray[2].trim();
+      const syncDelay = stringMsgArray[3].trim();
+      const accuracy = stringMsgArray[4].trim();
 
       console.log('Predicted Move: ' + predictedMove);
 
-      const resultInstance = new RawResultModel({ 
-        predictedMove
+      const resultInstance = new RawResultModel({
+        correctDancerIds,
+        predictedMove,
+        dancerIds,
+        syncDelay,
+        accuracy
       });
 
       resultInstance.save((err) => {

@@ -153,6 +153,8 @@ export class Summary extends Component {
                         <h4> Current Move - {currentMove}  </h4>
                         <br/>
                         <h4> Sync Delay - {this.props.currentResult.syncDelay}s</h4>
+                        <br/> 
+                        <h4> Accuracy - {this.props.currentResult.accuracy}%</h4>
                     </React.Fragment>
             )
         }
