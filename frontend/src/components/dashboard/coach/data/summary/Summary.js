@@ -149,12 +149,9 @@ export class Summary extends Component {
 
             resultDisplay = (
                     <React.Fragment>
-                        <br/>
                         <h4> Current Move - {currentMove}  </h4>
-                        <br/>
                         <h4> Sync Delay - {this.props.currentResult.syncDelay}s</h4>
-                        <br/> 
-                        <h4> Accuracy - {this.props.currentResult.accuracy}%</h4>
+                        <h4> Confidence - {this.props.currentResult.accuracy}%</h4>
                     </React.Fragment>
             )
         }
@@ -221,9 +218,9 @@ export class Summary extends Component {
 
         return (
           <SummaryDiv>
-              <StatusDiv>
+              {/* <StatusDiv>
                 {currentMode}
-              </StatusDiv>
+              </StatusDiv> */}
               <CorrectPositionDiv>
                 {positionDisplay}
               </CorrectPositionDiv>

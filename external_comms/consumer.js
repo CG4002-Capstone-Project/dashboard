@@ -30,6 +30,9 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
   let traineeOneDocumentBatchCount = 0;
   let traineeTwoDocumentBatchCount = 0;
   let traineeThreeDocumentBatchCount = 0;
+  let emgCount = 0;
+  let resultsCount = 0;
+
   connection.createChannel(function(error1, channel) {
     if (error1) {
       throw error1;
@@ -58,10 +61,10 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const accy = rawDataArray[4];
       const accz = rawDataArray[5];
       // console.log('Mode: ' + mode);
-      console.log('Dancer ID: ' + dancerId);
-      console.log('Timestamp: ' + timestamp);
-      console.log('Raw Data: ' + rawDataArray);
-      console.log(" [Raw Data] Received %s", stringMsg);
+      // console.log('Dancer ID: ' + dancerId);
+      // console.log('Timestamp: ' + timestamp);
+      // console.log('Raw Data: ' + rawDataArray);
+      // console.log(" [Raw Data] Received %s", stringMsg);
 
       const dataInstance = new TraineeOneDataModel({ 
         trainee_id: dancerId,
@@ -74,27 +77,32 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         accz,
         timestamp,
       });
+
+      traineeOneDocumentBatchCount += 1;
+
       // console.log(dataInstance);
-      traineeOneDocumentArray.push(dataInstance);
+      // traineeOneDocumentArray.push(dataInstance);
 
-      if (traineeOneDocumentArray.length == 10) {
-        traineeOneDocumentBatchCount += 1;
-        TraineeOneDataModel.insertMany(traineeOneDocumentArray).then((err, docs) => {
-          if (err) {
-            console.log('Error occured in batch insert for T1 documents');
-          }
-          console.log(`${traineeOneDocumentBatchCount} t1 documents sent to db in batch`)
-        })
+      // if (traineeOneDocumentArray.length == 10) {
+      //   traineeOneDocumentBatchCount += 1;
+      //   TraineeOneDataModel.insertMany(traineeOneDocumentArray).then((err, docs) => {
+      //     if (err) {
+      //       console.log('Error occured in batch insert for T1 documents ', err);
+      //     }
+      //     console.log(`${traineeOneDocumentBatchCount} t1 documents sent to db in batch`)
+      //   })
 
-        traineeOneDocumentArray = [];
-      }
-    //   dataInstance.save((err) => {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         console.log(`t1 data instance sent to db`)
-    //     }
-    //   })
+      //   traineeOneDocumentArray = [];
+      // }
+      dataInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (traineeOneDocumentBatchCount % 20 == 0) {
+              console.log(`t1 ${traineeOneDocumentBatchCount} data instance sent to db`)
+            }
+        }
+      })
     }, {
       noAck: true
     });
@@ -128,10 +136,10 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const accy = rawDataArray[4];
       const accz = rawDataArray[5];
       // console.log('Mode: ' + mode);
-      console.log('Dancer ID: ' + dancerId);
-      console.log('Timestamp: ' + timestamp);
-      console.log('Raw Data: ' + rawDataArray);
-      console.log(" [Raw Data] Received %s", stringMsg);
+      // console.log('Dancer ID: ' + dancerId);
+      // console.log('Timestamp: ' + timestamp);
+      // console.log('Raw Data: ' + rawDataArray);
+      // console.log(" [Raw Data] Received %s", stringMsg);
 
       const dataInstance = new TraineeTwoDataModel({ 
         trainee_id: dancerId,
@@ -144,28 +152,31 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         accz,
         timestamp,
       });
+      traineeTwoDocumentBatchCount += 1;
       // console.log(dataInstance);
-      traineeTwoDocumentArray.push(dataInstance);
+      // traineeTwoDocumentArray.push(dataInstance);
 
-      if (traineeTwoDocumentArray.length == 10) {
-        traineeTwoDocumentBatchCount += 1;
-        TraineeTwoDataModel.insertMany(traineeTwoDocumentArray).then((err, docs) => {
-          if (err) {
-            console.log('Error occured in batch insert for T2 documents');
-          }
-          console.log(`${traineeTwoDocumentBatchCount} t2 documents sent to db in batch`)
-        })
+      // if (traineeTwoDocumentArray.length == 10) {
+      //   traineeTwoDocumentBatchCount += 1;
+      //   TraineeTwoDataModel.insertMany(traineeTwoDocumentArray).then((err, docs) => {
+      //     if (err) {
+      //       console.log('Error occured in batch insert for T2 documents ', err);
+      //     }
+      //     console.log(`${traineeTwoDocumentBatchCount} t2 documents sent to db in batch`)
+      //   })
 
-        traineeTwoDocumentArray = [];
-      }
+      //   traineeTwoDocumentArray = [];
+      // }
 
-    //   dataInstance.save((err) => {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         console.log(`t2 data instance sent to db`)
-    //     }
-    //   })
+      dataInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (traineeTwoDocumentBatchCount % 20 == 0) {
+              console.log(`t2 ${traineeTwoDocumentBatchCount} data instance sent to db`)
+            }
+        }
+      })
     }, {
       noAck: true
     });
@@ -192,17 +203,17 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       const rawDataArray = rawDataString.split(' ');
       // const mode = rawDataArray[0];
-      const yaw = rawDataArray[1];
-      const pitch = rawDataArray[2];
-      const roll = rawDataArray[3];
-      const accx = rawDataArray[4];
-      const accy = rawDataArray[5];
-      const accz = rawDataArray[6];
+      const yaw = rawDataArray[0];
+      const pitch = rawDataArray[1];
+      const roll = rawDataArray[2];
+      const accx = rawDataArray[3];
+      const accy = rawDataArray[4];
+      const accz = rawDataArray[5];
       // console.log('Mode: ' + mode);
-      console.log('Dancer ID: ' + dancerId);
-      console.log('Timestamp: ' + timestamp);
-      console.log('Raw Data: ' + rawDataArray);
-      console.log(" [Raw Data] Received %s", stringMsg);
+      // console.log('Dancer ID: ' + dancerId);
+      // console.log('Timestamp: ' + timestamp);
+      // console.log('Raw Data: ' + rawDataArray);
+      // console.log(" [Raw Data] Received %s", stringMsg);
 
       const dataInstance = new TraineeThreeDataModel({ 
         trainee_id: dancerId,
@@ -215,28 +226,32 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         accz,
         timestamp,
       });
+
+      traineeThreeDocumentBatchCount += 1;
       // console.log(dataInstance);
-      traineeThreeDocumentArray.push(dataInstance);
+      // traineeThreeDocumentArray.push(dataInstance);
 
-      if (traineeThreeDocumentArray.length == 10) {
-        traineeThreeDocumentBatchCount += 1;
-        TraineeThreeDataModel.insertMany(traineeThreeDocumentArray).then((err, docs) => {
-          if (err) {
-            console.log('Error occured in batch insert for T3 documents');
-          }
-          console.log(`${traineeThreeDocumentBatchCount} t3 documents sent to db in batch`)
-        })
+      // if (traineeThreeDocumentArray.length == 10) {
+      //   traineeThreeDocumentBatchCount += 1;
+      //   TraineeThreeDataModel.insertMany(traineeThreeDocumentArray).then((err, docs) => {
+      //     if (err) {
+      //       console.log('Error occured in batch insert for T3 documents ', err);
+      //     }
+      //     console.log(`${traineeThreeDocumentBatchCount} t3 documents sent to db in batch`)
+      //   })
 
-        traineeThreeDocumentArray = [];
-      }
+      //   traineeThreeDocumentArray = [];
+      // }
 
-      // dataInstance.save((err) => {
-      //   if (err) {
-      //       console.log(err);
-      //   } else {
-      //       console.log(`t3 data instance sent to db`)
-      //   }
-      // })
+      dataInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (traineeThreeDocumentBatchCount % 20 == 0) {
+              console.log(`t3 ${traineeThreeDocumentBatchCount} data instance sent to db`)
+            }
+        }
+      })
     }, {
       noAck: true
     });
@@ -266,12 +281,12 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const rms = emgDataArray[1];
       const mfq = emgDataArray[2];
 
-      console.log('Timestamp: ' + timestamp);
-      console.log('EMG Voltage: ' + voltage);
-      console.log('EMG RMS: ' + rms);
-      console.log('EMG MFQ: ' + mfq);
+      // console.log('Timestamp: ' + timestamp);
+      // console.log('EMG Voltage: ' + voltage);
+      // console.log('EMG RMS: ' + rms);
+      // console.log('EMG MFQ: ' + mfq);
 
-      console.log(" [Emg] Received %s", stringMsg);
+      // console.log(" [Emg] Received %s", stringMsg);
 
       const emgInstance = new RawEMGModel({ 
         timestamp,
@@ -280,11 +295,15 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         mfq,
       });
 
+      emgCount += 1;
+
       emgInstance.save((err) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(`emg instance sent to db`)
+            if (emgCount % 20 == 0) {
+              console.log(`emg ${emgCount} instance sent to db`)
+            }
         }
       })
     }, {
@@ -314,7 +333,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const syncDelay = stringMsgArray[3].trim();
       const accuracy = stringMsgArray[4].trim();
 
-      console.log('Predicted Move: ' + predictedMove);
+      // console.log('Predicted Move: ' + predictedMove);
 
       const resultInstance = new RawResultModel({
         correctDancerIds,
@@ -324,11 +343,15 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         accuracy
       });
 
+      resultsCount += 1;
+
       resultInstance.save((err) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(`result instance sent to db`)
+            if (resultsCount % 20 == 0) {
+              console.log(`result ${resultsCount} instance sent to db`)
+            }
         }
       })
     }, {
