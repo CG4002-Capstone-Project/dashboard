@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
-import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
+import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv, NavBarDiv } from './RegisterStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import { register, test, getAccessToken, getName } from '../../utils/Auth';
 import { UserContext } from '../../contexts/UserContext';
@@ -88,7 +88,9 @@ export class NewRegister extends Component {
     render() {
         return (
             <RegisterDiv>
-                    <LoginAndRegisterNavBar />
+                    <NavBarDiv>
+                        <LoginAndRegisterNavBar />
+                    </NavBarDiv>
                     <HeaderTabDiv>
                         <HeaderH1> Registration </HeaderH1>
                         <InfoP> 
