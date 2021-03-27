@@ -10,11 +10,9 @@ export default class YPRLineChart extends Component {
     }
 
     componentDidUpdate() {
-        // this.myChart.data.labels = this.props.data.map(d => d.timestamp);
-        // this.myChart.data.datasets[0].data = this.props.data.map(d => d.yaw);
-        // this.myChart.data.datasets[1].data = this.props.data.map(d => d.pitch);
-        // this.myChart.data.datasets[2].data = this.props.data.map(d => d.roll);
         // this.myChart.update();
+        // i += 1;
+        // console.log(`gcc ${i}`);
 
         this.myChart.data.labels.push(this.props.data.timestamp);
         this.myChart.data.datasets[0].data.push(this.props.data.yaw);

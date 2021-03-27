@@ -107,7 +107,7 @@ export class Summary extends Component {
     }
 
     settleResult() {
-        console.log('here ', this.props.currentResult);
+        // console.log('here ', this.props.currentResult);
 
         if (_.isEmpty(this.props.currentResult)) {
             positionDisplay = (
@@ -166,7 +166,7 @@ export class Summary extends Component {
         let summarySecondRowPredictedMove = null;
         let summaryThirdRowPredictedMove = null;
 
-        console.log('History ', JSON.stringify(this.props.history));
+        // console.log('History ', JSON.stringify(this.props.history));
         if (this.props.history.length == 0) {
             summaryDisplay = ( 
                 <h4> No Data Yet! </h4>
