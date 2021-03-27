@@ -53,8 +53,10 @@ export default class YPRLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 180,
-                                suggestedMin: -180
+                                min: -15000,
+                                max: 15000,
+                                // suggestedMax: 180,
+                                // suggestedMin: -180
                             },
                         }
                     ]

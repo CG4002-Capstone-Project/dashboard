@@ -44,8 +44,10 @@ export default class EmgLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 5,
-                                suggestedMin: 0,
+                                min: 0,
+                                max: 10,
+                                // suggestedMax: 5,
+                                // suggestedMin: 0,
                             },
                         }
                     ]
