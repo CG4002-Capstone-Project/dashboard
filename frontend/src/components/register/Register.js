@@ -25,12 +25,12 @@ export class NewRegister extends Component {
 
     registerGroup = async () => {
         const { user, handleUser } = this.context;
-        console.log('CONTEXT 1', this.context);
+        // console.log('CONTEXT 1', this.context);
         await handleUser({ ...user, isFetching: true });
         try {
-            console.log('CONTEXT 2', this.context);
+            // console.log('CONTEXT 2', this.context);
             await register({ ...this.state });
-            console.log('CONTEXT 3', this.context);
+            // console.log('CONTEXT 3', this.context);
             await handleUser({
                 ...user,
                 email: this.state.coach.email,
@@ -38,8 +38,8 @@ export class NewRegister extends Component {
                 isAuth: true,
                 isFetching: true,
             });
-            console.log('CONTEXT 4', this.context);
-            console.log('LOCAL STORAGE ', getAccessToken(), getName());
+            // console.log('CONTEXT 4', this.context);
+            // console.log('LOCAL STORAGE ', getAccessToken(), getName());
 
         } catch {
             await handleUser({ ...user, isAuth: false, isFetching: false });

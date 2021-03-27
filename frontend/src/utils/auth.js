@@ -6,42 +6,47 @@ const NAME = 'name';
 const EMAIL = 'email';
 
 export const getAccessToken = () => {
-    return localStorage.getItem(ACCESSTOKEN);
+    return sessionStorage.getItem(ACCESSTOKEN);
 }
 
 export const setAccessToken = (accessToken) => {
-    localStorage.setItem(ACCESSTOKEN, accessToken);
+    sessionStorage.setItem(ACCESSTOKEN, accessToken);
 }
 
 export const getName = () => {
-    return localStorage.getItem(NAME);
+    return sessionStorage.getItem(NAME);
 }
 
 export const setName = (name) => {
-    localStorage.setItem(NAME, name);
+    sessionStorage.setItem(NAME, name);
 }
 
 export const getRole = () => {
-    return localStorage.getItem(ROLE);
+    return sessionStorage.getItem(ROLE);
 }
 
 export const setRole = (role) => {
-    localStorage.setItem(ROLE, role);
+    sessionStorage.setItem(ROLE, role);
 }
 
 export const getEmail = () => {
-    return localStorage.getItem(EMAIL);
+    return sessionStorage.getItem(EMAIL);
 }
 
 export const setEmail = (email) => {
-    localStorage.setItem(EMAIL, email);
+    sessionStorage.setItem(EMAIL, email);
 }
 
 export const checkAccessToken = async () => {
+    console.log('AUTH Checking Access Token');
     try {
         const accessToken = getAccessToken();
-        const data = await axios.post('http://localhost:3333/user/access', {}, accessToken);
-        return data;
+        const response = await axios.get('http://localhost:3333/user/access', {}, {
+            headers: {
+                'authorization': accessToken
+            }
+        });
+        return response.data;
     } catch (error) {
         logout();
         throw new Error(error);
@@ -49,10 +54,10 @@ export const checkAccessToken = async () => {
 }
 
 export const logout = () => {
-    localStorage.removeItem(ACCESSTOKEN);
-    localStorage.removeItem(NAME);
-    localStorage.removeItem(ROLE);
-    localStorage.removeItem(EMAIL);
+    sessionStorage.removeItem(ACCESSTOKEN);
+    sessionStorage.removeItem(NAME);
+    sessionStorage.removeItem(ROLE);
+    sessionStorage.removeItem(EMAIL);
 
 }
 

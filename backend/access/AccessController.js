@@ -1,19 +1,19 @@
 const express = require('express');
 const app = express();
 const { verifyUserAccess } = require('./Access');
+const { authChecker } = require('../auth/Auth');
 
 
 module.exports = app;
 
-app.post(
-    '/access',
+app.get(
+    '/access', authChecker,
     async (req, res) => {
         try {
-            // creates user documents in users collection 
-            console.log('User Access: ', JSON.stringify(req.body));
-            const isUserGrantedAccess = await verifyUserAccess(req.body);
-
-            return res.json({ success: isUserGrantedAccess });
+            console.log('User Access: ', JSON.stringify(req.user));
+            // const isUserGrantedAccess = await verifyUserAccess(req.body);
+            const {success, email, role} = req.user
+            return res.json({ success, email, role });
 
         } catch (error) {
             return res.status(403).json({ error });

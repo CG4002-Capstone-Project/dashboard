@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Component } from 'react';
 import { ThemeConsumer } from 'styled-components';
-import { checkAccessToken } from '../utils/Auth';
+import { checkAccessToken, logout, getAccessToken, getName, getEmail, getRole } from '../utils/Auth';
 
 /**
  * Sources: https://github.com/kentcdodds/bookshelf/blob/main/src/context/auth-context.js
@@ -35,22 +35,21 @@ class UserProvider extends Component {
             isFetching: true,
         }
     }
-
-    async componentDidUpdate() {
-        await this.checkUserAuth();
-    }
-
-    async componentDidMount() {
-        await this.checkUserAuth();
-    }
-
+    
     checkUserAuth = async () => {
+        console.log('checking user auth');
         this.handleUser({...this.state.user, isFetching: true})
 
         try {
-            const { email, role } = await checkAccessToken();
+            const { success, email, role } = await checkAccessToken();
+            if (!success) {
+                await this.handleUser({ ...this.state.user, isAuth: false, isFetching: false });
+                logout();
+            }
             await this.handleUser({ email, role, isAuth: true, isFetching: false });
+            console.log('USER AUTH: Cleared');
         } catch (error) {
+            console.log('USER AUTH: Not Cleared');
             this.handleUser({ ...this.state.user, isAuth: false, isFetching: false });
         }
     }
@@ -65,6 +64,17 @@ class UserProvider extends Component {
         const { children } = this.props;
         const { user } = this.state;
         const { handleUser } = this;
+        console.log('User Context checkUserAuth', getAccessToken(), getName(), getEmail(), getRole());
+        // TODO find a useEffect alternative to this
+        // if (this.state.isAuth) {
+        //     this.checkUserAuth();
+        // }
+
+        // TODO at least this....
+        // on page refresh but user is alr logged in 
+        // if (getAccessToken() && this.state.user.email==='') {
+        //     this.checkUserAuth();
+        // }
 
         return (
             <UserContext.Provider value={{user, handleUser}}>

@@ -18,10 +18,10 @@ const decodeAccessToken = (token) => {
     return jwt.verify(token, secret);
 }
 
-const validateUserWithDB = (email, role) => {
+const validateUserWithDB = async (email, role ) => {
     let isUserGrantedAccess = false;
-    let role = '';
-    let email = '';
+    let verifiedEmail = '';
+    let verifiedRole = '';
     try {
         await UserModel.find({ email, role }, (err, docs) => {
             if (err) {
@@ -31,29 +31,32 @@ const validateUserWithDB = (email, role) => {
 
             if (docs.length = 1) {
                 isUserGrantedAccess = true;
-                name = docs[0].name;
-                role = docs[0].role;
-                email = docs[0].email;
-            }
+                verifiedEmail = docs[0].email;
+                verifiedRole = docs[0].role;
+            } 
         })
     } catch (error) {
         throw new Error(error);
     }
 
-    return isUserGrantedAccess;
+    if (isUserGrantedAccess) {
+        return { success: isUserGrantedAccess, email: verifiedEmail, role: verifiedRole };
+    } else {
+        return { success: isUserGrantedAccess }
+    }
 }
 
 const authChecker = (req, res, next) => {
     try {
         const accessToken = req.headers.authorization;
-        const {email, role} = decodeAccessToken(accessToken);
-        const isUserAuthorized = validateUserWithDB(email, role);
+        const { email, role } = decodeAccessToken(accessToken);
+        const responseFromDB = validateUserWithDB(email , role);
 
-        if (!isUserAuthorized) {
-            return res.json({ error: 'Unauthorized' });
-        }
-
-        req.user ={email, role};
+        req.user = {
+            email: responseFromDB.email,
+            role: responseFromDB.role,
+            success: responseFromDB.success
+        };
         next();
     } catch(e) {
         res.status(401);

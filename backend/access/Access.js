@@ -25,7 +25,7 @@ const verifyUserAccess = async (body) => {
 }
 
 module.exports = {
-    verifyUserAccess
+    verifyUserAccess,
 }
 
 
