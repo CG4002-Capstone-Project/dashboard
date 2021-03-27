@@ -11,7 +11,7 @@ export default class AccLineChart extends Component {
 
     componentDidUpdate() {
         i += 1;
-        console.log(`macha ${i}`);
+        console.log(`acc ${i}`);
         this.myChart.data.labels.push(this.props.data.timestamp);
         this.myChart.data.datasets[0].data.push(this.props.data.accx);
         this.myChart.data.datasets[1].data.push(this.props.data.accy);
@@ -46,8 +46,10 @@ export default class AccLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 2,
-                                suggestedMin: -2,
+                                min: -15000,
+                                max: 15000,
+                                // suggestedMax: 2,
+                                // suggestedMin: -2,
                             },
                         }
                     ]

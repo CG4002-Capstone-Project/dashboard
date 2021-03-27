@@ -107,7 +107,7 @@ export class Summary extends Component {
     }
 
     settleResult() {
-        console.log('here ', this.props.currentResult);
+        // console.log('here ', this.props.currentResult);
 
         if (_.isEmpty(this.props.currentResult)) {
             positionDisplay = (
@@ -149,10 +149,9 @@ export class Summary extends Component {
 
             resultDisplay = (
                     <React.Fragment>
-                        <br/>
                         <h4> Current Move - {currentMove}  </h4>
-                        <br/>
                         <h4> Sync Delay - {this.props.currentResult.syncDelay}s</h4>
+                        <h4> Confidence - {this.props.currentResult.accuracy}%</h4>
                     </React.Fragment>
             )
         }
@@ -167,7 +166,7 @@ export class Summary extends Component {
         let summarySecondRowPredictedMove = null;
         let summaryThirdRowPredictedMove = null;
 
-        console.log('History ', JSON.stringify(this.props.history));
+        // console.log('History ', JSON.stringify(this.props.history));
         if (this.props.history.length == 0) {
             summaryDisplay = ( 
                 <h4> No Data Yet! </h4>
@@ -212,16 +211,16 @@ export class Summary extends Component {
          * Move and Video Component
          */
         
-        this.settleMode();
+        // this.settleMode();
         this.settleVideoAndMove();
         this.settleResult();
         this.settleHistory();
 
         return (
           <SummaryDiv>
-              <StatusDiv>
+              {/* <StatusDiv>
                 {currentMode}
-              </StatusDiv>
+              </StatusDiv> */}
               <CorrectPositionDiv>
                 {positionDisplay}
               </CorrectPositionDiv>
