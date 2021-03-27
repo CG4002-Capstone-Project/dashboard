@@ -136,12 +136,12 @@ db.once('open', async () => {
     let tempT1Accz = 0;
 
     traineeOneChangeStreams.on("change", (change) => {
+        // console.log('t1', change);
         switch (change.operationType) {
             case "insert":
-
                 const data = {
                     timestamp: change.fullDocument.timestamp,
-                    mode: change.fullDocument.mode,
+                    // mode: change.fullDocument.mode,
                     yaw: change.fullDocument.yaw,
                     pitch: change.fullDocument.pitch,
                     roll: change.fullDocument.roll,
@@ -159,14 +159,14 @@ db.once('open', async () => {
                 tempT1Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (i%10 == 0) {
+                if (i%20 == 0) {
                     // tempTimestamp = tempTimestamp / 100;
-                    tempT1Accx = tempT1Accx / 10;
-                    tempT1Accy = tempT1Accy / 10;
-                    tempT1Accz = tempT1Accz / 10;
-                    tempT1Yaw = tempT1Yaw / 10;
-                    tempT1Pitch = tempT1Pitch / 10;
-                    tempT1Roll = tempT1Roll / 10;
+                    tempT1Accx = tempT1Accx / 20;
+                    tempT1Accy = tempT1Accy / 20;
+                    tempT1Accz = tempT1Accz / 20;
+                    tempT1Yaw = tempT1Yaw / 20;
+                    tempT1Pitch = tempT1Pitch / 20;
+                    tempT1Roll = tempT1Roll / 20;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -176,7 +176,7 @@ db.once('open', async () => {
                         yaw: tempT1Yaw,
                         pitch: tempT1Pitch,
                         roll: tempT1Roll,
-                        mode: data.mode
+                        // mode: data.mode
                     }
                     
                     console.log(`T1 ${i}th data: ` + JSON.stringify(finalisedData));
@@ -202,12 +202,13 @@ db.once('open', async () => {
     let tempT2Accz = 0;
 
     traineeTwoChangeStreams.on("change", (change) => {
+        // console.log('t2', change);
         switch (change.operationType) {
             case "insert":
 
                 const data = {
                     timestamp: change.fullDocument.timestamp,
-                    mode: change.fullDocument.mode,
+                    // mode: change.fullDocument.mode,
                     yaw: change.fullDocument.yaw,
                     pitch: change.fullDocument.pitch,
                     roll: change.fullDocument.roll,
@@ -225,13 +226,13 @@ db.once('open', async () => {
                 tempT2Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (i%10 == 0) {
-                    tempT2Accx = tempT2Accx / 10;
-                    tempT2Accy = tempT2Accy / 10;
-                    tempT2Accz = tempT2Accz / 10;
-                    tempT2Yaw = tempT2Yaw / 10;
-                    tempT2Pitch = tempT2Pitch / 10;
-                    tempT2Roll = tempT2Roll / 10;
+                if (k%20 == 0) {
+                    tempT2Accx = tempT2Accx / 20;
+                    tempT2Accy = tempT2Accy / 20;
+                    tempT2Accz = tempT2Accz / 20;
+                    tempT2Yaw = tempT2Yaw / 20;
+                    tempT2Pitch = tempT2Pitch / 20;
+                    tempT2Roll = tempT2Roll / 20;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -241,7 +242,7 @@ db.once('open', async () => {
                         yaw: tempT2Yaw,
                         pitch: tempT2Pitch,
                         roll: tempT2Roll,
-                        mode: data.mode
+                        // mode: data.mode
                     }
                     
                     console.log(`T2 ${k}th data: ` + JSON.stringify(finalisedData));
@@ -272,7 +273,7 @@ db.once('open', async () => {
 
                 const data = {
                     timestamp: change.fullDocument.timestamp,
-                    mode: change.fullDocument.mode,
+                    // mode: change.fullDocument.mode,
                     yaw: change.fullDocument.yaw,
                     pitch: change.fullDocument.pitch,
                     roll: change.fullDocument.roll,
@@ -290,14 +291,14 @@ db.once('open', async () => {
                 tempT3Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (i%10 == 0) {
+                if (m%20 == 0) {
                     // tempTimestamp = tempTimestamp / 100;
-                    tempT3Accx = tempT3Accx / 10;
-                    tempT3Accy = tempT3Accy / 10;
-                    tempT3Accz = tempT3Accz / 10;
-                    tempT3Yaw = tempT3Yaw / 10;
-                    tempT3Pitch = tempT3Pitch / 10;
-                    tempT3Roll = tempT3Roll / 10;
+                    tempT3Accx = tempT3Accx / 20;
+                    tempT3Accy = tempT3Accy / 20;
+                    tempT3Accz = tempT3Accz / 20;
+                    tempT3Yaw = tempT3Yaw / 20;
+                    tempT3Pitch = tempT3Pitch / 20;
+                    tempT3Roll = tempT3Roll / 20;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -307,7 +308,7 @@ db.once('open', async () => {
                         yaw: tempT3Yaw,
                         pitch: tempT3Pitch,
                         roll: tempT3Roll,
-                        mode: data.mode
+                        // mode: data.mode
                     }
                     
                     console.log(`T3 ${m}th data: ` + JSON.stringify(finalisedData));

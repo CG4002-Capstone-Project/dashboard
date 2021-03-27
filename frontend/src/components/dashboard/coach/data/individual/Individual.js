@@ -53,7 +53,7 @@ export class Individual extends Component {
     
     render() {
         let display;
-        console.log(this.props.data);
+        // console.log(this.props.data);
         if (_.isEmpty(this.props.data)) {
             display = ( 
                 <PreDisplay>

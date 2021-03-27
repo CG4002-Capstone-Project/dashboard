@@ -10,11 +10,6 @@ const { RawResultModel, TraineeOneDataModel,
 const parse = require('csv-parse/lib/sync');
 const generateRawEMG = require('./raw_emg_generator');
 
-// generateRawData();
-// generateResults();
-// generateRawEMG();
-
-
 const connectToDb = async () => {
     const URI = process.env.MONGO_DB_LOCAL_URI;
     mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -206,7 +201,8 @@ const readEMGIntoDb = () => {
 const readEverythingIntoDb = () => {
     const arrayOfDataObjects = fs.readFileSync('raw_data.csv', 'utf8');
     const dataRecords = parse(arrayOfDataObjects, {
-        headers: ['trainee_id', 'mode', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
+        headers: ['trainee_id', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
+        // headers: ['trainee_id', 'mode', 'yaw', 'pitch', 'row', 'accx', 'accy', 'accz']
     })
 
     const arrayOfEmgObjects = fs.readFileSync('raw_emg.csv', 'utf8');
@@ -228,13 +224,13 @@ const readEverythingIntoDb = () => {
             if (dataRecords[i][0] == '0') {
                 const dataInstance = new TraineeOneDataModel({ 
                     trainee_id: dataRecords[i][0],
-                    mode: dataRecords[i][1],
-                    yaw: dataRecords[i][2],
-                    pitch: dataRecords[i][3],
-                    roll: dataRecords[i][4],
-                    accx: dataRecords[i][5],
-                    accy: dataRecords[i][6],
-                    accz: dataRecords[i][7],
+                    // mode: dataRecords[i][1],
+                    yaw: dataRecords[i][1],
+                    pitch: dataRecords[i][2],
+                    roll: dataRecords[i][3],
+                    accx: dataRecords[i][4],
+                    accy: dataRecords[i][5],
+                    accz: dataRecords[i][6],
                     timestamp: Date.now(),
                 });
                 // console.log(resultInstance);
@@ -251,13 +247,13 @@ const readEverythingIntoDb = () => {
             } else if (dataRecords[i][0] == '1') {
                 const dataInstance = new TraineeTwoDataModel({ 
                     trainee_id: dataRecords[i][0],
-                    mode: dataRecords[i][1],
-                    yaw: dataRecords[i][2],
-                    pitch: dataRecords[i][3],
-                    roll: dataRecords[i][4],
-                    accx: dataRecords[i][5],
-                    accy: dataRecords[i][6],
-                    accz: dataRecords[i][7],
+                    // mode: dataRecords[i][1],
+                    yaw: dataRecords[i][1],
+                    pitch: dataRecords[i][2],
+                    roll: dataRecords[i][3],
+                    accx: dataRecords[i][4],
+                    accy: dataRecords[i][5],
+                    accz: dataRecords[i][6],
                     timestamp: Date.now(),
                 });
                 // console.log(resultInstance);
@@ -274,13 +270,13 @@ const readEverythingIntoDb = () => {
             } else if (dataRecords[i][0] == '2') {
                 const dataInstance = new TraineeThreeDataModel({ 
                     trainee_id: dataRecords[i][0],
-                    mode: dataRecords[i][1],
-                    yaw: dataRecords[i][2],
-                    pitch: dataRecords[i][3],
-                    roll: dataRecords[i][4],
-                    accx: dataRecords[i][5],
-                    accy: dataRecords[i][6],
-                    accz: dataRecords[i][7],
+                    // mode: dataRecords[i][1],
+                    yaw: dataRecords[i][1],
+                    pitch: dataRecords[i][2],
+                    roll: dataRecords[i][3],
+                    accx: dataRecords[i][4],
+                    accy: dataRecords[i][5],
+                    accz: dataRecords[i][6],
                     timestamp: Date.now(),
                 });
                 // console.log(resultInstance);
@@ -344,6 +340,10 @@ const readEverythingIntoDb = () => {
     load();
 
 }
+
+// generateRawData();
+// generateResults();
+// generateRawEMG();
 
 connectToDb();
 readEverythingIntoDb();
