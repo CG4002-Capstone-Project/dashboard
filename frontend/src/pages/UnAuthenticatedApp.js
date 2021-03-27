@@ -9,7 +9,7 @@ import { LOGIN, HOME, REGISTER } from '../constants/Routes';
 const UnAuthenticatedApp = () => {
     return (
         <Switch>
-            {/* <Route exact path={LOGIN} component={Login} /> */}
+            <Route exact path={LOGIN} component={Login} />
             <Route exact path={REGISTER} component={Register} />
             {/* <Route exact path={HOME} component={Home} /> */}
             <Redirect to={REGISTER} />
