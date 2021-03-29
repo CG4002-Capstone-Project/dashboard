@@ -73,6 +73,7 @@ db.once('open', async () => {
     await db.dropCollection("raw_trainee_two_datas");
     await db.dropCollection("raw_trainee_three_datas");
     await db.dropCollection("raw_emgs");
+    await db.dropCollection("modes");
     // await db.dropCollection("access_logs");
     // await db.dropCollection("coach_trees");
     // await db.dropCollection("users");
@@ -86,6 +87,7 @@ db.once('open', async () => {
     await db.createCollection("raw_trainee_two_datas");
     await db.createCollection("raw_trainee_three_datas");
     await db.createCollection("raw_emgs");
+    await db.createCollection("modes");
     // await db.createCollection("access_logs");
     // await db.createCollection("coach_trees");
     // await db.createCollection("users");
@@ -99,6 +101,7 @@ db.once('open', async () => {
     const traineeTwoChangeStreams = db.collection("raw_trainee_two_datas").watch();
     const traineeThreeChangeStreams = db.collection("raw_trainee_three_datas").watch();
     const emgChangeStreams = db.collection("raw_emgs").watch();
+    const modeStreams = db.collection("modes").watch();
 
     resultsChangeStreams.on("change", (change) => {
         switch (change.operationType) {
@@ -331,6 +334,22 @@ db.once('open', async () => {
                     tempT3Roll = 0;
                 }
                 m += 1;
+        }
+    })
+
+    let n = 0;
+    modeStreams.on("change", (change) => {
+        switch (change.operationType) {
+            case "insert":
+                const mode = {
+                    mode: change.fullDocument.mode,
+                }
+
+                if (n%100 == 0) {
+                    console.log(`${n}th emg: ` + JSON.stringify(mode));
+                }
+                n += 1;
+                io.emit("newMode", mode);
         }
     })
 

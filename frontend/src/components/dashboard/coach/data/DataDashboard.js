@@ -58,6 +58,14 @@ export class DataDashboard extends Component {
             })
         })
 
+        socket.on("newMode", async (result) => {
+            if (result.mode != this.state.mode) {
+                await this.setState({
+                    mode: result.mode
+                })
+            }
+        })
+
         socket.on("disconnect", (reason) => {
             if (reason === "io server disconnect") {
                 // the disconnection was initiated by the server, you need to reconnect manually
@@ -78,7 +86,8 @@ export class DataDashboard extends Component {
         t2Data: {},
         t3Data: {},
         currentEmg: {},
-        history: []
+        history: [],
+        mode: ''
     }
 
     updateTraineeOneInfo = async (data) => {
@@ -198,6 +207,7 @@ export class DataDashboard extends Component {
                     // modeTraineeOne={this.state.modeTraineeOne}
                     // modeTraineeTwo={this.state.modeTraineeTwo}
                     // modeTraineeThree={this.state.modeTraineeThree}
+                    mode={this.state.mode}
                     history={this.state.history}
                     traineeOneName='Riyas'
                     traineeTwoName='Zeng Hao'

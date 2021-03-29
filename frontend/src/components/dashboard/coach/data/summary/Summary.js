@@ -24,40 +24,45 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 export class Summary extends Component {
 
     settleMode() {
-        let statusTraineeOne;
-        let statusTraineeTwo;
-        let statusTraineeThree;
-        if (this.props.modeTraineeOne == 1) {
-            statusTraineeOne = 'Idle';
-        } else if (this.props.modeTraineeOne == 2) {
-            statusTraineeOne = 'Moving';
-        } else if (this.props.modeTraineeOne == 3) {
-            statusTraineeOne = 'Dancing';
-        }
+        // let statusTraineeOne;
+        // let statusTraineeTwo;
+        // let statusTraineeThree;
+        // if (this.props.modeTraineeOne == 1) {
+        //     statusTraineeOne = 'Idle';
+        // } else if (this.props.modeTraineeOne == 2) {
+        //     statusTraineeOne = 'Moving';
+        // } else if (this.props.modeTraineeOne == 3) {
+        //     statusTraineeOne = 'Dancing';
+        // }
 
-        if (this.props.modeTraineeTwo == 1) {
-            statusTraineeTwo = 'Idle';
-        } else if (this.props.modeTraineeTwo == 2) {
-            statusTraineeTwo = 'Moving';
-        } else if (this.props.modeTraineeTwo == 3) {
-            statusTraineeTwo = 'Dancing';
-        }
-        if (this.props.modeTraineeThree == 1) {
-            statusTraineeThree = 'Idle';
-        } else if (this.props.modeTraineeThree == 2) {
-            statusTraineeThree = 'Moving';
-        } else if (this.props.modeTraineeThree == 3) {
-            statusTraineeThree = 'Dancing';
-        }
+        // if (this.props.modeTraineeTwo == 1) {
+        //     statusTraineeTwo = 'Idle';
+        // } else if (this.props.modeTraineeTwo == 2) {
+        //     statusTraineeTwo = 'Moving';
+        // } else if (this.props.modeTraineeTwo == 3) {
+        //     statusTraineeTwo = 'Dancing';
+        // }
+        // if (this.props.modeTraineeThree == 1) {
+        //     statusTraineeThree = 'Idle';
+        // } else if (this.props.modeTraineeThree == 2) {
+        //     statusTraineeThree = 'Moving';
+        // } else if (this.props.modeTraineeThree == 3) {
+        //     statusTraineeThree = 'Dancing';
+        // }
 
         currentMode = (
+            // <React.Fragment>
+            //     <br/>
+            //     <h4> {this.props.traineeOneName} - {statusTraineeOne}  </h4>
+            //     <br/>
+            //     <h4> {this.props.traineeTwoName} - {statusTraineeTwo} </h4>
+            //     <br/>
+            //     <h4> {this.props.traineeThreeName} - {statusTraineeThree} </h4>
+            // </React.Fragment>
             <React.Fragment>
                 <br/>
-                <h4> {this.props.traineeOneName} - {statusTraineeOne}  </h4>
+                <h4> {this.props.mode} </h4>
                 <br/>
-                <h4> {this.props.traineeTwoName} - {statusTraineeTwo} </h4>
-                <br/>
-                <h4> {this.props.traineeThreeName} - {statusTraineeThree} </h4>
             </React.Fragment>
         )
     }
@@ -211,16 +216,17 @@ export class Summary extends Component {
          * Move and Video Component
          */
         
-        // this.settleMode();
+        this.settleMode();
         this.settleVideoAndMove();
         this.settleResult();
         this.settleHistory();
 
         return (
           <SummaryDiv>
-              {/* <StatusDiv>
+              <StatusDiv>
                 {currentMode}
-              </StatusDiv> */}
+              </StatusDiv>
+              
               <CorrectPositionDiv>
                 {positionDisplay}
               </CorrectPositionDiv>
