@@ -16,7 +16,7 @@ app.post(
             if (userCredentials.isUserGrantedAccess) {
                 const token = await createAccessToken(userCredentials.email, userCredentials.role);
                 // console.log('hereee' , token);
-                await createLogInstance(userCredentials.email, userCredentials.role, token);
+                // await createLogInstance(userCredentials.email, userCredentials.role, token);
                 const response = {
                     success: true,
                     name: userCredentials.name,
@@ -24,6 +24,7 @@ app.post(
                     role: userCredentials.role,
                     accessToken: token
                 }
+                console.log('LOGIN response', response);
                 return res.status(200).json(response);
             } else {
                 return res.json({ success: false });

@@ -34,6 +34,7 @@ const searchForConflictUsers = async (body) => {
 const UserCreate = async (body) => {
     for (let key of Object.keys(body)) {
         const hashedPassword = await hashPassword(body[key].password);
+        // console.log(`Before user is saved in DB: ${body[key].name}, ${body[key].email}, ${body[key].username}, ${hashedPassword}, ${body[key].role}`);
         const userInstance = new UserModel({ name: body[key].name, email: body[key].email, username: body[key].username, password: hashedPassword, role: body[key].role });
         await userInstance.save((err) => {
             if (err) {

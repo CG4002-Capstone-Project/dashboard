@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const { hashPassword, generateAccessToken } = require('../auth/Auth');
+const { generateAccessToken, comparePassword } = require('../auth/Auth');
 const AccessLogModel = require('../schemas/access-log-schema');
 const UserModel = require('../schemas/user-schema');
 
@@ -23,18 +23,19 @@ const verifyUserCredentials = async (body) => {
     let email = '';
     console.log('login pre-user verify ', body);
     try {
-        await UserModel.find({ email: body.email , password: body.password }, (err, docs) => {
+        await UserModel.find({ email: body.email }, (err, docs) => {
             if (err) {
                 throw new Error(err);
             }
-            console.log('login docs ', docs);
+            // console.log('login docs ', docs.length);
 
-            if (docs.length = 1) {
-
-                isUserGrantedAccess = true;
-                name = docs[0].name;
-                role = docs[0].role;
-                email = docs[0].email;
+            if (docs.length = 1 && !_.isEmpty(docs)) {
+                if (comparePassword(body.password, docs[0].password)) {
+                    isUserGrantedAccess = true;
+                    name = docs[0].name;
+                    role = docs[0].role;
+                    email = docs[0].email;
+                }
             }
         })
     } catch (error) {
@@ -47,13 +48,13 @@ const verifyUserCredentials = async (body) => {
         role,
         email
     }
-    // console.log('login response', response);
+    console.log('login response', response);
     return response;
 }
 
 const createAccessToken = (email, role) => {
-    console.log('login create access token ', email , role);
     const token = generateAccessToken(email, role);
+    console.log('login create access token ', email , role, token);
     return token;
 }
 

@@ -76,6 +76,7 @@ export const register = async (data) => {
 
 export const login = async (data) => {
     const response = await axios.post('http://localhost:3333/login/attempt', data)
+    // console.log('login response', response.data);
     const accessToken = response.data.accessToken;
     const name = response.data.name;
     const email = response.data.email;
@@ -85,6 +86,8 @@ export const login = async (data) => {
     setName(name);
     setEmail(email);
     setRole(role);
+
+    return role;
 }
 
 export const test = async (data) => {

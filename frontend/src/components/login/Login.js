@@ -5,18 +5,42 @@ import { LoginDiv, NavBarDiv, MainDiv, ContentDiv, LoginMainFormDiv, SideContent
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import { TextInputField, Button } from 'evergreen-ui';
 import { login } from '../../utils/Auth';
+import { UserContext } from '../../contexts/UserContext';
 
 export class Login extends Component {
+    static contextType = UserContext;
+
     state = {
         email: '',
         password: '',
         onSave: false,
     }
 
-    handleLoginProcess() {
+    async handleLoginProcess() {
         const email = this.state.email;
         const password = this.state.password;
-        login({ email, password });
+        const { user, handleUser } = this.context;
+
+        // console.log('CONTEXT 1', this.context);
+        await handleUser({ ...user, isFetching: true });
+        try {
+            // console.log('CONTEXT 2', this.context);
+            const role = login({ email, password });
+            // console.log(role);
+            // console.log('CONTEXT 3', this.context);
+            await handleUser({
+                ...user,
+                email,
+                role,
+                isAuth: true,
+                isFetching: true,
+            });
+            // console.log('CONTEXT 4', this.context);
+            // console.log('LOCAL STORAGE ', getAccessToken(), getName());
+
+        } catch {
+            await handleUser({ ...user, isAuth: false, isFetching: false });
+        }
     }
 
     onSubmitButtonClicked = async (event) => {

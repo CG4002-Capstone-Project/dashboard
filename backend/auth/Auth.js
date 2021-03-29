@@ -10,8 +10,14 @@ const hashPassword = async (password) => {
     return hashed;
 }
 
+const comparePassword = async (givenPassword, dbPassword) => {
+    const match = await bcrypt.compare(givenPassword, dbPassword);
+    return match;
+}
+
 const generateAccessToken = (payload) => {
-    return jwt.sign(payload, secret, { expiresIn: 60 * 60 * 24 });
+    // { expiresIn: 60 * 60 * 24 }
+    return jwt.sign(payload, secret);
 }
 
 const decodeAccessToken = (token) => {
@@ -66,6 +72,7 @@ const authChecker = (req, res, next) => {
 
 module.exports = {
     hashPassword,
+    comparePassword,
     generateAccessToken,
     decodeAccessToken,
     authChecker
