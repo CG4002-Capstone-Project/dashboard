@@ -5,7 +5,9 @@ import ReactPlayer from 'react-player';
 import Table from 'react-bootstrap/Table';
 import Fade from 'react-bootstrap/Fade';
 import _ from 'lodash';
-import EmgLineChart from './EmgLineChart';
+import io from "socket.io-client";
+import EmgController from './EmgController';
+
 
 let currentMove;
 let videoComponent;
@@ -14,6 +16,8 @@ let resultDisplay;
 let positionDisplay;
 let summaryDisplay;
 let i = 0;
+let m = 0;
+let j = 0;
 
 const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High', 'Side Pump', 'Wipe Table']
 
@@ -23,62 +27,85 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 
 export class Summary extends Component {
 
+    componentDidMount = async () => {
+        const socket = io(`http://localhost:3333/`);
+
+        socket.on("connect", () => {
+            console.log(`[SUMMARY] Frontend Summary socket connected to backend ${socket.id}`);
+        })
+
+        socket.on("newResult", async (result) => {
+            m += 1;
+            console.log(`${j}th result: `+ JSON.stringify(result));
+
+            // this.updatePositions(result.dancerIds);
+            // this.updateCurrentMove(result.predictedMove);
+
+
+            await this.setState(prevState => ({
+                currentResult: {
+                    ...prevState.currentResult,
+                    timestamp: result.timestamp,
+                    dancerIds: result.dancerIds,
+                    correctDancerIds: result.correctDancerIds,
+                    predictedMove: result.predictedMove,
+                    syncDelay: result.syncDelay,
+                    accuracy: result.accuracy
+                }
+            }))
+
+            await this.handleHistoryState(result);  
+        })
+
+        // socket.on("newMode", async (result) => {
+        //     await this.setState({
+        //         mode: result.mode
+        //     })
+        //     console.log('Mode Changed in Result! ', result.mode);
+        // })
+
+        socket.on("disconnect", (reason) => {
+            if (reason === "io server disconnect") {
+                // the disconnection was initiated by the server, you need to reconnect manually
+                socket.connect();
+              }
+            console.log('Frontend socket disconnected. Reason: ' + reason);
+        })
+    }
+
     state = {
         history: [],
-        currentResult: {}
+        currentResult: {},
     }
-    componentDidUpdate() {
-        i += 1;
-        console.log(`Count ${i} Current Move!!`, JSON.stringify(this.props.currentResult));
-        console.log(`Count ${i} Current Summary State!!`, JSON.stringify(this.state));
 
-        /**
-         * Move and Video Component
-         */
-        
-        // this.settleMode();
-        if (this.props.currentResult != this.state.currentResult) {
-            this.settleVideoAndMove();
-            this.settleResult();
-            this.setState({
-                currentResult: this.props.currentResult
+    handleHistoryState = async (result) => {
+        if (this.state.history.length == 0) {
+            await this.setState(prevState => {
+                const history = [];
+                history.push(result);
+                return { history };
+            })
+        } else if (this.state.history.length == 1) {
+            await this.setState(prevState => {
+                const history = [result, prevState.history[0]];
+                return { history };
+            })
+        } else if (this.state.history.length == 2) {
+            await this.setState(prevState => {
+                const history = [result, prevState.history[0], prevState.history[1]];
+                return { history };
+            })
+        } else if (this.state.history.length == 3) {
+            await this.setState(prevState => {
+                const history = [result, prevState.history[0], prevState.history[1]];
+                return { history };
             })
         }
 
-        if (this.props.history != this.state.history) {
-            this.settleHistory();
-            this.setState({
-                history: this.props.history
-            })
-        }
+        // console.log('history', this.state.history);
     }
+    
     settleMode() {
-        // let statusTraineeOne;
-        // let statusTraineeTwo;
-        // let statusTraineeThree;
-        // if (this.props.modeTraineeOne == 1) {
-        //     statusTraineeOne = 'Idle';
-        // } else if (this.props.modeTraineeOne == 2) {
-        //     statusTraineeOne = 'Moving';
-        // } else if (this.props.modeTraineeOne == 3) {
-        //     statusTraineeOne = 'Dancing';
-        // }
-
-        // if (this.props.modeTraineeTwo == 1) {
-        //     statusTraineeTwo = 'Idle';
-        // } else if (this.props.modeTraineeTwo == 2) {
-        //     statusTraineeTwo = 'Moving';
-        // } else if (this.props.modeTraineeTwo == 3) {
-        //     statusTraineeTwo = 'Dancing';
-        // }
-        // if (this.props.modeTraineeThree == 1) {
-        //     statusTraineeThree = 'Idle';
-        // } else if (this.props.modeTraineeThree == 2) {
-        //     statusTraineeThree = 'Moving';
-        // } else if (this.props.modeTraineeThree == 3) {
-        //     statusTraineeThree = 'Dancing';
-        // }
-
         if (this.props.mode == '') {
             currentMode = (
                 <React.Fragment>
@@ -107,42 +134,42 @@ export class Summary extends Component {
     }
 
     settleVideoAndMove() {
-        if (this.props.currentResult.predictedMove == 0) {
+        if (this.state.currentResult.predictedMove == 0) {
             currentMove = 'Dab';
             videoComponent = (
                 <ReactPlayer url='./video/dab.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             );
-        } else if (this.props.currentResult.predictedMove == 1) {
+        } else if (this.state.currentResult.predictedMove == 1) {
             currentMove = 'Elbow Kick';
             videoComponent = (
                 <ReactPlayer url='./video/elbowkick.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentResult.predictedMove == 2) {
+        } else if (this.state.currentResult.predictedMove == 2) {
             currentMove = 'Gun';
             videoComponent = (
                 <ReactPlayer url='./video/gun.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             );
-        }  else if (this.props.currentResult.predictedMove == 3) {
+        }  else if (this.state.currentResult.predictedMove == 3) {
             currentMove = 'Hair';
             videoComponent = (
                 <ReactPlayer url='./video/hair.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentResult.predictedMove == 4) {
+        } else if (this.state.currentResult.predictedMove == 4) {
             currentMove = 'Listen';
             videoComponent = (
                 <ReactPlayer url='./video/listen.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentResult.predictedMove == 5) {
+        } else if (this.state.currentResult.predictedMove == 5) {
             currentMove = 'Point High';
             videoComponent = (
                 <ReactPlayer url='./video/pointhigh.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentResult.predictedMove ==  6) {
+        } else if (this.state.currentResult.predictedMove ==  6) {
             currentMove = 'Side Pump';
             videoComponent = (
                 <ReactPlayer url='./video/sidepump.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
             )
-        } else if (this.props.currentResult.predictedMove == 7) {
+        } else if (this.state.currentResult.predictedMove == 7) {
             currentMove = 'Wipe Table';
             videoComponent = (
                 <ReactPlayer url='./video/wipetable.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
@@ -153,7 +180,7 @@ export class Summary extends Component {
     settleResult() {
         // console.log('here ', this.props.currentResult);
 
-        if (_.isEmpty(this.props.currentResult)) {
+        if (_.isEmpty(this.state.currentResult)) {
             positionDisplay = (
                 <React.Fragment>
                     <h4> Positions </h4>
@@ -167,15 +194,15 @@ export class Summary extends Component {
                 </React.Fragment>
             );
         } else {
-            if (this.props.currentResult.correctDancerIds == this.props.currentResult.dancerIds) {
+            if (this.state.currentResult.correctDancerIds == this.state.currentResult.dancerIds) {
                 positionDisplay = (
                     <React.Fragment>
                         <br />
                         <br/>
-                        <GreenH4> Current Positions - {this.props.currentResult.dancerIds} </GreenH4>
+                        <GreenH4> Current Positions - {this.state.currentResult.dancerIds} </GreenH4>
                         <br/>
                         <br/>
-                        <GreenH4> Correct Positions - {this.props.currentResult.correctDancerIds} </GreenH4>
+                        <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
                     </React.Fragment>
                 )
             } else {
@@ -183,10 +210,10 @@ export class Summary extends Component {
                     <React.Fragment>
                         <br/>
                         <br/>
-                        <RedH4> Current Positions - {this.props.currentResult.dancerIds} </RedH4>
+                        <RedH4> Current Positions - {this.state.currentResult.dancerIds} </RedH4>
                         <br/>
                         <br/>
-                        <GreenH4> Correct Positions - {this.props.currentResult.correctDancerIds} </GreenH4>
+                        <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
                     </React.Fragment>
                 )
             }
@@ -194,8 +221,8 @@ export class Summary extends Component {
             resultDisplay = (
                     <React.Fragment>
                         <h4> Current Move - {currentMove}  </h4>
-                        <h4> Sync Delay - {this.props.currentResult.syncDelay}s</h4>
-                        <h4> Confidence - {this.props.currentResult.accuracy}%</h4>
+                        <h4> Sync Delay - {this.state.currentResult.syncDelay}s</h4>
+                        <h4> Confidence - {this.state.currentResult.accuracy}%</h4>
                     </React.Fragment>
             )
         }
@@ -211,30 +238,30 @@ export class Summary extends Component {
         let summaryThirdRowPredictedMove = null;
 
         // console.log('History ', JSON.stringify(this.props.history));
-        if (this.props.history.length == 0) {
+        if (_.isEmpty(this.state.history)) {
             summaryDisplay = ( 
                 <h4> No Data Yet! </h4>
             )
-        } else if (this.props.history.length == 1) {
-            summaryFirstRowDancerIds = this.props.history[0].dancerIds;
-            summaryFirstRowPredictedMove = moveIdToMove[this.props.history[0].predictedMove];
+        } else if (this.state.history.length == 1) {
+            summaryFirstRowDancerIds = this.state.history[0].dancerIds;
+            summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
             
-        } else if (this.props.history.length == 2) {
-            summaryFirstRowDancerIds = this.props.history[0].dancerIds;
-            summaryFirstRowPredictedMove = moveIdToMove[this.props.history[0].predictedMove];
+        } else if (this.state.history.length == 2) {
+            summaryFirstRowDancerIds = this.state.history[0].dancerIds;
+            summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
 
-            summarySecondRowDancerIds = this.props.history[1].dancerIds;
-            summarySecondRowPredictedMove = moveIdToMove[this.props.history[1].predictedMove];
+            summarySecondRowDancerIds = this.state.history[1].dancerIds;
+            summarySecondRowPredictedMove = moveIdToMove[this.state.history[1].predictedMove];
 
-        } else if (this.props.history.length == 3) {
-            summaryFirstRowDancerIds = this.props.history[0].dancerIds;
-            summaryFirstRowPredictedMove = moveIdToMove[this.props.history[0].predictedMove];
+        } else if (this.state.history.length == 3) {
+            summaryFirstRowDancerIds = this.state.history[0].dancerIds;
+            summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
 
-            summarySecondRowDancerIds = this.props.history[1].dancerIds;
-            summarySecondRowPredictedMove = moveIdToMove[this.props.history[1].predictedMove];
+            summarySecondRowDancerIds = this.state.history[1].dancerIds;
+            summarySecondRowPredictedMove = moveIdToMove[this.state.history[1].predictedMove];
 
-            summaryThirdRowDancerIds = this.props.history[2].dancerIds;
-            summaryThirdRowPredictedMove = moveIdToMove[this.props.history[2].predictedMove];
+            summaryThirdRowDancerIds = this.state.history[2].dancerIds;
+            summaryThirdRowPredictedMove = moveIdToMove[this.state.history[2].predictedMove];
         }
 
         summaryDisplay = (
@@ -251,6 +278,10 @@ export class Summary extends Component {
 
     render() {
 
+        this.settleResult();
+        this.settleVideoAndMove();
+        this.settleHistory();
+
         return (
           <SummaryDiv>
               {/* <StatusDiv>
@@ -266,12 +297,12 @@ export class Summary extends Component {
               </SyncDelayMoveAccuracyDiv>
 
               <EMGDiv>
-                <EmgLineChart data={this.props.emgs}/>
+                <EmgController />
               </EMGDiv>
               
-              {/* <DanceMovePlayerDiv>
+              <DanceMovePlayerDiv>
                 {videoComponent}
-              </DanceMovePlayerDiv> */}
+              </DanceMovePlayerDiv>
 
               <HistoryDiv>
                 <h4> History </h4>
