@@ -74,6 +74,19 @@ export const register = async (data) => {
     setRole(role);
 }
 
+export const login = async (data) => {
+    const response = await axios.post('http://localhost:3333/login/attempt', data)
+    const accessToken = response.data.accessToken;
+    const name = response.data.name;
+    const email = response.data.email;
+    const role = response.data.role;
+    // console.log('access token: ' + JSON.stringify(accessToken));
+    setAccessToken(accessToken);
+    setName(name);
+    setEmail(email);
+    setRole(role);
+}
+
 export const test = async (data) => {
     const accessToken = getAccessToken();
         const can = await axios.post(' http://localhost:3333/register/decode', { 

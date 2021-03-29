@@ -21,14 +21,16 @@ const verifyUserCredentials = async (body) => {
     let name = '';
     let role = '';
     let email = '';
+    console.log('login pre-user verify ', body);
     try {
         await UserModel.find({ email: body.email , password: body.password }, (err, docs) => {
             if (err) {
                 throw new Error(err);
             }
-            // console.log('login docs ', docs);
+            console.log('login docs ', docs);
 
             if (docs.length = 1) {
+
                 isUserGrantedAccess = true;
                 name = docs[0].name;
                 role = docs[0].role;

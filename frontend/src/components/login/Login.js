@@ -4,6 +4,7 @@ import { LoginDiv, NavBarDiv, MainDiv, ContentDiv, LoginMainFormDiv, SideContent
     LoginH2Div, LoginH1, LoginFormDiv, IndividualField } from './LoginStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import { TextInputField, Button } from 'evergreen-ui';
+import { login } from '../../utils/Auth';
 
 export class Login extends Component {
     state = {
@@ -13,7 +14,9 @@ export class Login extends Component {
     }
 
     handleLoginProcess() {
-        
+        const email = this.state.email;
+        const password = this.state.password;
+        login({ email, password });
     }
 
     onSubmitButtonClicked = async (event) => {
