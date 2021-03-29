@@ -23,6 +23,35 @@ const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High'
 
 export class Summary extends Component {
 
+    state = {
+        history: [],
+        currentResult: {}
+    }
+    componentDidUpdate() {
+        i += 1;
+        console.log(`Count ${i} Current Move!!`, JSON.stringify(this.props.currentResult));
+        console.log(`Count ${i} Current Summary State!!`, JSON.stringify(this.state));
+
+        /**
+         * Move and Video Component
+         */
+        
+        // this.settleMode();
+        if (this.props.currentResult != this.state.currentResult) {
+            this.settleVideoAndMove();
+            this.settleResult();
+            this.setState({
+                currentResult: this.props.currentResult
+            })
+        }
+
+        if (this.props.history != this.state.history) {
+            this.settleHistory();
+            this.setState({
+                history: this.props.history
+            })
+        }
+    }
     settleMode() {
         // let statusTraineeOne;
         // let statusTraineeTwo;
@@ -221,15 +250,6 @@ export class Summary extends Component {
     }
 
     render() {
-        console.log(`Count ${i} Current Move!!`, JSON.stringify(this.props.currentResult));
-        /**
-         * Move and Video Component
-         */
-        
-        // this.settleMode();
-        this.settleVideoAndMove();
-        this.settleResult();
-        this.settleHistory();
 
         return (
           <SummaryDiv>
@@ -249,9 +269,9 @@ export class Summary extends Component {
                 <EmgLineChart data={this.props.emgs}/>
               </EMGDiv>
               
-              <DanceMovePlayerDiv>
+              {/* <DanceMovePlayerDiv>
                 {videoComponent}
-              </DanceMovePlayerDiv>
+              </DanceMovePlayerDiv> */}
 
               <HistoryDiv>
                 <h4> History </h4>

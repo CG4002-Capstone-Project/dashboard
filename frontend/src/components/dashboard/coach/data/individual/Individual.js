@@ -73,7 +73,7 @@ export class Individual extends Component {
                             {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
                             <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
                             <AccessibilityNewIcon fontSize='large' color="action" style={{ color: red[500], marginRight: '1rem'}} /> */}
-                            {this.positionStickman()}
+                            {/* {this.positionStickman()} */}
                             {/* <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
                             <IoAccessibilitySharp size='2rem' style={{ fill:'#291f7d', marginRight: '1.5rem' }} />
                             <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} /> */}

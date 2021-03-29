@@ -285,7 +285,7 @@ const readEverythingIntoDb = () => {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log(`data instance ${i} sent`)
+                        console.log(`T3 data instance ${i} sent`)
                         // console.log(` ${records[i][2]} saved!`);
                     }
                 })

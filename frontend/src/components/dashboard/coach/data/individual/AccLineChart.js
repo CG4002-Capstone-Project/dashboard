@@ -11,13 +11,28 @@ export default class AccLineChart extends Component {
 
     componentDidUpdate() {
         i += 1;
-        console.log(`acc ${i}`);
-        this.myChart.data.labels.push(this.props.data.timestamp);
-        this.myChart.data.datasets[0].data.push(this.props.data.accx);
-        this.myChart.data.datasets[1].data.push(this.props.data.accy);
-        this.myChart.data.datasets[2].data.push(this.props.data.accz);
+        // console.log(`acc ${i}`);
 
-        this.myChart.update();
+        if (this.myChart.data.datasets[0].data.length < 200) {
+            this.myChart.data.labels.push(this.props.data.timestamp);
+            this.myChart.data.datasets[0].data.push(this.props.data.accx);
+            this.myChart.data.datasets[1].data.push(this.props.data.accy);
+            this.myChart.data.datasets[2].data.push(this.props.data.accz);
+        } else if (this.myChart.data.datasets[0].data.length === 200) {
+            this.myChart.data.labels.shift();
+            this.myChart.data.datasets[0].data.shift();
+            this.myChart.data.datasets[1].data.shift();
+            this.myChart.data.datasets[2].data.shift();
+
+            this.myChart.data.labels.push(this.props.data.timestamp);
+            this.myChart.data.datasets[0].data.push(this.props.data.accx);
+            this.myChart.data.datasets[1].data.push(this.props.data.accy);
+            this.myChart.data.datasets[2].data.push(this.props.data.accz);
+        }
+        
+        this.myChart.update({
+            duration: 0
+        });
     }
 
     componentDidMount() {
@@ -63,14 +78,14 @@ export default class AccLineChart extends Component {
                 legend: {
                     position: 'right',
                 },
-                elements: {
-                    line: {
-                        tension: 0
-                    },
-                    point: {
-                        radius: 0
-                    }
-                }
+                // elements: {
+                //     line: {
+                //         tension: 0
+                //     },
+                //     point: {
+                //         radius: 0
+                //     }
+                // }
             },
             data: {
                 labels: [],

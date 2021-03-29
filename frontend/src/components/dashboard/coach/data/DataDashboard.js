@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { DashboardDiv, CoverDiv } from './DataStyledComponents';
 import Individual from './individual/Individual';
 import Summary from './summary/Summary';
 import io from "socket.io-client";
+import { result } from 'lodash';
 // import { traceLifecycle } from 'react-lifecycle-visualizer';
 
 let i = 0;
@@ -45,17 +46,32 @@ export class DataDashboard extends Component {
             // this.updatePositions(result.dancerIds);
             // this.updateCurrentMove(result.predictedMove);
 
-            await this.setState({
-                currentResult: result
-            });
+
+            await this.setState(prevState => ({
+                currentResult: {
+                    ...prevState.currentResult,
+                    timestamp: result.timestamp,
+                    dancerIds: result.dancerIds,
+                    correctDancerIds: result.correctDancerIds,
+                    predictedMove: result.predictedMove,
+                    syncDelay: result.syncDelay,
+                    accuracy: result.accuracy
+                }
+            }))
 
             await this.handleHistoryState(result);  
         })
 
         socket.on("newEMG", async (result) => {
-            await this.setState({
-                currentEmg: result
-            })
+
+            await this.setState(prevState => ({
+                currentEmg: {
+                    ...prevState.currentEmg,
+                    voltage: result.voltage,
+                    rms: result.rms,
+                    mfq: result.mfq
+                }
+            }))
         })
 
         // socket.on("newMode", async (result) => {
@@ -95,9 +111,18 @@ export class DataDashboard extends Component {
         //         modeTraineeOne: data.mode
         //     });
         // }
-        await this.setState({
-            t1Data: data
-        })
+
+        await this.setState(prevState => ({
+            t1Data: {
+                ...prevState.t1Data,
+                accx: data.accx,
+                accy: data.accy,
+                accz: data.accz,
+                yaw: data.yaw,
+                pitch: data.pitch,
+                roll: data.roll
+            }
+        }))
     }
 
     updateTraineeTwoInfo = async (data) => {
@@ -106,9 +131,17 @@ export class DataDashboard extends Component {
         //         modeTraineeTwo: data.mode
         //     });
         // }
-        await this.setState({
-            t2Data: data
-        })
+        await this.setState(prevState => ({
+            t2Data: {
+                ...prevState.t2Data,
+                accx: data.accx,
+                accy: data.accy,
+                accz: data.accz,
+                yaw: data.yaw,
+                pitch: data.pitch,
+                roll: data.roll
+            }
+        }))
     }
 
     updateTraineeThreeInfo = async (data) => {
@@ -117,78 +150,88 @@ export class DataDashboard extends Component {
         //         modeTraineeThree: data.mode
         //     });
         // }
-        await this.setState({
-            t3Data: data
-        })
+        await this.setState(prevState => ({
+            t3Data: {
+                ...prevState.t3Data,
+                accx: data.accx,
+                accy: data.accy,
+                accz: data.accz,
+                yaw: data.yaw,
+                pitch: data.pitch,
+                roll: data.roll
+            }
+        }))
     }
 
     updatePositions = async (positions) => {
         const positionsArray = positions.split(' ');
 
         if (positionsArray[0] == '1') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeOne: 1
-            });
+            }))
         } else if (positionsArray[0] == '2') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeOne: 2
-            });
+            }))
         } else if (positionsArray[0] == '3') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeOne: 3
-            });
+            }))
         }
 
         if (positionsArray[1] == '1') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeTwo: 1
-            });
+            }))
         } else if (positionsArray[1] == '2') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeTwo: 2
-            });
+            }))
         } else if (positionsArray[1] == '3') {
-            await this.setState({
-                posTraineeTwo: 3
-            });
+            await this.setState(prevState => ({
+                posTraineeTwo: 1
+            }))
         }
 
         if (positionsArray[2] == '1') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeThree: 1
-            })
+            }))
         } else if (positionsArray[2] == '2') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeThree: 2
-            })
+            }))
         } else if (positionsArray[2] == '3') {
-            await this.setState({
+            await this.setState(prevState => ({
                 posTraineeThree: 3
-            })
+            }))
         }
     }
 
     handleHistoryState = async (result) => {
         if (this.state.history.length == 0) {
-            const history = [];
-            history.push(result)
-            await this.setState({
-                history
-            })
+            await this.setState(prevState => ({
+                history: prevState.history.push(result)
+            }))
         } else if (this.state.history.length == 1) {
-            const previousFirstItem = this.state.history[0];
-            const history = [result, previousFirstItem];
-            await this.setState({
-                history
-            })
-        } else if (this.state.history.length > 1) {
-            const previousFirstItem = this.state.history[0];
-            const previousSecondItem = this.state.history[1];
-            const history = [result, previousFirstItem, previousSecondItem];
-            await this.setState({
-                history
-            })
-        } 
+            await this.setState(prevState => ({
+                history: prevState.history.unshift(result)
+            }))
+        } else if (this.state.history.length == 2) {
+            await this.setState(prevState => ({
+                history: prevState.history.unshift(result)
+            }))
+        } else if (this.state.history.length == 3) {
+            await this.setState(prevState => ({
+                history: prevState.history.pop()
+            }))
+            await this.setState(prevState => ({
+                history: prevState.history.unshift(result)
+            }))
+        }
+
+        console.log('history', this.state.history);
     }
 
     render() {
@@ -206,7 +249,7 @@ export class DataDashboard extends Component {
                     // modeTraineeOne={this.state.modeTraineeOne}
                     // modeTraineeTwo={this.state.modeTraineeTwo}
                     // modeTraineeThree={this.state.modeTraineeThree}
-                    mode={this.state.mode}
+                    // mode={this.state.mode}
                     history={this.state.history}
                     traineeOneName='Riyas'
                     traineeTwoName='Zeng Hao'

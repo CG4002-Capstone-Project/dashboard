@@ -10,23 +10,27 @@ export default class GCCLineChart extends Component {
     }
 
     componentDidUpdate() {
-        // this.myChart.update();
-        // i += 1;
-        // console.log(`gcc ${i}`);
 
-        this.myChart.data.labels.push(this.props.data.timestamp);
-        this.myChart.data.datasets[0].data.push(this.props.data.yaw);
-        this.myChart.data.datasets[1].data.push(this.props.data.pitch);
-        this.myChart.data.datasets[2].data.push(this.props.data.roll);
-        this.myChart.update();
-        // setInterval(() => {
-        //     i += 1;
-        //     console.log(`Updated for the ${i}`);
-        //     return this.myChart.update()
-        // }, 1000)
-        
-        // setInterval(this.myChart.update(), 100);
-    
+        if (this.myChart.data.datasets[0].data.length < 200) {
+            this.myChart.data.labels.push(this.props.data.timestamp);
+            this.myChart.data.datasets[0].data.push(this.props.data.yaw);
+            this.myChart.data.datasets[1].data.push(this.props.data.pitch);
+            this.myChart.data.datasets[2].data.push(this.props.data.roll);
+        } else if (this.myChart.data.datasets[0].data.length === 200) {
+            this.myChart.data.labels.shift();
+            this.myChart.data.datasets[0].data.shift();
+            this.myChart.data.datasets[1].data.shift();
+            this.myChart.data.datasets[2].data.shift();
+
+            this.myChart.data.labels.push(this.props.data.timestamp);
+            this.myChart.data.datasets[0].data.push(this.props.data.yaw);
+            this.myChart.data.datasets[1].data.push(this.props.data.pitch);
+            this.myChart.data.datasets[2].data.push(this.props.data.roll);
+        }
+
+        this.myChart.update({
+            duration: 0
+        });    
     }
                 
 
@@ -74,14 +78,14 @@ export default class GCCLineChart extends Component {
                 legend: {
                     position: 'right',
                 },
-                elements: {
-                    line: {
-                        tension: 0
-                    },
-                    point: {
-                        radius: 0
-                    }
-                }
+                // elements: {
+                //     line: {
+                //         tension: 0
+                //     },
+                //     point: {
+                //         radius: 0
+                //     }
+                // }
             },
             data: {
                 labels: [],
