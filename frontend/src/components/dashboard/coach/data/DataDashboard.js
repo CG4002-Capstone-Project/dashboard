@@ -58,13 +58,12 @@ export class DataDashboard extends Component {
             })
         })
 
-        socket.on("newMode", async (result) => {
-            if (result.mode != this.state.mode) {
-                await this.setState({
-                    mode: result.mode
-                })
-            }
-        })
+        // socket.on("newMode", async (result) => {
+        //     await this.setState({
+        //         mode: result.mode
+        //     })
+        //     console.log('Mode Changed in Result! ', result.mode);
+        // })
 
         socket.on("disconnect", (reason) => {
             if (reason === "io server disconnect") {

@@ -45,7 +45,7 @@ export default class EmgLineChart extends Component {
                         {
                             ticks: {
                                 min: 0,
-                                max: 10,
+                                max: 100,
                                 // suggestedMax: 5,
                                 // suggestedMin: 0,
                             },
@@ -61,6 +61,14 @@ export default class EmgLineChart extends Component {
                 legend: {
                     position: 'right',
                 },
+                elements: {
+                    line: {
+                        tension: 0
+                    },
+                    point: {
+                        radius: 0
+                    }
+                }
             },
             data: {
                 labels: [],

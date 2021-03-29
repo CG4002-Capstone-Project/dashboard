@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 import { AddColumnLeftIcon } from 'evergreen-ui';
 let i = 0;
 
-export default class YPRLineChart extends Component {
+export default class GCCLineChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
@@ -39,6 +39,10 @@ export default class YPRLineChart extends Component {
                 animation: {
                     duration: 0,
                 },
+                hover: {
+                    animationDuration: 0,
+                },
+                responsiveAnimationDuration: 0,
                 responsive: true,
                 aspectRatio: 2.75,
                 scales: {
@@ -53,8 +57,8 @@ export default class YPRLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                min: -15000,
-                                max: 15000,
+                                min: -150,
+                                max: 150,
                                 // suggestedMax: 180,
                                 // suggestedMin: -180
                             },
@@ -62,19 +66,27 @@ export default class YPRLineChart extends Component {
                     ]
                 },
                 title: {
-                    text: 'Yaw, Pitch & Roll against Time',
+                    text: 'Gyroscope X, Y & Z against Time',
                     display: true,
                     fontFamily: 'Acme',
                     position: 'bottom'
                 },
                 legend: {
                     position: 'right',
+                },
+                elements: {
+                    line: {
+                        tension: 0
+                    },
+                    point: {
+                        radius: 0
+                    }
                 }
             },
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Yaw',
+                    label: 'Gcc X',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
@@ -82,7 +94,7 @@ export default class YPRLineChart extends Component {
                     borderColor: 'red',
                     backgroundColor: 'red'              
                 }, {
-                    label: 'Pitch',
+                    label: 'Gcc Y',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
@@ -90,7 +102,7 @@ export default class YPRLineChart extends Component {
                     borderColor: 'blue',
                     backgroundColor: 'blue'
                 }, {
-                    label: 'Roll',
+                    label: 'Gcc Z',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay, DisplayDiv, MiscDiv, AccGraphDiv, YPRGraphDiv  } from './IndividualStyledComponents';
-import YPRLineChart from './YPRLineChart';
+import GCCLineChart from './GCCLineChart';
 import AccLineChart from './AccLineChart';
 import { IconContext } from 'react-icons';
 import { IoAccessibilityOutline, IoAccessibilitySharp } from 'react-icons/io5'; 
@@ -83,7 +83,7 @@ export class Individual extends Component {
                         <AccLineChart data={this.props.data} />
                     </AccGraphDiv>
                     <YPRGraphDiv>
-                        <YPRLineChart data={this.props.data} /> 
+                        <GCCLineChart data={this.props.data} /> 
                     </YPRGraphDiv>
                 </DisplayDiv>
             </React.Fragment> 

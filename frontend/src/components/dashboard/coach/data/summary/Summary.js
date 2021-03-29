@@ -50,21 +50,31 @@ export class Summary extends Component {
         //     statusTraineeThree = 'Dancing';
         // }
 
-        currentMode = (
-            // <React.Fragment>
-            //     <br/>
-            //     <h4> {this.props.traineeOneName} - {statusTraineeOne}  </h4>
-            //     <br/>
-            //     <h4> {this.props.traineeTwoName} - {statusTraineeTwo} </h4>
-            //     <br/>
-            //     <h4> {this.props.traineeThreeName} - {statusTraineeThree} </h4>
-            // </React.Fragment>
-            <React.Fragment>
-                <br/>
-                <h4> {this.props.mode} </h4>
-                <br/>
+        if (this.props.mode == '') {
+            currentMode = (
+                <React.Fragment>
+                    <h4> Positions </h4>
+                    <h4> Waiting for incoming data! Be Patient. </h4>
             </React.Fragment>
-        )
+            )
+        } else {
+                // <React.Fragment>
+                //     <br/>
+                //     <h4> {this.props.traineeOneName} - {statusTraineeOne}  </h4>
+                //     <br/>
+                //     <h4> {this.props.traineeTwoName} - {statusTraineeTwo} </h4>
+                //     <br/>
+                //     <h4> {this.props.traineeThreeName} - {statusTraineeThree} </h4>
+                // </React.Fragment>
+            console.log('Mode Changed in Summary! ', this.props.mode);
+            currentMode = (
+                <React.Fragment>
+                    <br/>
+                    <h4> {this.props.mode} </h4>
+                    <br/>
+                </React.Fragment>
+            )
+        }
     }
 
     settleVideoAndMove() {
@@ -216,16 +226,16 @@ export class Summary extends Component {
          * Move and Video Component
          */
         
-        this.settleMode();
+        // this.settleMode();
         this.settleVideoAndMove();
         this.settleResult();
         this.settleHistory();
 
         return (
           <SummaryDiv>
-              <StatusDiv>
+              {/* <StatusDiv>
                 {currentMode}
-              </StatusDiv>
+              </StatusDiv> */}
               
               <CorrectPositionDiv>
                 {positionDisplay}

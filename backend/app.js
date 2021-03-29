@@ -345,9 +345,8 @@ db.once('open', async () => {
                     mode: change.fullDocument.mode,
                 }
 
-                if (n%100 == 0) {
-                    console.log(`${n}th emg: ` + JSON.stringify(mode));
-                }
+                console.log(`${n}th mode: ` + JSON.stringify(mode));
+
                 n += 1;
                 io.emit("newMode", mode);
         }

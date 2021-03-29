@@ -63,6 +63,14 @@ export default class AccLineChart extends Component {
                 legend: {
                     position: 'right',
                 },
+                elements: {
+                    line: {
+                        tension: 0
+                    },
+                    point: {
+                        radius: 0
+                    }
+                }
             },
             data: {
                 labels: [],
