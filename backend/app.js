@@ -12,6 +12,7 @@ const server = require('http').createServer(app);
 app.use(bodyParser.json()); // used to be app
 app.use(cors()); // used to be app
 app.options('*', cors());
+const divider = 30;
 
 // cors issue: https://stackoverflow.com/questions/58914404/socket-io-cors-error-by-using-node-react-and-socket-io
 const io = require('socket.io')(server, {
@@ -171,14 +172,14 @@ db.once('open', async () => {
                 tempT1Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (i%20 == 0) {
+                if (i%divider == 0) {
                     // tempTimestamp = tempTimestamp / 100;
-                    tempT1Accx = tempT1Accx / 20;
-                    tempT1Accy = tempT1Accy / 20;
-                    tempT1Accz = tempT1Accz / 20;
-                    tempT1Yaw = tempT1Yaw / 20;
-                    tempT1Pitch = tempT1Pitch / 20;
-                    tempT1Roll = tempT1Roll / 20;
+                    tempT1Accx = tempT1Accx / divider;
+                    tempT1Accy = tempT1Accy / divider;
+                    tempT1Accz = tempT1Accz / divider;
+                    tempT1Yaw = tempT1Yaw / divider;
+                    tempT1Pitch = tempT1Pitch / divider;
+                    tempT1Roll = tempT1Roll / divider;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -238,13 +239,13 @@ db.once('open', async () => {
                 tempT2Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (k%20 == 0) {
-                    tempT2Accx = tempT2Accx / 20;
-                    tempT2Accy = tempT2Accy / 20;
-                    tempT2Accz = tempT2Accz / 20;
-                    tempT2Yaw = tempT2Yaw / 20;
-                    tempT2Pitch = tempT2Pitch / 20;
-                    tempT2Roll = tempT2Roll / 20;
+                if (k%divider == 0) {
+                    tempT2Accx = tempT2Accx / divider;
+                    tempT2Accy = tempT2Accy / divider;
+                    tempT2Accz = tempT2Accz / divider;
+                    tempT2Yaw = tempT2Yaw / divider;
+                    tempT2Pitch = tempT2Pitch / divider;
+                    tempT2Roll = tempT2Roll / divider;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -303,14 +304,14 @@ db.once('open', async () => {
                 tempT3Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (m%20 == 0) {
+                if (m%divider == 0) {
                     // tempTimestamp = tempTimestamp / 100;
-                    tempT3Accx = tempT3Accx / 20;
-                    tempT3Accy = tempT3Accy / 20;
-                    tempT3Accz = tempT3Accz / 20;
-                    tempT3Yaw = tempT3Yaw / 20;
-                    tempT3Pitch = tempT3Pitch / 20;
-                    tempT3Roll = tempT3Roll / 20;
+                    tempT3Accx = tempT3Accx / divider;
+                    tempT3Accy = tempT3Accy / divider;
+                    tempT3Accz = tempT3Accz / divider;
+                    tempT3Yaw = tempT3Yaw / divider;
+                    tempT3Pitch = tempT3Pitch / divider;
+                    tempT3Roll = tempT3Roll / divider;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
