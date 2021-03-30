@@ -1,18 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Register from './components/register/Register';
-import CoachApp from './components/coach/CoachApp';
+import MainApp from './pages/MainApp';
+import { UserProvider as AppProviders } from './contexts/UserContext';
 
-class App extends React.Component {
-  render() {
+const App = () => {
     return (
-      <React.Fragment>
-      {/* <Register /> */}
-      <CoachApp />
-      </React.Fragment>
-
+        <AppProviders>
+            <MainApp />
+        </AppProviders>
     )
-  }
 }
 
 export default App;

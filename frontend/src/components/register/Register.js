@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
-import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv } from './RegisterStyledComponents';
+import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv, NavBarDiv } from './RegisterStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
-import axios from 'axios';
+import { register, test, getAccessToken, getName } from '../../utils/Auth';
+import { UserContext } from '../../contexts/UserContext';
 
 export class NewRegister extends Component {
-    
+    static contextType = UserContext;
+
     state = { 
         coach: {
             role: 'coach',
@@ -22,23 +24,27 @@ export class NewRegister extends Component {
     }
 
     registerGroup = async () => {
-        const response = await axios.post(' http://localhost:3333/register/create', { ...this.state })
-        const accessToken = response.data.accessToken;
-        console.log('access token: ' + JSON.stringify(accessToken));
-        localStorage.setItem('accessToken', accessToken);
-        await this.test();
-    }
+        const { user, handleUser } = this.context;
+        // console.log('CONTEXT 1', this.context);
+        await handleUser({ ...user, isFetching: true });
+        try {
+            // console.log('CONTEXT 2', this.context);
+            await register({ ...this.state });
+            // console.log('CONTEXT 3', this.context);
+            await handleUser({
+                ...user,
+                email: this.state.coach.email,
+                role: this.state.coach.role,
+                isAuth: true,
+                isFetching: true,
+            });
+            // console.log('CONTEXT 4', this.context);
+            // console.log('LOCAL STORAGE ', getAccessToken(), getName());
 
-    test = async () => {
-        const accessToken = localStorage.getItem('accessToken');
-        const can = await axios.post(' http://localhost:3333/register/decode', { 
-            data: 'helo'
-        }, { headers: { 
-                'authorization': accessToken
-            }
-        })
-        console.log('access token: ' + accessToken);
-        console.log('can', can);
+        } catch {
+            await handleUser({ ...user, isAuth: false, isFetching: false });
+        }
+        // await test();
     }
 
     accountForSubmittedForm = async (input) => {
@@ -82,7 +88,9 @@ export class NewRegister extends Component {
     render() {
         return (
             <RegisterDiv>
-                    <LoginAndRegisterNavBar />
+                    <NavBarDiv>
+                        <LoginAndRegisterNavBar />
+                    </NavBarDiv>
                     <HeaderTabDiv>
                         <HeaderH1> Registration </HeaderH1>
                         <InfoP> 

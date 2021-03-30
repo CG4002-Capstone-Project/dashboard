@@ -16,8 +16,9 @@ export default class EmgLineChart extends Component {
         this.myChart.data.datasets[1].data.push(this.props.data.rms);
         this.myChart.data.datasets[2].data.push(this.props.data.mfq);
 
-        this.myChart.update();
-    }
+        this.myChart.update({
+            duration: 0
+        });    }
 
     componentDidMount() {
         // console.log(this.props.data.map(d => d.timestamp));
@@ -45,7 +46,7 @@ export default class EmgLineChart extends Component {
                         {
                             ticks: {
                                 min: 0,
-                                max: 10,
+                                max: 200,
                                 // suggestedMax: 5,
                                 // suggestedMin: 0,
                             },
@@ -61,6 +62,14 @@ export default class EmgLineChart extends Component {
                 legend: {
                     position: 'right',
                 },
+                // elements: {
+                //     line: {
+                //         tension: 0
+                //     },
+                //     point: {
+                //         radius: 0
+                //     }
+                // }
             },
             data: {
                 labels: [],

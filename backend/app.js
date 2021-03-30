@@ -4,6 +4,8 @@ const cors = require('cors');
 
 const Login = require('./login/LoginController');
 const Registration = require('./registration/RegistrationController');
+const Access = require('./access/AccessController');
+const Analytics = require('./analytics/AnalyticsController');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -11,6 +13,7 @@ const server = require('http').createServer(app);
 app.use(bodyParser.json()); // used to be app
 app.use(cors()); // used to be app
 app.options('*', cors());
+const divider = 30;
 
 // cors issue: https://stackoverflow.com/questions/58914404/socket-io-cors-error-by-using-node-react-and-socket-io
 const io = require('socket.io')(server, {
@@ -72,6 +75,11 @@ db.once('open', async () => {
     await db.dropCollection("raw_trainee_two_datas");
     await db.dropCollection("raw_trainee_three_datas");
     await db.dropCollection("raw_emgs");
+    await db.dropCollection("modes");
+    // await db.dropCollection("access_logs");
+    // await db.dropCollection("coach_trees");
+    // await db.dropCollection("users");
+
     console.log('DELETED Collections ');
 
     // add collections 
@@ -81,6 +89,11 @@ db.once('open', async () => {
     await db.createCollection("raw_trainee_two_datas");
     await db.createCollection("raw_trainee_three_datas");
     await db.createCollection("raw_emgs");
+    await db.createCollection("modes");
+    // await db.createCollection("access_logs");
+    // await db.createCollection("coach_trees");
+    // await db.createCollection("users");
+
     console.log("CREATED Collections")
 
     console.log('Setting change streams');
@@ -90,16 +103,19 @@ db.once('open', async () => {
     const traineeTwoChangeStreams = db.collection("raw_trainee_two_datas").watch();
     const traineeThreeChangeStreams = db.collection("raw_trainee_three_datas").watch();
     const emgChangeStreams = db.collection("raw_emgs").watch();
+    const modeStreams = db.collection("modes").watch();
 
     resultsChangeStreams.on("change", (change) => {
         switch (change.operationType) {
             case "insert":
                 const move = transposeMoves(change.fullDocument.predictedMove);
+                const correctMove = transposeMoves(change.fullDocument.correctMove);
                 const result = {
                     timestamp: change.fullDocument.timestamp,
                     dancerIds: change.fullDocument.dancerIds,
                     correctDancerIds: change.fullDocument.correctDancerIds,
                     predictedMove: move,
+                    correctMove,
                     syncDelay: change.fullDocument.syncDelay,
                     accuracy: change.fullDocument.accuracy,
                 }
@@ -120,7 +136,7 @@ db.once('open', async () => {
                 }
 
                 if (j%100 == 0) {
-                    console.log(`${j}th emg: ` + JSON.stringify(emg));
+                    // console.log(`${j}th emg: ` + JSON.stringify(emg));
                 }
                 j += 1;
                 io.emit("newEMG", emg);
@@ -159,14 +175,14 @@ db.once('open', async () => {
                 tempT1Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (i%20 == 0) {
+                if (i%divider == 0) {
                     // tempTimestamp = tempTimestamp / 100;
-                    tempT1Accx = tempT1Accx / 20;
-                    tempT1Accy = tempT1Accy / 20;
-                    tempT1Accz = tempT1Accz / 20;
-                    tempT1Yaw = tempT1Yaw / 20;
-                    tempT1Pitch = tempT1Pitch / 20;
-                    tempT1Roll = tempT1Roll / 20;
+                    tempT1Accx = tempT1Accx / divider;
+                    tempT1Accy = tempT1Accy / divider;
+                    tempT1Accz = tempT1Accz / divider;
+                    tempT1Yaw = tempT1Yaw / divider;
+                    tempT1Pitch = tempT1Pitch / divider;
+                    tempT1Roll = tempT1Roll / divider;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -179,7 +195,7 @@ db.once('open', async () => {
                         // mode: data.mode
                     }
                     
-                    console.log(`T1 ${i}th data: ` + JSON.stringify(finalisedData));
+                    // console.log(`T1 ${i}th data: ` + JSON.stringify(finalisedData));
                     io.emit("onNewTraineeOneData", finalisedData);
 
                     tempT1Accx = 0;
@@ -226,13 +242,13 @@ db.once('open', async () => {
                 tempT2Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (k%20 == 0) {
-                    tempT2Accx = tempT2Accx / 20;
-                    tempT2Accy = tempT2Accy / 20;
-                    tempT2Accz = tempT2Accz / 20;
-                    tempT2Yaw = tempT2Yaw / 20;
-                    tempT2Pitch = tempT2Pitch / 20;
-                    tempT2Roll = tempT2Roll / 20;
+                if (k%divider == 0) {
+                    tempT2Accx = tempT2Accx / divider;
+                    tempT2Accy = tempT2Accy / divider;
+                    tempT2Accz = tempT2Accz / divider;
+                    tempT2Yaw = tempT2Yaw / divider;
+                    tempT2Pitch = tempT2Pitch / divider;
+                    tempT2Roll = tempT2Roll / divider;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -245,7 +261,7 @@ db.once('open', async () => {
                         // mode: data.mode
                     }
                     
-                    console.log(`T2 ${k}th data: ` + JSON.stringify(finalisedData));
+                    // console.log(`T2 ${k}th data: ` + JSON.stringify(finalisedData));
                     io.emit("onNewTraineeTwoData", finalisedData);
 
                     tempT2Accx = 0;
@@ -291,14 +307,14 @@ db.once('open', async () => {
                 tempT3Roll += Number(data.roll);
 
                 // console.log(`${i}th data: ${tempAccx}`);
-                if (m%20 == 0) {
+                if (m%divider == 0) {
                     // tempTimestamp = tempTimestamp / 100;
-                    tempT3Accx = tempT3Accx / 20;
-                    tempT3Accy = tempT3Accy / 20;
-                    tempT3Accz = tempT3Accz / 20;
-                    tempT3Yaw = tempT3Yaw / 20;
-                    tempT3Pitch = tempT3Pitch / 20;
-                    tempT3Roll = tempT3Roll / 20;
+                    tempT3Accx = tempT3Accx / divider;
+                    tempT3Accy = tempT3Accy / divider;
+                    tempT3Accz = tempT3Accz / divider;
+                    tempT3Yaw = tempT3Yaw / divider;
+                    tempT3Pitch = tempT3Pitch / divider;
+                    tempT3Roll = tempT3Roll / divider;
 
                     const finalisedData = {
                         timestamp: data.timestamp,
@@ -311,7 +327,7 @@ db.once('open', async () => {
                         // mode: data.mode
                     }
                     
-                    console.log(`T3 ${m}th data: ` + JSON.stringify(finalisedData));
+                    // console.log(`T3 ${m}th data: ` + JSON.stringify(finalisedData));
                     io.emit("onNewTraineeThreeData", finalisedData);
 
                     tempT3Accx = 0;
@@ -325,10 +341,27 @@ db.once('open', async () => {
         }
     })
 
+    let n = 0;
+    modeStreams.on("change", (change) => {
+        switch (change.operationType) {
+            case "insert":
+                const mode = {
+                    mode: change.fullDocument.mode,
+                }
+
+                // console.log(`${n}th mode: ` + JSON.stringify(mode));
+
+                n += 1;
+                io.emit("newMode", mode);
+        }
+    })
+
 
 })
 
 app.use('/login', Login); // used to be app
 app.use('/register', Registration); // used to be app
+app.use('/user', Access);
+app.use('/analytics', Analytics);
 
 module.exports = server; // used to be app

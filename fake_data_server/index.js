@@ -285,7 +285,7 @@ const readEverythingIntoDb = () => {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log(`data instance ${i} sent`)
+                        console.log(`T3 data instance ${i} sent`)
                         // console.log(` ${records[i][2]} saved!`);
                     }
                 })
@@ -319,8 +319,9 @@ const readEverythingIntoDb = () => {
                     dancerIds: resultRecords[k][0],
                     correctDancerIds: resultRecords[k][1],
                     predictedMove: resultRecords[k][2],
-                    syncDelay: resultRecords[k][3],
-                    accuracy: resultRecords[k][4],
+                    correctMove: resultRecords[k][3],
+                    syncDelay: resultRecords[k][4],
+                    accuracy: resultRecords[k][5],
                     timestamp: Date.now()
                 });
 

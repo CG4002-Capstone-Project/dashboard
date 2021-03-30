@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay, DisplayDiv, MiscDiv, AccGraphDiv, YPRGraphDiv  } from './IndividualStyledComponents';
-import YPRLineChart from './YPRLineChart';
+import GCCLineChart from './GCCLineChart';
 import AccLineChart from './AccLineChart';
 import { IconContext } from 'react-icons';
 import { IoAccessibilityOutline, IoAccessibilitySharp } from 'react-icons/io5'; 
@@ -73,7 +73,7 @@ export class Individual extends Component {
                             {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
                             <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
                             <AccessibilityNewIcon fontSize='large' color="action" style={{ color: red[500], marginRight: '1rem'}} /> */}
-                            {this.positionStickman()}
+                            {/* {this.positionStickman()} */}
                             {/* <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} />
                             <IoAccessibilitySharp size='2rem' style={{ fill:'#291f7d', marginRight: '1.5rem' }} />
                             <IoAccessibilityOutline size='2rem' style={{ marginRight: '1.5rem' }} /> */}
@@ -83,7 +83,7 @@ export class Individual extends Component {
                         <AccLineChart data={this.props.data} />
                     </AccGraphDiv>
                     <YPRGraphDiv>
-                        <YPRLineChart data={this.props.data} /> 
+                        <GCCLineChart data={this.props.data} /> 
                     </YPRGraphDiv>
                 </DisplayDiv>
             </React.Fragment> 

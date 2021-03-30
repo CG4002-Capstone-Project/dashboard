@@ -17,6 +17,7 @@ export const StatusDiv = styled.div`
     text-align: center;
     box-sizing: border-box;
     margin: auto;
+    background-color: ${props => props.inputColor || ""};
 `;
 
 export const CorrectPositionDiv = styled.div`
@@ -25,6 +26,7 @@ export const CorrectPositionDiv = styled.div`
     text-align: center;
     box-sizing: border-box;
     margin: auto;
+    background-color: ${props => props.inputColor || ""};
 `;
 
 export const SyncDelayMoveAccuracyDiv = styled.div`

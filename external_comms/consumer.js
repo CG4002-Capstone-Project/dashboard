@@ -1,7 +1,8 @@
 require('dotenv').config();
 const amqp = require('amqplib/callback_api');
 const mongoose = require('mongoose');
-const { TraineeOneDataModel, TraineeTwoDataModel, TraineeThreeDataModel, RawEMGModel, RawResultModel } = require('./schema');
+const { TraineeOneDataModel, TraineeTwoDataModel, TraineeThreeDataModel, 
+  RawEMGModel, RawResultModel, ModeModel } = require('./schema');
 
 
 const CLOUD_AMQP_URL = process.env.CLOUDAMQP_URL;
@@ -32,6 +33,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
   let traineeThreeDocumentBatchCount = 0;
   let emgCount = 0;
   let resultsCount = 0;
+  let modeCount = 0;
 
   connection.createChannel(function(error1, channel) {
     if (error1) {
@@ -312,6 +314,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
   })
 
   // assume msg to be of the format: predictedMove 
+  let correctMove = ''
   connection.createChannel(function(error1, channel) {
     if (error1) {
       throw error1;
@@ -335,12 +338,21 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       // console.log('Predicted Move: ' + predictedMove);
 
+      if (resultsCount % 3 == 0) {
+        correctMove = 'gun';
+      } else if (resultsCount % 3 == 1) {
+        correctMove = 'hair';
+      } else if (resultsCount % 3 == 2) {
+        correctMove = 'sidepump';
+      }
+
       const resultInstance = new RawResultModel({
         correctDancerIds,
         predictedMove,
         dancerIds,
         syncDelay,
-        accuracy
+        accuracy,
+        correctMove
       });
 
       resultsCount += 1;
@@ -351,6 +363,43 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
         } else {
             if (resultsCount % 20 == 0) {
               console.log(`result ${resultsCount} instance sent to db`)
+            }
+        }
+      })
+    }, {
+      noAck: true
+    });
+  })
+
+  // assume msg to be of the format: mode 
+  connection.createChannel(function(error1, channel) {
+    if (error1) {
+      throw error1;
+    }
+    const queue = 'mode';
+
+    channel.assertQueue(queue, {
+      durable: false
+    });
+
+    console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+
+    channel.consume(queue, function(msg) {
+      const stringMsg = msg.content.toString();
+      const mode = stringMsg.trim();
+
+      const modeInstance = new ModeModel({ 
+        mode
+      });
+
+      modeCount += 1;
+
+      modeInstance.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (modeCount % 20 == 0) {
+              console.log(`mode ${modeCount} instance sent to db`)
             }
         }
       })

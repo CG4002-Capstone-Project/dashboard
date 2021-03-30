@@ -5,11 +5,11 @@ import styled from 'styled-components';
 export const RegisterDiv = styled.div`
     display: grid;
     grid-template-areas: 
-        '. . .'
+        'nav nav nav'
         '. header .'
         '. input .';    
     grid-gap: 1rem;
-    grid-template-rows: 0.25fr 0.5fr 1.5fr 0.25fr;
+    grid-template-rows: 62px 0.5fr 1.5fr 0.25fr;
     grid-template-columns: 1fr 3fr 1fr;
     background-color: #FFFFF2;
     margin: auto;
@@ -18,6 +18,13 @@ export const RegisterDiv = styled.div`
     /* border: 5px black solid; */
     
 `;   
+
+export const NavBarDiv = styled.div`
+    grid-area: nav;
+    /* border: 5px red solid; */
+    box-sizing: border-box;
+`;
+
 export const HeaderTabDiv = styled.div`
     grid-area: header;
     /* border: 5px red solid; */
