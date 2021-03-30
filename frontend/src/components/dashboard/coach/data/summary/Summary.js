@@ -57,12 +57,12 @@ export class Summary extends Component {
             await this.handleHistoryState(result);  
         })
 
-        // socket.on("newMode", async (result) => {
-        //     await this.setState({
-        //         mode: result.mode
-        //     })
-        //     console.log('Mode Changed in Result! ', result.mode);
-        // })
+        socket.on("newMode", async (result) => {
+            await this.setState(prevState => ({
+                mode: result.mode
+            }))
+            console.log('Mode Changed in Result! ', result.mode);
+        })
 
         socket.on("disconnect", (reason) => {
             if (reason === "io server disconnect") {
@@ -76,6 +76,7 @@ export class Summary extends Component {
     state = {
         history: [],
         currentResult: {},
+        mode: ''
     }
 
     handleHistoryState = async (result) => {
@@ -106,10 +107,10 @@ export class Summary extends Component {
     }
     
     settleMode() {
-        if (this.props.mode == '') {
+        if (this.state.mode == '') {
             currentMode = (
                 <React.Fragment>
-                    <h4> Positions </h4>
+                    <h4> Trainee Instructions </h4>
                     <h4> Waiting for incoming data! Be Patient. </h4>
             </React.Fragment>
             )
@@ -122,13 +123,28 @@ export class Summary extends Component {
                 //     <br/>
                 //     <h4> {this.props.traineeThreeName} - {statusTraineeThree} </h4>
                 // </React.Fragment>
-            console.log('Mode Changed in Summary! ', this.props.mode);
+            let color =''
+            console.log('Mode Changed in Summary! ', this.state.mode);
+            // currentMode = (
+            //     <React.Fragment>
+            //         <br/>
+            //         <h1> {this.state.mode} </h1>
+            //         <br/>
+            //     </React.Fragment>
+            // )
+            if (this.state.mode == 'CHANGE POSITIONS') {
+                color = 'yellow';
+            } else if (this.state.mode == 'START DANCING') {
+                color = 'green';
+            } else if (this.state.mode == 'RESETTING... DO NOT MOVE...') {
+                color = 'red';
+            }
             currentMode = (
-                <React.Fragment>
+                <StatusDiv inputColor={color}>
                     <br/>
-                    <h4> {this.props.mode} </h4>
-                    <br/>
-                </React.Fragment>
+                    <h1> {this.state.mode} </h1>
+                    <br />
+                </StatusDiv>
             )
         }
     }
@@ -181,12 +197,18 @@ export class Summary extends Component {
         // console.log('here ', this.props.currentResult);
 
         if (_.isEmpty(this.state.currentResult)) {
+            // positionDisplay = (
+            //     <React.Fragment>
+            //         <h4> Positions </h4>
+            //         <h4> Waiting for incoming data! Be Patient. </h4>
+            //     </React.Fragment>
+            // );
             positionDisplay = (
-                <React.Fragment>
+                <CorrectPositionDiv>
                     <h4> Positions </h4>
                     <h4> Waiting for incoming data! Be Patient. </h4>
-                </React.Fragment>
-            );
+                </CorrectPositionDiv>
+            )
             resultDisplay = (
                 <React.Fragment>
                     <h4> Statistics </h4>
@@ -195,26 +217,40 @@ export class Summary extends Component {
             );
         } else {
             if (this.state.currentResult.correctDancerIds == this.state.currentResult.dancerIds) {
+                // positionDisplay = (
+                //     <React.Fragment>
+                //         <br />
+                //         <br/>
+                //         <GreenH4> Current Positions - {this.state.currentResult.dancerIds} </GreenH4>
+                //         <br/>
+                //         <br/>
+                //         <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
+                //     </React.Fragment>
+                // )
                 positionDisplay = (
-                    <React.Fragment>
+                    <CorrectPositionDiv inputColor='lightgreen'>
+                        <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
                         <br />
-                        <br/>
-                        <GreenH4> Current Positions - {this.state.currentResult.dancerIds} </GreenH4>
-                        <br/>
-                        <br/>
-                        <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
-                    </React.Fragment>
+                        <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                    </CorrectPositionDiv>
                 )
             } else {
+                // positionDisplay = (
+                //     <React.Fragment>
+                //         <br/>
+                //         <br/>
+                //         <RedH4> Current Positions - {this.state.currentResult.dancerIds} </RedH4>
+                //         <br/>
+                //         <br/>
+                //         <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
+                //     </React.Fragment>
+                // )
                 positionDisplay = (
-                    <React.Fragment>
-                        <br/>
-                        <br/>
-                        <RedH4> Current Positions - {this.state.currentResult.dancerIds} </RedH4>
-                        <br/>
-                        <br/>
-                        <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
-                    </React.Fragment>
+                    <CorrectPositionDiv inputColor='lightsalmon'>
+                        <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
+                        <br />
+                        <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                    </CorrectPositionDiv>
                 )
             }
 
@@ -281,12 +317,10 @@ export class Summary extends Component {
         this.settleResult();
         this.settleVideoAndMove();
         this.settleHistory();
+        this.settleMode();
 
         return (
           <SummaryDiv>
-              {/* <StatusDiv>
-                {currentMode}
-              </StatusDiv> */}
               
               <CorrectPositionDiv>
                 {positionDisplay}
@@ -296,13 +330,17 @@ export class Summary extends Component {
                 {resultDisplay}
               </SyncDelayMoveAccuracyDiv>
 
+              <StatusDiv>
+                {currentMode}
+              </StatusDiv>
+
               <EMGDiv>
                 <EmgController />
               </EMGDiv>
               
-              <DanceMovePlayerDiv>
+              {/* <DanceMovePlayerDiv>
                 {videoComponent}
-              </DanceMovePlayerDiv>
+              </DanceMovePlayerDiv> */}
 
               <HistoryDiv>
                 <h4> History </h4>

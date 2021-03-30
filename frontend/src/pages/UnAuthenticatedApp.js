@@ -12,7 +12,7 @@ const UnAuthenticatedApp = () => {
             <Route exact path={LOGIN} component={Login} />
             <Route exact path={REGISTER} component={Register} />
             {/* <Route exact path={HOME} component={Home} /> */}
-            <Redirect to={REGISTER} />
+            <Redirect to={LOGIN} />
         </Switch>
     )
 }

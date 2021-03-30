@@ -133,7 +133,7 @@ db.once('open', async () => {
                 }
 
                 if (j%100 == 0) {
-                    console.log(`${j}th emg: ` + JSON.stringify(emg));
+                    // console.log(`${j}th emg: ` + JSON.stringify(emg));
                 }
                 j += 1;
                 io.emit("newEMG", emg);
@@ -192,7 +192,7 @@ db.once('open', async () => {
                         // mode: data.mode
                     }
                     
-                    console.log(`T1 ${i}th data: ` + JSON.stringify(finalisedData));
+                    // console.log(`T1 ${i}th data: ` + JSON.stringify(finalisedData));
                     io.emit("onNewTraineeOneData", finalisedData);
 
                     tempT1Accx = 0;
@@ -258,7 +258,7 @@ db.once('open', async () => {
                         // mode: data.mode
                     }
                     
-                    console.log(`T2 ${k}th data: ` + JSON.stringify(finalisedData));
+                    // console.log(`T2 ${k}th data: ` + JSON.stringify(finalisedData));
                     io.emit("onNewTraineeTwoData", finalisedData);
 
                     tempT2Accx = 0;
@@ -324,7 +324,7 @@ db.once('open', async () => {
                         // mode: data.mode
                     }
                     
-                    console.log(`T3 ${m}th data: ` + JSON.stringify(finalisedData));
+                    // console.log(`T3 ${m}th data: ` + JSON.stringify(finalisedData));
                     io.emit("onNewTraineeThreeData", finalisedData);
 
                     tempT3Accx = 0;
@@ -346,7 +346,7 @@ db.once('open', async () => {
                     mode: change.fullDocument.mode,
                 }
 
-                console.log(`${n}th mode: ` + JSON.stringify(mode));
+                // console.log(`${n}th mode: ` + JSON.stringify(mode));
 
                 n += 1;
                 io.emit("newMode", mode);
