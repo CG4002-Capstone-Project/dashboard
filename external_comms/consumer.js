@@ -314,6 +314,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
   })
 
   // assume msg to be of the format: predictedMove 
+  let correctMove = ''
   connection.createChannel(function(error1, channel) {
     if (error1) {
       throw error1;
@@ -337,12 +338,21 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       // console.log('Predicted Move: ' + predictedMove);
 
+      if (resultsCount % 3 == 0) {
+        correctMove = 'gun';
+      } else if (resultsCount % 3 == 1) {
+        correctMove = 'hair';
+      } else if (resultsCount % 3 == 2) {
+        correctMove = 'sidepump';
+      }
+
       const resultInstance = new RawResultModel({
         correctDancerIds,
         predictedMove,
         dancerIds,
         syncDelay,
-        accuracy
+        accuracy,
+        correctMove
       });
 
       resultsCount += 1;

@@ -21,6 +21,7 @@ const rawResultsSchema = new mongoose.Schema({
     dancerIds: { type: String, required: true, trim: true },
     correctDancerIds: { type: String, required: true, trim: true },
     predictedMove: { type: String, required: true, trim: true  },
+    correctMove: { type: String, required: true, trim: true },
     syncDelay: { type: String, required: true, trim: true  },
     accuracy: { type: String, required: true, trim: true  },
 })

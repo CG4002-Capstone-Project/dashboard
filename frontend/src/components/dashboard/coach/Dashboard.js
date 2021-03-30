@@ -30,7 +30,7 @@ export class Dashboard extends Component {
         if (this.state.currentState == 0) {
             display = <PreDataDashboard onStart={this.onDanceStart}/>;
         } else if (this.state.currentState == 1) {
-            display = <DataDashboard />;
+            display = <DataDashboard onEnd={this.onDanceEnd} />;
         } else if (this.state.currentState == 2) {
             display = <PostDataDashboard />;
         }

@@ -7,6 +7,8 @@ import Fade from 'react-bootstrap/Fade';
 import _ from 'lodash';
 import io from "socket.io-client";
 import EmgController from './EmgController';
+import { Button, EndorsedIcon } from 'evergreen-ui';
+
 
 
 let currentMove;
@@ -259,9 +261,15 @@ export class Summary extends Component {
                         <h4> Current Move - {currentMove}  </h4>
                         <h4> Sync Delay - {this.state.currentResult.syncDelay}s</h4>
                         <h4> Confidence - {this.state.currentResult.accuracy}%</h4>
+                        <Button appearance='primary' marginRight={30} onClick={this.onDanceEndClicked} iconAfter={EndorsedIcon}> End Dance! </Button>
                     </React.Fragment>
             )
         }
+    }
+
+    onDanceEndClicked = event => {
+        event.preventDefault();
+        this.props.onDanceEnd();
     }
 
     settleHistory() {

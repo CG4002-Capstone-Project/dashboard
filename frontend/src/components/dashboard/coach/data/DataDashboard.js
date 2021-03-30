@@ -10,14 +10,20 @@ import Summary from './summary/Summary';
 // @traceLifecycle
 export class DataDashboard extends Component {
 
+    onDanceEnd = async () => {
+        console.log('On Dance End Clicked ', this.props);
+        await this.props.onEnd();
+    }
     render() {
+        console.log('Data Dashboard Props ', this.props);
         return (
             <React.Fragment>
                 <IndividualController />
                 <Summary 
                     traineeOneName='Riyas'
                     traineeTwoName='Zeng Hao'
-                    traineeThreeName='Brandon' 
+                    traineeThreeName='Brandon'
+                    onDanceEnd={this.onDanceEnd} 
                 />
             </React.Fragment>
         )

@@ -5,6 +5,7 @@ const cors = require('cors');
 const Login = require('./login/LoginController');
 const Registration = require('./registration/RegistrationController');
 const Access = require('./access/AccessController');
+const Analytics = require('./analytics/AnalyticsController');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -108,11 +109,13 @@ db.once('open', async () => {
         switch (change.operationType) {
             case "insert":
                 const move = transposeMoves(change.fullDocument.predictedMove);
+                const correctMove = transposeMoves(change.fullDocument.correctMove);
                 const result = {
                     timestamp: change.fullDocument.timestamp,
                     dancerIds: change.fullDocument.dancerIds,
                     correctDancerIds: change.fullDocument.correctDancerIds,
                     predictedMove: move,
+                    correctMove,
                     syncDelay: change.fullDocument.syncDelay,
                     accuracy: change.fullDocument.accuracy,
                 }
@@ -359,5 +362,6 @@ db.once('open', async () => {
 app.use('/login', Login); // used to be app
 app.use('/register', Registration); // used to be app
 app.use('/user', Access);
+app.use('/analytics', Analytics);
 
 module.exports = server; // used to be app

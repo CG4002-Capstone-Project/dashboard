@@ -319,8 +319,9 @@ const readEverythingIntoDb = () => {
                     dancerIds: resultRecords[k][0],
                     correctDancerIds: resultRecords[k][1],
                     predictedMove: resultRecords[k][2],
-                    syncDelay: resultRecords[k][3],
-                    accuracy: resultRecords[k][4],
+                    correctMove: resultRecords[k][3],
+                    syncDelay: resultRecords[k][4],
+                    accuracy: resultRecords[k][5],
                     timestamp: Date.now()
                 });
 
