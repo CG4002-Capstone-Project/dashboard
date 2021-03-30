@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { SummaryDiv, StatusDiv, DanceMovePlayerDiv, EMGDiv, CorrectPositionDiv, SyncDelayMoveAccuracyDiv, HistoryDiv,
-    GreenH4, RedH4 } from './SummaryStyledComponents';
+import { SummaryDiv, ModeDiv, ModeContentDiv, DanceMovePlayerDiv, EMGDiv, CorrectPositionDiv, SyncDelayMoveAccuracyDiv, HistoryDiv,
+    GreenH4, RedH4, CorrectPositionContentDiv } from './SummaryStyledComponents';
 import ReactPlayer from 'react-player';
 import Table from 'react-bootstrap/Table';
 import Fade from 'react-bootstrap/Fade';
@@ -111,29 +111,16 @@ export class Summary extends Component {
     settleMode() {
         if (this.state.mode == '') {
             currentMode = (
-                <React.Fragment>
-                    <h4> Trainee Instructions </h4>
-                    <h4> Waiting for incoming data! Be Patient. </h4>
-            </React.Fragment>
+                <ModeDiv>
+                    <ModeContentDiv>
+                        <h4> Trainee Instructions </h4>
+                        <h4> Waiting for incoming data! Be Patient. </h4>
+                    </ModeContentDiv>
+                </ModeDiv>
             )
         } else {
-                // <React.Fragment>
-                //     <br/>
-                //     <h4> {this.props.traineeOneName} - {statusTraineeOne}  </h4>
-                //     <br/>
-                //     <h4> {this.props.traineeTwoName} - {statusTraineeTwo} </h4>
-                //     <br/>
-                //     <h4> {this.props.traineeThreeName} - {statusTraineeThree} </h4>
-                // </React.Fragment>
             let color =''
             console.log('Mode Changed in Summary! ', this.state.mode);
-            // currentMode = (
-            //     <React.Fragment>
-            //         <br/>
-            //         <h1> {this.state.mode} </h1>
-            //         <br/>
-            //     </React.Fragment>
-            // )
             if (this.state.mode == 'CHANGE POSITIONS') {
                 color = 'yellow';
             } else if (this.state.mode == 'START DANCING') {
@@ -142,11 +129,13 @@ export class Summary extends Component {
                 color = 'red';
             }
             currentMode = (
-                <StatusDiv inputColor={color}>
-                    <br/>
-                    <h1> {this.state.mode} </h1>
-                    <br />
-                </StatusDiv>
+                <ModeDiv inputColor={color}>
+                    <ModeContentDiv>
+                        <br/>
+                        <h1> {this.state.mode} </h1>
+                        <br />
+                    </ModeContentDiv>
+                </ModeDiv>
             )
         }
     }
@@ -199,16 +188,13 @@ export class Summary extends Component {
         // console.log('here ', this.props.currentResult);
 
         if (_.isEmpty(this.state.currentResult)) {
-            // positionDisplay = (
-            //     <React.Fragment>
-            //         <h4> Positions </h4>
-            //         <h4> Waiting for incoming data! Be Patient. </h4>
-            //     </React.Fragment>
-            // );
             positionDisplay = (
                 <CorrectPositionDiv>
-                    <h4> Positions </h4>
-                    <h4> Waiting for incoming data! Be Patient. </h4>
+                    <CorrectPositionContentDiv>
+                        <h4> Positions </h4>
+                        <h4> Waiting for incoming data! Be Patient. </h4>
+                    </CorrectPositionContentDiv>
+                   
                 </CorrectPositionDiv>
             )
             resultDisplay = (
@@ -219,39 +205,24 @@ export class Summary extends Component {
             );
         } else {
             if (this.state.currentResult.correctDancerIds == this.state.currentResult.dancerIds) {
-                // positionDisplay = (
-                //     <React.Fragment>
-                //         <br />
-                //         <br/>
-                //         <GreenH4> Current Positions - {this.state.currentResult.dancerIds} </GreenH4>
-                //         <br/>
-                //         <br/>
-                //         <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
-                //     </React.Fragment>
-                // )
                 positionDisplay = (
                     <CorrectPositionDiv inputColor='lightgreen'>
-                        <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
-                        <br />
-                        <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                        <CorrectPositionContentDiv>
+                            <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
+                            <br />
+                            <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                        </CorrectPositionContentDiv>
                     </CorrectPositionDiv>
                 )
             } else {
-                // positionDisplay = (
-                //     <React.Fragment>
-                //         <br/>
-                //         <br/>
-                //         <RedH4> Current Positions - {this.state.currentResult.dancerIds} </RedH4>
-                //         <br/>
-                //         <br/>
-                //         <GreenH4> Correct Positions - {this.state.currentResult.correctDancerIds} </GreenH4>
-                //     </React.Fragment>
-                // )
                 positionDisplay = (
                     <CorrectPositionDiv inputColor='lightsalmon'>
-                        <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
-                        <br />
-                        <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                        <CorrectPositionContentDiv>
+                            <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
+                            <br />
+                            <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                        </CorrectPositionContentDiv>
+
                     </CorrectPositionDiv>
                 )
             }
@@ -286,38 +257,40 @@ export class Summary extends Component {
             summaryDisplay = ( 
                 <h4> No Data Yet! </h4>
             )
-        } else if (this.state.history.length == 1) {
-            summaryFirstRowDancerIds = this.state.history[0].dancerIds;
-            summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
-            
-        } else if (this.state.history.length == 2) {
-            summaryFirstRowDancerIds = this.state.history[0].dancerIds;
-            summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
-
-            summarySecondRowDancerIds = this.state.history[1].dancerIds;
-            summarySecondRowPredictedMove = moveIdToMove[this.state.history[1].predictedMove];
-
-        } else if (this.state.history.length == 3) {
-            summaryFirstRowDancerIds = this.state.history[0].dancerIds;
-            summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
-
-            summarySecondRowDancerIds = this.state.history[1].dancerIds;
-            summarySecondRowPredictedMove = moveIdToMove[this.state.history[1].predictedMove];
-
-            summaryThirdRowDancerIds = this.state.history[2].dancerIds;
-            summaryThirdRowPredictedMove = moveIdToMove[this.state.history[2].predictedMove];
+        } else {
+            if (this.state.history.length == 1) {
+                summaryFirstRowDancerIds = this.state.history[0].dancerIds;
+                summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
+                
+            } else if (this.state.history.length == 2) {
+                summaryFirstRowDancerIds = this.state.history[0].dancerIds;
+                summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
+    
+                summarySecondRowDancerIds = this.state.history[1].dancerIds;
+                summarySecondRowPredictedMove = moveIdToMove[this.state.history[1].predictedMove];
+    
+            } else if (this.state.history.length == 3) {
+                summaryFirstRowDancerIds = this.state.history[0].dancerIds;
+                summaryFirstRowPredictedMove = moveIdToMove[this.state.history[0].predictedMove];
+    
+                summarySecondRowDancerIds = this.state.history[1].dancerIds;
+                summarySecondRowPredictedMove = moveIdToMove[this.state.history[1].predictedMove];
+    
+                summaryThirdRowDancerIds = this.state.history[2].dancerIds;
+                summaryThirdRowPredictedMove = moveIdToMove[this.state.history[2].predictedMove];
+            }
+    
+            summaryDisplay = (
+                <Table borderless size='sm'>
+                    <thead><tr><th>Positions</th><th>Move</th></tr></thead>
+                    <tbody>
+                        {/* <Fade appear={true} in={true}></Fade> */}
+                        <tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr>
+                        <tr><td style={{ color: 'red' }}>{summarySecondRowDancerIds}</td><td style={{ color: 'red' }}>{summarySecondRowPredictedMove}</td></tr>
+                        <tr><td>{summaryThirdRowDancerIds}</td><td>{summaryThirdRowPredictedMove}</td></tr></tbody>
+                </Table>
+            );
         }
-
-        summaryDisplay = (
-            <Table borderless size='sm'>
-                <thead><tr><th>Positions</th><th>Move</th></tr></thead>
-                <tbody>
-                    {/* <Fade appear={true} in={true}></Fade> */}
-                    <tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr>
-                    <tr><td style={{ color: 'red' }}>{summarySecondRowDancerIds}</td><td style={{ color: 'red' }}>{summarySecondRowPredictedMove}</td></tr>
-                    <tr><td>{summaryThirdRowDancerIds}</td><td>{summaryThirdRowPredictedMove}</td></tr></tbody>
-            </Table>
-        );
     }
 
     render() {
@@ -329,18 +302,14 @@ export class Summary extends Component {
 
         return (
           <SummaryDiv>
-              
-              <CorrectPositionDiv>
-                {positionDisplay}
-              </CorrectPositionDiv>
+              {positionDisplay}
 
               <SyncDelayMoveAccuracyDiv>
                 {resultDisplay}
               </SyncDelayMoveAccuracyDiv>
 
-              <StatusDiv>
-                {currentMode}
-              </StatusDiv>
+
+              {currentMode}
 
               <EMGDiv>
                 <EmgController />
