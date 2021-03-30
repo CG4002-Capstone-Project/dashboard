@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const IndividualDiv = styled.div`
-    border: paleturquoise solid;
+    border: 1px lightgray solid;
     box-sizing: border-box;
     flex: 1;
     text-align: center;
