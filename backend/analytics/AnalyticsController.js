@@ -1,20 +1,46 @@
 const express = require('express');
 const app = express();
 const { authChecker } = require('../auth/Auth');
-const { getAccumulatedResults } = require('./Analytics');
+const { getAccumulatedData, getAccumulatedMoves, getAccumulatedPositions } = require('./Analytics');
 
 
 
 module.exports = app;
 
 app.get(
-    '/results',
+    '/data',
     async (req, res) => {
         try {
-            console.log('ANALYTICS PRE-RESULTS');
-            const accumulatedResults = await getAccumulatedResults();
-            console.log('ANALYTICS RESULTS ', accumulatedResults);
-            return res.status(200).json(accumulatedResults);
+            console.log('ANALYTICS PRE-DATA');
+            const accumulatedData = await getAccumulatedData();
+            console.log('ANALYTICS DATA ', accumulatedData);
+            return res.status(200).json(accumulatedData);
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
+})
+
+app.get(
+    '/moves',
+    async (req, res) => {
+        try {
+            console.log('ANALYTICS PRE-MOVES');
+            const accumulatedMoves = await getAccumulatedMoves();
+            console.log('ANALYTICS MOVES ', accumulatedMoves);
+            return res.status(200).json(accumulatedMoves);
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
+})
+
+app.get(
+    '/positions',
+    async (req, res) => {
+        try {
+            console.log('ANALYTICS PRE-POSITIONS');
+            const accumulatedPositions = await getAccumulatedPositions();
+            console.log('ANALYTICS POSITIONS ', accumulatedPositions);
+            return res.status(200).json(accumulatedPositions);
         } catch (error) {
             return res.status(403).json({ error });
         }
