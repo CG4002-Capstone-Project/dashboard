@@ -27,11 +27,14 @@ export const MovesDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     border: 1px solid red;
-
+    display: flex;
+    flex-direction: column;
 `;
 
 export const PositionsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     border: 1px solid green;
+    display: flex;
+    flex-direction: column;
 `;

@@ -1,11 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { MoveHeadlineDiv, HairChartDiv, GunChartDiv, SidepumpChartDiv } from './MovesControllerStyledComponents';
 
 export class MovesController extends Component {
     render() {
         return (
-            <div>
-                
-            </div>
+            <React.Fragment>
+                <MoveHeadlineDiv>
+
+                </MoveHeadlineDiv>
+
+                <HairChartDiv>
+
+                </HairChartDiv>
+
+                <GunChartDiv>
+
+                </GunChartDiv>
+
+                <SidepumpChartDiv>
+
+                </SidepumpChartDiv>
+            </React.Fragment>
         )
     }
 }

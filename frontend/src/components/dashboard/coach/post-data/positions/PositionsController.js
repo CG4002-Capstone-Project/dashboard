@@ -1,11 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { PositionHeadlineDiv, TraineeOneDiv, TraineeTwoDiv, TraineeThreeDiv } from './PositionsControllerStyledComponents';
 
 export class PositionsController extends Component {
     render() {
         return (
-            <div>
-                
-            </div>
+            <React.Fragment>
+                <PositionHeadlineDiv>
+
+                </PositionHeadlineDiv>
+
+                <TraineeOneDiv>
+
+                </TraineeOneDiv>
+
+                <TraineeTwoDiv>
+
+                </TraineeTwoDiv>
+
+                <TraineeThreeDiv>
+
+                </TraineeThreeDiv>
+            </React.Fragment>
         )
     }
 }
