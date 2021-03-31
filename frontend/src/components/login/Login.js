@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { LoginDiv, NavBarDiv, MainDiv, ContentDiv, LoginMainFormDiv, SideContentDiv,
     LoginH2Div, LoginH1, LoginFormDiv, IndividualField } from './LoginStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
+import Navbar from '../navbars/login/Navbar';
 import { TextInputField, Button } from 'evergreen-ui';
 import { login } from '../../utils/Auth';
 import { UserContext } from '../../contexts/UserContext';
@@ -21,7 +22,8 @@ export class Login extends Component {
         const password = this.state.password;
         const { user, handleUser } = this.context;
 
-        // console.log('CONTEXT 1', this.context);
+        console.log('CONTEXT 1', this.context);
+        console.log('LOGIN STATE', this.state);
         await handleUser({ ...user, isFetching: true });
         try {
             // console.log('CONTEXT 2', this.context);
@@ -57,7 +59,8 @@ export class Login extends Component {
         return (
             <LoginDiv>
                 <NavBarDiv>
-                    <LoginAndRegisterNavBar />
+                    {/* <LoginAndRegisterNavBar /> */}
+                    <Navbar />
                 </NavBarDiv>
                 <MainDiv>
                     <ContentDiv>

@@ -11,22 +11,33 @@ export const SummaryDiv = styled.div`
     align-items: stretch;
 `;
 
-export const StatusDiv = styled.div`
+export const ModeDiv = styled.div`
     flex: 1;
     /* border: 1px solid lightslategray; */
     text-align: center;
     box-sizing: border-box;
-    margin: auto;
+    /* margin: auto; */
     background-color: ${props => props.inputColor || ""};
+    display: flex;
 `;
+
+export const ModeContentDiv = styled.div`
+    margin: auto;
+`
 
 export const CorrectPositionDiv = styled.div`
     flex: 1;
     /* border: 1px solid lightslategray; */
     text-align: center;
     box-sizing: border-box;
-    margin: auto;
+    /* margin: auto; */
     background-color: ${props => props.inputColor || ""};
+    display: flex;
+`;
+
+export const CorrectPositionContentDiv = styled.div`
+    /* border: 1px solid lightslategray; */
+    margin: auto;
 `;
 
 export const SyncDelayMoveAccuracyDiv = styled.div`

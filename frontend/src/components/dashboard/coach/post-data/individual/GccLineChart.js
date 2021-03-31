@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
-let i = 0;
 
-export default class EmgLineChart extends Component {
+export default class GCCLineChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
     }
-
+    
     componentDidUpdate() {
-        i += 1;
-        // console.log(`emg ${i}`);
-        this.myChart.data.labels.push(this.props.data.timestamp);
-        this.myChart.data.datasets[0].data.push(this.props.data.voltage);
-        this.myChart.data.datasets[1].data.push(this.props.data.rms);
-        this.myChart.data.datasets[2].data.push(this.props.data.mfq);
+        this.myChart.data.labels = this.props.timestamp;
+        this.myChart.data.datasets[0].data = this.props.gccx;
+        this.myChart.data.datasets[1].data = this.props.gccy;
+        this.myChart.data.datasets[2].data = this.props.gccz;
 
-        this.myChart.update({
-            duration: 0
-        });    }
-
+        this.myChart.update();
+    }
     componentDidMount() {
         // console.log(this.props.data.map(d => d.timestamp));
         this.myChart = new Chart(this.chartRef.current, {
@@ -31,8 +26,9 @@ export default class EmgLineChart extends Component {
                 hover: {
                     animationDuration: 0,
                 },
-                responsive: true,
                 responsiveAnimationDuration: 0,
+                responsive: true,
+                aspectRatio: 2.75,
                 scales: {
                     xAxes: [
                         {   
@@ -45,16 +41,16 @@ export default class EmgLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                min: 0,
-                                max: 400,
-                                // suggestedMax: 5,
-                                // suggestedMin: 0,
+                                min: -150,
+                                max: 150,
+                                // suggestedMax: 180,
+                                // suggestedMin: -180
                             },
                         }
                     ]
                 },
                 title: {
-                    text: 'EMG Value against Time',
+                    text: 'Gyroscope X, Y & Z against Time',
                     display: true,
                     fontFamily: 'Acme',
                     position: 'bottom'
@@ -72,34 +68,31 @@ export default class EmgLineChart extends Component {
                 // }
             },
             data: {
-                labels: [],
+                labels: this.props.timestamp,
                 datasets: [{
-                    label: 'Voltage',
-                    data: [],
+                    label: 'Gcc X',
+                    data: this.props.gccx,
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'teal',
-                    backgroundColor: 'teal',
-                    spanGaps: true,            
+                    borderColor: 'red',
+                    backgroundColor: 'red'              
                 }, {
-                    label: 'RMS',
-                    data: [],
+                    label: 'Gcc Y',
+                    data: this.props.gccy,
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'lime',
-                    backgroundColor: 'lime',
-                    spanGaps: true,                   
+                    borderColor: 'blue',
+                    backgroundColor: 'blue'
                 }, {
-                    label: 'MFQ',
-                    data: [],
+                    label: 'Gcc Z',
+                    data: this.props.gccz,
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'purple',
-                    backgroundColor: 'purple',
-                    spanGaps: true,               
+                    borderColor: 'green',
+                    backgroundColor: 'green'
                 }]
             }
 

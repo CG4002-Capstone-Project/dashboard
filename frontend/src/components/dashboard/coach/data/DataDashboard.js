@@ -20,9 +20,9 @@ export class DataDashboard extends Component {
             <React.Fragment>
                 <IndividualController />
                 <Summary 
-                    traineeOneName='Riyas'
-                    traineeTwoName='Zeng Hao'
-                    traineeThreeName='Brandon'
+                    traineeOneName='Brandon'
+                    traineeTwoName='Riyas'
+                    traineeThreeName='Ting Wei'
                     onDanceEnd={this.onDanceEnd} 
                 />
             </React.Fragment>

@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
-let i = 0;
 
-export default class EmgLineChart extends Component {
+export default class AccLineChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
     }
 
     componentDidUpdate() {
-        i += 1;
-        // console.log(`emg ${i}`);
-        this.myChart.data.labels.push(this.props.data.timestamp);
-        this.myChart.data.datasets[0].data.push(this.props.data.voltage);
-        this.myChart.data.datasets[1].data.push(this.props.data.rms);
-        this.myChart.data.datasets[2].data.push(this.props.data.mfq);
+        // console.log('ACC POST DATA 2', this.props);
+        this.myChart.data.labels = this.props.timestamp;
+        this.myChart.data.datasets[0].data = this.props.accx;
+        this.myChart.data.datasets[1].data = this.props.accy;
+        this.myChart.data.datasets[2].data = this.props.accz;
 
-        this.myChart.update({
-            duration: 0
-        });    }
+        this.myChart.update();
+    }
 
     componentDidMount() {
-        // console.log(this.props.data.map(d => d.timestamp));
+        // console.log('ACC POST DATA 1', this.props);
         this.myChart = new Chart(this.chartRef.current, {
             type: 'line',
             options: {
@@ -31,8 +28,9 @@ export default class EmgLineChart extends Component {
                 hover: {
                     animationDuration: 0,
                 },
-                responsive: true,
                 responsiveAnimationDuration: 0,
+                responsive: true,
+                aspectRatio: 2.75,
                 scales: {
                     xAxes: [
                         {   
@@ -45,16 +43,16 @@ export default class EmgLineChart extends Component {
                     yAxes: [
                         {
                             ticks: {
-                                min: 0,
-                                max: 400,
-                                // suggestedMax: 5,
-                                // suggestedMin: 0,
+                                min: -15000,
+                                max: 15000,
+                                // suggestedMax: 2,
+                                // suggestedMin: -2,
                             },
                         }
                     ]
                 },
                 title: {
-                    text: 'EMG Value against Time',
+                    text: 'Acceleration X, Y and Z against Time',
                     display: true,
                     fontFamily: 'Acme',
                     position: 'bottom'
@@ -72,34 +70,31 @@ export default class EmgLineChart extends Component {
                 // }
             },
             data: {
-                labels: [],
+                labels: this.props.timestamp,
                 datasets: [{
-                    label: 'Voltage',
-                    data: [],
+                    label: 'Acc X',
+                    data: this.props.accx,
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'teal',
-                    backgroundColor: 'teal',
-                    spanGaps: true,            
+                    borderColor: 'red',
+                    backgroundColor: 'red'              
                 }, {
-                    label: 'RMS',
-                    data: [],
+                    label: 'Acc Y',
+                    data: this.props.accy,
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'lime',
-                    backgroundColor: 'lime',
-                    spanGaps: true,                   
+                    borderColor: 'blue',
+                    backgroundColor: 'blue'
                 }, {
-                    label: 'MFQ',
-                    data: [],
+                    label: 'Acc Z',
+                    data: this.props.accz,
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'purple',
-                    backgroundColor: 'purple',
-                    spanGaps: true,               
+                    borderColor: 'green',
+                    backgroundColor: 'green'
                 }]
             }
 
