@@ -110,6 +110,10 @@ db.once('open', async () => {
             case "insert":
                 const move = transposeMoves(change.fullDocument.predictedMove);
                 const correctMove = transposeMoves(change.fullDocument.correctMove);
+                // for actual one only 
+                const accuracy = parseFloat(change.fullDocument.accuracy);
+                const modifiedAccuracy = accuracy * 150;
+                const modifiedAccuracyString = modifiedAccuracy.toString();
                 const result = {
                     timestamp: change.fullDocument.timestamp,
                     dancerIds: change.fullDocument.dancerIds,
@@ -117,7 +121,7 @@ db.once('open', async () => {
                     predictedMove: move,
                     correctMove,
                     syncDelay: change.fullDocument.syncDelay,
-                    accuracy: change.fullDocument.accuracy,
+                    accuracy: modifiedAccuracyString,
                 }
                 console.log('result: ' + JSON.stringify(result));
                 io.emit("newResult", result);
