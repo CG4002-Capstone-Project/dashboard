@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MoveHeadlineDiv, HairChartDiv, GunChartDiv, SidepumpChartDiv } from './MovesControllerStyledComponents';
 import { UserContext } from '../../../../../contexts/UserContext';
 import { getMovesSummary } from '../../../../../utils/Analytics';
+import PieChart from './PieChart';
 
 export class MovesController extends Component {
     static contextType = UserContext;
@@ -54,19 +55,23 @@ export class MovesController extends Component {
         return (
             <React.Fragment>
                 <MoveHeadlineDiv>
-                    {this.state.totalCorrectMoves}
+                    <br />
+                    <h1> Overall Dance Move Statistics </h1>
+                    <h2> There were total {this.state.totalMoves} moves </h2>
+                    <h2> The group had {this.state.totalCorrectMoves} correct dance moves.  </h2>
                 </MoveHeadlineDiv>
 
                 <HairChartDiv>
-
+                    <PieChart name='Hair' totalCorrect={this.state.totalHairCorrect} totalIncorrect={this.state.totalHairIncorrect} />
                 </HairChartDiv>
 
                 <GunChartDiv>
+                    <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
 
                 </GunChartDiv>
 
                 <SidepumpChartDiv>
-
+                    <PieChart name='Sidepump' totalCorrect={this.state.totalSidepumpCorrect} totalIncorrect={this.state.totalSidepumpIncorrect} />
                 </SidepumpChartDiv>
             </React.Fragment>
         )
