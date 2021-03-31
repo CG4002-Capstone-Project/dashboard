@@ -53,9 +53,9 @@ export class PositionsController extends Component {
             <React.Fragment>
                 <PositionHeadlineDiv>
                     <br />
-                    <h1> Overall Dance Position Statistics </h1>
-                    <h2> There were total {this.state.totalPositions} positions </h2>
-                    <h2> The group had {this.state.totalCorrectPositions} correct positions moves.  </h2>
+                    <h2> Overall Dance Position Statistics </h2>
+                    <h3> Total {this.state.totalPositions} positions </h3>
+                    <h3> The group had {this.state.totalCorrectPositions} correct positions moves.  </h3>
                 </PositionHeadlineDiv>
 
                 <TraineeOneDiv>

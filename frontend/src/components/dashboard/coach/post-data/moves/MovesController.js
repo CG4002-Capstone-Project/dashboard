@@ -56,9 +56,9 @@ export class MovesController extends Component {
             <React.Fragment>
                 <MoveHeadlineDiv>
                     <br />
-                    <h1> Overall Dance Move Statistics </h1>
-                    <h2> There were total {this.state.totalMoves} moves </h2>
-                    <h2> The group had {this.state.totalCorrectMoves} correct dance moves.  </h2>
+                    <h2> Overall Dance Move Statistics </h2>
+                    <h3> Total {this.state.totalMoves} moves </h3>
+                    <h3> The group had {this.state.totalCorrectMoves} correct dance moves.  </h3>
                 </MoveHeadlineDiv>
 
                 <HairChartDiv>
