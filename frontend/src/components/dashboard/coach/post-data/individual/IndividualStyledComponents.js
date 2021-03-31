@@ -31,6 +31,6 @@ export const GCCGraphDiv = styled.div`
 export const IndividualDiv = styled.div`
     border: 1px lightgray solid;
     box-sizing: border-box;
-    flex: 1;
+    flex: 3;
     text-align: center;
 `;

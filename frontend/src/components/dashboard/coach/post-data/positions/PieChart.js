@@ -7,6 +7,8 @@ export default class PieChart extends Component {
         this.chartRef = React.createRef();
     }
 
+    // how to resize canvas to div constraints: https://stackoverflow.com/questions/44070980/make-pie-chart-smaller-chart-js#:~:text=To%20make%20the%20pie%20chart,options%2C%20like%20so%20...&text=In%20var%20ctxPTD%20%3D%20%24(%22%23,height%20only%20like....
+    // examples: https://dyclassroom.com/chartjs/how-to-create-a-pie-chart-using-chartjs , https://codepen.io/k3no/pen/dXAQOp
     componentDidUpdate() {
 
         this.myChart.data.datasets[0].data[0] = this.props.totalCorrect;

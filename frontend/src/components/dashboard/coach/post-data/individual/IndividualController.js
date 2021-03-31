@@ -3,6 +3,7 @@ import { getDataSummary } from '../../../../../utils/Analytics';
 import { UserContext } from '../../../../../contexts/UserContext';
 import { DropDownDiv } from './IndividualControllerStyledComponents';
 import Individual from './Individual';
+import { Select } from 'evergreen-ui';
 
 export class IndividualController extends Component {
     static contextType = UserContext;
@@ -14,34 +15,34 @@ export class IndividualController extends Component {
 
         try {
             console.log('POST DATA 2');
-            const resultsSummary = await getDataSummary();
+            const dataSummary = await getDataSummary();
             console.log('POST DATA 3');
             await this.setState(prevState => ({
                 ...prevState,
-                totalCorrectMoves: resultsSummary.totalCorrectMoves,
-                totalCorrectPositions: resultsSummary.totalCorrectPositions,
-                totalNoMoves: resultsSummary.totalNoMoves,
-                traineeOneTimestamp: resultsSummary.traineeOneTimestamp,
-                traineeOneAccx: resultsSummary.traineeOneAccx,
-                traineeOneAccy: resultsSummary.traineeOneAccy,
-                traineeOneAccz: resultsSummary.traineeOneAccz,
-                traineeOneGccx: resultsSummary.traineeOneGccx,
-                traineeOneGccy: resultsSummary.traineeOneGccy,
-                traineeOneGccz: resultsSummary.traineeOneGccz,
-                traineeTwoTimestamp: resultsSummary.traineeTwoTimestamp,
-                traineeTwoAccx: resultsSummary.traineeTwoAccx,
-                traineeTwoAccy: resultsSummary.traineeTwoAccy,
-                traineeTwoAccz: resultsSummary.traineeTwoAccz,
-                traineeTwoGccx: resultsSummary.traineeTwoGccx,
-                traineeTwoGccy: resultsSummary.traineeTwoGccy,
-                traineeTwoGccz: resultsSummary.traineeTwoGccz,
-                traineeThreeTimestamp: resultsSummary.traineeThreeTimestamp,
-                traineeThreeAccx: resultsSummary.traineeThreeAccx,
-                traineeThreeAccy: resultsSummary.traineeThreeAccy,
-                traineeThreeAccz: resultsSummary.traineeThreeAccz,
-                traineeThreeGccx: resultsSummary.traineeThreeGccx,
-                traineeThreeGccy: resultsSummary.traineeThreeGccy,
-                traineeThreeGccz: resultsSummary.traineeThreeGccz,
+                totalCorrectMoves: dataSummary.totalCorrectMoves,
+                totalCorrectPositions: dataSummary.totalCorrectPositions,
+                totalNoMoves: dataSummary.totalNoMoves,
+                traineeOneTimestamp: dataSummary.traineeOneTimestamp,
+                traineeOneAccx: dataSummary.traineeOneAccx,
+                traineeOneAccy: dataSummary.traineeOneAccy,
+                traineeOneAccz: dataSummary.traineeOneAccz,
+                traineeOneGccx: dataSummary.traineeOneGccx,
+                traineeOneGccy: dataSummary.traineeOneGccy,
+                traineeOneGccz: dataSummary.traineeOneGccz,
+                traineeTwoTimestamp: dataSummary.traineeTwoTimestamp,
+                traineeTwoAccx: dataSummary.traineeTwoAccx,
+                traineeTwoAccy: dataSummary.traineeTwoAccy,
+                traineeTwoAccz: dataSummary.traineeTwoAccz,
+                traineeTwoGccx: dataSummary.traineeTwoGccx,
+                traineeTwoGccy: dataSummary.traineeTwoGccy,
+                traineeTwoGccz: dataSummary.traineeTwoGccz,
+                traineeThreeTimestamp: dataSummary.traineeThreeTimestamp,
+                traineeThreeAccx: dataSummary.traineeThreeAccx,
+                traineeThreeAccy: dataSummary.traineeThreeAccy,
+                traineeThreeAccz: dataSummary.traineeThreeAccz,
+                traineeThreeGccx: dataSummary.traineeThreeGccx,
+                traineeThreeGccy: dataSummary.traineeThreeGccy,
+                traineeThreeGccz: dataSummary.traineeThreeGccz,
                 }))
             await handleUser({ ...user, isFetching: false });
         } catch (error) {
@@ -51,9 +52,7 @@ export class IndividualController extends Component {
     }
 
     state = {
-        totalCorrectMoves: 0,
-        totalCorrectPositions: 0,
-        totalNoMoves: 0,
+        currentTrainee: 1,
         traineeOneTimestamp: [],
         traineeOneAccx: [],
         traineeOneAccy: [],
@@ -77,48 +76,75 @@ export class IndividualController extends Component {
         traineeThreeGccy: [],
         traineeThreeGccz: [],
     };
+
+    onDropdownChange = async (event) => {
+        event.preventDefault();
+        await this.setState(prevState => ({
+            ...prevState,
+            currentTrainee: event.target.value
+        }))
+        console.log(this.state.currentTrainee);
+    }
     render() {
-        {/* <PostDashboardDiv>
-                    <Individual 
-                        name='Riyas'
-                        no='1'
-                        timestamp={this.state.traineeOneTimestamp} 
-                        accx={this.state.traineeOneAccx} 
-                        accy={this.state.traineeOneAccy}
-                        accz={this.state.traineeOneAccz}
-                        gccx={this.state.traineeOneGccx}
-                        gccy={this.state.traineeOneGccy}
-                        gccz={this.state.traineeOneGccz}
-                    />
-                    <Individual
-                        name='Zeng Hao'
-                        no='2'
-                        timestamp={this.state.traineeTwoTimestamp}
-                        accx={this.state.traineeTwoAccx}
-                        accy={this.state.traineeTwoAccy}
-                        accz={this.state.traineeTwoAccz}
-                        gccx={this.state.traineeTwoGccx}
-                        gccy={this.state.traineeTwoGccy}
-                        gccz={this.state.traineeTwoGccz}
-                    />
-                    <Individual
-                        name='Brandon'
-                        no='3'
-                        timestamp={this.state.traineeThreeTimestamp}
-                        accx={this.state.traineeThreeAccx}
-                        accy={this.state.traineeThreeAccy}
-                        accz={this.state.traineeThreeAccz}
-                        gccx={this.state.traineeThreeGccx}
-                        gccy={this.state.traineeThreeGccy}
-                        gccz={this.state.traineeThreeGccz}
-                    />
-                </IndividualControllerDiv> */}
+        let individual; 
+
+        if (this.state.currentTrainee == 1) {
+            individual = (
+                <Individual 
+                    name='Riyas'
+                    no='1'
+                    timestamp={this.state.traineeOneTimestamp} 
+                    accx={this.state.traineeOneAccx} 
+                    accy={this.state.traineeOneAccy}
+                    accz={this.state.traineeOneAccz}
+                    gccx={this.state.traineeOneGccx}
+                    gccy={this.state.traineeOneGccy}
+                    gccz={this.state.traineeOneGccz}
+                />
+            )
+        } else if (this.state.currentTrainee == 2) {
+            individual = (
+                <Individual
+                    name='Zeng Hao'
+                    no='2'
+                    timestamp={this.state.traineeTwoTimestamp}
+                    accx={this.state.traineeTwoAccx}
+                    accy={this.state.traineeTwoAccy}
+                    accz={this.state.traineeTwoAccz}
+                    gccx={this.state.traineeTwoGccx}
+                    gccy={this.state.traineeTwoGccy}
+                    gccz={this.state.traineeTwoGccz}
+                />
+            )
+        } else if (this.state.currentTrainee == 3) {
+            individual = (
+                <Individual
+                    name='Brandon'
+                    no='3'
+                    timestamp={this.state.traineeThreeTimestamp}
+                    accx={this.state.traineeThreeAccx}
+                    accy={this.state.traineeThreeAccy}
+                    accz={this.state.traineeThreeAccz}
+                    gccx={this.state.traineeThreeGccx}
+                    gccy={this.state.traineeThreeGccy}
+                    gccz={this.state.traineeThreeGccz}
+                />
+            )
+        }
+    
         return (
             <React.Fragment>
                 <DropDownDiv>
-                    <h1> hello  </h1>
+                    <br/>
+                    <h1> Choose a trainee data to view! </h1>
+                    <br />
+                    <Select width={240} height={40} marginBottom={20} onChange={this.onDropdownChange} >
+                        <option value={1}> Trainee 1 </option>
+                        <option value={2}> Trainee 2 </option>
+                        <option value={3}> Trainee 3 </option>
+                    </Select>
                 </DropDownDiv>
-                <Individual />
+                {individual}
             </React.Fragment>
         )
     }

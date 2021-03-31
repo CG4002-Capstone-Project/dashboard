@@ -12,7 +12,7 @@ export class PostDataDashboard extends Component {
             <React.Fragment>
                 <PostDashboardDiv>
                     <DataDiv>
-                        {/* <IndividualController/> */}
+                        <IndividualController/>
                     </DataDiv>
 
                     <MovesDiv>

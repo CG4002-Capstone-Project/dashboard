@@ -54,7 +54,7 @@ export class PositionsController extends Component {
                 <PositionHeadlineDiv>
                     <br />
                     <h1> Overall Dance Position Statistics </h1>
-                    <h2> There were total {this.state.totalPositions} moves </h2>
+                    <h2> There were total {this.state.totalPositions} positions </h2>
                     <h2> The group had {this.state.totalCorrectPositions} correct positions moves.  </h2>
                 </PositionHeadlineDiv>
 
