@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PositionHeadlineDiv, TraineeOneDiv, TraineeTwoDiv, TraineeThreeDiv } from './PositionsControllerStyledComponents';
 import { UserContext } from '../../../../../contexts/UserContext';
 import { getPositionsSummary } from '../../../../../utils/Analytics';
+import PieChart from './PieChart';
 
 export class PositionsController extends Component {
     static contextType = UserContext;
@@ -51,18 +52,23 @@ export class PositionsController extends Component {
         return (
             <React.Fragment>
                 <PositionHeadlineDiv>
-                    {this.state.totalPositions}
+                    <br />
+                    <h1> Overall Dance Position Statistics </h1>
+                    <h2> There were total {this.state.totalPositions} moves </h2>
+                    <h2> The group had {this.state.totalCorrectPositions} correct positions moves.  </h2>
                 </PositionHeadlineDiv>
 
                 <TraineeOneDiv>
-
+                    <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
                 </TraineeOneDiv>
 
                 <TraineeTwoDiv>
+                    <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
 
                 </TraineeTwoDiv>
 
                 <TraineeThreeDiv>
+                    <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
 
                 </TraineeThreeDiv>
             </React.Fragment>

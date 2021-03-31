@@ -188,7 +188,12 @@ const getAccumulatedPositions = async () => {
 
         for (const doc of resultsDocs) {
             totalPositions += 1;
-
+            
+            if (doc.correctDancerIds === doc.dancerIds) {
+                totalCorrectPositions += 1;
+            } else {
+                totalIncorrectPositions += 1;
+            }
             const correctDancerIdsString = doc.correctDancerIds.trim();
             const correctDancerIdsArray = correctDancerIdsString.split(' ');
 
@@ -198,7 +203,6 @@ const getAccumulatedPositions = async () => {
             let i = 0;
             for (const pos of correctDancerIdsArray) {
                 if (pos === dancerIdsArray[i]) {
-                    totalCorrectPositions += 1;
                     if (pos === '1') {
                         traineeOneCorrectPosition += 1;
                     } else if (pos === '2') {
@@ -207,7 +211,6 @@ const getAccumulatedPositions = async () => {
                         traineeThreeCorrectPosition += 1;
                     }
                 } else {
-                    totalIncorrectPositions += 1;
                     if (pos === '1') {
                         traineeOneIncorrectPosition += 1;
                     } else if (pos === '2') {
