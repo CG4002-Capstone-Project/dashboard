@@ -197,8 +197,8 @@ const getAccumulatedPositions = async () => {
 
             let i = 0;
             for (const pos of correctDancerIdsArray) {
-                totalCorrectPositions += 1;
                 if (pos === dancerIdsArray[i]) {
+                    totalCorrectPositions += 1;
                     if (pos === '1') {
                         traineeOneCorrectPosition += 1;
                     } else if (pos === '2') {
