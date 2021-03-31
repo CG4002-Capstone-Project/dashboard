@@ -22,7 +22,8 @@ export class Login extends Component {
         const password = this.state.password;
         const { user, handleUser } = this.context;
 
-        // console.log('CONTEXT 1', this.context);
+        console.log('CONTEXT 1', this.context);
+        console.log('LOGIN STATE', this.state);
         await handleUser({ ...user, isFetching: true });
         try {
             // console.log('CONTEXT 2', this.context);

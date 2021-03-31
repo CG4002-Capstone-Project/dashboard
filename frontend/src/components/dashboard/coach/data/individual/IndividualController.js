@@ -95,9 +95,9 @@ export class IndividualController extends Component {
     render() {
         return (
             <IndividualControllerDiv>
-                <Individual data={this.state.t1Data} no='1' name='Riyas'  />
-                <Individual data={this.state.t2Data} no='2' name='Zeng Hao'  />
-                <Individual data={this.state.t3Data} no='3' name='Brandon'  />
+                <Individual data={this.state.t1Data} no='1' name='Brandon'  />
+                <Individual data={this.state.t2Data} no='2' name='Riyas'  />
+                <Individual data={this.state.t3Data} no='3' name='Ting Wei'  />
             </IndividualControllerDiv>
         )
     }

@@ -112,7 +112,10 @@ db.once('open', async () => {
                 const correctMove = transposeMoves(change.fullDocument.correctMove);
                 // for actual one only 
                 const accuracy = parseFloat(change.fullDocument.accuracy);
-                const modifiedAccuracy = accuracy * 150;
+                let modifiedAccuracy = accuracy * 150;
+                if (modifiedAccuracy > 95) {
+                    modifiedAccuracy = 95;
+                }
                 const modifiedAccuracyString = modifiedAccuracy.toString();
                 const result = {
                     timestamp: change.fullDocument.timestamp,

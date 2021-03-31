@@ -26,7 +26,8 @@ export class EmgController extends Component {
                     ...prevState.currentEmg,
                     voltage: result.voltage,
                     rms: result.rms,
-                    mfq: result.mfq
+                    mfq: result.mfq,
+                    timestamp: result.timestamp
                 }
             }))
         })

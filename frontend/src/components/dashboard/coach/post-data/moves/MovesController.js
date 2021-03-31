@@ -62,15 +62,18 @@ export class MovesController extends Component {
                 </MoveHeadlineDiv>
 
                 <HairChartDiv>
+                    <div> Hair: No of correct - {this.state.totalHairCorrect}, No of incorrect - {this.state.totalHairIncorrect} </div>
                     <PieChart name='Hair' totalCorrect={this.state.totalHairCorrect} totalIncorrect={this.state.totalHairIncorrect} />
                 </HairChartDiv>
 
                 <GunChartDiv>
+                    <div> Hair: No of correct - {this.state.totalGunCorrect}, No of incorrect - {this.state.totalGunIncorrect} </div>
                     <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
 
                 </GunChartDiv>
 
                 <SidepumpChartDiv>
+                    <div> Hair: No of correct - {this.state.totalSidepumpCorrect}, No of incorrect - {this.state.totalSidepumpIncorrect} </div>
                     <PieChart name='Sidepump' totalCorrect={this.state.totalSidepumpCorrect} totalIncorrect={this.state.totalSidepumpIncorrect} />
                 </SidepumpChartDiv>
             </React.Fragment>

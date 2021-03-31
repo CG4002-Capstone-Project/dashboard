@@ -91,7 +91,7 @@ export class IndividualController extends Component {
         if (this.state.currentTrainee == 1) {
             individual = (
                 <Individual 
-                    name='Riyas'
+                    name='Brandon'
                     no='1'
                     timestamp={this.state.traineeOneTimestamp} 
                     accx={this.state.traineeOneAccx} 
@@ -105,7 +105,7 @@ export class IndividualController extends Component {
         } else if (this.state.currentTrainee == 2) {
             individual = (
                 <Individual
-                    name='Zeng Hao'
+                    name='Riyas'
                     no='2'
                     timestamp={this.state.traineeTwoTimestamp}
                     accx={this.state.traineeTwoAccx}
@@ -119,7 +119,7 @@ export class IndividualController extends Component {
         } else if (this.state.currentTrainee == 3) {
             individual = (
                 <Individual
-                    name='Brandon'
+                    name='Ting Wei'
                     no='3'
                     timestamp={this.state.traineeThreeTimestamp}
                     accx={this.state.traineeThreeAccx}

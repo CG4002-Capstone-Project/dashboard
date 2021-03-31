@@ -59,15 +59,18 @@ export class PositionsController extends Component {
                 </PositionHeadlineDiv>
 
                 <TraineeOneDiv>
+                    <div> Trainee 1: No of correct - {this.state.traineeOneCorrectPosition}, No of incorrect - {this.state.traineeOneIncorrectPosition} </div>
                     <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
                 </TraineeOneDiv>
 
                 <TraineeTwoDiv>
+                    <div> Trainee 2: No of correct - {this.state.traineeTwoCorrectPosition}, No of incorrect - {this.state.traineeTwoIncorrectPosition} </div>
                     <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
 
                 </TraineeTwoDiv>
 
                 <TraineeThreeDiv>
+                    <div> Trainee 3: No of correct - {this.state.traineeThreeCorrectPosition}, No of incorrect - {this.state.traineeThreeIncorrectPosition} </div>
                     <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
 
                 </TraineeThreeDiv>
