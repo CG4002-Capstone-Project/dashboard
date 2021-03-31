@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getResultsSummary } from '../../../../../utils/Analytics';
+import { getDataSummary } from '../../../../../utils/Analytics';
 import { UserContext } from '../../../../../contexts/UserContext';
 import { DropDownDiv } from './IndividualControllerStyledComponents';
 import Individual from './Individual';
@@ -14,7 +14,7 @@ export class IndividualController extends Component {
 
         try {
             console.log('POST DATA 2');
-            const resultsSummary = await getResultsSummary();
+            const resultsSummary = await getDataSummary();
             console.log('POST DATA 3');
             await this.setState(prevState => ({
                 ...prevState,
