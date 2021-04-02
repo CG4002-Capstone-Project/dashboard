@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { LoginDiv, NavBarDiv, MainDiv, ContentDiv, LoginMainFormDiv, SideContentDiv,
     LoginH2Div, LoginH1, LoginFormDiv, IndividualField, LoginH2,
-    GIFDiv, Video, LoginH1Div } from './LoginStyledComponents';
+    GIFDiv, Video, LoginH1Div, LoginAttemptFailedDiv, LoginAttemptFailedText } from './LoginStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import { TextInputField, Button } from 'evergreen-ui';
 import { login } from '../../utils/Auth';
@@ -16,6 +16,7 @@ export class Login extends Component {
         email: '',
         password: '',
         onSave: false,
+        onLoginAttemptFailed: false
     }
 
     async handleLoginProcess() {
@@ -23,21 +24,31 @@ export class Login extends Component {
         const password = this.state.password;
         const { user, handleUser } = this.context;
 
-        console.log('CONTEXT 1', this.context);
-        console.log('LOGIN STATE', this.state);
+        // console.log('CONTEXT 1', this.context);
+        // console.log('LOGIN STATE', this.state);
         await handleUser({ ...user, isFetching: true });
         try {
             // console.log('CONTEXT 2', this.context);
-            const role = login({ email, password });
+            const {role, success} = await login({ email, password });
             // console.log(role);
             // console.log('CONTEXT 3', this.context);
-            await handleUser({
-                ...user,
-                email,
-                role,
-                isAuth: true,
-                isFetching: true,
-            });
+
+            //console.log('SUCCESS ', success );
+            if (success) {
+                await handleUser({
+                    ...user,
+                    email,
+                    role,
+                    isAuth: true,
+                    isFetching: true,
+                });
+            } else {
+                await this.setState(prevState => ({
+                    ...prevState,
+                    onLoginAttemptFailed: true
+                }))
+            }
+            
             // console.log('CONTEXT 4', this.context);
             // console.log('LOCAL STORAGE ', getAccessToken(), getName());
 
@@ -57,6 +68,7 @@ export class Login extends Component {
     }
 
     render() {
+
         return (
             <LoginDiv>
                 <LoginAndRegisterNavBar />
@@ -69,17 +81,33 @@ export class Login extends Component {
 
                             <LoginFormDiv>
                                 <IndividualField>
-                                    <TextInputField placeholder="Email" margin='auto' width={400} onChange={e => this.setState({ email: e.target.value })} />
+                                    <TextInputField
+                                        label="Email"
+                                        placeholder="Email" 
+                                        margin='auto' 
+                                        required 
+                                        isInvalid={this.state.onLoginAttemptFailed ? true : false }
+                                        validationMessage={this.state.onLoginAttemptFailed ? 'Email may or may not be correct.' : null} 
+                                        width={400} 
+                                        onChange={e => this.setState({ email: e.target.value, onLoginAttemptFailed: false })} />
                                 </IndividualField>
 
                                 <IndividualField>
-                                    <TextInputField placeholder="Password" margin='auto' width={400} onChange={e => this.setState({ password: e.target.value })} />
+                                    <TextInputField 
+                                        label="Password"
+                                        placeholder="Password" 
+                                        margin='auto' 
+                                        required 
+                                        validationMessage={this.state.onLoginAttemptFailed ? 'Password may or may not be correct.' : null} 
+                                        isInvalid={this.state.onLoginAttemptFailed ? true : false } 
+                                        width={400} 
+                                        onChange={e => this.setState({ password: e.target.value, onLoginAttemptFailed: false })} />
                                 </IndividualField>
 
                                 <IndividualField>
                                     <Button onClick={this.onSubmitButtonClicked} >Submit</Button>
                                 </IndividualField>
-
+                                
                             </LoginFormDiv>
                         </LoginMainFormDiv>
                         <SideContentDiv>

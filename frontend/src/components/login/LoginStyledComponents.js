@@ -79,6 +79,14 @@ export const IndividualField = styled.div`
     /* border: 2px solid green; */
 `;
 
+export const LoginAttemptFailedDiv = styled.div`
+
+`;
+
+export const LoginAttemptFailedText = styled.text`
+    color: red
+`;
+
 export const LeftContent = styled.div`
     flex: 1;
     display: flex;
