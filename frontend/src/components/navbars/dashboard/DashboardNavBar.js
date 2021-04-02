@@ -11,7 +11,7 @@ export class DashboardNavBar extends Component {
                 <LinkContainer to="/">
                     <Navbar.Brand className="font-weight-bold"> DanceEdge </Navbar.Brand>
                 </LinkContainer>
-                <Navbar.Brand className="font-weight-bold text-muted"> Logged in as: {localStorage.getItem('name')} </Navbar.Brand>
+                <Navbar.Brand className="font-weight-bold text-muted"> Logged in as: {sessionStorage.getItem('name')} </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav className="mr-auto" className="justify-content-end">

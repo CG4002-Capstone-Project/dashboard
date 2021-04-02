@@ -81,13 +81,14 @@ export const login = async (data) => {
     const name = response.data.name;
     const email = response.data.email;
     const role = response.data.role;
+    const success = response.data.success;
     // console.log('access token: ' + JSON.stringify(accessToken));
     setAccessToken(accessToken);
     setName(name);
     setEmail(email);
     setRole(role);
 
-    return role;
+    return {role, success};
 }
 
 export const test = async (data) => {
