@@ -104,7 +104,7 @@ export const SideContentDiv = styled.div`
 `;
 
 export const LoginH2Div = styled.div`
-    width: 75%;
+    width: 80%;
     /* margin: auto; */
     box-sizing: border-box;
     /* border: 2px solid pink; */
@@ -126,9 +126,12 @@ export const GIFDiv = styled.div`
     /* flex: 3; */
     /* margin: auto; */
     box-sizing: border-box;
+    overflow: hidden;
+
 `;
 
 export const Video = styled.video`
     object-fit: cover;
-    margin: auto;
+    width: 400px;
+    height: 300px;
 `;
