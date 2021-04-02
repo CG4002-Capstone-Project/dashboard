@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { LoginDiv, NavBarDiv, MainDiv, ContentDiv, LoginMainFormDiv, SideContentDiv,
     LoginH2Div, LoginH1, LoginFormDiv, IndividualField } from './LoginStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
-import Navbar from '../navbars/login/Navbar';
 import { TextInputField, Button } from 'evergreen-ui';
 import { login } from '../../utils/Auth';
 import { UserContext } from '../../contexts/UserContext';
@@ -58,10 +57,11 @@ export class Login extends Component {
     render() {
         return (
             <LoginDiv>
-                <NavBarDiv>
-                    {/* <LoginAndRegisterNavBar /> */}
+                {/* <NavBarDiv>
+                    
                     <Navbar />
-                </NavBarDiv>
+                </NavBarDiv> */}
+                <LoginAndRegisterNavBar />
                 <MainDiv>
                     <ContentDiv>
                         <LoginMainFormDiv>
