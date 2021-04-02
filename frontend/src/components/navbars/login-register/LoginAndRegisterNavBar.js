@@ -10,7 +10,7 @@ export class LoginAndRegisterNavBar extends Component {
 
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <LinkContainer to="/login">
+                <LinkContainer to="/">
                     <Navbar.Brand className="font-weight-bold" > DanceEdge </Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
