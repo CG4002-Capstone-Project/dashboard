@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 import { LoginDiv, NavBarDiv, MainDiv, ContentDiv, LoginMainFormDiv, SideContentDiv,
-    LoginH2Div, LoginH1, LoginFormDiv, IndividualField } from './LoginStyledComponents';
+    LoginH2Div, LoginH1, LoginFormDiv, IndividualField, LoginH2,
+    GIFDiv, Video, LoginH1Div } from './LoginStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import { TextInputField, Button } from 'evergreen-ui';
 import { login } from '../../utils/Auth';
 import { UserContext } from '../../contexts/UserContext';
+import video from './the_office.mp4';
 
 export class Login extends Component {
     static contextType = UserContext;
@@ -57,14 +59,14 @@ export class Login extends Component {
     render() {
         return (
             <LoginDiv>
-                {/* <NavBarDiv>
-                    
-                    <Navbar />
-                </NavBarDiv> */}
                 <LoginAndRegisterNavBar />
                 <MainDiv>
                     <ContentDiv>
                         <LoginMainFormDiv>
+                            <LoginH1Div>
+                                <LoginH1> Login </LoginH1>
+                            </LoginH1Div>
+
                             <LoginFormDiv>
                                 <IndividualField>
                                     <TextInputField placeholder="Email" margin='auto' width={400} onChange={e => this.setState({ email: e.target.value })} />
@@ -82,8 +84,11 @@ export class Login extends Component {
                         </LoginMainFormDiv>
                         <SideContentDiv>
                             <LoginH2Div>
-                                <LoginH1> Login </LoginH1>
+                                <LoginH2> Cant wait to dance like these guys?  </LoginH2>
                             </LoginH2Div>
+                            <GIFDiv>
+                                <Video autoPlay loop muted src={video} type='video/mp4' />
+                            </GIFDiv>
 
                         </SideContentDiv>
                     </ContentDiv>

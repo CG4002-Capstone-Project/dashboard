@@ -31,9 +31,11 @@ export const ContentDiv = styled.div`
     /* border: 2px solid green; */
     height: 75%;
     max-width: 60%;
-    background-color: #333;
+    background-color: #0c0c0c;
+    padding: 10px;
     display: flex;
     flex-direction: row;
+    border-radius: 30px;
 `;
 
 export const LoginMainFormDiv = styled.div`
@@ -41,41 +43,92 @@ export const LoginMainFormDiv = styled.div`
     box-sizing: border-box;
     /* border: 2px solid yellow; */
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const LoginH1Div = styled.div`
+    width: 50%;
+    /* margin: auto; */
+    box-sizing: border-box;
+    /* border: 2px solid pink; */
+    text-align: center;
+
+    /* position: relative; */
+    /* flex: 1; */
 `;
 
 export const LoginFormDiv = styled.div`
-    flex: 1;
+    /* flex: 1; */
     box-sizing: border-box;
-    margin: auto;
+    /* margin: auto; */
     /* border: 2px solid yellow; */
     text-align: center;
     align-content: center;
+    border-radius: 30px;
+    padding-top: 10px;
+    background-color: #191919;
+
 `;
 
 export const IndividualField = styled.div`
-    margin: 15px auto;
+    margin: 15px;
     box-sizing: border-box;
     text-align: center;
     /* border: 2px solid green; */
-`
+`;
+
+export const LeftContent = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
+export const RightContent = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
 
 export const SideContentDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     /* border: 2px solid red; */
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const LoginH2Div = styled.div`
-    width: 50%;
-    margin: auto;
+    width: 75%;
+    /* margin: auto; */
     box-sizing: border-box;
     /* border: 2px solid pink; */
     text-align: center;
     position: relative;
-    flex: 1;
+    /* flex: 1; */
+    padding-bottom: 10px;
 `;
 
 export const LoginH1 = styled.h1`
     color: white; 
+`;
+
+export const LoginH2 = styled.h2`
+    color: white;
+`;
+
+export const GIFDiv = styled.div`
+    /* flex: 3; */
+    /* margin: auto; */
+    box-sizing: border-box;
+`;
+
+export const Video = styled.video`
+    object-fit: cover;
+    margin: auto;
 `;
