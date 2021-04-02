@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+// how to mae video in background: https://jsfiddle.net/tkloht/y61s3vqk/3/
+// additional: https://css-tricks.com/full-page-background-video-styles/
+
+
 export const HomeDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,11 +28,42 @@ export const VideoBg = styled.video`
 
 export const VideoContent = styled.div`
     box-sizing: border-box;
-    border: 2px solid yellow;
+    /* border: 2px solid yellow; */
     position: absolute;
     display: inline-block;
     width: 100%;
     height: 100%;
+`;
+
+export const HeadlineDiv = styled.div`
+    position: relative;
+    top: 20%;
+    left: 5%;
+    box-sizing: border-box;
+    /* border: 2px solid red; */
+    width: fit-content;
+    /* filter: blur(4px); */
+    backdrop-filter: blur(4px);
+    // https://css-tricks.com/almanac/properties/b/backdrop-filter/
+`;
+
+export const ContentH1 = styled.h1`
+    color: #ff0000;
+    
+`;
+
+
+export const ContentH2 = styled.h2`
+    color: whitesmoke;
+`;
+
+export const YellowContentH2 = styled.h2`
+    color: yellow;
+`;
+
+
+export const ContentH3 = styled.h3`
+    color: white;
 `;
 
 export const ContentDiv = styled.div`
