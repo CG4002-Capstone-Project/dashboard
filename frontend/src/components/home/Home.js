@@ -4,7 +4,8 @@ import {
     HomeDiv,
     CoverVideoDiv,
     ContentDiv,
-    VideoBg
+    VideoBg,
+    VideoContent
 } from './HomeStyledComponents';
 import video from './Cover-Video.mp4';
 
@@ -16,7 +17,11 @@ export class Home extends Component {
                 <HomeDiv>
                     <CoverVideoDiv>
                         <VideoBg autoPlay loop muted src={video} type='video/mp4' />
+                        <VideoContent>
+                        <h1> Hello </h1>
+                        </VideoContent>
                     </CoverVideoDiv>
+   
                     <ContentDiv>
 
                     </ContentDiv>
