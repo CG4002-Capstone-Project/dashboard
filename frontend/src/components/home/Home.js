@@ -3,8 +3,10 @@ import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNa
 import {
     HomeDiv,
     CoverVideoDiv,
-    ContentDiv
+    ContentDiv,
+    VideoBg
 } from './HomeStyledComponents';
+import video from './Cover-Video.mp4';
 
 export class Home extends Component {
     render() {
@@ -13,7 +15,7 @@ export class Home extends Component {
                 <LoginAndRegisterNavBar />
                 <HomeDiv>
                     <CoverVideoDiv>
-
+                        <VideoBg autoPlay loop muted src={video} type='video/mp4' />
                     </CoverVideoDiv>
                     <ContentDiv>
 
