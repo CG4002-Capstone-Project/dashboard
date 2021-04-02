@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import { NavBarDiv } from './LoginAndRegisterNavBarStyledComponents';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-// import '../../dashboard/node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './LoginAndRegisterNavBar.css';
+import { LinkContainer } from 'react-router-bootstrap';
 
-// TODO the href here are all referring to trainee/login and trainee/register . trainee should be removed.
+// how to implement LinkContainer: https://medium.com/how-to-react/use-react-router-link-with-bootstrap-315a8b88e129
 
 export class LoginAndRegisterNavBar extends Component {
     render() {
+
         return (
-            <Navbar bg="dark" variant="light" fixed='top' className='navbar-dark'>
-                <Navbar.Brand href='home'> DanceEdge </Navbar.Brand>
-                <Nav variant='pills' className='nav'>
-                    <Nav.Item className='item'>
-                        <Nav.Link href='register'> Register </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item className='item'>
-                        <Nav.Link href='login'> Login </Nav.Link>
-                    </Nav.Item>
-                </Nav>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <LinkContainer to="/">
+                    <Navbar.Brand className="font-weight-bold" > DanceEdge </Navbar.Brand>
+                </LinkContainer>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end"  >
+                    <Nav className="mr-auto" className="justify-content-end">
+                        <LinkContainer to="/login">
+                            <Nav.Link > Login </Nav.Link>
+                        </LinkContainer>
+
+                        <LinkContainer to="/register">
+                            <Nav.Link > Registration </Nav.Link>
+                        </LinkContainer>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         )
     }
