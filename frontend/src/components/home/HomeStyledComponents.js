@@ -14,7 +14,7 @@ export const HomeDiv = styled.div`
 
 export const CoverVideoDiv = styled.div`
     box-sizing: border-box;
-    height: calc(100vh - 56px);
+    height: 100vh;
     /* border: 5px solid red; */
 `;
 
@@ -73,7 +73,51 @@ export const ContentH4 = styled.h4`
 
 export const ContentDiv = styled.div`
     box-sizing: border-box;
-    /* border: 2px solid purple; */
+    /* border: 5px solid purple; */
     height: 100vh;
+    background-color: black;
+    display: flex;
 `;
 
+export const ContentMainDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    margin: auto;
+    /* border: 2px solid green; */
+    height: 75%;
+    max-width: 60%;
+    background-color: #0c0c0c;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 30px;
+`;
+
+export const ParaMainDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    /* border: 2px solid yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const DemoMainDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    /* border: 2px solid yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const DemoBg = styled.video`
+    object-fit: contain;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    display: inline-block;
+
+`;

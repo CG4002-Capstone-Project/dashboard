@@ -12,9 +12,14 @@ import {
     ContentH4,
     YellowContentH2,
     SpanDanceEdge,
-    NormalSpan
+    NormalSpan,
+    ContentMainDiv,
+    ParaMainDiv,
+    DemoMainDiv,
+    DemoBg
 } from './HomeStyledComponents';
 import video from './Cover-Video-2.mp4';
+import demo from './demo.MOV';
 import { IconButton, ArrowRightIcon } from 'evergreen-ui';
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
@@ -93,7 +98,7 @@ export class Home extends Component {
                                             activeClass="active"
                                             to="main-content"
                                             spy={true}
-                                            offset={50}
+                                            offset={0}
                                             duration={500}
                                             smooth={true}
                                             onSetActive={this.handleSetActive}
@@ -115,7 +120,14 @@ export class Home extends Component {
 
                     <Element name="main-content">
                         <ContentDiv>
-
+                            <ContentMainDiv>
+                                <ParaMainDiv>
+                                    <p> Macha </p>
+                                </ParaMainDiv>
+                                <DemoMainDiv>
+                                    <DemoBg autoPlay loop muted src={demo} type='video/MOV' />
+                                </DemoMainDiv>
+                            </ContentMainDiv>
                         </ContentDiv>
                     </Element>
                     
