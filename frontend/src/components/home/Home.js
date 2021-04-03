@@ -16,13 +16,17 @@ import {
     ContentMainDiv,
     ParaMainDiv,
     DemoMainDiv,
-    DemoBg
+    DemoBg,
+    ParaDiv,
+    ButtonsDiv,
+    ParaContent
 } from './HomeStyledComponents';
 import video from './Cover-Video-2.mp4';
 import demo from './demo.MOV';
-import { IconButton, ArrowRightIcon } from 'evergreen-ui';
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-
+import { IconButton, ArrowRightIcon, Button } from 'evergreen-ui';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { Redirect } from 'react-router-dom';
+ 
 
 export class Home extends Component {
     componentDidMount() {
@@ -67,13 +71,21 @@ export class Home extends Component {
 
     onScrollButtonClicked = event => {
         event.preventDefault();
-        console.log('here');
+        console.log('Scroll button clicked on home page');
         // not neccessary but just archiving it 
         // scroller.scrollTo('main-content', {
         //     duration: 500,
         //     offset: 50,
         //     smooth: true
         // })
+    }
+
+    onRegisterButtonClicked = event => {
+        event.preventDefault();
+        console.log('Register Now button clicked on home page')
+        // return <Redirect to='/register' />
+        // how to redirect to another page, apparently just gotta push to props of history: https://stackoverflow.com/questions/44877821/how-to-navigate-on-path-by-button-click-in-react-router-v4
+        this.props.history.push('/register');
     }
 
     render() {
@@ -122,7 +134,24 @@ export class Home extends Component {
                         <ContentDiv>
                             <ContentMainDiv>
                                 <ParaMainDiv>
-                                    <p> Macha </p>
+                                    <ParaDiv>
+                                        <ParaContent>
+                                            DanceEdge is the leading remote dance provider company. With the significant disruption caused
+                                            by the COVID-19 pandemic on our society, physical interactions are no longer possible. Dancing in a group has 
+                                            been made difficult. Dance coaches are no longer able to monitor the progress of their trainees effectively. That was
+                                            until, DanceEdge was developed.
+                                        </ParaContent>
+
+                                        <ParaContent>
+                                            DanceEdge provides a slick user interface dashboard to both coaches and trainees. Each trainee is provided with a one size
+                                            fit all hardware motion sensor that detects the trainees position and dance moves. Data is instantaneously sent to the dashboard
+                                            for clear visualizations. Learning how to dance in a group has never been made easy...till DanceEdge came along.
+                                        </ParaContent>
+                                    </ParaDiv>
+                                    <ButtonsDiv>
+                                        <ContentH2> DanceEdge is currently a one time FREE OF COST promotion till end April! Register today! </ContentH2>
+                                        <Button onClick={this.onRegisterButtonClicked} marginTop='16px' >Register Now!</Button>
+                                    </ButtonsDiv>
                                 </ParaMainDiv>
                                 <DemoMainDiv>
                                     <DemoBg autoPlay loop muted src={demo} type='video/MOV' />

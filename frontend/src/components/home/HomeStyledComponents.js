@@ -84,7 +84,7 @@ export const ContentMainDiv = styled.div`
     box-sizing: border-box;
     margin: auto;
     /* border: 2px solid green; */
-    height: 75%;
+    height: fit-content;
     max-width: 60%;
     background-color: #0c0c0c;
     padding: 10px;
@@ -103,6 +103,25 @@ export const ParaMainDiv = styled.div`
     align-items: center;
 `;
 
+export const ParaDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    /* border: 2px solid green; */
+    padding: 5%;
+`;
+
+export const ButtonsDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    /* border: 2px solid red; */
+    padding: 5%;
+    text-align: center;
+`;
+
+export const ParaContent = styled.p`
+    color: whitesmoke;
+`; 
+
 export const DemoMainDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
@@ -119,5 +138,4 @@ export const DemoBg = styled.video`
     height: 400px;
     position: absolute;
     display: inline-block;
-
 `;
