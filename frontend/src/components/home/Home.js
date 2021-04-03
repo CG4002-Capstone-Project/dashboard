@@ -9,8 +9,9 @@ import {
     HeadlineDiv,
     ContentH1,
     ContentH2,
-    ContentH3,
-    YellowContentH2
+    ContentH4,
+    YellowContentH2,
+    SpanDanceEdge
 } from './HomeStyledComponents';
 import video from './Cover-Video-2.mp4';
 
@@ -29,8 +30,8 @@ export class Home extends Component {
                                 <ContentH1> Dying to Dance in a Group?  </ContentH1>
                                 <br/>
                                 <br/>
-                                <YellowContentH2> Don't Worry, DanceEdge, has got you covered </YellowContentH2>
-                                <ContentH3> Check out our world-leading technology below </ContentH3>
+                                <YellowContentH2> Don't Worry, <SpanDanceEdge> DanceEdge </SpanDanceEdge>, has got you covered </YellowContentH2>
+                                <ContentH4> Check out our world-leading technology below </ContentH4>
                             </HeadlineDiv>
                         </VideoContent>
                     </CoverVideoDiv>

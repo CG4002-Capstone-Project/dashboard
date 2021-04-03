@@ -48,22 +48,24 @@ export const HeadlineDiv = styled.div`
 `;
 
 export const ContentH1 = styled.h1`
-    color: #ff0000;
-    
+    color: 	#cdcdb4;
 `;
 
+export const SpanDanceEdge = styled.span`
+    color: 	#8b0000;
+`;
 
 export const ContentH2 = styled.h2`
-    color: whitesmoke;
+    color: #cdcdb4;
 `;
 
 export const YellowContentH2 = styled.h2`
-    color: yellow;
+    color: #cdcdb4;
 `;
 
 
-export const ContentH3 = styled.h3`
-    color: white;
+export const ContentH4 = styled.h4`
+    color: #cdcdb4;
 `;
 
 export const ContentDiv = styled.div`
