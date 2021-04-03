@@ -9,7 +9,7 @@ export class LoginAndRegisterNavBar extends Component {
     render() {
 
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top" >
                 <LinkContainer to="/">
                     <Navbar.Brand className="font-weight-bold" > DanceEdge </Navbar.Brand>
                 </LinkContainer>
