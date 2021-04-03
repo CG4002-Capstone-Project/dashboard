@@ -37,10 +37,18 @@ const rawEMGSchema = new mongoose.Schema({
 
 const RawEMGModel = mongoose.model('raw_emg', rawEMGSchema);
 
+const modeSchema = new mongoose.Schema({
+    timestamp: { type: String, default: Date.now() },
+    mode: { type: String, required: true, trim: true },
+})
+
+const ModeModel = mongoose.model('mode', modeSchema);
+
 module.exports = {
     TraineeOneDataModel,
     TraineeTwoDataModel,
     TraineeThreeDataModel,
     RawResultModel,
-    RawEMGModel
+    RawEMGModel,
+    ModeModel
 }
