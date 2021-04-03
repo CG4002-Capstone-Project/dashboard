@@ -321,7 +321,7 @@ const readEverythingIntoDb = () => {
                 j += 1;
             }
 
-            if (i % 400 == 200 && k < resultRecords.length) {
+            if (i % 200 == 0 && k < resultRecords.length) {
                 const resultInstance = new RawResultModel({ 
                     dancerIds: resultRecords[k][0],
                     correctDancerIds: resultRecords[k][1],
