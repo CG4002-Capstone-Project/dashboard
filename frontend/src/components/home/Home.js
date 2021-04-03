@@ -11,11 +11,66 @@ import {
     ContentH2,
     ContentH4,
     YellowContentH2,
-    SpanDanceEdge
+    SpanDanceEdge,
+    NormalSpan
 } from './HomeStyledComponents';
 import video from './Cover-Video-2.mp4';
+import { IconButton, ArrowRightIcon } from 'evergreen-ui';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 export class Home extends Component {
+    componentDidMount() {
+        Events.scrollEvent.register('begin', (to, element) => {
+            console.log('HOME Page Begin', arguments)
+        })
+
+        Events.scrollEvent.register('end', (to, element) => {
+            console.log('HOME Page End', arguments)
+        })
+        scrollSpy.update();
+    }
+
+    componentWillUnmount() {
+        Events.scrollEvent.remove('begin');
+        Events.scrollEvent.remove('end');
+    }
+
+    scrollToTop = () => {
+        scroll.scrollToTop();
+    }
+
+    scrollToBottom = () => {
+        scroll.scrollToBottom();
+    }
+
+    scrollTo = () => {
+        scroll.scrollTo(100);
+    }
+
+    scrollMore = () => {
+        scroll.scrollMore(100);
+    }
+
+    handleSetActive = (to) => {
+        console.log(to);
+    } 
+
+    state = {
+        onScrollDownButtonHover: false,
+    }
+
+    onScrollButtonClicked = event => {
+        event.preventDefault();
+        console.log('here');
+        // not neccessary but just archiving it 
+        // scroller.scrollTo('main-content', {
+        //     duration: 500,
+        //     offset: 50,
+        //     smooth: true
+        // })
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -31,14 +86,39 @@ export class Home extends Component {
                                 <br/>
                                 <br/>
                                 <YellowContentH2> Don't Worry, <SpanDanceEdge> DanceEdge </SpanDanceEdge>, has got you covered </YellowContentH2>
-                                <ContentH4> Check out our world-leading technology below </ContentH4>
+                                <ContentH4> 
+                                        Check out our world-leading technology below
+                                        <NormalSpan>
+                                            <Link 
+                                            activeClass="active"
+                                            to="main-content"
+                                            spy={true}
+                                            offset={50}
+                                            duration={500}
+                                            smooth={true}
+                                            onSetActive={this.handleSetActive}
+                                            >
+                                                <IconButton 
+                                                appearance='primary'
+                                                intent='success'
+                                                icon={ArrowRightIcon}
+                                                onClick={this.onScrollButtonClicked}
+                                                // style={{ float: 'right'}}
+                                                />    
+                                            
+                                            </Link>
+                                        </NormalSpan>
+                                </ContentH4> 
                             </HeadlineDiv>
                         </VideoContent>
                     </CoverVideoDiv>
-   
-                    <ContentDiv>
 
-                    </ContentDiv>
+                    <Element name="main-content">
+                        <ContentDiv>
+
+                        </ContentDiv>
+                    </Element>
+                    
                 </HomeDiv>
             </React.Fragment>
         )

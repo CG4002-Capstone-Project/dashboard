@@ -55,6 +55,9 @@ export const SpanDanceEdge = styled.span`
     color: 	#8b0000;
 `;
 
+export const NormalSpan = styled.span`
+`;
+
 export const ContentH2 = styled.h2`
     color: #cdcdb4;
 `;
