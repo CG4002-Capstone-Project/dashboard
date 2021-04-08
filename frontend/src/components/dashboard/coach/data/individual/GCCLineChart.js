@@ -103,24 +103,24 @@ export default class GCCLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'red',
-                    backgroundColor: 'red'              
+                    borderColor: 'hsl(62, 100%, 69%)',
+                    backgroundColor: 'hsl(62, 100%, 69%)'              
                 }, {
                     label: 'Gcc Y',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'blue',
-                    backgroundColor: 'blue'
+                    borderColor: 'hsl(171, 100%, 69%)',
+                    backgroundColor: 'hsl(171, 100%, 69%)'
                 }, {
                     label: 'Gcc Z',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'green',
-                    backgroundColor: 'green'
+                    borderColor: 'hsl(0, 100%, 85%)',
+                    backgroundColor: 'hsl(0, 100%, 85%)'
                 }]
             }
 

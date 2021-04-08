@@ -87,8 +87,8 @@ export default class EmgLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'teal',
-                    backgroundColor: 'teal',
+                    borderColor: 'hsl(62, 100%, 69%)',
+                    backgroundColor: 'hsl(62, 100%, 69%)',
                     spanGaps: true,            
                 }, {
                     label: 'RMS',
@@ -96,8 +96,8 @@ export default class EmgLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'lime',
-                    backgroundColor: 'lime',
+                    borderColor: 'hsl(171, 100%, 69%)',
+                    backgroundColor: 'hsl(171, 100%, 69%)',
                     spanGaps: true,                   
                 }, {
                     label: 'MFQ',
@@ -105,8 +105,8 @@ export default class EmgLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'purple',
-                    backgroundColor: 'purple',
+                    borderColor: 'hsl(0, 100%, 85%)',
+                    backgroundColor: 'hsl(0, 100%, 85%)',
                     spanGaps: true,               
                 }]
             }

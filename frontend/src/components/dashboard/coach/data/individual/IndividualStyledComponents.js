@@ -8,6 +8,10 @@ export const IndividualDiv = styled.div`
     border-radius: 20px;
     margin-right: 15px;
     background-color: #1A1A1A;
+
+    :hover {
+        background-color: black;
+    }
 `;
 
 export const PreDisplay = styled.div`
