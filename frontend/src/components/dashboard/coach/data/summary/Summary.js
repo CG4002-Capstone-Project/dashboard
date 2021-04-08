@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
-import { SummaryDiv, ModeDiv, ModeContentDiv, DanceMovePlayerDiv, EMGDiv, CorrectPositionDiv, SyncDelayMoveAccuracyDiv, HistoryDiv,
-    GreenH4, RedH4, CorrectPositionContentDiv } from './SummaryStyledComponents';
+import { SummaryDiv, 
+    ModeDiv, 
+    ModeContentDiv, 
+    DanceMovePlayerDiv, 
+    EMGDiv, 
+    CorrectPositionDiv, 
+    SyncDelayMoveAccuracyDiv, 
+    HistoryDiv,
+    GreenH4, 
+    RedH4, 
+    CorrectPositionContentDiv,
+    WhiteH4 } from './SummaryStyledComponents';
 import ReactPlayer from 'react-player';
 import Table from 'react-bootstrap/Table';
 import Fade from 'react-bootstrap/Fade';
@@ -108,37 +118,37 @@ export class Summary extends Component {
         // console.log('history', this.state.history);
     }
     
-    settleMode() {
-        if (this.state.mode == '') {
-            currentMode = (
-                <ModeDiv>
-                    <ModeContentDiv>
-                        <h4> Trainee Instructions </h4>
-                        <h4> Waiting for incoming data! Be Patient. </h4>
-                    </ModeContentDiv>
-                </ModeDiv>
-            )
-        } else {
-            let color =''
-            console.log('Mode Changed in Summary! ', this.state.mode);
-            if (this.state.mode == 'CHANGE POSITIONS') {
-                color = 'yellow';
-            } else if (this.state.mode == 'START DANCING') {
-                color = 'green';
-            } else if (this.state.mode == 'RESETTING... DO NOT MOVE...') {
-                color = 'red';
-            }
-            currentMode = (
-                <ModeDiv inputColor={color}>
-                    <ModeContentDiv>
-                        <br/>
-                        <h1> {this.state.mode} </h1>
-                        <br />
-                    </ModeContentDiv>
-                </ModeDiv>
-            )
-        }
-    }
+    // settleMode() {
+    //     if (this.state.mode == '') {
+    //         currentMode = (
+    //             <ModeDiv>
+    //                 <ModeContentDiv>
+    //                     <h4> Trainee Instructions </h4>
+    //                     <h4> Waiting for incoming data! Be Patient. </h4>
+    //                 </ModeContentDiv>
+    //             </ModeDiv>
+    //         )
+    //     } else {
+    //         let color =''
+    //         console.log('Mode Changed in Summary! ', this.state.mode);
+    //         if (this.state.mode == 'CHANGE POSITIONS') {
+    //             color = 'yellow';
+    //         } else if (this.state.mode == 'START DANCING') {
+    //             color = 'green';
+    //         } else if (this.state.mode == 'RESETTING... DO NOT MOVE...') {
+    //             color = 'red';
+    //         }
+    //         currentMode = (
+    //             <ModeDiv inputColor={color}>
+    //                 <ModeContentDiv>
+    //                     <br/>
+    //                     <h1> {this.state.mode} </h1>
+    //                     <br />
+    //                 </ModeContentDiv>
+    //             </ModeDiv>
+    //         )
+    //     }
+    // }
 
     settleVideoAndMove() {
         if (this.state.currentResult.predictedMove == 0) {
@@ -191,16 +201,16 @@ export class Summary extends Component {
             positionDisplay = (
                 <CorrectPositionDiv>
                     <CorrectPositionContentDiv>
-                        <h4> Positions </h4>
-                        <h4> Waiting for incoming data! Be Patient. </h4>
+                        <WhiteH4> Positions </WhiteH4>
+                        <WhiteH4> Waiting for incoming data! Be Patient. </WhiteH4>
                     </CorrectPositionContentDiv>
                    
                 </CorrectPositionDiv>
             )
             resultDisplay = (
                 <React.Fragment>
-                    <h4> Statistics </h4>
-                    <h4> Waiting for incoming data! Be Patient. </h4>
+                    <WhiteH4> Statistics </WhiteH4>
+                    <WhiteH4> Waiting for incoming data! Be Patient. </WhiteH4>
                 </React.Fragment>
             );
         } else {
@@ -208,9 +218,9 @@ export class Summary extends Component {
                 positionDisplay = (
                     <CorrectPositionDiv inputColor='lightgreen'>
                         <CorrectPositionContentDiv>
-                            <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
+                            <WhiteH4> Current Positions - {this.state.currentResult.dancerIds} </WhiteH4>
                             <br />
-                            <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                            <WhiteH4> Correct Positions - {this.state.currentResult.correctDancerIds} </WhiteH4>
                         </CorrectPositionContentDiv>
                     </CorrectPositionDiv>
                 )
@@ -218,9 +228,9 @@ export class Summary extends Component {
                 positionDisplay = (
                     <CorrectPositionDiv inputColor='lightsalmon'>
                         <CorrectPositionContentDiv>
-                            <h4> Current Positions - {this.state.currentResult.dancerIds} </h4>
+                            <WhiteH4> Current Positions - {this.state.currentResult.dancerIds} </WhiteH4>
                             <br />
-                            <h4> Correct Positions - {this.state.currentResult.correctDancerIds} </h4>
+                            <WhiteH4> Correct Positions - {this.state.currentResult.correctDancerIds} </WhiteH4>
                         </CorrectPositionContentDiv>
 
                     </CorrectPositionDiv>
@@ -229,9 +239,9 @@ export class Summary extends Component {
 
             resultDisplay = (
                     <React.Fragment>
-                        <h4> Current Move - {currentMove}  </h4>
-                        <h4> Sync Delay - {this.state.currentResult.syncDelay}s</h4>
-                        <h4> Confidence - {this.state.currentResult.accuracy}%</h4>
+                        <WhiteH4> Current Move - {currentMove}  </WhiteH4>
+                        <WhiteH4> Sync Delay - {this.state.currentResult.syncDelay}s</WhiteH4>
+                        <WhiteH4> Confidence - {this.state.currentResult.accuracy}%</WhiteH4>
                         <Button appearance='primary' marginRight={30} onClick={this.onDanceEndClicked} iconAfter={EndorsedIcon}> End Dance! </Button>
                     </React.Fragment>
             )
@@ -255,7 +265,7 @@ export class Summary extends Component {
         // console.log('History ', JSON.stringify(this.props.history));
         if (_.isEmpty(this.state.history)) {
             summaryDisplay = ( 
-                <h4> No Data Yet! </h4>
+                <WhiteH4> No Data Yet! </WhiteH4>
             )
         } else {
             if (this.state.history.length == 1) {
@@ -298,7 +308,7 @@ export class Summary extends Component {
         this.settleResult();
         this.settleVideoAndMove();
         this.settleHistory();
-        this.settleMode();
+        // this.settleMode();
 
         return (
           <SummaryDiv>
@@ -309,7 +319,7 @@ export class Summary extends Component {
               </SyncDelayMoveAccuracyDiv>
 
 
-              {currentMode}
+              {/* {currentMode} */}
 
               <EMGDiv>
                 <EmgController />
@@ -320,7 +330,7 @@ export class Summary extends Component {
               </DanceMovePlayerDiv> */}
 
               <HistoryDiv>
-                <h4> History </h4>
+                <WhiteH4> History </WhiteH4>
                 {summaryDisplay}
               </HistoryDiv>
           </SummaryDiv>

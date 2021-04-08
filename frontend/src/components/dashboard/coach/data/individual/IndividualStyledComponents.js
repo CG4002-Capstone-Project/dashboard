@@ -5,6 +5,9 @@ export const IndividualDiv = styled.div`
     box-sizing: border-box;
     flex: 1;
     text-align: center;
+    border-radius: 20px;
+    margin-right: 15px;
+    background-color: #0c0c0c;
 `;
 
 export const PreDisplay = styled.div`
@@ -45,4 +48,20 @@ export const AccGraphDiv = styled.div`
 export const YPRGraphDiv = styled.div`
     box-sizing: border-box;
     flex: 1;
+`;
+
+export const WhiteH1 = styled.h1`
+    color: white;
+`;
+
+export const WhiteH2 = styled.h2`
+    color: white;
+`;
+
+export const WhiteH3 = styled.h3`
+    color: white;
+`;
+
+export const WhiteP = styled.p`
+    color: white;
 `;

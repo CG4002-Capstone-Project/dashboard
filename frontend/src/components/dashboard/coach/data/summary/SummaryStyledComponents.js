@@ -79,6 +79,12 @@ export const RedH4 = styled.h4`
     color: red;
 `;
 
+export const WhiteH4 = styled.h4`
+    color: white;
+`;
+
+
+
 
 
 

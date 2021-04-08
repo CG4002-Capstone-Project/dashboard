@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { IndividualDiv, InfoDisplay, PreDisplay, PositionDisplay, DisplayDiv, MiscDiv, AccGraphDiv, YPRGraphDiv  } from './IndividualStyledComponents';
+import { IndividualDiv, 
+    InfoDisplay, 
+    PreDisplay, 
+    PositionDisplay, 
+    DisplayDiv, 
+    MiscDiv, 
+    AccGraphDiv, 
+    YPRGraphDiv,
+    WhiteH1,
+    WhiteH2,
+    WhiteH3,
+    WhiteP  } from './IndividualStyledComponents';
 import GCCLineChart from './GCCLineChart';
 import AccLineChart from './AccLineChart';
 import { IconContext } from 'react-icons';
@@ -57,8 +68,8 @@ export class Individual extends Component {
         if (_.isEmpty(this.props.data)) {
             display = ( 
                 <PreDisplay>
-                    <h2> Ooops unable to connect just yet. </h2>
-                    <p>  Receving data in abit! If problem persists, check whether trainee has activated their device.  </p>
+                    <WhiteH2> Ooops unable to connect just yet. </WhiteH2>
+                    <WhiteP> Receving data in abit! If problem persists, check whether trainee has activated their device.  </WhiteP>
                 </PreDisplay>
             )
         } else {
@@ -67,7 +78,7 @@ export class Individual extends Component {
                 <DisplayDiv>
                     <MiscDiv>
                         <InfoDisplay>
-                            <h3> Trainee {this.props.no} - {this.props.name} </h3>
+                            <WhiteH3> Trainee {this.props.no} - {this.props.name} </WhiteH3>
                         </InfoDisplay>
                         <PositionDisplay >
                             {/* <AccessibilityNewIcon fontSize='large' color="primary" style={{ marginRight: '1rem'}} />
