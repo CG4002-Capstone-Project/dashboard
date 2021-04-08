@@ -10,7 +10,9 @@ import { SummaryDiv,
     GreenH4, 
     RedH4, 
     CorrectPositionContentDiv,
-    WhiteH4 } from './SummaryStyledComponents';
+    WhiteH4,
+    EndDanceDiv,
+    EndDanceContentDiv } from './SummaryStyledComponents';
 import ReactPlayer from 'react-player';
 import Table from 'react-bootstrap/Table';
 import Fade from 'react-bootstrap/Fade';
@@ -47,7 +49,7 @@ export class Summary extends Component {
         })
 
         socket.on("newResult", async (result) => {
-            m += 1;
+            j += 1;
             console.log(`${j}th result: `+ JSON.stringify(result));
 
             // this.updatePositions(result.dancerIds);
@@ -115,7 +117,7 @@ export class Summary extends Component {
             })
         }
 
-        // console.log('history', this.state.history);
+        console.log('history', this.state.history);
     }
     
     // settleMode() {
@@ -202,7 +204,7 @@ export class Summary extends Component {
                 <CorrectPositionDiv>
                     <CorrectPositionContentDiv>
                         <WhiteH4> Positions </WhiteH4>
-                        <WhiteH4> Waiting for incoming data! Be Patient. </WhiteH4>
+                        {/* <WhiteH4> Waiting for incoming data! Be Patient. </WhiteH4> */}
                     </CorrectPositionContentDiv>
                    
                 </CorrectPositionDiv>
@@ -210,13 +212,13 @@ export class Summary extends Component {
             resultDisplay = (
                 <React.Fragment>
                     <WhiteH4> Statistics </WhiteH4>
-                    <WhiteH4> Waiting for incoming data! Be Patient. </WhiteH4>
+                    {/* <WhiteH4> Waiting for incoming data! Be Patient. </WhiteH4> */}
                 </React.Fragment>
             );
         } else {
             if (this.state.currentResult.correctDancerIds == this.state.currentResult.dancerIds) {
                 positionDisplay = (
-                    <CorrectPositionDiv inputColor='lightgreen'>
+                    <CorrectPositionDiv inputColor='green'>
                         <CorrectPositionContentDiv>
                             <WhiteH4> Current Positions - {this.state.currentResult.dancerIds} </WhiteH4>
                             <br />
@@ -226,7 +228,7 @@ export class Summary extends Component {
                 )
             } else {
                 positionDisplay = (
-                    <CorrectPositionDiv inputColor='lightsalmon'>
+                    <CorrectPositionDiv inputColor='red'>
                         <CorrectPositionContentDiv>
                             <WhiteH4> Current Positions - {this.state.currentResult.dancerIds} </WhiteH4>
                             <br />
@@ -242,7 +244,6 @@ export class Summary extends Component {
                         <WhiteH4> Current Move - {currentMove}  </WhiteH4>
                         <WhiteH4> Sync Delay - {this.state.currentResult.syncDelay}s</WhiteH4>
                         <WhiteH4> Confidence - {this.state.currentResult.accuracy}%</WhiteH4>
-                        <Button appearance='primary' marginRight={30} onClick={this.onDanceEndClicked} iconAfter={EndorsedIcon}> End Dance! </Button>
                     </React.Fragment>
             )
         }
@@ -265,7 +266,8 @@ export class Summary extends Component {
         // console.log('History ', JSON.stringify(this.props.history));
         if (_.isEmpty(this.state.history)) {
             summaryDisplay = ( 
-                <WhiteH4> No Data Yet! </WhiteH4>
+                <React.Fragment> </React.Fragment>
+                // <WhiteH4> No Data Yet! </WhiteH4>
             )
         } else {
             if (this.state.history.length == 1) {
@@ -292,12 +294,12 @@ export class Summary extends Component {
     
             summaryDisplay = (
                 <Table borderless size='sm'>
-                    <thead><tr><th>Positions</th><th>Move</th></tr></thead>
+                    <thead><tr><th style={{ color: 'white'}}>Positions</th><th style={{ color: 'white'}}>Move</th></tr></thead>
                     <tbody>
                         {/* <Fade appear={true} in={true}></Fade> */}
                         <tr><td style={{ color: 'green' }} >{summaryFirstRowDancerIds}</td><td style={{ color: 'green' }}>{summaryFirstRowPredictedMove}</td></tr>
                         <tr><td style={{ color: 'red' }}>{summarySecondRowDancerIds}</td><td style={{ color: 'red' }}>{summarySecondRowPredictedMove}</td></tr>
-                        <tr><td>{summaryThirdRowDancerIds}</td><td>{summaryThirdRowPredictedMove}</td></tr></tbody>
+                        <tr><td style={{ color: 'white' }}>{summaryThirdRowDancerIds}</td><td style={{ color: 'white' }}>{summaryThirdRowPredictedMove}</td></tr></tbody>
                 </Table>
             );
         }
@@ -318,16 +320,15 @@ export class Summary extends Component {
                 {resultDisplay}
               </SyncDelayMoveAccuracyDiv>
 
+              <EndDanceDiv>
+                  <EndDanceContentDiv>
+                    <Button appearance='primary' height={56} onClick={this.onDanceEndClicked} iconAfter={EndorsedIcon}> End Dance! </Button>
+                  </EndDanceContentDiv>
 
-              {/* {currentMode} */}
-
+              </EndDanceDiv>
               <EMGDiv>
                 <EmgController />
               </EMGDiv>
-              
-              {/* <DanceMovePlayerDiv>
-                {videoComponent}
-              </DanceMovePlayerDiv> */}
 
               <HistoryDiv>
                 <WhiteH4> History </WhiteH4>
