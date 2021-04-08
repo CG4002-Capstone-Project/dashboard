@@ -7,7 +7,7 @@ export const IndividualDiv = styled.div`
     text-align: center;
     border-radius: 20px;
     margin-right: 15px;
-    background-color: #0c0c0c;
+    background-color: #1A1A1A;
 `;
 
 export const PreDisplay = styled.div`
