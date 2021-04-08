@@ -9,16 +9,18 @@ let m = 0;
 
 export const IndividualControllerDiv = styled.div`
     box-sizing: border-box;
-    border: 3px solid lightgoldenrodyellow;
+    /* border: 3px solid lightgoldenrodyellow; */
     width: 100%;
     height: 68%;
     /* max-width: 100%;
     max-height: 70%; */
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around; 
     align-items: stretch;
-    background-color: #FFFFF2;
+    background-color: black;
+    padding: 10px;
+    flex-wrap: nowrap;
 `;
 
 export class IndividualController extends Component {

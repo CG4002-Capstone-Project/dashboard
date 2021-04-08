@@ -9,7 +9,7 @@ export const PreDashboardDiv = styled.div`
     grid-gap: 1rem;
     grid-template-rows: 62px 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    background-color: #FFFFF2;
+    background-color: black;
     margin: auto;
     width: 100vw;
     height: 100vh;
@@ -21,3 +21,7 @@ export const QuestionDiv = styled.div`
     text-align: center;
     margin: auto;
 `;
+
+export const WhiteH1 = styled.h1`
+    color: white;
+`
