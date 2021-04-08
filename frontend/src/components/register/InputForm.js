@@ -1,6 +1,8 @@
-import { TextInputField, Button, ArrowRightIcon, EditIcon, SavedIcon } from 'evergreen-ui';
+import { TextInputField, Button, ArrowRightIcon, EditIcon, SavedIcon, TextInput } from 'evergreen-ui';
 import React, { Component } from 'react';
-import { InputFormDiv } from './InputFormStyledComponents';
+import { InputFormDiv,
+    TextFieldsDiv,
+    ButtonsDiv } from './InputFormStyledComponents';
 
 export class InputForm extends Component {
     state = {
@@ -48,13 +50,19 @@ export class InputForm extends Component {
     render() {
         return (
             <InputFormDiv>
-                <TextInputField label='Name' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.name} onChange={e => this.setState({ name: e.target.value })}/>
-                <TextInputField label='Email' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
-                <TextInputField label='Username' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.username} onChange={e => this.setState({ username: e.target.value })} />
-                <TextInputField label='Password' required={true} isInvalid={true} validationMessage='This field is required' disabled={this.state.onSave} value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
-                <Button appearance='primary' marginRight={30} onClick={this.onSaveButtonClicked} iconAfter={SavedIcon}> Save </Button>
-                <Button appearance='primary' marginRight={30} onClick={this.onEditButtonClicked} iconAfter={EditIcon} > Edit </Button>
-                <Button appearance='primary' marginRight={30} onClick={this.onNextButtonClicked} iconAfter={ArrowRightIcon}> Next </Button>
+                <TextFieldsDiv>
+                    <TextInputField placeholder='Name' marginTop={6} marginBottom={6} inputWidth={400} disabled={this.state.onSave} value={this.state.name} onChange={e => this.setState({ name: e.target.value })}/>
+                    <TextInputField placeholder='Email' marginBottom={6} disabled={this.state.onSave} value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+                    <TextInputField placeholder='Username' marginBottom={6} disabled={this.state.onSave} value={this.state.username} onChange={e => this.setState({ username: e.target.value })} />
+                    <TextInputField placeholder='Password' marginBottom={6} disabled={this.state.onSave} value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+                </TextFieldsDiv>
+                <ButtonsDiv>
+                    <Button appearance='primary' marginRight={30} onClick={this.onSaveButtonClicked} iconAfter={SavedIcon}> Save </Button>
+                    <Button appearance='primary' marginRight={30} onClick={this.onEditButtonClicked} iconAfter={EditIcon} > Edit </Button>
+                    <Button appearance='primary' marginRight={30} onClick={this.onNextButtonClicked} iconAfter={ArrowRightIcon}> Next </Button>
+                </ButtonsDiv>
+               
+                
             </InputFormDiv>
         )
     }

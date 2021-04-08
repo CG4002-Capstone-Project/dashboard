@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import VerticalTab from './VerticalTab';
-import { RegisterDiv, HeaderTabDiv, HeaderH1, InfoP, VerticalTabDiv, NavBarDiv } from './RegisterStyledComponents';
+import { RegisterDiv,
+    RegisterMainDiv, 
+    HeaderTabDiv, 
+    HeaderH1, 
+    InfoP, 
+    VerticalTabDiv,
+    RegisterOutsideDiv,
+    RegisterContentDiv
+} from './RegisterStyledComponents';
 import LoginAndRegisterNavBar from '../navbars/login-register/LoginAndRegisterNavBar';
 import { register, test, getAccessToken, getName } from '../../utils/Auth';
 import { UserContext } from '../../contexts/UserContext';
@@ -88,22 +96,26 @@ export class NewRegister extends Component {
     render() {
         return (
             <RegisterDiv>
-                    <NavBarDiv>
-                        <LoginAndRegisterNavBar />
-                    </NavBarDiv>
-                    <HeaderTabDiv>
-                        <HeaderH1> Registration </HeaderH1>
-                        <InfoP> 
-                        Please be informed that only coaches can register themselves and their trainees into the system. 
-                                <br></br>
-                                <br></br>
-                        Trainees who wish to use DanceEdge must contact their coach to register the group on their behalf.
-                        </InfoP>
-                    </HeaderTabDiv>
-                    <VerticalTabDiv>
-                        <VerticalTab onTabChange={this.accountForTabChange} onFormSubmit={this.accountForSubmittedForm}/>
-                    </VerticalTabDiv>
-                    {this.state.activeIndex}
+                    <LoginAndRegisterNavBar />
+                    <RegisterMainDiv>
+                        <RegisterOutsideDiv>
+                            <RegisterContentDiv>
+                                <HeaderTabDiv>
+                                    <HeaderH1> Registration </HeaderH1>
+                                    <InfoP> 
+                                    Please be informed that only coaches can register themselves and their trainees into the system. 
+                                            <br></br>
+                                            <br></br>
+                                    Trainees who wish to use DanceEdge must contact their coach to register the group on their behalf.
+                                    </InfoP>
+                                </HeaderTabDiv>
+                                <VerticalTabDiv>
+                                    <VerticalTab onTabChange={this.accountForTabChange} onFormSubmit={this.accountForSubmittedForm}/>
+                                </VerticalTabDiv>
+                            </RegisterContentDiv>
+                        </RegisterOutsideDiv>
+                    </RegisterMainDiv>
+               
             </RegisterDiv>
         )
     }

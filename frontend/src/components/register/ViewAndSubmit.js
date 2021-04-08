@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { ViewAndSubmitDiv, CoachInfo, Trainee1Info, Trainee2Info, Trainee3Info } from './ViewAndSubmitStyledComponents';
-import { Button } from 'evergreen-ui';
+import { ViewAndSubmitDiv, 
+    InfoBoxDiv,
+    SubmitButtonDiv,
+    PleaseSaveDiv,
+    WhiteH1,
+    WhiteH4,
+    WhiteLine } from './ViewAndSubmitStyledComponents';
+import { Button, Text } from 'evergreen-ui';
 
 
 export class ViewAndSubmit extends Component {
@@ -15,50 +21,79 @@ export class ViewAndSubmit extends Component {
         if (this.props.display) {
             content = (
                 <React.Fragment>
-                    <CoachInfo>
-                        <h3> Coach </h3>
-                        <h4> Name: {this.props.coach.name} </h4>
-                        <h4> Email: {this.props.coach.email} </h4>
-                        <h4> Username: {this.props.coach.username} </h4>
-                        <h4> Password: {this.props.coach.password} </h4>
-
-                    </CoachInfo>
+                    <InfoBoxDiv>
+                        <p>
+                            <WhiteH4> Coach </WhiteH4>
+                            <br />
+                            <Text color="white">  Name: {this.props.coach.name} </Text>
+                            <br/>
+                            <Text color="white"> Email: {this.props.coach.email}  </Text>
+                            <br/>
+                            <Text color="white"> Username: {this.props.coach.username}  </Text>
+                            <br/>
+                            <Text color="white"> Password: {this.props.coach.password}  </Text>                            
+                        </p>
+                    </InfoBoxDiv>
                     
-                    
-                    <Trainee1Info>
+                    <InfoBoxDiv>
+                        <p>
+                            <WhiteH4> Trainee 1 </WhiteH4>
+                            <br />
+                            <Text color="white">  Name: {this.props.trainee1.name} </Text>
+                            <br/>
+                            <Text color="white"> Email: {this.props.trainee1.email}  </Text>
+                            <br/>
+                            <Text color="white"> Username: {this.props.trainee1.username}  </Text>
+                            <br/>
+                            <Text color="white"> Password: {this.props.trainee1.password}  </Text>                            
+                        </p>
+                    </InfoBoxDiv>
 
-                        <h3> Trainee 1 </h3>
-                        <h4> Name: {this.props.trainee1.name} </h4>
-                        <h4> Email: {this.props.trainee1.email} </h4>
-                        <h4> Username: {this.props.trainee1.username} </h4>
-                        <h4> Password: {this.props.trainee1.password} </h4>
+                    <InfoBoxDiv>
+                        <p>
+                            <WhiteH4> Trainee 2 </WhiteH4>
+                            <br />
+                            <Text color="white">  Name: {this.props.trainee2.name} </Text>
+                            <br/>
+                            <Text color="white"> Email: {this.props.trainee2.email}  </Text>
+                            <br/>
+                            <Text color="white"> Username: {this.props.trainee2.username}  </Text>
+                            <br/>
+                            <Text color="white"> Password: {this.props.trainee2.password}  </Text>                            
+                        </p>
 
-                    </Trainee1Info>
+                    </InfoBoxDiv>
 
-                    <Trainee2Info>
+                    <InfoBoxDiv>
 
-                        <h3> Trainee 2 </h3>
-                        <h4> Name: {this.props.trainee2.name} </h4>
-                        <h4> Email: {this.props.trainee2.email} </h4>
-                        <h4> Username: {this.props.trainee2.username} </h4>
-                        <h4> Password: {this.props.trainee2.password} </h4>
+                        <p>
+                            <WhiteH4> Trainee 3 </WhiteH4>
+                            <br />
+                            <Text color="white">  Name: {this.props.trainee3.name} </Text>
+                            <br/>
+                            <Text color="white"> Email: {this.props.trainee3.email}  </Text>
+                            <br/>
+                            <Text color="white"> Username: {this.props.trainee3.username}  </Text>
+                            <br/>
+                            <Text color="white"> Password: {this.props.trainee3.password}  </Text>                            
+                        </p>
+                    </InfoBoxDiv>
 
-                    </Trainee2Info>
+                    <SubmitButtonDiv>
+                        <Button appearance='primary' marginRight={30} onClick={this.onSubmitButtonClicked}> Submit </Button>
+                    </SubmitButtonDiv>
 
-                    <Trainee3Info>
-                        <h3> Trainee 3 </h3>
-                        <h4> Name: {this.props.trainee3.name} </h4>
-                        <h4> Email: {this.props.trainee3.email} </h4>
-                        <h4> Username: {this.props.trainee3.username} </h4>
-                        <h4> Password: {this.props.trainee3.password} </h4>
-                    </Trainee3Info>
-
-                    <Button appearance='primary' marginRight={30} onClick={this.onSubmitButtonClicked}> Submit </Button>
 
                 </React.Fragment>
             )
         } else {
-            content = <h1> Please save all of the other sections before processing </h1>
+            content = (
+                <PleaseSaveDiv>
+                    <WhiteH1>
+                        Please save all other sections before proceeding
+                    </WhiteH1>
+                </PleaseSaveDiv>
+            )
         }
  
         return (

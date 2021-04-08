@@ -14,7 +14,7 @@ export const HomeDiv = styled.div`
 
 export const CoverVideoDiv = styled.div`
     box-sizing: border-box;
-    height: 100vh;
+    height: calc(100vh - 56px);
     /* border: 5px solid red; */
 `;
 
@@ -22,6 +22,7 @@ export const VideoBg = styled.video`
     object-fit: cover;
     width: 100%;
     height: 100%;
+    padding-bottom: 56px;
     position: absolute;
     display: inline-block;
 `;
@@ -48,18 +49,19 @@ export const HeadlineDiv = styled.div`
 `;
 
 export const ContentH1 = styled.h1`
-    color: 	#cdcdb4;
+    color: 	hsl(0, 0%, 70%);
+    
 `;
 
 export const SpanDanceEdge = styled.span`
-    color: 	#8b0000;
+    color: 	hsl(0, 100%, 50%);
 `;
 
 export const NormalSpan = styled.span`
 `;
 
 export const ContentH2 = styled.h2`
-    color: #cdcdb4;
+    color: 	hsl(0, 0%, 70%);
 `;
 
 export const YellowContentH2 = styled.h2`
@@ -68,7 +70,7 @@ export const YellowContentH2 = styled.h2`
 
 
 export const ContentH4 = styled.h4`
-    color: #cdcdb4;
+    color: 	hsl(0, 0%, 70%);
 `;
 
 export const ContentDiv = styled.div`

@@ -177,8 +177,8 @@ export class VerticalTab extends Component {
 
     render() {
         return (
-         <Pane display='flex' height={240} >
-             <Tablist marginBottom={16} flexBasis={240} marginRight={24}>
+         <Pane display='flex' height={240} backgroundColor='#3c3c3c' elevation={2}  >
+             <Tablist marginBottom={30} flexBasis={240} marginRight={24} >
                  {this.state.tabs.map((tab, index) => (
                      <SidebarTab 
                         key={tab}
@@ -186,13 +186,15 @@ export class VerticalTab extends Component {
                         onSelect={() => this.setState({ activeIndex: index })}
                         isSelected={index === this.state.activeIndex}
                         aria-controls={`panel-${tab}`}
+                        backgroundColor='#494747'
+                        marginBottom={16}
                     >
-                        {tab}
+                        <h4 style={{ color: 'white' }}  > {tab} </h4>
                     </SidebarTab>
                  ))}
                  
              </Tablist>
-             <Pane padding={16} background="tint1" flex="1" height='max-content'>
+             <Pane  flex="1" >
                 {this.state.tabs.map((tab, index) => (
                     <Pane
                         key={tab}
