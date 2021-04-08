@@ -7,6 +7,7 @@ export const DashboardDiv = styled.div`
     max-width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: black;
 `;
 
 export const NavbarDiv = styled.div`

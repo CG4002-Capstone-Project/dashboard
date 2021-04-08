@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { PreDashboardDiv, QuestionDiv } from './PreDataStyledComponents';
+import { PreDashboardDiv, 
+    QuestionDiv,
+    WhiteH1 } from './PreDataStyledComponents';
 import { Button, EndorsedIcon } from 'evergreen-ui';
 
 export class PreDataDashboard extends Component {
@@ -12,7 +14,7 @@ export class PreDataDashboard extends Component {
         return (
             <PreDashboardDiv>
                 <QuestionDiv>
-                    <h1> Are you ready to dance? </h1>
+                    <WhiteH1> Are you ready to Dance? </WhiteH1>
                     <Button appearance='primary' marginRight={30} onClick={this.onLetsDanceClicked} iconAfter={EndorsedIcon}> Lets Dance! </Button>
                 </QuestionDiv>
             </PreDashboardDiv>

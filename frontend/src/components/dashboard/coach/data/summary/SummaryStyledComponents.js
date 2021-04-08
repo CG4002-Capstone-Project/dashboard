@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SummaryDiv = styled.div`
     box-sizing: border-box;
-    border: 2px solid lightblue;
+    /* border: 2px solid lightblue; */
     width: 100%;
     height: 32%;
     display: flex;
@@ -78,6 +78,26 @@ export const GreenH4 = styled.h4`
 export const RedH4 = styled.h4`
     color: red;
 `;
+
+export const WhiteH4 = styled.h4`
+    color: white;
+`;
+
+export const EndDanceDiv = styled.div`
+    flex: 1;
+    /* border: 1px solid lightslategray; */
+    text-align: center;
+    box-sizing: border-box;
+    margin: auto;
+`;
+
+export const EndDanceContentDiv = styled.div`
+    margin: auto;
+    position: relative;
+    /* border: 2px solid red; */
+`;
+
+
 
 
 

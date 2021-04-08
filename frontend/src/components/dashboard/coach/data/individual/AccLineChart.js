@@ -63,9 +63,13 @@ export default class AccLineChart extends Component {
                             ticks: {
                                 min: -15000,
                                 max: 15000,
+                                fontColor: 'white'
                                 // suggestedMax: 2,
                                 // suggestedMin: -2,
                             },
+                            gridLines: {
+                                zeroLineColor: 'white'
+                            }
                         }
                     ]
                 },
@@ -73,10 +77,14 @@ export default class AccLineChart extends Component {
                     text: 'Acceleration X, Y and Z against Time',
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'bottom'
+                    position: 'bottom',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'right',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // elements: {
                 //     line: {
@@ -95,24 +103,24 @@ export default class AccLineChart extends Component {
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'red',
-                    backgroundColor: 'red'              
+                    borderColor: 'hsl(62, 100%, 69%)',
+                    backgroundColor: 'hsl(62, 100%, 69%)'              
                 }, {
                     label: 'Acc Y',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'blue',
-                    backgroundColor: 'blue'
+                    borderColor: 'hsl(171, 100%, 69%)',
+                    backgroundColor: 'hsl(171, 100%, 69%)'
                 }, {
                     label: 'Acc Z',
                     data: [],
                     fill: 'none',
                     pointRadius: 2,
                     borderWidth: 1,
-                    borderColor: 'green',
-                    backgroundColor: 'green'
+                    borderColor: 'hsl(0, 100%, 85%)',
+                    backgroundColor: 'hsl(0, 100%, 85%)'
                 }]
             }
 
