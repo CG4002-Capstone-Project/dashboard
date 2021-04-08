@@ -67,6 +67,9 @@ export default class AccLineChart extends Component {
                                 // suggestedMax: 2,
                                 // suggestedMin: -2,
                             },
+                            gridLines: {
+                                zeroLineColor: 'white'
+                            }
                         }
                     ]
                 },

@@ -51,6 +51,9 @@ export default class EmgLineChart extends Component {
                                 // suggestedMax: 5,
                                 // suggestedMin: 0,
                             },
+                            gridLines: {
+                                zeroLineColor: 'white'
+                            }
                         }
                     ]
                 },

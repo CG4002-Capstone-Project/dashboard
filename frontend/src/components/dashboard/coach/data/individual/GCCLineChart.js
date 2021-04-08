@@ -67,6 +67,9 @@ export default class GCCLineChart extends Component {
                                 // suggestedMax: 180,
                                 // suggestedMin: -180
                             },
+                            gridLines: {
+                                zeroLineColor: 'white'
+                            }
                         }
                     ]
                 },
