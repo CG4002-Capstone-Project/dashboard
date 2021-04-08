@@ -47,6 +47,7 @@ export default class EmgLineChart extends Component {
                             ticks: {
                                 min: 0,
                                 max: 400,
+                                fontColor: 'white'
                                 // suggestedMax: 5,
                                 // suggestedMin: 0,
                             },
@@ -57,10 +58,14 @@ export default class EmgLineChart extends Component {
                     text: 'EMG Value against Time',
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'bottom'
+                    position: 'bottom',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'right',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // elements: {
                 //     line: {

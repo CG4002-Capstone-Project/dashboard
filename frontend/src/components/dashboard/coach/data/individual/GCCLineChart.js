@@ -63,6 +63,7 @@ export default class GCCLineChart extends Component {
                             ticks: {
                                 min: -150,
                                 max: 150,
+                                fontColor: 'white'
                                 // suggestedMax: 180,
                                 // suggestedMin: -180
                             },
@@ -73,10 +74,14 @@ export default class GCCLineChart extends Component {
                     text: 'Gyroscope X, Y & Z against Time',
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'bottom'
+                    position: 'bottom',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'right',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // elements: {
                 //     line: {
