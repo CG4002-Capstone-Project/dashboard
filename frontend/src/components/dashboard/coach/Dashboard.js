@@ -25,10 +25,16 @@ export class Dashboard extends Component {
             currentState: 2,
         })
     }
+
+    onViewResults = async (event) => {
+        await this.setState({
+            currentState: 2
+        })
+    }
     render() {
         let display;
         if (this.state.currentState == 0) {
-            display = <PreDataDashboard onStart={this.onDanceStart}/>;
+            display = <PreDataDashboard onStart={this.onDanceStart} onViewResults={this.onViewResults}/>;
         } else if (this.state.currentState == 1) {
             display = <DataDashboard onEnd={this.onDanceEnd} />;
         } else if (this.state.currentState == 2) {
