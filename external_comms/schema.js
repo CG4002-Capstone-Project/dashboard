@@ -31,8 +31,8 @@ const RawResultModel = mongoose.model('raw_result', rawResultsSchema);
 const rawEMGSchema = new mongoose.Schema({
     timestamp: { type: String, default: Date.now() },
     voltage: { type: String, required: true, trim: true },
-    rms: { type: String, required: true, trim: true },
-    mfq: { type: String, required: true, trim: true },
+    // rms: { type: String, required: true, trim: true },
+    // mfq: { type: String, required: true, trim: true },
 })
 
 const RawEMGModel = mongoose.model('raw_emg', rawEMGSchema);

@@ -42,7 +42,8 @@ export class IndividualController extends Component {
                     accz: data.accz,
                     yaw: data.yaw,
                     pitch: data.pitch,
-                    roll: data.roll
+                    roll: data.roll,
+                    timestamp: data.timestamp
                 }
             }))
         })
@@ -75,7 +76,8 @@ export class IndividualController extends Component {
                     accz: data.accz,
                     yaw: data.yaw,
                     pitch: data.pitch,
-                    roll: data.roll
+                    roll: data.roll,
+                    timestamp: data.timestamp
                 }
             }))
         })

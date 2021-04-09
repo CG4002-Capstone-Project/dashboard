@@ -273,6 +273,7 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
 
     channel.consume(queue, function(msg) {
+      // console.log('emg ', msg);
       const stringMsg = msg.content.toString();
       const stringMsgArray = stringMsg.split('|');
       const timestamp = stringMsgArray[0].trim();
@@ -280,8 +281,8 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       const emgDataArray = emgDataString.split(' ');
       const voltage = emgDataArray[0];
-      const rms = emgDataArray[1];
-      const mfq = emgDataArray[2];
+      // const rms = emgDataArray[1];
+      // const mfq = emgDataArray[2];
 
       // console.log('Timestamp: ' + timestamp);
       // console.log('EMG Voltage: ' + voltage);
@@ -293,8 +294,8 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
       const emgInstance = new RawEMGModel({ 
         timestamp,
         voltage,
-        rms,
-        mfq,
+        // rms,
+        // mfq,
       });
 
       emgCount += 1;
