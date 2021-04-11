@@ -339,12 +339,22 @@ amqp.connect(CLOUD_AMQP_URL, async function(error0, connection) {
 
       // console.log('Predicted Move: ' + predictedMove);
 
-      if (resultsCount % 3 == 0) {
+      if (resultsCount % 8 == 0) {
+        correctMove = 'dab';
+      } else if (resultsCount % 8 == 1) {
+        correctMove = 'elbowkick';
+      } else if (resultsCount % 8 == 2) {
         correctMove = 'gun';
-      } else if (resultsCount % 3 == 1) {
+      } else if (resultsCount % 8 == 3) {
         correctMove = 'hair';
-      } else if (resultsCount % 3 == 2) {
+      } else if (resultsCount % 8 == 4) {
+        correctMove = 'listen';
+      } else if (resultsCount % 8 == 5) {
+        correctMove = 'pointhigh';
+      } else if (resultsCount % 8 == 6) {
         correctMove = 'sidepump';
+      } else if (resultsCount % 8 == 7) {
+        correctMove = 'wipetable';
       }
 
       const resultInstance = new RawResultModel({
