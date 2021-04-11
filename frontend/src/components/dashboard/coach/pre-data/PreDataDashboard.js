@@ -15,7 +15,6 @@ export class PreDataDashboard extends Component {
 
     onViewResultsClicked = event => {
         event.preventDefault();
-        //cthis.props.onViewResults();
         this.props.history.push('/coach/summary');
     }
     render() {

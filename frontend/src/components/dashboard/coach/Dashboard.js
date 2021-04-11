@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PreDataDashboard from './pre-data/PreDataDashboard';
-import PostDataDashboard from './post-data/PostDataDashboard';
 import DataDashboard from './data/DataDashboard';
 
 export class Dashboard extends Component {
@@ -37,9 +36,7 @@ export class Dashboard extends Component {
             display = <PreDataDashboard onStart={this.onDanceStart} onViewResults={this.onViewResults}/>;
         } else if (this.state.currentState == 1) {
             display = <DataDashboard onEnd={this.onDanceEnd} />;
-        } else if (this.state.currentState == 2) {
-            display = <PostDataDashboard />;
-        }
+        } 
         return (
             <React.Fragment>
                 {display}
