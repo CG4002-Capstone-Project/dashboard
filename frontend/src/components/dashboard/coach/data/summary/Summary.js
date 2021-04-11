@@ -13,7 +13,6 @@ import { SummaryDiv,
     WhiteH4,
     EndDanceDiv,
     EndDanceContentDiv } from './SummaryStyledComponents';
-import ReactPlayer from 'react-player';
 import Table from 'react-bootstrap/Table';
 import Fade from 'react-bootstrap/Fade';
 import _ from 'lodash';
@@ -155,44 +154,20 @@ export class Summary extends Component {
     settleVideoAndMove() {
         if (this.state.currentResult.predictedMove == 0) {
             currentMove = 'Dab';
-            videoComponent = (
-                <ReactPlayer url='./video/dab.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            );
         } else if (this.state.currentResult.predictedMove == 1) {
             currentMove = 'Elbow Kick';
-            videoComponent = (
-                <ReactPlayer url='./video/elbowkick.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            )
         } else if (this.state.currentResult.predictedMove == 2) {
             currentMove = 'Gun';
-            videoComponent = (
-                <ReactPlayer url='./video/gun.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            );
         }  else if (this.state.currentResult.predictedMove == 3) {
             currentMove = 'Hair';
-            videoComponent = (
-                <ReactPlayer url='./video/hair.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            )
         } else if (this.state.currentResult.predictedMove == 4) {
             currentMove = 'Listen';
-            videoComponent = (
-                <ReactPlayer url='./video/listen.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            )
         } else if (this.state.currentResult.predictedMove == 5) {
             currentMove = 'Point High';
-            videoComponent = (
-                <ReactPlayer url='./video/pointhigh.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            )
         } else if (this.state.currentResult.predictedMove ==  6) {
-            currentMove = 'Side Pump';
-            videoComponent = (
-                <ReactPlayer url='./video/sidepump.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            )
+            currentMove = 'Side Pump';           
         } else if (this.state.currentResult.predictedMove == 7) {
             currentMove = 'Wipe Table';
-            videoComponent = (
-                <ReactPlayer url='./video/wipetable.mp4' controls={true} loop={true} playing={true}  volume={0} width={300} height={200} />
-            )
         }
     }
 
