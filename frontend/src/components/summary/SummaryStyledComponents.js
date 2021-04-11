@@ -1,6 +1,22 @@
 import styled from 'styled-components';
 
 export const SummaryDiv = styled.div`
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const NavbarDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    max-height: 56px;
+    width: 100%;
+`;
+
+export const SummaryMainDiv = styled.div`
+    flex: 1;
     box-sizing: border-box;
     border: 3px solid lightgoldenrodyellow;
     width: 100%;
