@@ -39,18 +39,50 @@ export const DataDiv = styled.div`
     flex-direction: column;
 `;
 
+export const IndividualChartsDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid blue;
+`;
+
+export const TableDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid blue;
+`;
+
+export const StatsDiv = styled.div`
+    flex: 2;
+    box-sizing: border-box;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const SummaryStatsDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: row;
+`;
+
+export const IndividualTraineeStatsDiv = styled.div`
+    flex: 3;
+    box-sizing: border-box;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+`;
+
 export const MovesDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     border: 1px solid red;
-    display: flex;
-    flex-direction: column;
 `;
 
 export const PositionsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     border: 1px solid green;
-    display: flex;
-    flex-direction: column;
 `;

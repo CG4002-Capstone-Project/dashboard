@@ -4,7 +4,12 @@ import { SummaryDiv,
     SummaryMainDiv, 
     MovesDiv, 
     DataDiv, 
-    PositionsDiv } from './SummaryStyledComponents';
+    PositionsDiv,
+    SummaryStatsDiv,
+    IndividualTraineeStatsDiv,
+    StatsDiv,
+    IndividualChartsDiv,
+    TableDiv } from './SummaryStyledComponents';
 import IndividualController from './individual/IndividualController';
 import MovesController from './moves/MovesController';
 import PositionsController from './positions/PositionsController';
@@ -21,16 +26,32 @@ export class Summary extends Component {
                 </NavbarDiv>
                 <SummaryMainDiv>
                     <DataDiv>
-                        <IndividualController/>
+                       
+                        <IndividualChartsDiv>
+                            <IndividualController/>
+                        </IndividualChartsDiv>
+                        <TableDiv>
+
+                        </TableDiv>
                     </DataDiv>
 
-                    <MovesDiv>
-                        <MovesController />
-                    </MovesDiv>
+                    <StatsDiv>
+                        <SummaryStatsDiv>
+                        <MovesDiv>
 
-                    <PositionsDiv>
-                        <PositionsController />
-                    </PositionsDiv>
+=                       </MovesDiv>
+
+                        <PositionsDiv>
+                        </PositionsDiv>
+
+                        </SummaryStatsDiv>
+
+                        <IndividualTraineeStatsDiv>
+
+                        </IndividualTraineeStatsDiv>
+                    </StatsDiv>
+
+                    
                 </SummaryMainDiv>
 
             </SummaryDiv>
