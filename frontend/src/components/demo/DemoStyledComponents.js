@@ -35,7 +35,7 @@ export const DemoCentreDiv = styled.div`
     margin: 32px auto;
     display: flex;
     flex-direction: column;
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
 `;
 
 export const DemoInfoDiv = styled.div`
@@ -57,8 +57,15 @@ export const HeaderDiv = styled.div`
 export const DemoContentDiv = styled.div`
     flex: 3;
     box-sizing: border-box;
-    display: flex;
-    border: 2px solid pink;
+    /* display: flex; */
+    /* border: 2px solid pink; */
+`;
+
+export const DemoViewDiv = styled.div`
+    /* flex: 1; */
+    box-sizing: border-box;
+    margin: auto;
+    /* border: 2px solid green; */
 `;
 
 export const WhiteH1 = styled.h1`

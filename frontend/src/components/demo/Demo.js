@@ -7,11 +7,13 @@ import {
     DemoCentreDiv,
     DemoInfoDiv,
     DemoContentDiv,
+    DemoViewDiv,
     WhiteH1,
     WhiteP,
     HeaderDiv
 } from './DemoStyledComponents';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
+import DemoView from './DemoView';
 
 export class Demo extends Component {
     render() {
@@ -31,7 +33,9 @@ export class Demo extends Component {
                         </DemoInfoDiv>
 
                         <DemoContentDiv>
-
+                            <DemoViewDiv>
+                                <DemoView />
+                            </DemoViewDiv>
                         </DemoContentDiv>
                     </DemoCentreDiv>
                    
