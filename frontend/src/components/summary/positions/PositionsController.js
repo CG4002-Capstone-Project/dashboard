@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { PositionHeadlineDiv, TraineeOneDiv, TraineeTwoDiv, TraineeThreeDiv } from './PositionsControllerStyledComponents';
+import { PositionHeadlineDiv,
+    PositionsDiv,
+    PositionMainDiv,
+    H3, 
+    TraineeOneDiv, 
+    TraineeTwoDiv, 
+    TraineeThreeDiv } from './PositionsControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getPositionsSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
@@ -50,31 +56,39 @@ export class PositionsController extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <PositionsDiv>
                 <PositionHeadlineDiv>
-                    <br />
-                    <h2> Overall Dance Position Statistics </h2>
-                    <h3> Total {this.state.totalPositions} positions </h3>
-                    <h3> The group had {this.state.totalCorrectPositions} correct positions moves.  </h3>
+                    <H3> Dance Position Stats </H3>
                 </PositionHeadlineDiv>
+                <PositionMainDiv>
 
-                <TraineeOneDiv>
-                    <div> Trainee 1: No of correct - {this.state.traineeOneCorrectPosition}, No of incorrect - {this.state.traineeOneIncorrectPosition} </div>
-                    <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
-                </TraineeOneDiv>
+                </PositionMainDiv>
+            </PositionsDiv>
+            // <React.Fragment>
+            //     <PositionHeadlineDiv>
+            //         <br />
+            //         <h2> Overall Dance Position Statistics </h2>
+            //         <h3> Total {this.state.totalPositions} positions </h3>
+            //         <h3> The group had {this.state.totalCorrectPositions} correct positions moves.  </h3>
+            //     </PositionHeadlineDiv>
 
-                <TraineeTwoDiv>
-                    <div> Trainee 2: No of correct - {this.state.traineeTwoCorrectPosition}, No of incorrect - {this.state.traineeTwoIncorrectPosition} </div>
-                    <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
+            //     <TraineeOneDiv>
+            //         <div> Trainee 1: No of correct - {this.state.traineeOneCorrectPosition}, No of incorrect - {this.state.traineeOneIncorrectPosition} </div>
+            //         <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
+            //     </TraineeOneDiv>
 
-                </TraineeTwoDiv>
+            //     <TraineeTwoDiv>
+            //         <div> Trainee 2: No of correct - {this.state.traineeTwoCorrectPosition}, No of incorrect - {this.state.traineeTwoIncorrectPosition} </div>
+            //         <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
 
-                <TraineeThreeDiv>
-                    <div> Trainee 3: No of correct - {this.state.traineeThreeCorrectPosition}, No of incorrect - {this.state.traineeThreeIncorrectPosition} </div>
-                    <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
+            //     </TraineeTwoDiv>
 
-                </TraineeThreeDiv>
-            </React.Fragment>
+            //     <TraineeThreeDiv>
+            //         <div> Trainee 3: No of correct - {this.state.traineeThreeCorrectPosition}, No of incorrect - {this.state.traineeThreeIncorrectPosition} </div>
+            //         <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
+
+            //     </TraineeThreeDiv>
+            // </React.Fragment>
         )
     }
 }

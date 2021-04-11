@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { MoveHeadlineDiv, HairChartDiv, GunChartDiv, SidepumpChartDiv } from './MovesControllerStyledComponents';
+import { MoveHeadlineDiv,
+    MoveMainDiv,
+    MovesDiv, 
+    HairChartDiv, 
+    GunChartDiv, 
+    SidepumpChartDiv,
+    H3 } from './MovesControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getMovesSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
@@ -53,30 +59,39 @@ export class MovesController extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <MovesDiv>
                 <MoveHeadlineDiv>
-                    <br />
-                    <h2> Overall Dance Move Statistics </h2>
-                    <h3> Total {this.state.totalMoves} moves </h3>
-                    <h3> The group had {this.state.totalCorrectMoves} correct dance moves.  </h3>
+                    <H3> Dance Moves Stats </H3>
                 </MoveHeadlineDiv>
+                <MoveMainDiv>
 
-                <HairChartDiv>
-                    <div> Hair: No of correct - {this.state.totalHairCorrect}, No of incorrect - {this.state.totalHairIncorrect} </div>
-                    <PieChart name='Hair' totalCorrect={this.state.totalHairCorrect} totalIncorrect={this.state.totalHairIncorrect} />
-                </HairChartDiv>
+                </MoveMainDiv>
 
-                <GunChartDiv>
-                    <div> Hair: No of correct - {this.state.totalGunCorrect}, No of incorrect - {this.state.totalGunIncorrect} </div>
-                    <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+            </MovesDiv>
+            // <React.Fragment>
+            //     <MoveHeadlineDiv>
+            //         <br />
+            //         <h2> Overall Dance Move Statistics </h2>
+            //         <h3> Total {this.state.totalMoves} moves </h3>
+            //         <h3> The group had {this.state.totalCorrectMoves} correct dance moves.  </h3>
+            //     </MoveHeadlineDiv>
 
-                </GunChartDiv>
+            //     <HairChartDiv>
+            //         <div> Hair: No of correct - {this.state.totalHairCorrect}, No of incorrect - {this.state.totalHairIncorrect} </div>
+            //         <PieChart name='Hair' totalCorrect={this.state.totalHairCorrect} totalIncorrect={this.state.totalHairIncorrect} />
+            //     </HairChartDiv>
 
-                <SidepumpChartDiv>
-                    <div> Hair: No of correct - {this.state.totalSidepumpCorrect}, No of incorrect - {this.state.totalSidepumpIncorrect} </div>
-                    <PieChart name='Sidepump' totalCorrect={this.state.totalSidepumpCorrect} totalIncorrect={this.state.totalSidepumpIncorrect} />
-                </SidepumpChartDiv>
-            </React.Fragment>
+            //     <GunChartDiv>
+            //         <div> Hair: No of correct - {this.state.totalGunCorrect}, No of incorrect - {this.state.totalGunIncorrect} </div>
+            //         <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+
+            //     </GunChartDiv>
+
+            //     <SidepumpChartDiv>
+            //         <div> Hair: No of correct - {this.state.totalSidepumpCorrect}, No of incorrect - {this.state.totalSidepumpIncorrect} </div>
+            //         <PieChart name='Sidepump' totalCorrect={this.state.totalSidepumpCorrect} totalIncorrect={this.state.totalSidepumpIncorrect} />
+            //     </SidepumpChartDiv>
+            // </React.Fragment>
         )
     }
 }

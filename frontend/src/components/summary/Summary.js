@@ -38,10 +38,11 @@ export class Summary extends Component {
                     <StatsDiv>
                         <SummaryStatsDiv>
                         <MovesDiv>
-
+                            <MovesController />
 =                       </MovesDiv>
 
                         <PositionsDiv>
+                            <PositionsController />
                         </PositionsDiv>
 
                         </SummaryStatsDiv>

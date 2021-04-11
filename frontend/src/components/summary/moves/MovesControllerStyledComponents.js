@@ -1,10 +1,28 @@
 import styled from 'styled-components';
 
+export const MovesDiv = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+`;
+
+
+
 export const MoveHeadlineDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid pink; */
+    /* border: 1px solid red; */
     text-align: center;
+`;
+
+export const MoveMainDiv = styled.div`
+    flex: 9;
+    display: flex;
+    flex-direction: row;    
+    box-sizing: border-box;
+    border: 1px solid black;
 `;
 
 export const GunChartDiv = styled.div`
@@ -31,3 +49,6 @@ export const SidepumpChartDiv = styled.div`
     margin: auto;
 `;
 
+export const H3 = styled.h3`
+    margin-top: 12px ;
+`;
