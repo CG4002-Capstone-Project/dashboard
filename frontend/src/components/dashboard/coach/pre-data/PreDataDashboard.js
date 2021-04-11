@@ -5,6 +5,7 @@ import { PreDashboardDiv,
     PostQuestionDiv,
     WhiteH1 } from './PreDataStyledComponents';
 import { Button, EndorsedIcon } from 'evergreen-ui';
+import { withRouter } from 'react-router-dom';
 
 export class PreDataDashboard extends Component {
     onLetsDanceClicked = event => {
@@ -14,7 +15,8 @@ export class PreDataDashboard extends Component {
 
     onViewResultsClicked = event => {
         event.preventDefault();
-        this.props.onViewResults();
+        //cthis.props.onViewResults();
+        this.props.history.push('/coach/summary');
     }
     render() {
         return (
@@ -36,4 +38,4 @@ export class PreDataDashboard extends Component {
     }
 }
 
-export default PreDataDashboard;
+export default withRouter(PreDataDashboard);
