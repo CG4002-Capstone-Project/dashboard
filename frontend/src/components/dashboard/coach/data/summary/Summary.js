@@ -19,8 +19,7 @@ import _ from 'lodash';
 import io from "socket.io-client";
 import EmgController from './EmgController';
 import { Button, EndorsedIcon } from 'evergreen-ui';
-
-
+import { withRouter } from 'react-router-dom';
 
 let currentMove;
 let videoComponent;
@@ -226,7 +225,8 @@ export class Summary extends Component {
 
     onDanceEndClicked = event => {
         event.preventDefault();
-        this.props.onDanceEnd();
+        // this.props.onDanceEnd();
+        this.props.history.push('/coach/summary');
     }
 
     settleHistory() {
@@ -314,4 +314,4 @@ export class Summary extends Component {
     }
 }
 
-export default Summary
+export default withRouter(Summary);
