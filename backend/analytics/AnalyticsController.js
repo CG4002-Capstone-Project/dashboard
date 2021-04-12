@@ -4,7 +4,8 @@ const { authChecker } = require('../auth/Auth');
 const { getAccumulatedData, 
     getAccumulatedMoves, 
     getAccumulatedPositions,
-    getIndividualPositionStats } = require('./Analytics');
+    getIndividualPositionStats,
+    getIndividualMoveStats } = require('./Analytics');
     
 module.exports = app;
 
@@ -52,9 +53,12 @@ app.get(
     async (req, res) => {
         try {
             console.log('ANALYTICS Individual Stats');
-            const individualStats = await getIndividualPositionStats();
-            console.log('ANALYTICS POSITIONS ', individualStats);
-            return res.status(200).json(individualStats);
+            const individualPositionStats = await getIndividualPositionStats();
+            const individualMoveStats = await getIndividualMoveStats();
+            // console.log('ANALYTICS POSITIONS ', individualStats);
+            return res.status(200).json({ 
+                ...individualPositionStats, 
+                ...individualMoveStats });
         } catch (error) {
             return res.status(403).json({ error });
         }

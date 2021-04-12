@@ -510,11 +510,341 @@ const getIndividualPositionStats = async () => {
     }
 }
 
+const getIndividualMoveStats = async () => {
+    let totalDab = 0;
+    let moveDabCorrDab = 0;
+    let moveDabIncorrElbowKick = 0;
+    let moveDabIncorrListen = 0;
+    let moveDabIncorrSidepump = 0;
+    let moveDabIncorrGun = 0;
+    let moveDabIncorrHair = 0;
+    let moveDabIncorrPointHigh = 0;
+    let moveDabIncorrWipeTable = 0;
+
+    let totalHair = 0;
+    let moveHairCorrHair = 0;
+    let moveHairIncorrDab = 0;
+    let moveHairIncorrElbowKick = 0;
+    let moveHairIncorrListen = 0;
+    let moveHairIncorrSidepump = 0;
+    let moveHairIncorrGun = 0;
+    let moveHairIncorrPointHigh = 0;
+    let moveHairIncorrWipeTable = 0;
+
+    let totalElbowKick = 0;
+    let moveElbowKickCorrElbowKick = 0;
+    let moveElbowKickIncorrListen = 0;
+    let moveElbowKickIncorrHair = 0;
+    let moveElbowKickIncorrDab = 0;
+    let moveElbowKickIncorrSidepump = 0;
+    let moveElbowKickIncorrGun = 0;
+    let moveElbowKickIncorrPointHigh = 0;
+    let moveElbowKickIncorrWipeTable = 0;
+
+    let totalListen = 0;
+    let moveListenCorrListen = 0;
+    let moveListenIncorrHair = 0;
+    let moveListenIncorrElbowKick = 0;
+    let moveListenIncorrDab = 0;
+    let moveListenIncorrSidepump = 0;
+    let moveListenIncorrGun = 0;
+    let moveListenIncorrPointHigh = 0;
+    let moveListenIncorrWipeTable = 0;
+
+    let totalSidepump = 0;
+    let moveSidepumpCorrSidepump = 0;
+    let moveSidempumpIncorrElbowKick = 0;
+    let moveSidepumpIncorrHair = 0;
+    let moveSidepumpIncorrListen = 0;
+    let moveSidepumpIncorrDab = 0;
+    let moveSidepumpIncorrGun = 0;
+    let moveSidepumpIncorrPointHigh = 0;
+    let moveSidepumpIncorrWipeTable = 0;
+
+    let totalGun = 0;
+    let moveGunCorrGun = 0;
+    let moveGunIncorrElbowKick = 0;
+    let moveGunIncorrHair = 0;
+    let moveGunIncorrListen = 0;
+    let moveGunIncorrDab = 0;
+    let moveGunIncorrPointHigh = 0;
+    let moveGunIncorrWipeTable = 0;
+    let moveGunIncorrSidepump = 0;
+
+    let totalPointHigh = 0;
+    let movePointHighCorrPointHigh = 0;
+    let movePointHighIncorrElbowKick = 0;
+    let movePointHighIncorrHair = 0;
+    let movePointHighIncorrListen = 0;
+    let movePointHighIncorrDab = 0;
+    let movePointHighIncorrWipeTable = 0;
+    let movePointHighIncorrSidepump = 0;
+    let movePointHighIncorrGun = 0;
+
+    let totalWipeTable = 0;
+    let moveWipeTableCorrWipeTable = 0;
+    let moveWipeTableIncorrElbowKick = 0;
+    let moveWipeTableIncorrHair = 0;
+    let moveWipeTableIncorrDab = 0;
+    let moveWipeTableIncorrListen = 0;
+    let moveWipeTableIncorrSidepump = 0;
+    let moveWipeTableIncorrGun = 0;
+    let moveWipeTableIncorrPointHigh = 0; 
+
+
+    try {
+        const resultsDocs = await RawResultsModel.find({});
+        console.log('GET INDIVIDUAL MOVES STATS ', resultsDocs);
+
+        for (const doc of resultsDocs) {
+            const predictedMove = doc.predictedMove;
+            const correctMove = doc.correctMove;
+
+            if (correctMove == 'dab') {
+                totalDab += 1;
+
+                if (predictedMove == 'dab') {
+                    moveDabCorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    moveDabIncorrElbowKick += 1;
+                } else if (predictedMove == 'listen') {
+                    moveDabIncorrListen += 1;
+                } else if (predictedMove == 'hair') {
+                    moveDabIncorrHair += 1;
+                } else if (predictedMove == 'sidepump') {
+                    moveDabIncorrSidepump += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveDabIncorrPointHigh += 1;
+                } else if (predictedMove == 'wipetable') {
+                    moveDabIncorrWipeTable += 1;
+                } else if (predictedMove == 'gun') {
+                    moveDabIncorrGun += 1;
+                }
+            } else if (correctMove == 'elbowkick') {
+                totalElbowKick += 1;
+
+                if (predictedMove == 'elbowkick') {
+                    moveElbowKickCorrElbowKick += 1;
+                } else if (predictedMove == 'dab') {
+                    moveElbowKickIncorrDab += 1;
+                } else if (predictedMove == 'listen') {
+                    moveElbowKickIncorrListen += 1;
+                } else if (predictedMove == 'hair') {
+                    moveElbowKickIncorrHair += 1;
+                } else if (predictedMove == 'sidepump') {
+                    moveElbowKickIncorrSidepump += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveElbowKickIncorrPointHigh += 1;
+                } else if (predictedMove == 'wipetable') {
+                    moveElbowKickIncorrWipeTable += 1;
+                } else if (predictedMove == 'gun') {
+                    moveElbowKickIncorrGun += 1;
+                }
+            } else if (correctMove == 'listen') {
+                totalListen += 1;
+                if (predictedMove == 'listen') {
+                    moveListenCorrListen += 1;
+                } else if (predictedMove == 'dab') {
+                    moveListenIncorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    moveListenIncorrElbowKick += 1;
+                } else if (predictedMove == 'hair') {
+                    moveListenIncorrHair += 1;
+                } else if (predictedMove == 'sidepump') {
+                    moveListenIncorrSidepump += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveListenIncorrPointHigh += 1;
+                } else if (predictedMove == 'wipetable') {
+                    moveListenIncorrWipeTable += 1;
+                } else if (predictedMove == 'gun') {
+                    moveListenIncorrGun += 1;
+                }
+            } else if (correctMove == 'hair') {
+                totalHair += 1;
+                if (predictedMove == 'hair') {
+                    moveHairCorrHair += 1;
+                } else if (predictedMove == 'dab') {
+                    moveHairIncorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    moveHairIncorrElbowKick += 1;
+                } else if (predictedMove == 'listen') {
+                    moveHairIncorrListen += 1;
+                } else if (predictedMove == 'sidepump') {
+                    moveHairIncorrSidepump += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveHairIncorrPointHigh += 1;
+                } else if (predictedMove == 'wipetable') {
+                    moveHairIncorrWipeTable += 1;
+                } else if (predictedMove == 'gun') {
+                    moveHairIncorrGun += 1;
+                }
+            } else if (correctMove == 'sidepump') {
+                totalSidepump += 1;
+                if (predictedMove == 'sidepump') {
+                    moveSidepumpCorrSidepump += 1;
+                } else if (predictedMove == 'dab') {
+                    moveSidepumpIncorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    moveSidempumpIncorrElbowKick += 1;
+                } else if (predictedMove == 'listen') {
+                    moveSidepumpIncorrListen += 1;
+                } else if (predictedMove == 'hair') {
+                    moveSidepumpIncorrHair += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveSidepumpIncorrPointHigh += 1;
+                } else if (predictedMove == 'wipetable') {
+                    moveSidepumpIncorrWipeTable += 1;
+                } else if (predictedMove == 'gun') {
+                    moveSidepumpIncorrGun += 1;
+                }
+            } else if (correctMove == 'pointhigh') {
+                totalPointHigh += 1;
+                if (predictedMove == 'pointhigh') {
+                    movePointHighCorrPointHigh += 1;
+                } else if (predictedMove == 'dab') {
+                    movePointHighIncorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    movePointHighIncorrElbowKick += 1;
+                } else if (predictedMove == 'listen') {
+                    movePointHighIncorrListen += 1;
+                } else if (predictedMove == 'hair') {
+                    movePointHighIncorrHair += 1;
+                } else if (predictedMove == 'sidepump') {
+                    movePointHighIncorrSidepump += 1;
+                } else if (predictedMove == 'wipetable') {
+                    movePointHighIncorrWipeTable += 1;
+                } else if (predictedMove == 'gun') {
+                    movePointHighIncorrGun += 1;
+                }
+            } else if (correctMove == 'wipetable') {
+                totalWipeTable += 1;
+                if (predictedMove == 'wipetable') {
+                    moveWipeTableCorrWipeTable += 1;
+                } else if (predictedMove == 'dab') {
+                    moveWipeTableIncorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    moveWipeTableIncorrElbowKick += 1;
+                } else if (predictedMove == 'listen') {
+                    moveWipeTableIncorrListen += 1;
+                } else if (predictedMove == 'hair') {
+                    moveWipeTableIncorrHair += 1;
+                } else if (predictedMove == 'sidepump') {
+                    moveWipeTableIncorrSidepump += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveWipeTableIncorrPointHigh += 1;
+                } else if (predictedMove == 'gun') {
+                    moveWipeTableIncorrGun += 1;
+                }
+            } else if (correctMove == 'gun') {
+                totalGun += 1;
+                if (predictedMove == 'gun') {
+                    moveGunCorrGun += 1;
+                } else if (predictedMove == 'dab') {
+                    moveGunIncorrDab += 1;
+                } else if (predictedMove == 'elbowkick') {
+                    moveGunIncorrElbowKick += 1;
+                } else if (predictedMove == 'listen') {
+                    moveGunIncorrListen += 1;
+                } else if (predictedMove == 'hair') {
+                    moveGunIncorrHair += 1;
+                } else if (predictedMove == 'sidepump') {
+                    moveGunIncorrSidepump += 1;
+                } else if (predictedMove == 'pointhigh') {
+                    moveGunIncorrPointHigh += 1;
+                } else if (predictedMove == 'wipetable') {
+                    moveGunIncorrWipeTable += 1;
+                }
+            }
+            
+        }
+
+    } catch (error) {
+        console.log('Get Individual Move stats error ', error);
+        throw new Error(error);
+    }
+
+    return {
+        totalDab,
+        moveDabCorrDab,
+        moveDabIncorrElbowKick,
+        moveDabIncorrListen,
+        moveDabIncorrHair,
+        moveDabIncorrGun,
+        moveDabIncorrPointHigh,
+        moveDabIncorrSidepump,
+        moveDabIncorrWipeTable,
+        totalElbowKick,
+        moveElbowKickCorrElbowKick,
+        moveElbowKickIncorrDab,
+        moveElbowKickIncorrGun,
+        moveElbowKickIncorrHair,
+        moveElbowKickIncorrPointHigh,
+        moveElbowKickIncorrSidepump,
+        moveElbowKickIncorrListen,
+        moveElbowKickIncorrWipeTable,
+        totalHair,
+        moveHairCorrHair,
+        moveHairIncorrDab,
+        moveHairIncorrElbowKick,
+        moveHairIncorrGun,
+        moveHairIncorrListen,
+        moveHairIncorrPointHigh,
+        moveHairIncorrSidepump,
+        moveHairIncorrWipeTable,
+        totalListen,
+        moveListenCorrListen,
+        moveListenIncorrDab,
+        moveListenIncorrElbowKick,
+        moveListenIncorrGun,
+        moveListenIncorrHair,
+        moveListenIncorrPointHigh,
+        moveListenIncorrSidepump,
+        moveListenIncorrWipeTable,
+        totalGun,
+        moveGunCorrGun,
+        moveGunIncorrDab,
+        moveGunIncorrElbowKick,
+        moveGunIncorrHair,
+        moveGunIncorrListen,
+        moveGunIncorrPointHigh,
+        moveGunIncorrSidepump,
+        moveGunIncorrWipeTable,
+        totalSidepump,
+        moveSidepumpCorrSidepump,
+        moveSidempumpIncorrElbowKick,
+        moveSidepumpIncorrDab,
+        moveSidepumpIncorrGun,
+        moveSidepumpIncorrHair,
+        moveSidepumpIncorrListen,
+        moveSidepumpIncorrPointHigh,
+        moveSidepumpIncorrWipeTable,
+        totalPointHigh,
+        movePointHighCorrPointHigh,
+        movePointHighIncorrDab,
+        movePointHighIncorrElbowKick,
+        movePointHighIncorrGun,
+        movePointHighIncorrHair,
+        movePointHighIncorrSidepump,
+        movePointHighIncorrListen,
+        movePointHighIncorrWipeTable,
+        totalWipeTable,
+        moveWipeTableCorrWipeTable,
+        moveWipeTableIncorrDab,
+        moveWipeTableIncorrElbowKick,
+        moveWipeTableIncorrGun,
+        moveWipeTableIncorrHair,
+        moveWipeTableIncorrListen,
+        moveWipeTableIncorrPointHigh,
+        moveWipeTableIncorrSidepump
+    }
+}
+
 module.exports = {
     getAccumulatedData,
     getAccumulatedMoves,
     getAccumulatedPositions,
-    getIndividualPositionStats
+    getIndividualPositionStats,
+    getIndividualMoveStats
 }
 
 
