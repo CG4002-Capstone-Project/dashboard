@@ -69,12 +69,12 @@ export class Summary extends Component {
             await this.handleHistoryState(result);  
         })
 
-        socket.on("newMode", async (result) => {
-            await this.setState(prevState => ({
-                mode: result.mode
-            }))
-            console.log('Mode Changed in Result! ', result.mode);
-        })
+        // socket.on("newMode", async (result) => {
+        //     await this.setState(prevState => ({
+        //         mode: result.mode
+        //     }))
+        //     console.log('Mode Changed in Result! ', result.mode);
+        // })
 
         socket.on("disconnect", (reason) => {
             if (reason === "io server disconnect") {
