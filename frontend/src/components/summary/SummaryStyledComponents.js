@@ -60,7 +60,7 @@ export const StatsDiv = styled.div`
 `;
 
 export const SummaryStatsDiv = styled.div`
-    flex: 1;
+    flex: 2;
     box-sizing: border-box;
     border: 1px solid blue;
     display: flex;
@@ -68,7 +68,7 @@ export const SummaryStatsDiv = styled.div`
 `;
 
 export const IndividualTraineeStatsDiv = styled.div`
-    flex: 3;
+    flex: 1;
     box-sizing: border-box;
     border: 1px solid blue;
     display: flex;
@@ -79,10 +79,39 @@ export const MovesDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const MovesSummaryDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid red;
+`;
+
+export const MovesStatsDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid red;
 `;
 
 export const PositionsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
     border: 1px solid green;
+    display: flex;
+    flex-direction: column;
 `;
+
+export const PositionsSummaryDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid red;
+`;
+
+export const PositionsStatsDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid red;
+`;
+
