@@ -10,7 +10,7 @@ import { SummaryDiv,
     StatsDiv,
     IndividualChartsDiv,
     TableDiv } from './SummaryStyledComponents';
-import IndividualController from './individual/IndividualController';
+import IndividualDataController from './individual/IndividualDataController';
 import MovesController from './moves/MovesController';
 import PositionsController from './positions/PositionsController';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
@@ -28,7 +28,7 @@ export class Summary extends Component {
                     <DataDiv>
                        
                         <IndividualChartsDiv>
-                            <IndividualController/>
+                            <IndividualDataController/>
                         </IndividualChartsDiv>
                         <TableDiv>
 

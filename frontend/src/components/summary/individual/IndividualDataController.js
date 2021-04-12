@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { getDataSummary } from '../../../utils/Analytics';
 import { UserContext } from '../../../contexts/UserContext';
-import { DropDownDiv } from './IndividualControllerStyledComponents';
+import { DropDownDiv } from './IndividualDataControllerStyledComponents';
 import Individual from './Individual';
 import { Select } from 'evergreen-ui';
 
-export class IndividualController extends Component {
+export class IndividualDataController extends Component {
     static contextType = UserContext;
 
     async componentDidMount() {
@@ -150,4 +150,4 @@ export class IndividualController extends Component {
     }
 }
 
-export default IndividualController
+export default IndividualDataController
