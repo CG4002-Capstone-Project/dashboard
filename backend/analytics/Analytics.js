@@ -105,14 +105,29 @@ const getAccumulatedMoves = async () => {
     let totalHair = 0;
     let totalGun = 0;
     let totalSidepump = 0;
+    let totalDab = 0;
+    let totalElbowKick = 0;
+    let totalListen = 0;
+    let totalWipeTable = 0;
+    let totalPointHigh = 0;
 
     let totalHairCorrect = 0;
     let totalGunCorrect = 0;
     let totalSidepumpCorrect = 0;
+    let totalDabCorrect = 0;
+    let totalElbowKickCorrect = 0;
+    let totalListenCorrect = 0;
+    let totalWipeTableCorrect = 0;
+    let totalPointHighCorrect = 0;
 
     let totalHairIncorrect = 0;
     let totalGunIncorrect = 0;
     let totalSidepumpIncorrect = 0;
+    let totalDabIncorrect = 0;
+    let totalElbowKickIncorrect = 0;
+    let totalListenIncorrect = 0;
+    let totalWipeTableIncorrect = 0;
+    let totalPointHighIncorrect = 0;
 
     try {
         const resultsDocs = await RawResultsModel.find({});
@@ -128,6 +143,16 @@ const getAccumulatedMoves = async () => {
                 totalGun += 1;
             } else if (doc.correctMove === 'sidepump') {
                 totalSidepump += 1;
+            } else if (doc.correctMove === 'dab') {
+                totalDab += 1;
+            } else if (doc.correctMove === 'elbowkick') {
+                totalElbowKick += 1;
+            } else if (doc.correctMove === 'listen') {
+                totalListen += 1;
+            } else if (doc.correctMove === 'wipetable') {
+                totalWipeTable += 1;
+            } else if (doc.correctMove === 'pointhigh') {
+                totalPointHigh += 1;
             }
 
             if (doc.correctMove === doc.predictedMove) {
@@ -139,6 +164,16 @@ const getAccumulatedMoves = async () => {
                     totalGunCorrect += 1;
                 } else if (doc.correctMove === 'sidepump') {
                     totalSidepumpCorrect += 1;
+                } else if (doc.correctMove === 'dab') {
+                    totalDabCorrect += 1;
+                } else if (doc.correctMove === 'elbowkick') {
+                    totalElbowKick += 1;
+                } else if (doc.correctMove === 'listen') {
+                    totalListenCorrect += 1;
+                } else if (doc.correctMove === 'wipetable') {
+                    totalWipeTableCorrect += 1;
+                } else if (doc.correctMove === 'pointhigh') {
+                    totalPointHighCorrect += 1;
                 }
             }
         }
@@ -147,6 +182,11 @@ const getAccumulatedMoves = async () => {
         totalHairIncorrect = totalHair - totalHairCorrect;
         totalGunIncorrect = totalGun - totalGunCorrect;
         totalSidepumpIncorrect = totalSidepump - totalSidepumpCorrect;
+        totalDabIncorrect = totalDab - totalDabCorrect;
+        totalElbowKickIncorrect = totalElbowKick - totalElbowKickCorrect;
+        totalListenIncorrect = totalListen - totalListenCorrect;
+        totalWipeTableInCorrect = totalWipeTable - totalWipeTableCorrect;
+        totalPointHighInCorrect = totalPointHigh - totalPointHighCorrect;
 
     } catch (error) {
         console.log('Get accumulated moves error ', error);
@@ -164,7 +204,22 @@ const getAccumulatedMoves = async () => {
         totalHairIncorrect,
         totalSidepump,
         totalSidepumpCorrect,
-        totalSidepumpIncorrect
+        totalSidepumpIncorrect,
+        totalDab,
+        totalDabCorrect,
+        totalDabIncorrect,
+        totalElbowKick,
+        totalElbowKickCorrect,
+        totalElbowKickIncorrect,
+        totalListen,
+        totalListenCorrect,
+        totalListenIncorrect,
+        totalWipeTable,
+        totalWipeTableCorrect,
+        totalWipeTableIncorrect,
+        totalPointHigh,
+        totalPointHighCorrect,
+        totalPointHighIncorrect
     }
 
 }

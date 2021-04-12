@@ -52,4 +52,8 @@ export const H3 = styled.h3`
     margin-top: 12px;
 `;
 
+export const H4 = styled.h4`
+
+`;
+
 

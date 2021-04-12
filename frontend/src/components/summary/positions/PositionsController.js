@@ -5,7 +5,8 @@ import { PositionHeadlineDiv,
     H3, 
     ScoreDiv, 
     DropdownDiv, 
-    ChartDiv } from './PositionsControllerStyledComponents';
+    ChartDiv,
+    H4 } from './PositionsControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getPositionsSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
@@ -44,7 +45,7 @@ export class PositionsController extends Component {
     }
 
     state = {
-        currentPosition: 0,
+        currentPosition: 1,
         totalPositions: 0,
         totalCorrectPositions: 0,
         totalIncorrectPositions: 0,
@@ -71,32 +72,23 @@ export class PositionsController extends Component {
 
         console.log('POST DATA SUMMARY POSITIONS ', this.state.currentPosition);
 
-        if (this.state.currentPosition == 0) {
-            chart = (
-                <H3> Pick one! </H3>
-            );
-        } else if (this.state.currentPosition == 1) {
+        if (this.state.currentPosition == 1) {
             chart = (
                 <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
             );
+            respectiveScore = `Trainee 1 Score: ${this.state.traineeOneCorrectPosition} / ${this.state.totalPositions}`;
 
-            respectiveScore = (
-                <H3> Trainee 1 Score: {this.state.traineeOneCorrectPosition} / {this.state.totalPositions} </H3>
-            );
         } else if (this.state.currentPosition == 2) {
             chart = (
                 <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
             );
-            respectiveScore = (
-                <H3> Trainee 2 Score: {this.state.traineeTwoCorrectPosition} / {this.state.totalPositions} </H3>
-            );
+            respectiveScore = `Trainee 2 Score: ${this.state.traineeTwoCorrectPosition} / ${this.state.totalPositions}`;
+    
         } else if (this.state.currentPosition == 3) {
             chart = (
                 <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
             );
-            respectiveScore = (
-                <H3> Trainee 3 Score: {this.state.traineeThreeCorrectPosition} / {this.state.totalPositions} </H3>
-            );
+            respectiveScore = `Trainee 3 Score: ${this.state.traineeThreeCorrectPosition} / ${this.state.totalPositions}`;
         }
     
         return (
@@ -106,8 +98,8 @@ export class PositionsController extends Component {
                 </PositionHeadlineDiv>
                 <PositionMainDiv>
                     <ScoreDiv>
-                        <H3> Position Score: {this.state.totalCorrectPositions} / {this.state.totalPositions} </H3>
-                        {respectiveScore}
+                        <H4> Position Score: {this.state.totalCorrectPositions} / {this.state.totalPositions} </H4>
+                        <H4> {respectiveScore} </H4>
                     </ScoreDiv>
                     <ChartDiv>
                         <DropdownDiv>
@@ -121,31 +113,6 @@ export class PositionsController extends Component {
                     </ChartDiv>
                 </PositionMainDiv>
             </PositionsDiv>
-            // <React.Fragment>
-            //     <PositionHeadlineDiv>
-            //         <br />
-            //         <h2> Overall Dance Position Statistics </h2>
-            //         <h3> Total {this.state.totalPositions} positions </h3>
-            //         <h3> The group had {this.state.totalCorrectPositions} correct positions moves.  </h3>
-            //     </PositionHeadlineDiv>
-
-            //     <TraineeOneDiv>
-            //         <div> Trainee 1: No of correct - {this.state.traineeOneCorrectPosition}, No of incorrect - {this.state.traineeOneIncorrectPosition} </div>
-            //         <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
-            //     </TraineeOneDiv>
-
-            //     <TraineeTwoDiv>
-            //         <div> Trainee 2: No of correct - {this.state.traineeTwoCorrectPosition}, No of incorrect - {this.state.traineeTwoIncorrectPosition} </div>
-            //         <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
-
-            //     </TraineeTwoDiv>
-
-            //     <TraineeThreeDiv>
-            //         <div> Trainee 3: No of correct - {this.state.traineeThreeCorrectPosition}, No of incorrect - {this.state.traineeThreeIncorrectPosition} </div>
-            //         <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
-
-            //     </TraineeThreeDiv>
-            // </React.Fragment>
         )
     }
 }

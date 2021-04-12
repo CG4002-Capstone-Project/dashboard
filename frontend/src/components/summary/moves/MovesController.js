@@ -5,12 +5,12 @@ import { MoveHeadlineDiv,
     ChartDiv,
     ScoreDiv,
     DropdownDiv,
-    H3 } from './MovesControllerStyledComponents';
+    H3,
+    H4 } from './MovesControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getMovesSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
 import { Select } from 'evergreen-ui';
-import { ThemeConsumer } from 'styled-components';
 
 export class MovesController extends Component {
     static contextType = UserContext;
@@ -61,7 +61,7 @@ export class MovesController extends Component {
     }
 
     state = {
-        currentTrainee: 0,
+        currentTrainee: 1,
         totalMoves: 0,
         totalCorrectMoves: 0,
         totalGun: 0,
@@ -101,68 +101,56 @@ export class MovesController extends Component {
 
         let chart;
         let respectiveScore; 
+
+        console.log('POST DATA SUMMARY MOVES ', this.state);
         
-        if (this.state.currentTrainee == 0) {
-            chart = (
-                <H3> Pick one! </H3>
-            )
-        } else if (this.state.currentTrainee == 1) {
+        if (this.state.currentTrainee == 1) {
             chart = (
                 <PieChart name='Dab' totalCorrect={this.state.totalDabCorrect} totalIncorrect={this.state.totalDabIncorrect} />
             );
+            respectiveScore = `Dab Score: ${this.state.totalDabCorrect} / ${this.state.totalDab}`;
 
-            respectiveScore = (
-                <H3> Dab Score: {this.state.totalDabCorrect} / {this.state.totalDab} </H3>
-            )
         } else if (this.state.currentTrainee == 2) {
             chart = (
                 <PieChart name='Elbow Kick' totalCorrect={this.state.totalElbowKickCorrect} totalIncorrect={this.state.totalElbowKickIncorrect} />
             );
-            respectiveScore = (
-                <H3> Elbow Kick Score: {this.state.totalElbowKickCorrect} / {this.state.totalElbowKick} </H3>
-            )
+            respectiveScore = `Elbow Kick Score: ${this.state.totalElbowKickCorrect} / ${this.state.totalElbowKick}`;
+
         } else if (this.state.currentTrainee == 3) {
             chart = (
                 <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
             );
-            respectiveScore = (
-                <H3> Gun Score: {this.state.totalGunCorrect} / {this.state.totalGun} </H3>
-            )
+            respectiveScore = `Gun Score: ${this.state.totalGunCorrect} / ${this.state.totalGun}`;
+
         } else if (this.state.currentTrainee == 4) {
             chart = (
                 <PieChart name='Hair' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
             );
-            respectiveScore = (
-                <H3> Hair Score: {this.state.totalHairCorrect} / {this.state.totalHair} </H3>
-            )
+            respectiveScore = `Hair Score: ${this.state.totalHairCorrect} / ${this.state.totalHair}`;
+
         } else if (this.state.currentTrainee == 5) {
             chart = (
                 <PieChart name='Listen' totalCorrect={this.state.totalListenCorrect} totalIncorrect={this.state.totalListenIncorrect} />
             );
-            respectiveScore = (
-                <H3> Listen Score: {this.state.totalListenCorrect} / {this.state.totalListen} </H3>
-            )
+            respectiveScore = `Listen Score: ${this.state.totalListenCorrect} / ${this.state.totalListen}`;
+
         } else if (this.state.currentTrainee == 6) {
             chart = (
                 <PieChart name='Point High' totalCorrect={this.state.totalPointHighCorrect} totalIncorrect={this.state.totalPointHighIncorrect} />
             );
-            respectiveScore = (
-                <H3> Point High Score: {this.state.totalPointHighCorrect} / {this.state.totalPointHigh} </H3>
-            )
+            respectiveScore = `Point High Score: ${this.state.totalPointHighCorrect} / ${this.state.totalPointHigh}`;
+
         } else if (this.state.currentTrainee == 7) {
             chart = (
                 <PieChart name='Side Pump' totalCorrect={this.state.totalSidePumpCorrect} totalIncorrect={this.state.totalSidePumpIncorrect} />
             );
-            respectiveScore = (
-                <H3> Side Pump Score: {this.state.totalSidePumpCorrect} / {this.state.totalSidePump} </H3>
-            )
+            respectiveScore = `Side Pump Score: ${this.state.totalSidePumpCorrect} / ${this.state.totalSidePump}`;
+
         } else if (this.state.currentTrainee == 8) {
             chart = (
                 <PieChart name='Wipe Table' totalCorrect={this.state.totalWipeTableCorrect} totalIncorrect={this.state.totalWipeTableIncorrect} />
             );
-            respectiveScore = (
-                <H3> Wipe Table Score: {this.state.totalWipeTableCorrect} / {this.state.totalWipeTable} </H3>
-            )
+            respectiveScore = `Wipe Table Score: ${this.state.totalWipeTableCorrect} / ${this.state.totalWipeTable}`;
         }
 
         return (
@@ -172,8 +160,9 @@ export class MovesController extends Component {
                 </MoveHeadlineDiv>
                 <MoveMainDiv>
                     <ScoreDiv>
-                        <H3> Total Score: {this.state.totalCorrectMoves} / {this.state.totalMoves} </H3>
-                        {respectiveScore}
+                        {/* <H3> Total Score: {this.state.totalCorrectMoves} / {this.state.totalMoves} </H3> */}
+                        <H4> Total Score: {this.state.totalCorrectMoves} / {this.state.totalMoves} </H4>
+                        <H4> {respectiveScore} </H4>
                     </ScoreDiv>
                     <ChartDiv>
                         <DropdownDiv>
