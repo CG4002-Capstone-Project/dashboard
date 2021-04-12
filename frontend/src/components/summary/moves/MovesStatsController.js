@@ -294,9 +294,9 @@ export class MovesStatsController extends Component {
         return (
                 <MovesDiv>
                     <MoveMainDiv>
-                        <ScoreDiv>
-                            {/* {respectiveScore} */}
-                        </ScoreDiv>
+                        {/* <ScoreDiv>
+                            {respectiveScore}
+                        </ScoreDiv> */}
                         <ChartDiv>
                             <DropdownDiv>
                                 <Select width={120} height={40} onChange={this.onDropdownChange} >
