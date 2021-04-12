@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { MoveHeadlineDiv,
     MoveMainDiv,
     MovesDiv, 
-    HairChartDiv, 
-    GunChartDiv, 
-    SidepumpChartDiv,
+    ChartDiv,
+    ScoreDiv,
+    DropdownDiv,
     H3 } from './MovesControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getMovesSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
+import { Select } from 'evergreen-ui';
+import { ThemeConsumer } from 'styled-components';
 
 export class MovesController extends Component {
     static contextType = UserContext;
@@ -34,7 +36,22 @@ export class MovesController extends Component {
                 totalHairIncorrect: movesSummary.totalHairIncorrect,
                 totalSidepump: movesSummary.totalSidepump,
                 totalSidepumpCorrect: movesSummary.totalSidepumpCorrect,
-                totalSidepumpIncorrect: movesSummary.totalSidepumpIncorrect
+                totalSidepumpIncorrect: movesSummary.totalSidepumpIncorrect,
+                totalDab: movesSummary.totalDab,
+                totalDabCorrect: movesSummary.totalDabCorrect,
+                totalDabIncorrect: movesSummary.totalDabIncorrect,
+                totalElbowKick: movesSummary.totalElbowKick,
+                totalElbowKickCorrect: movesSummary.totalElbowKickCorrect,
+                totalElbowKickIncorrect: movesSummary.totalElbowKickIncorrect,
+                totalListen: movesSummary.totalListen,
+                totalListenCorrect: movesSummary.totalListenCorrect,
+                totalListenIncorrect: movesSummary.totalListenIncorrect,
+                totalWipeTable: movesSummary.totalWipeTable,
+                totalWipeTableCorrect: movesSummary.totalWipeTableCorrect,
+                totalWipeTableIncorrect: movesSummary.totalWipeTableIncorrect,
+                totalPointHigh: movesSummary.totalPointHigh,
+                totalPointHighCorrect: movesSummary.totalPointHighCorrect,
+                totalPointHighIncorrect: movesSummary.totalPointHighIncorrect
                 }))
             await handleUser({ ...user, isFetching: false });
         } catch (error) {
@@ -44,6 +61,7 @@ export class MovesController extends Component {
     }
 
     state = {
+        currentTrainee: 0,
         totalMoves: 0,
         totalCorrectMoves: 0,
         totalGun: 0,
@@ -54,44 +72,126 @@ export class MovesController extends Component {
         totalHairIncorrect: 0,
         totalSidepump: 0,
         totalSidepumpCorrect: 0,
-        totalSidepumpIncorrect: 0
+        totalSidepumpIncorrect: 0,
+        totalDab: 0,
+        totalDabCorrect: 0,
+        totalDabIncorrect: 0,
+        totalElbowKick: 0,
+        totalElbowKickCorrect: 0,
+        totalElbowKickIncorrect: 0,
+        totalListen: 0,
+        totalListenCorrect: 0,
+        totalListenIncorrect: 0,
+        totalWipeTable: 0,
+        totalWipeTableCorrect: 0,
+        totalWipeTableIncorrect: 0,
+        totalPointHigh: 0,
+        totalPointHighCorrect: 0,
+        totalPointHighIncorrect: 0,
     };
 
+    onDropdownChange = event => {
+        event.preventDefault();
+        this.setState(prevState => ({
+            ...prevState,
+            currentTrainee: event.target.value
+        }))
+    }
     render() {
+
+        let chart;
+        let respectiveScore; 
+        
+        if (this.state.currentTrainee == 0) {
+            chart = (
+                <H3> Pick one! </H3>
+            )
+        } else if (this.state.currentTrainee == 1) {
+            chart = (
+                <PieChart name='Dab' totalCorrect={this.state.totalDabCorrect} totalIncorrect={this.state.totalDabIncorrect} />
+            );
+
+            respectiveScore = (
+                <H3> Dab Score: {this.state.totalDabCorrect} / {this.state.totalDab} </H3>
+            )
+        } else if (this.state.currentTrainee == 2) {
+            chart = (
+                <PieChart name='Elbow Kick' totalCorrect={this.state.totalElbowKickCorrect} totalIncorrect={this.state.totalElbowKickIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Elbow Kick Score: {this.state.totalElbowKickCorrect} / {this.state.totalElbowKick} </H3>
+            )
+        } else if (this.state.currentTrainee == 3) {
+            chart = (
+                <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Gun Score: {this.state.totalGunCorrect} / {this.state.totalGun} </H3>
+            )
+        } else if (this.state.currentTrainee == 4) {
+            chart = (
+                <PieChart name='Hair' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Hair Score: {this.state.totalHairCorrect} / {this.state.totalHair} </H3>
+            )
+        } else if (this.state.currentTrainee == 5) {
+            chart = (
+                <PieChart name='Listen' totalCorrect={this.state.totalListenCorrect} totalIncorrect={this.state.totalListenIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Listen Score: {this.state.totalListenCorrect} / {this.state.totalListen} </H3>
+            )
+        } else if (this.state.currentTrainee == 6) {
+            chart = (
+                <PieChart name='Point High' totalCorrect={this.state.totalPointHighCorrect} totalIncorrect={this.state.totalPointHighIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Point High Score: {this.state.totalPointHighCorrect} / {this.state.totalPointHigh} </H3>
+            )
+        } else if (this.state.currentTrainee == 7) {
+            chart = (
+                <PieChart name='Side Pump' totalCorrect={this.state.totalSidePumpCorrect} totalIncorrect={this.state.totalSidePumpIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Side Pump Score: {this.state.totalSidePumpCorrect} / {this.state.totalSidePump} </H3>
+            )
+        } else if (this.state.currentTrainee == 8) {
+            chart = (
+                <PieChart name='Wipe Table' totalCorrect={this.state.totalWipeTableCorrect} totalIncorrect={this.state.totalWipeTableIncorrect} />
+            );
+            respectiveScore = (
+                <H3> Wipe Table Score: {this.state.totalWipeTableCorrect} / {this.state.totalWipeTable} </H3>
+            )
+        }
+
         return (
             <MovesDiv>
                 <MoveHeadlineDiv>
                     <H3> Dance Moves Stats </H3>
                 </MoveHeadlineDiv>
                 <MoveMainDiv>
-
+                    <ScoreDiv>
+                        <H3> Total Score: {this.state.totalCorrectMoves} / {this.state.totalMoves} </H3>
+                        {respectiveScore}
+                    </ScoreDiv>
+                    <ChartDiv>
+                        <DropdownDiv>
+                            <Select width={120} height={40} onChange={this.onDropdownChange} >
+                                <option value={1}> Dab </option>
+                                <option value={2}> Elbow Kick </option>
+                                <option value={3}> Gun </option>
+                                <option value={4}> Hair </option>
+                                <option value={5}> Listen </option>
+                                <option value={6}> Point High </option>
+                                <option value={7}> Side Pump </option>
+                                <option value={8}> Wipe Table </option>
+                            </Select>
+                        </DropdownDiv>
+                        {chart}
+                    </ChartDiv>
                 </MoveMainDiv>
-
             </MovesDiv>
-            // <React.Fragment>
-            //     <MoveHeadlineDiv>
-            //         <br />
-            //         <h2> Overall Dance Move Statistics </h2>
-            //         <h3> Total {this.state.totalMoves} moves </h3>
-            //         <h3> The group had {this.state.totalCorrectMoves} correct dance moves.  </h3>
-            //     </MoveHeadlineDiv>
-
-            //     <HairChartDiv>
-            //         <div> Hair: No of correct - {this.state.totalHairCorrect}, No of incorrect - {this.state.totalHairIncorrect} </div>
-            //         <PieChart name='Hair' totalCorrect={this.state.totalHairCorrect} totalIncorrect={this.state.totalHairIncorrect} />
-            //     </HairChartDiv>
-
-            //     <GunChartDiv>
-            //         <div> Hair: No of correct - {this.state.totalGunCorrect}, No of incorrect - {this.state.totalGunIncorrect} </div>
-            //         <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
-
-            //     </GunChartDiv>
-
-            //     <SidepumpChartDiv>
-            //         <div> Hair: No of correct - {this.state.totalSidepumpCorrect}, No of incorrect - {this.state.totalSidepumpIncorrect} </div>
-            //         <PieChart name='Sidepump' totalCorrect={this.state.totalSidepumpCorrect} totalIncorrect={this.state.totalSidepumpIncorrect} />
-            //     </SidepumpChartDiv>
-            // </React.Fragment>
         )
     }
 }

@@ -46,7 +46,7 @@ export default class EmgLineChart extends Component {
                         {
                             ticks: {
                                 min: 0,
-                                max: 400,
+                                max: 1000,
                                 fontColor: 'white'
                                 // suggestedMax: 5,
                                 // suggestedMin: 0,

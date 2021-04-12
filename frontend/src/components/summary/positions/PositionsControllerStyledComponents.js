@@ -23,26 +23,30 @@ export const PositionMainDiv = styled.div`
     border: 1px solid black;
 `;
 
-export const TraineeOneDiv = styled.div`
+export const ScoreDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid pink; */
+    border: 1px solid red;
+    text-align: center;
     margin: auto;
 `;
 
-export const TraineeTwoDiv = styled.div`
+export const DropdownDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid purple; */
+    border: 1px solid blue;
+    text-align: center;
     margin: auto;
 `;
 
-export const TraineeThreeDiv = styled.div`
+export const ChartDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid turquoise; */
+    border: 1px solid green;
+    text-align: center;
     margin: auto;
 `;
+
 
 export const H3 = styled.h3`
     margin-top: 12px;

@@ -25,26 +25,26 @@ export const MoveMainDiv = styled.div`
     border: 1px solid black;
 `;
 
-export const GunChartDiv = styled.div`
+export const ScoreDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid pink; */
+    border: 1px solid red;
     text-align: center;
     margin: auto;
 `;
 
-export const HairChartDiv = styled.div`
+export const DropdownDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid purple; */
+    border: 1px solid blue;
     text-align: center;
     margin: auto;
 `;
 
-export const SidepumpChartDiv = styled.div`
+export const ChartDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    /* border: 1px solid turquoise; */
+    border: 1px solid green;
     text-align: center;
     margin: auto;
 `;

@@ -11,6 +11,7 @@ export default class PieChart extends Component {
 
         this.myChart.data.datasets[0].data[0] = this.props.totalCorrect;
         this.myChart.data.datasets[0].data[1] = this.props.totalIncorrect;
+        this.myChart.options.title.text = this.props.name;
 
         this.myChart.update();
     }
