@@ -297,10 +297,224 @@ const getAccumulatedPositions = async () => {
 
 }
 
+const getIndividualPositionStats = async () => {
+    // traineeCorrectPositionActualPosition
+    let t1Pos1 = 0;
+    let t1Pos1Corr1 = 0;
+    let t1Pos1Incorr2 = 0;
+    let t1Pos1Incorr3 = 0;
+
+    let t1Pos2 = 0;
+    let t1Pos2Incorr1 = 0;
+    let t1Pos2Corr2 = 0;
+    let t1Pos2Incorr3 = 0;
+
+    let t1Pos3 = 0;
+    let t1Pos3Incorr1 = 0;
+    let t1Pos3Incorr2 = 0;
+    let t1Pos3Corr3 = 0;
+
+    let t2Pos1 = 0;
+    let t2Pos1Corr1 = 0;
+    let t2Pos1Incorr2 = 0;
+    let t2Pos1Incorr3 = 0;
+
+    let t2Pos2 = 0;
+    let t2Pos2Incorr1 = 0;
+    let t2Pos2Corr2 = 0;
+    let t2Pos2Incorr3 = 0;
+
+    let t2Pos3 = 0;
+    let t2Pos3Incorr1 = 0;
+    let t2Pos3Incorr2 = 0;
+    let t2Pos3Corr3 = 0;
+
+    let t3Pos1 = 0;
+    let t3Pos1Corr1 = 0;
+    let t3Pos1Incorr2 = 0;
+    let t3Pos1Incorr3 = 0;
+
+    let t3Pos2 = 0;
+    let t3Pos2Incorr1 = 0;
+    let t3Pos2Corr2 = 0;
+    let t3Pos2Incorr3 = 0;
+
+    let t3Pos3 = 0;
+    let t3Pos3Incorr1 = 0;
+    let t3Pos3Incorr2 = 0;
+    let t3Pos3Corr3 = 0;
+
+    try {
+        const resultsDocs = await RawResultsModel.find({});
+        console.log('GET INDIVIDUAL RESULTS DOCS ', resultsDocs);
+        // totalPositions = resultsDocs.length;
+
+        for (const doc of resultsDocs) {
+            const correctDancerIds = doc.correctDancerIds.trim();
+            const dancerIds = doc.dancerIds.trim();
+
+            const correctDancerIdsArray = correctDancerIds.split(' ');
+            const dancerIdsArray = dancerIds.split(' ');
+
+            for (i = 0; i < correctDancerIdsArray.length; i++) {
+                if (i == 0) {
+                    // first position
+
+                    if (correctDancerIdsArray[i] === '1') {
+                        t1Pos1 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t1Pos1Corr1 += 1;
+                        } else if (dancerIdsArray[1] == '1') {
+                            t1Pos1Incorr2 += 1;
+                        } else if (dancerIdsArray[2] == '1') {
+                            t1Pos1Incorr3 += 1;
+                        }
+                    } else if (correctDancerIdsArray[i] == '2') {
+                        t2Pos1 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t2Pos1Corr1 += 1;
+                        } else if (dancerIdsArray[1] == '2') {
+                            t2Pos1Incorr2 += 1;
+                        } else if (dancerIdsArray[2] == '2') {
+                            t2Pos1Incorr3 += 1;
+                        }
+
+                    } else if (correctDancerIdsArray[i] == '3') {
+                        t3Pos1 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t3Pos1Corr1 += 1;
+                        } else if (dancerIdsArray[1] == '3') {
+                            t3Pos1Incorr2 += 1;
+                        } else if (dancerIdsArray[2] == '3') {
+                            t3Pos1Incorr3 += 1;
+                        }
+                    }
+
+                } else if (i == 1) {
+                    // second position
+
+                    if (correctDancerIdsArray[i] === '1') {
+                        t1Pos2 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t1Pos2Corr2 += 1;
+                        } else if (dancerIdsArray[0] == '1') {
+                            t1Pos2Incorr1 += 1;
+                        } else if (dancerIdsArray[2] == '1') {
+                            t1Pos2Incorr3 += 1;
+                        }
+                    } else if (correctDancerIdsArray[i] == '2') {
+                        t2Pos2 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t2Pos2Corr2 += 1;
+                        } else if (dancerIdsArray[0] == '2') {
+                            t2Pos2Incorr1 += 1;
+                        } else if (dancerIdsArray[2] == '2') {
+                            t2Pos2Incorr3 += 1;
+                        }
+                    } else if (correctDancerIdsArray[i] == '3') {
+                        t3Pos2 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t3Pos2Corr2 += 1;
+                        } else if (dancerIdsArray[0] == '3') {
+                            t3Pos2Incorr1 += 1;
+                        } else if (dancerIdsArray[2] == '3') {
+                            t3Pos2Incorr3 += 1;
+                        }
+                    }
+                    
+                } else if (i == 2) {
+                    // third position
+                    if (correctDancerIdsArray[i] === '1') {
+                        t1Pos3 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t1Pos3Corr3 += 1;
+                        } else if (dancerIdsArray[0] == '1') {
+                            t1Pos3Incorr1 += 1;
+                        } else if (dancerIdsArray[1] == '1') {
+                            t1Pos3Incorr2 += 1;
+                        }
+                    } else if (correctDancerIdsArray[i] == '2') {
+                        t2Pos3 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t2Pos3Corr3 += 1;
+                        } else if (dancerIdsArray[0] == '2') {
+                            t2Pos3Incorr1 += 1;
+                        } else if (dancerIdsArray[1] == '2') {
+                            t2Pos3Incorr2 += 1;
+                        }
+                    } else if (correctDancerIdsArray[i] == '3') {
+                        t3Pos3 += 1;
+
+                        if (dancerIdsArray[i] == correctDancerIdsArray[i]) {
+                            t3Pos3Corr3 += 1;
+                        } else if (dancerIdsArray[0] == '3') {
+                            t3Pos3Incorr1 += 1;
+                        } else if (dancerIdsArray[1] == '3') {
+                            t3Pos3Incorr2 += 1;
+                        }
+                    }
+                }
+            }
+        }
+
+    } catch (error) {
+        console.log('Get individual positions error ', error);
+        throw new Error(error);
+    }
+
+    return {
+        t1Pos1,
+        t1Pos1Corr1,
+        t1Pos1Incorr2,
+        t1Pos1Incorr3,
+        t1Pos2,
+        t1Pos2Corr2,
+        t1Pos2Incorr1,
+        t1Pos2Incorr3,
+        t1Pos3,
+        t1Pos3Corr3,
+        t1Pos3Incorr1,
+        t1Pos3Incorr2,
+        t2Pos1,
+        t2Pos1Corr1,
+        t2Pos1Incorr2,
+        t2Pos1Incorr3,
+        t2Pos2,
+        t2Pos2Corr2,
+        t2Pos2Incorr1,
+        t2Pos2Incorr3,
+        t2Pos3,
+        t2Pos3Corr3,
+        t2Pos3Incorr1,
+        t2Pos3Incorr2,
+        t3Pos1,
+        t3Pos1Corr1,
+        t3Pos1Incorr2,
+        t3Pos1Incorr3,
+        t3Pos2,
+        t3Pos2Corr2,
+        t3Pos2Incorr1,
+        t3Pos2Incorr3,
+        t3Pos3,
+        t3Pos3Corr3,
+        t3Pos3Incorr1,
+        t3Pos3Incorr2
+    }
+}
+
 module.exports = {
     getAccumulatedData,
     getAccumulatedMoves,
-    getAccumulatedPositions
+    getAccumulatedPositions,
+    getIndividualPositionStats
 }
 
 

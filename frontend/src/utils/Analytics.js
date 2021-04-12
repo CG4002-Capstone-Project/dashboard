@@ -52,3 +52,22 @@ export const getPositionsSummary = async () => {
         throw new Error(error);
     }
 }
+
+export const getIndividualStats = async () => {
+    console.log('[Analytics] Get Individual Stats');
+
+    try {
+        const accessToken = getAccessToken();
+        const response = await axios.get('http://localhost:3333/analytics/individual/stats', {}, {
+            headers: {
+                'authorization': accessToken
+            }
+        });
+        return response.data;
+    } catch (error) {
+        logout();
+        console.log(error);
+        throw new Error(error);
+    }
+
+}

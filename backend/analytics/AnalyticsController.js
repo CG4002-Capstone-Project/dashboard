@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const { authChecker } = require('../auth/Auth');
-const { getAccumulatedData, getAccumulatedMoves, getAccumulatedPositions } = require('./Analytics');
-
-
-
+const { getAccumulatedData, 
+    getAccumulatedMoves, 
+    getAccumulatedPositions,
+    getIndividualPositionStats } = require('./Analytics');
+    
 module.exports = app;
 
 app.get(
@@ -45,3 +46,16 @@ app.get(
             return res.status(403).json({ error });
         }
 })
+
+app.get(
+    '/individual/stats',
+    async (req, res) => {
+        try {
+            console.log('ANALYTICS Individual Stats');
+            const individualStats = await getIndividualPositionStats();
+            console.log('ANALYTICS POSITIONS ', individualStats);
+            return res.status(200).json(individualStats);
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
+});
