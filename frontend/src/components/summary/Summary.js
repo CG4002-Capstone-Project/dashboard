@@ -19,6 +19,7 @@ import IndividualStatsController from './individual-stats/IndividualStatsControl
 import MovesSummaryController from './moves/MovesSummaryController';
 import MovesStatsController from './moves/MovesStatsController';
 import PositionsSummaryController from './positions/PositionsSummaryController';
+import PositionsStatsController from './positions/PositionsStatsController';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
 
 export class Summary extends Component {
@@ -58,7 +59,7 @@ export class Summary extends Component {
                                 </PositionsSummaryDiv>
 
                                 <PositionsStatsDiv>
-
+                                    <PositionsStatsController />
                                 </PositionsStatsDiv>
                             </PositionsDiv>
 
