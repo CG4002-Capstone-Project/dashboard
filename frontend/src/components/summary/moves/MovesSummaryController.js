@@ -9,7 +9,7 @@ import { MoveHeadlineDiv,
     H4 } from './MovesSummaryControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getMovesSummary } from '../../../utils/Analytics';
-import PieChart from './PieChart';
+import PieSummaryChart from './PieSummaryChart';
 import { Select } from 'evergreen-ui';
 
 export class MovesSummaryController extends Component {
@@ -18,12 +18,12 @@ export class MovesSummaryController extends Component {
     async componentDidMount() {
         const { user, handleUser } = this.context;
         await handleUser({ ...user, isFetching: true });
-        console.log('POST MOVES 1');
+        console.log('POST MOVES SUMMARY 1');
 
         try {
-            console.log('POST MOVES 2');
+            console.log('POST MOVES SUMMARY 2');
             const movesSummary = await getMovesSummary();
-            console.log('POST MOVES 3');
+            console.log('POST MOVES SUMMARY 3');
             await this.setState(prevState => ({
                 ...prevState,
                 totalMoves: movesSummary.totalMoves,
@@ -55,7 +55,7 @@ export class MovesSummaryController extends Component {
                 }))
             await handleUser({ ...user, isFetching: false });
         } catch (error) {
-            console.log('Post MOVES error', error);
+            console.log('Post MOVES SUMMARY error', error);
             throw new Error(error);
         }
     }
@@ -106,49 +106,49 @@ export class MovesSummaryController extends Component {
         
         if (this.state.currentTrainee == 1) {
             chart = (
-                <PieChart name='Dab' totalCorrect={this.state.totalDabCorrect} totalIncorrect={this.state.totalDabIncorrect} />
+                <PieSummaryChart name='Dab' totalCorrect={this.state.totalDabCorrect} totalIncorrect={this.state.totalDabIncorrect} />
             );
             respectiveScore = `Dab Score: ${this.state.totalDabCorrect} / ${this.state.totalDab}`;
 
         } else if (this.state.currentTrainee == 2) {
             chart = (
-                <PieChart name='Elbow Kick' totalCorrect={this.state.totalElbowKickCorrect} totalIncorrect={this.state.totalElbowKickIncorrect} />
+                <PieSummaryChart name='Elbow Kick' totalCorrect={this.state.totalElbowKickCorrect} totalIncorrect={this.state.totalElbowKickIncorrect} />
             );
             respectiveScore = `Elbow Kick Score: ${this.state.totalElbowKickCorrect} / ${this.state.totalElbowKick}`;
 
         } else if (this.state.currentTrainee == 3) {
             chart = (
-                <PieChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+                <PieSummaryChart name='Gun' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
             );
             respectiveScore = `Gun Score: ${this.state.totalGunCorrect} / ${this.state.totalGun}`;
 
         } else if (this.state.currentTrainee == 4) {
             chart = (
-                <PieChart name='Hair' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+                <PieSummaryChart name='Hair' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
             );
             respectiveScore = `Hair Score: ${this.state.totalHairCorrect} / ${this.state.totalHair}`;
 
         } else if (this.state.currentTrainee == 5) {
             chart = (
-                <PieChart name='Listen' totalCorrect={this.state.totalListenCorrect} totalIncorrect={this.state.totalListenIncorrect} />
+                <PieSummaryChart name='Listen' totalCorrect={this.state.totalListenCorrect} totalIncorrect={this.state.totalListenIncorrect} />
             );
             respectiveScore = `Listen Score: ${this.state.totalListenCorrect} / ${this.state.totalListen}`;
 
         } else if (this.state.currentTrainee == 6) {
             chart = (
-                <PieChart name='Point High' totalCorrect={this.state.totalPointHighCorrect} totalIncorrect={this.state.totalPointHighIncorrect} />
+                <PieSummaryChart name='Point High' totalCorrect={this.state.totalPointHighCorrect} totalIncorrect={this.state.totalPointHighIncorrect} />
             );
             respectiveScore = `Point High Score: ${this.state.totalPointHighCorrect} / ${this.state.totalPointHigh}`;
 
         } else if (this.state.currentTrainee == 7) {
             chart = (
-                <PieChart name='Side Pump' totalCorrect={this.state.totalSidePumpCorrect} totalIncorrect={this.state.totalSidePumpIncorrect} />
+                <PieSummaryChart name='Side Pump' totalCorrect={this.state.totalSidePumpCorrect} totalIncorrect={this.state.totalSidePumpIncorrect} />
             );
             respectiveScore = `Side Pump Score: ${this.state.totalSidePumpCorrect} / ${this.state.totalSidePump}`;
 
         } else if (this.state.currentTrainee == 8) {
             chart = (
-                <PieChart name='Wipe Table' totalCorrect={this.state.totalWipeTableCorrect} totalIncorrect={this.state.totalWipeTableIncorrect} />
+                <PieSummaryChart name='Wipe Table' totalCorrect={this.state.totalWipeTableCorrect} totalIncorrect={this.state.totalWipeTableIncorrect} />
             );
             respectiveScore = `Wipe Table Score: ${this.state.totalWipeTableCorrect} / ${this.state.totalWipeTable}`;
         }
