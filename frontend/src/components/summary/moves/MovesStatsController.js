@@ -1,68 +1,42 @@
 import React, { Component } from 'react';
+import { MoveHeadlineDiv,
+    MoveMainDiv,
+    MovesDiv, 
+    ChartDiv,
+    ScoreDiv,
+    DropdownDiv,
+    H3,
+    H4 } from './MovesStatsStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
-import { getIndividualStats } from '../../../utils/Analytics';
-import IndividualStats from './IndividualStats';
+import { getMovesStats } from '../../../utils/Analytics';
 
-export class IndividualStatsController extends Component {
+import { Select } from 'evergreen-ui';
+
+export class MovesStatsController extends Component {
     static contextType = UserContext;
 
-    // async componentDidMount() {
-    //     const { user, handleUser } = this.context;
-    //     await handleUser({ ...user, isFetching: true });
-    //     console.log('POST DATA SUMMARY INDIVIDUAL STATS 1');
+    async componentDidMount() {
+        const { user, handleUser } = this.context;
+        await handleUser({ ...user, isFetching: true });
+        console.log('POST DATA MOVES STATS 1');
 
-    //     try {
-    //         console.log('POST DATA SUMMARY INDIVIDUAL STATS 2');
-    //         const individualStats = await getIndividualStats();
-    //         console.log('POST DATA SUMMARY INDIVIDUAL STATS 3');
-    //         await this.setState(prevState => ({
-    //             ...prevState,
-    //             ...individualStats,
-    //             }))
-    //         await handleUser({ ...user, isFetching: false });
-    //     } catch (error) {
-    //         console.log('POST DATA SUMMARY INDIVIDUAL STATS error', error);
-    //         throw new Error(error);
-    //     }
-    // }
+        try {
+            console.log('POST DATA MOVES STATS 2');
+            const individualStats = await getMovesStats();
+            console.log('POST DATA MOVES STATS 3');
+            await this.setState(prevState => ({
+                ...prevState,
+                ...individualStats,
+                }))
+            await handleUser({ ...user, isFetching: false });
+        } catch (error) {
+            console.log('POST DATA MOVES STATS error', error);
+            throw new Error(error);
+        }
+    }
 
     state = {
-        t1Pos1: 0,
-        t1Pos1Corr1: 0,
-        t1Pos1Incorr2: 0,
-        t1Pos1Incorr3: 0,
-        t1Pos2: 0,
-        t1Pos2Corr2: 0,
-        t1Pos2Incorr1: 0,
-        t1Pos2Incorr3: 0,
-        t1Pos3: 0,
-        t1Pos3Corr3: 0,
-        t1Pos3Incorr1: 0,
-        t1Pos3Incorr2: 0,
-        t2Pos1: 0,
-        t2Pos1Corr1: 0,
-        t2Pos1Incorr2: 0,
-        t2Pos1Incorr3: 0,
-        t2Pos2: 0,
-        t2Pos2Corr2: 0,
-        t2Pos2Incorr1: 0,
-        t2Pos2Incorr3: 0,
-        t2Pos3: 0,
-        t2Pos3Corr3: 0,
-        t2Pos3Incorr1: 0,
-        t2Pos3Incorr2: 0,
-        t3Pos1: 0,
-        t3Pos1Corr1: 0,
-        t3Pos1Incorr2: 0,
-        t3Pos1Incorr3: 0,
-        t3Pos2: 0,
-        t3Pos2Corr2: 0,
-        t3Pos2Incorr1: 0,
-        t3Pos2Incorr3: 0,
-        t3Pos3: 0,
-        t3Pos3Corr3: 0,
-        t3Pos3Incorr1: 0,
-        t3Pos3Incorr2: 0,
+        activeIndex: 1,
         totalDab: 0,
         moveDabCorrDab: 0,
         moveDabIncorrElbowKick: 0,
@@ -136,17 +110,33 @@ export class IndividualStatsController extends Component {
         moveWipeTableIncorrPointHigh: 0,
         moveWipeTableIncorrSidepump: 0
     }
-
     render() {
-        console.log('Individual Stats Controller ', this.state);
         return (
-            <React.Fragment>
-                <IndividualStats /> 
-                <IndividualStats />
-                <IndividualStats />
-            </React.Fragment>
+                <MovesDiv>
+                    <MoveMainDiv>
+                        {/* <ScoreDiv>
+                            <H4> Total Score: {this.state.totalCorrectMoves} / {this.state.totalMoves} </H4>
+                            <H4> {respectiveScore} </H4>
+                        </ScoreDiv> */}
+                        <ChartDiv>
+                            <DropdownDiv>
+                                <Select width={120} height={40} onChange={this.onDropdownChange} >
+                                    <option value={1}> Dab </option>
+                                    <option value={2}> Elbow Kick </option>
+                                    <option value={3}> Gun </option>
+                                    <option value={4}> Hair </option>
+                                    <option value={5}> Listen </option>
+                                    <option value={6}> Point High </option>
+                                    <option value={7}> Side Pump </option>
+                                    <option value={8}> Wipe Table </option>
+                                </Select>
+                            </DropdownDiv>
+                            {/* {chart} */}
+                        </ChartDiv>
+                    </MoveMainDiv>
+            </MovesDiv>
         )
     }
 }
 
-export default IndividualStatsController
+export default MovesStatsController

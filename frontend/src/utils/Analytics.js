@@ -53,12 +53,30 @@ export const getPositionsSummary = async () => {
     }
 }
 
-export const getIndividualStats = async () => {
-    console.log('[Analytics] Get Individual Stats');
+export const getMovesStats = async () => {
+    console.log('[Analytics] Get Moves Stats');
 
     try {
         const accessToken = getAccessToken();
-        const response = await axios.get('http://localhost:3333/analytics/individual/stats', {}, {
+        const response = await axios.get('http://localhost:3333/analytics/moves/stats', {}, {
+            headers: {
+                'authorization': accessToken
+            }
+        });
+        return response.data;
+    } catch (error) {
+        logout();
+        console.log(error);
+        throw new Error(error);
+    }
+}
+
+export const getPositionsStats = async () => {
+    console.log('[Analytics] Get Positions Stats');
+
+    try {
+        const accessToken = getAccessToken();
+        const response = await axios.get('http://localhost:3333/analytics/positions/stats', {}, {
             headers: {
                 'authorization': accessToken
             }

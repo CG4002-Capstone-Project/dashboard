@@ -49,16 +49,24 @@ app.get(
 })
 
 app.get(
-    '/individual/stats',
+    '/moves/stats',
     async (req, res) => {
         try {
-            console.log('ANALYTICS Individual Stats');
-            const individualPositionStats = await getIndividualPositionStats();
+            console.log('ANALYTICS Moves Stats');
             const individualMoveStats = await getIndividualMoveStats();
-            // console.log('ANALYTICS POSITIONS ', individualStats);
-            return res.status(200).json({ 
-                ...individualPositionStats, 
-                ...individualMoveStats });
+            return res.status(200).json(individualMoveStats);
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
+});
+
+app.get(
+    '/positions/stats',
+    async (req, res) => {
+        try {
+            console.log('ANALYTICS Positions Stats');
+            const individualPositionStats = await getIndividualPositionStats();
+            return res.status(200).json(individualPositionStats);
         } catch (error) {
             return res.status(403).json({ error });
         }
