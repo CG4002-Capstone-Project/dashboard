@@ -9,7 +9,7 @@ import { PositionHeadlineDiv,
     H4 } from './PositionsSummaryControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getPositionsSummary } from '../../../utils/Analytics';
-import PieChart from './PieChart';
+import PieSummaryChart from './PieSummaryChart';
 import { Select } from 'evergreen-ui';
 
 
@@ -74,19 +74,19 @@ export class PositionsSummaryController extends Component {
 
         if (this.state.currentPosition == 1) {
             chart = (
-                <PieChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
+                <PieSummaryChart name='Trainee 1' totalCorrect={this.state.traineeOneCorrectPosition} totalIncorrect={this.state.traineeOneIncorrectPosition} />
             );
             respectiveScore = `Trainee 1 Score: ${this.state.traineeOneCorrectPosition} / ${this.state.totalPositions}`;
 
         } else if (this.state.currentPosition == 2) {
             chart = (
-                <PieChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
+                <PieSummaryChart name='Trainee 2' totalCorrect={this.state.traineeTwoCorrectPosition} totalIncorrect={this.state.traineeTwoIncorrectPosition} />
             );
             respectiveScore = `Trainee 2 Score: ${this.state.traineeTwoCorrectPosition} / ${this.state.totalPositions}`;
     
         } else if (this.state.currentPosition == 3) {
             chart = (
-                <PieChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
+                <PieSummaryChart name='Trainee 3' totalCorrect={this.state.traineeThreeCorrectPosition} totalIncorrect={this.state.traineeThreeIncorrectPosition} />
             );
             respectiveScore = `Trainee 3 Score: ${this.state.traineeThreeCorrectPosition} / ${this.state.totalPositions}`;
         }
