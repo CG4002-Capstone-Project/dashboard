@@ -10,7 +10,7 @@ import { SummaryDiv,
     StatsDiv,
     IndividualChartsDiv,
     TableDiv } from './SummaryStyledComponents';
-import IndividualDataController from './individual/IndividualDataController';
+import IndividualDataController from './individual-data/IndividualDataController';
 import MovesController from './moves/MovesController';
 import PositionsController from './positions/PositionsController';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
