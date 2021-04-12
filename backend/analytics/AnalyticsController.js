@@ -21,7 +21,7 @@ app.get(
 })
 
 app.get(
-    '/moves',
+    '/moves/summary',
     async (req, res) => {
         try {
             console.log('ANALYTICS PRE-MOVES');
@@ -34,7 +34,7 @@ app.get(
 })
 
 app.get(
-    '/positions',
+    '/positions/summary',
     async (req, res) => {
         try {
             console.log('ANALYTICS PRE-POSITIONS');
