@@ -6,13 +6,13 @@ import { MoveHeadlineDiv,
     ScoreDiv,
     DropdownDiv,
     H3,
-    H4 } from './MovesControllerStyledComponents';
+    H4 } from './MovesSummaryControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getMovesSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
 import { Select } from 'evergreen-ui';
 
-export class MovesController extends Component {
+export class MovesSummaryController extends Component {
     static contextType = UserContext;
 
     async componentDidMount() {
@@ -185,4 +185,4 @@ export class MovesController extends Component {
     }
 }
 
-export default MovesController
+export default MovesSummaryController;

@@ -16,8 +16,9 @@ import { SummaryDiv,
     TableDiv } from './SummaryStyledComponents';
 import IndividualDataController from './individual-data/IndividualDataController';
 import IndividualStatsController from './individual-stats/IndividualStatsController';
-import MovesController from './moves/MovesController';
-import PositionsController from './positions/PositionsController';
+import MovesSummaryController from './moves/MovesSummaryController';
+import MovesStatsController from './moves/MovesStatsController';
+import PositionsSummaryController from './positions/PositionsSummaryController';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
 
 export class Summary extends Component {
@@ -44,16 +45,16 @@ export class Summary extends Component {
                         <SummaryStatsDiv>
                             <MovesDiv>
                                 <MovesSummaryDiv>
-                                    <MovesController />
+                                    <MovesSummaryController />
                                 </MovesSummaryDiv>
                                 <MovesStatsDiv>
-
+                                    <MovesStatsController />
                                 </MovesStatsDiv>
                             </MovesDiv>
 
                             <PositionsDiv>
                                 <PositionsSummaryDiv>
-                                    <PositionsController />
+                                    <PositionsSummaryController />
                                 </PositionsSummaryDiv>
 
                                 <PositionsStatsDiv>

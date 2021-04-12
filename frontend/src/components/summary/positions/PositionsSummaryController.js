@@ -6,14 +6,14 @@ import { PositionHeadlineDiv,
     ScoreDiv, 
     DropdownDiv, 
     ChartDiv,
-    H4 } from './PositionsControllerStyledComponents';
+    H4 } from './PositionsSummaryControllerStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getPositionsSummary } from '../../../utils/Analytics';
 import PieChart from './PieChart';
 import { Select } from 'evergreen-ui';
 
 
-export class PositionsController extends Component {
+export class PositionsSummaryController extends Component {
     static contextType = UserContext;
 
     async componentDidMount() {
@@ -117,4 +117,4 @@ export class PositionsController extends Component {
     }
 }
 
-export default PositionsController
+export default PositionsSummaryController;
