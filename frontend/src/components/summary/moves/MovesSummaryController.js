@@ -127,7 +127,7 @@ export class MovesSummaryController extends Component {
 
         } else if (this.state.currentTrainee == 4) {
             chart = (
-                <PieSummaryChart name='Hair' totalCorrect={this.state.totalGunCorrect} totalIncorrect={this.state.totalGunIncorrect} />
+                <PieSummaryChart name='Hair' totalCorrect={this.state.totalHairCorrect} totalIncorrect={this.state.totalHairIncorrect} />
             );
             respectiveScore = `Hair Score: ${this.state.totalHairCorrect} / ${this.state.totalHair}`;
 
@@ -145,7 +145,7 @@ export class MovesSummaryController extends Component {
 
         } else if (this.state.currentTrainee == 7) {
             chart = (
-                <PieSummaryChart name='Side Pump' totalCorrect={this.state.totalSidePumpCorrect} totalIncorrect={this.state.totalSidePumpIncorrect} />
+                <PieSummaryChart name='Side Pump' totalCorrect={this.state.totalSidepumpCorrect} totalIncorrect={this.state.totalSidepumpIncorrect} />
             );
             respectiveScore = `Side Pump Score: ${this.state.totalSidepumpCorrect} / ${this.state.totalSidepump}`;
 
