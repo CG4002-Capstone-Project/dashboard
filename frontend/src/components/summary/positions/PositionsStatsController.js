@@ -6,7 +6,9 @@ import { PositionHeadlineDiv,
     ScoreDiv, 
     DropdownDiv, 
     ChartDiv,
-    H4 } from './PositionsStatsStyledComponents';
+    H4,
+    IndividualChartDiv,
+    ChartMainDiv } from './PositionsStatsStyledComponents';
 import { UserContext } from '../../../contexts/UserContext';
 import { getPositionsStats } from '../../../utils/Analytics';
 import PieStatsChart from './PieStatsChart';
@@ -176,15 +178,18 @@ export class PositionsStatsController extends Component {
                                     <option value={3}> Trainee 3 </option>
                                 </Select>
                         </DropdownDiv>
-                        <div>
-                            {chart1}
-                        </div>
-                        <div>
-                            {chart2}
-                        </div>
-                        <div>
-                            {chart3}
-                        </div>
+                        <ChartMainDiv>
+                            <IndividualChartDiv>
+                                {chart1}
+                            </IndividualChartDiv>
+                            <IndividualChartDiv>
+                                {chart2}
+                            </IndividualChartDiv>
+                            <IndividualChartDiv>
+                                {chart3}
+                            </IndividualChartDiv>
+                        </ChartMainDiv>
+                        
                     </ChartDiv>
                 </PositionMainDiv>
             </PositionsDiv>

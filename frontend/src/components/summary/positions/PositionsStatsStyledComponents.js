@@ -47,6 +47,20 @@ export const ChartDiv = styled.div`
     margin: auto;
 `;
 
+export const ChartMainDiv = styled.div`
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    border: 3px solid blue;
+    flex-wrap: wrap;
+`
+
+export const IndividualChartDiv = styled.div`
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid green;
+`;
+
 
 export const H3 = styled.h3`
     margin-top: 12px;

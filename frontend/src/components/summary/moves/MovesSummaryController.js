@@ -144,7 +144,7 @@ export class MovesSummaryController extends Component {
             chart = (
                 <PieSummaryChart name='Side Pump' totalCorrect={this.state.totalSidePumpCorrect} totalIncorrect={this.state.totalSidePumpIncorrect} />
             );
-            respectiveScore = `Side Pump Score: ${this.state.totalSidePumpCorrect} / ${this.state.totalSidePump}`;
+            respectiveScore = `Side Pump Score: ${this.state.totalSidepumpCorrect} / ${this.state.totalSidepump}`;
 
         } else if (this.state.currentTrainee == 8) {
             chart = (
