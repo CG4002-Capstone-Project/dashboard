@@ -56,6 +56,8 @@ function transposeMoves(move) {
         return 6;
     } else if (move == 'wipetable') {
         return 7;
+    } else if (move == 'logout') {
+        return 8;
     }
 }
 

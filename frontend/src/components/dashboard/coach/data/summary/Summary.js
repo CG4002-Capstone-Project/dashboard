@@ -31,7 +31,7 @@ let i = 0;
 let m = 0;
 let j = 0;
 
-const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High', 'Side Pump', 'Wipe Table']
+const moveIdToMove = ['Dab', 'Elbow Kick', 'Gun', 'Hair', 'Listen', 'Point High', 'Side Pump', 'Wipe Table', 'Logout']
 
 // why mp4 videos need to be placed in public folder: https://stackoverflow.com/questions/60794257/react-js-react-player-how-to-play-local-video
 // why tables need to be wary of whitespaces: https://stackoverflow.com/questions/39914455/react-validatedomnesting-text-cannot-appear-as-a-child-of-tr
@@ -167,6 +167,8 @@ export class Summary extends Component {
             currentMove = 'Side Pump';           
         } else if (this.state.currentResult.predictedMove == 7) {
             currentMove = 'Wipe Table';
+        } else if (this.state.currentResult.predictedMove == 8) {
+            currentMove = 'Logout';
         }
     }
 
