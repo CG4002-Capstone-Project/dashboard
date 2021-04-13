@@ -53,6 +53,9 @@ export class MovesSummaryController extends Component {
                 totalPointHighCorrect: movesSummary.totalPointHighCorrect,
                 totalPointHighIncorrect: movesSummary.totalPointHighIncorrect
                 }))
+            this.props.getMovesStats({ 
+                totalMoves: movesSummary.totalMoves, 
+                totalCorrectMoves: movesSummary.totalCorrectMoves});
             await handleUser({ ...user, isFetching: false });
         } catch (error) {
             console.log('Post MOVES SUMMARY error', error);

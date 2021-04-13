@@ -22,7 +22,29 @@ import PositionsSummaryController from './positions/PositionsSummaryController';
 import PositionsStatsController from './positions/PositionsStatsController';
 import DashboardNavBar from '../navbars/dashboard/DashboardNavBar';
 
-export class Summary extends Component {
+export class Summary extends Component {    
+
+    state = {
+        totalMoves: 0,
+        totalCorrectMoves: 0,
+
+    }
+
+    onMovesStats = async ({totalMoves, totalCorrectMoves}) => {
+        await this.setState(prevState => ({
+                ...prevState,
+                totalMoves,
+                totalCorrectMoves,
+                }))
+    }
+
+    onPositionsStats = async(positionsStats) => {
+        await this.setState(prevState => ({
+            ...prevState,
+            ...positionsStats,
+        }))
+
+    }
 
     render() {
         console.log('Summary');
@@ -46,7 +68,7 @@ export class Summary extends Component {
                         <SummaryStatsDiv>
                             <MovesDiv>
                                 <MovesSummaryDiv>
-                                    <MovesSummaryController />
+                                    <MovesSummaryController getMovesStats={this.onMovesStats} />
                                 </MovesSummaryDiv>
                                 <MovesStatsDiv>
                                     <MovesStatsController />
@@ -55,7 +77,7 @@ export class Summary extends Component {
 
                             <PositionsDiv>
                                 <PositionsSummaryDiv>
-                                    <PositionsSummaryController />
+                                    <PositionsSummaryController getPositionsStats={this.onPositionsStats} />
                                 </PositionsSummaryDiv>
 
                                 <PositionsStatsDiv>
@@ -66,7 +88,7 @@ export class Summary extends Component {
                         </SummaryStatsDiv>
 
                         <IndividualTraineeStatsDiv>
-                            <IndividualStatsController />
+                            <IndividualStatsController overallStats={this.state}/>
                         </IndividualTraineeStatsDiv>
                     </StatsDiv>
 

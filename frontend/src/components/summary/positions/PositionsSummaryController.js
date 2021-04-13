@@ -37,6 +37,17 @@ export class PositionsSummaryController extends Component {
                 traineeThreeCorrectPosition: positionsSummary.traineeThreeCorrectPosition,
                 traineeThreeIncorrectPosition: positionsSummary.traineeThreeIncorrectPosition
                 }))
+            this.props.getPositionsStats({
+                totalPositions: positionsSummary.totalPositions,
+                totalCorrectPositions: positionsSummary.totalCorrectPositions,
+                totalIncorrectPositions: positionsSummary.totalIncorrectPositions,
+                traineeOneCorrectPosition: positionsSummary.traineeOneCorrectPosition,
+                traineeOneIncorrectPosition: positionsSummary.traineeOneIncorrectPosition,
+                traineeTwoCorrectPosition: positionsSummary.traineeTwoCorrectPosition,
+                traineeTwoIncorrectPosition: positionsSummary.traineeTwoIncorrectPosition,
+                traineeThreeCorrectPosition: positionsSummary.traineeThreeCorrectPosition,
+                traineeThreeIncorrectPosition: positionsSummary.traineeThreeIncorrectPosition
+            })
             await handleUser({ ...user, isFetching: false });
         } catch (error) {
             console.log('Post positions error', error);
