@@ -36,7 +36,7 @@ export const DropdownDiv = styled.div`
     box-sizing: border-box;
     /* border: 1px solid blue; */
     text-align: center;
-    margin: auto;
+    margin-bottom: 10px;
 `;
 
 export const ChartDiv = styled.div`
