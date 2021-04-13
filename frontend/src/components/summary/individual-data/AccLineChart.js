@@ -30,7 +30,7 @@ export default class AccLineChart extends Component {
                 },
                 responsiveAnimationDuration: 0,
                 responsive: true,
-                aspectRatio: 2.75,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [
                         {   
@@ -45,9 +45,13 @@ export default class AccLineChart extends Component {
                             ticks: {
                                 min: -15000,
                                 max: 15000,
+                                fontColor: 'white'
                                 // suggestedMax: 2,
                                 // suggestedMin: -2,
                             },
+                            gridLines: {
+                                zeroLineColor: 'white'
+                            }
                         }
                     ]
                 },
@@ -55,10 +59,14 @@ export default class AccLineChart extends Component {
                     text: 'Acceleration X, Y and Z against Time',
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'bottom'
+                    position: 'bottom',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'right',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // elements: {
                 //     line: {

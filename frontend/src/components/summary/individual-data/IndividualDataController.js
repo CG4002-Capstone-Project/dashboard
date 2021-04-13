@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { getDataSummary } from '../../../../../utils/Analytics';
-import { UserContext } from '../../../../../contexts/UserContext';
-import { DropDownDiv } from './IndividualControllerStyledComponents';
+import { getDataSummary } from '../../../utils/Analytics';
+import { UserContext } from '../../../contexts/UserContext';
+import { 
+    MainDiv,
+    HeadlineDiv,
+    H3,
+    DropDownDiv } from './IndividualDataControllerStyledComponents';
 import Individual from './Individual';
 import { Select } from 'evergreen-ui';
 
-export class IndividualController extends Component {
+export class IndividualDataController extends Component {
     static contextType = UserContext;
 
     async componentDidMount() {
@@ -133,11 +137,11 @@ export class IndividualController extends Component {
         }
     
         return (
-            <React.Fragment>
+            <MainDiv>
+                <HeadlineDiv>
+                    <H3> Data </H3>
+                </HeadlineDiv>
                 <DropDownDiv>
-                    <br/>
-                    <h1> Choose a trainee data to view! </h1>
-                    <br />
                     <Select width={240} height={40} marginBottom={20} onChange={this.onDropdownChange} >
                         <option value={1}> Trainee 1 </option>
                         <option value={2}> Trainee 2 </option>
@@ -145,9 +149,9 @@ export class IndividualController extends Component {
                     </Select>
                 </DropDownDiv>
                 {individual}
-            </React.Fragment>
+            </MainDiv>
         )
     }
 }
 
-export default IndividualController
+export default IndividualDataController

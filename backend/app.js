@@ -138,8 +138,8 @@ db.once('open', async () => {
                 const emg = {
                     timestamp: change.fullDocument.timestamp,
                     voltage: change.fullDocument.voltage,
-                    rms: change.fullDocument.rms,
-                    mfq: change.fullDocument.mfq,
+                    // rms: change.fullDocument.rms,
+                    // mfq: change.fullDocument.mfq,
                 }
 
                 if (j%100 == 0) {

@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const { authChecker } = require('../auth/Auth');
-const { getAccumulatedData, getAccumulatedMoves, getAccumulatedPositions } = require('./Analytics');
-
-
-
+const { getAccumulatedData, 
+    getAccumulatedMoves, 
+    getAccumulatedPositions,
+    getIndividualPositionStats,
+    getIndividualMoveStats } = require('./Analytics');
+    
 module.exports = app;
 
 app.get(
@@ -21,7 +23,7 @@ app.get(
 })
 
 app.get(
-    '/moves',
+    '/moves/summary',
     async (req, res) => {
         try {
             console.log('ANALYTICS PRE-MOVES');
@@ -34,7 +36,7 @@ app.get(
 })
 
 app.get(
-    '/positions',
+    '/positions/summary',
     async (req, res) => {
         try {
             console.log('ANALYTICS PRE-POSITIONS');
@@ -45,3 +47,27 @@ app.get(
             return res.status(403).json({ error });
         }
 })
+
+app.get(
+    '/moves/stats',
+    async (req, res) => {
+        try {
+            console.log('ANALYTICS Moves Stats');
+            const individualMoveStats = await getIndividualMoveStats();
+            return res.status(200).json(individualMoveStats);
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
+});
+
+app.get(
+    '/positions/stats',
+    async (req, res) => {
+        try {
+            console.log('ANALYTICS Positions Stats');
+            const individualPositionStats = await getIndividualPositionStats();
+            return res.status(200).json(individualPositionStats);
+        } catch (error) {
+            return res.status(403).json({ error });
+        }
+});

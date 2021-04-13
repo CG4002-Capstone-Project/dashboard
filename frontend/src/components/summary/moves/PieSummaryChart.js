@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 
-export default class PieChart extends Component {
+export default class PieSummaryChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
@@ -11,6 +11,7 @@ export default class PieChart extends Component {
 
         this.myChart.data.datasets[0].data[0] = this.props.totalCorrect;
         this.myChart.data.datasets[0].data[1] = this.props.totalIncorrect;
+        this.myChart.options.title.text = this.props.name;
 
         this.myChart.update();
     }
@@ -24,10 +25,14 @@ export default class PieChart extends Component {
                     text: this.props.name,
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'top'
+                    position: 'top',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'right',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // circumference: 10 * Math.PI,
             },

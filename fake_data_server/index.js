@@ -6,9 +6,10 @@ const csv = require('csv-parser');
 const fs = require('fs');
 const { RawResultModel, TraineeOneDataModel,
     TraineeTwoDataModel,
-    TraineeThreeDataModel, RawEMGModel } = require('./schema');
+    TraineeThreeDataModel, RawEMGModel, ModeModel } = require('./schema');
 const parse = require('csv-parse/lib/sync');
 const generateRawEMG = require('./raw_emg_generator');
+const generateModeData = require('./raw_mode_generator');
 
 const connectToDb = async () => {
     const URI = process.env.MONGO_DB_LOCAL_URI;
@@ -215,12 +216,18 @@ const readEverythingIntoDb = () => {
         headers: ['dancerIds', 'correctDancerIds', 'predictedMove', 'syncDelay', 'accuracy']
     })
 
+    const arrayOfModeObjects = fs.readFileSync('raw_mode.csv', 'utf8');
+    const modeRecords = parse(arrayOfModeObjects, {
+        headers: ['mode']
+    })
+
 
     const timer = ms => new Promise(res => setTimeout(res, ms));
     let j = 0, k = 0;
 
     async function load() {
         for (let i = 0; i < dataRecords.length; i++) {
+
             if (dataRecords[i][0] == '0') {
                 const dataInstance = new TraineeOneDataModel({ 
                     trainee_id: dataRecords[i][0],
@@ -314,7 +321,7 @@ const readEverythingIntoDb = () => {
                 j += 1;
             }
 
-            if (i % 400 == 200 && k < resultRecords.length) {
+            if (i % 200 == 0 && k < resultRecords.length) {
                 const resultInstance = new RawResultModel({ 
                     dancerIds: resultRecords[k][0],
                     correctDancerIds: resultRecords[k][1],
@@ -335,6 +342,20 @@ const readEverythingIntoDb = () => {
 
                 k += 1;
             }
+
+            const modeInstance = new ModeModel({
+                mode: modeRecords[i][0]
+            });
+
+            modeInstance.save((err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    if (i % 100 == 0) {
+                        console.log(`Mode instance ${i} sent`)
+                    }
+                }
+            })
         }
     }
 
@@ -345,6 +366,7 @@ const readEverythingIntoDb = () => {
 // generateRawData();
 // generateResults();
 // generateRawEMG();
+// generateModeData();
 
 connectToDb();
 readEverythingIntoDb();
