@@ -42,10 +42,14 @@ export default class PieStatsChart extends Component {
                     text: this.props.correctMoveName,
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'top'
+                    position: 'top',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'bottom',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // circumference: 10 * Math.PI,
             },

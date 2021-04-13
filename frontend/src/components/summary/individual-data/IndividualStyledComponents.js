@@ -34,3 +34,7 @@ export const IndividualDiv = styled.div`
     flex: 3;
     text-align: center;
 `;
+
+export const H3 = styled.h3`
+    color: white;
+`;

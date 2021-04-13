@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import AccLineChart from './AccLineChart';
 import GccLineChart from './GccLineChart';
-import { IndividualDiv, DisplayDiv, MiscDiv, InfoDisplay, AccGraphDiv, GCCGraphDiv } from './IndividualStyledComponents';
+import { IndividualDiv, 
+    DisplayDiv, 
+    MiscDiv, 
+    InfoDisplay, 
+    AccGraphDiv, 
+    GCCGraphDiv,
+    H3 } from './IndividualStyledComponents';
 
 export class Individual extends Component {
     render() {
@@ -12,7 +18,7 @@ export class Individual extends Component {
                         <DisplayDiv>
                             <MiscDiv>
                                 <InfoDisplay>
-                                    <h3> Trainee {this.props.no} - {this.props.name} </h3>
+                                    <H3> Trainee {this.props.no} - {this.props.name} </H3>
                                 </InfoDisplay>
                             </MiscDiv>
                             <AccGraphDiv>

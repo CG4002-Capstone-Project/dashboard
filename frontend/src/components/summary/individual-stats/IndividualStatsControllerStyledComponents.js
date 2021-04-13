@@ -21,8 +21,9 @@ export const H3 = styled.h3`
 `;
 
 export const H4 = styled.h4`
+    color: white;
 `;
 
 export const H5 = styled.h5`
-
+    color: white;
 `;

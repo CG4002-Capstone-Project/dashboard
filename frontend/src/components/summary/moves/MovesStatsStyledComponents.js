@@ -48,9 +48,12 @@ export const ChartDiv = styled.div`
 `;
 
 export const H3 = styled.h3`
-    margin-top: 12px ;
+    margin-top: 12px;
+    color: white;
+
 `;
 
 export const H4 = styled.h4`
+    color: white;
 
 `;

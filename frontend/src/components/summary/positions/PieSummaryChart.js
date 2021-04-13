@@ -27,10 +27,14 @@ export default class PieSummaryChart extends Component {
                     text: this.props.name,
                     display: true,
                     fontFamily: 'Acme',
-                    position: 'top'
+                    position: 'top',
+                    fontColor: 'white'
                 },
                 legend: {
                     position: 'right',
+                    labels: {
+                        fontColor: 'white'
+                    }
                 },
                 // circumference: 10 * Math.PI,
             },

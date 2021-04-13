@@ -155,7 +155,7 @@ const getAccumulatedMoves = async () => {
                 totalPointHigh += 1;
             }
 
-            if (doc.correctMove === doc.predictedMove) {
+            if (doc.correctMove === doc.predictedMove && doc.correctMove != 'logout') {
                 totalCorrectMoves += 1;
 
                 if (doc.correctMove === 'hair') {
