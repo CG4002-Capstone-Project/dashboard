@@ -28,7 +28,7 @@ export default class GCCLineChart extends Component {
                 },
                 responsiveAnimationDuration: 0,
                 responsive: true,
-                aspectRatio: 2.75,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [
                         {   

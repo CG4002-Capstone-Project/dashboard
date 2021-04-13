@@ -20,13 +20,13 @@ export const PositionMainDiv = styled.div`
     display: flex;
     flex-direction: row;    
     box-sizing: border-box;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 `;
 
 export const ScoreDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     text-align: center;
     margin: auto;
 `;
@@ -34,7 +34,7 @@ export const ScoreDiv = styled.div`
 export const DropdownDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     text-align: center;
     margin: auto;
 `;
@@ -42,7 +42,7 @@ export const DropdownDiv = styled.div`
 export const ChartDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     text-align: center;
     margin: auto;
 `;
@@ -51,14 +51,16 @@ export const ChartMainDiv = styled.div`
     display: flex;
     width: 100%;
     box-sizing: border-box;
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
     flex-wrap: wrap;
 `
 
 export const IndividualChartDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    width: 40%;
+    margin: auto;
 `;
 
 

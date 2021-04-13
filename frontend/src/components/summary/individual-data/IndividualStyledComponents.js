@@ -29,7 +29,7 @@ export const GCCGraphDiv = styled.div`
 `;
 
 export const IndividualDiv = styled.div`
-    border: 1px lightgray solid;
+    /* border: 4px lightgray solid; */
     box-sizing: border-box;
     flex: 3;
     text-align: center;

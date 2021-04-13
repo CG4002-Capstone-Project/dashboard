@@ -6,6 +6,7 @@ export const SummaryDiv = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    /* border: 5px solid red; */
 `;
 
 export const NavbarDiv = styled.div`
@@ -28,33 +29,34 @@ export const SummaryMainDiv = styled.div`
     justify-content: space-evenly;
     align-items: stretch;
     background-color: #FFFFF2;
-    border: 1px solid black;
 `;
 
 export const DataDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid blue;
+    border: 2px solid lightgray;
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
+    margin-right: 5px;
 `;
 
 export const IndividualChartsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 `;
 
 export const TableDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 `;
 
 export const StatsDiv = styled.div`
     flex: 2;
     box-sizing: border-box;
-    border: 1px solid blue;
+    /* border-left: 1px solid lightgray; */
     display: flex;
     flex-direction: column;
 `;
@@ -62,7 +64,7 @@ export const StatsDiv = styled.div`
 export const SummaryStatsDiv = styled.div`
     flex: 2;
     box-sizing: border-box;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row;
 `;
@@ -70,7 +72,7 @@ export const SummaryStatsDiv = styled.div`
 export const IndividualTraineeStatsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
 `;
@@ -78,27 +80,30 @@ export const IndividualTraineeStatsDiv = styled.div`
 export const MovesDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid red;
+    border: 2px solid lightgray;
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
+    margin-right: 5px;
 `;
 
 export const MovesSummaryDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 `;
 
 export const MovesStatsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 `;
 
 export const PositionsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid green;
+    border: 2px solid lightgray;
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
 `;
@@ -106,12 +111,12 @@ export const PositionsDiv = styled.div`
 export const PositionsSummaryDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 `;
 
 export const PositionsStatsDiv = styled.div`
     flex: 1;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 `;
 

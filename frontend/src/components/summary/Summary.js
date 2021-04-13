@@ -59,9 +59,9 @@ export class Summary extends Component {
                         <IndividualChartsDiv>
                             <IndividualDataController/>
                         </IndividualChartsDiv>
-                        <TableDiv>
-
-                        </TableDiv>
+                        <IndividualTraineeStatsDiv>
+                                <IndividualStatsController overallStats={this.state}/>
+                        </IndividualTraineeStatsDiv>
                     </DataDiv>
 
                     <StatsDiv>
@@ -79,17 +79,14 @@ export class Summary extends Component {
                                 <PositionsSummaryDiv>
                                     <PositionsSummaryController getPositionsStats={this.onPositionsStats} />
                                 </PositionsSummaryDiv>
-
+ 
                                 <PositionsStatsDiv>
                                     <PositionsStatsController />
-                                </PositionsStatsDiv>
+                                </PositionsStatsDiv> 
                             </PositionsDiv>
 
                         </SummaryStatsDiv>
 
-                        <IndividualTraineeStatsDiv>
-                            <IndividualStatsController overallStats={this.state}/>
-                        </IndividualTraineeStatsDiv>
                     </StatsDiv>
 
                     
